@@ -98,11 +98,13 @@ const StepRow = ({
         <span
           className="how-cascade-num"
           style={{
+            display: "inline-block",
             fontFamily: "'Fraunces', serif",
             fontWeight: 900,
-            fontSize: "20px",
-            lineHeight: 1.2,
+            fontSize: "32px",
+            lineHeight: 1,
             color: "#FF5003",
+            transition: `font-size 300ms ${EASE}, transform 300ms ${EASE}`,
           }}
         >
           {num}
