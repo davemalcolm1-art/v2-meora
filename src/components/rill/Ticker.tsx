@@ -17,7 +17,7 @@ const Ticker = () => {
   return (
     <section
       style={{
-        background: "#1A2B35",
+        background: "#F7F4EF",
         padding: "28px 0",
         overflow: "hidden",
       }}
