@@ -2701,36 +2701,109 @@ button.btn-ghost {
 .how-section .how-steps::before { background: rgba(232,98,42,0.3) !important; top: 20px !important; }
 .how-section .how-step:hover .step-num { box-shadow: 0 0 16px rgba(232,98,42,0.4) !important; }
 
-/* SCIENCE — white background, dark text */
-.science-section,
-.science-bg,
-.science-overlay { background: #FFFFFF !important; }
-.science-bg { background-image: none !important; animation: none !important; }
-.science-overlay { background: transparent !important; }
-.science-heading, .science-heading *,
-.science-sub,
-.science-title, .science-title-dark,
-.science-quote, .science-quote-dark { color: #1A2B35 !important; }
-.science-heading em { color: #E8622A !important; }
-.science-sub,
-.science-quote, .science-quote-dark { color: #6B6560 !important; }
-.science-eyebrow span,
-.science-label, .science-label-dark,
-.science-source { color: #E8622A !important; }
-.science-disclaimer { color: #6B6560 !important; }
-.science-link span, .science-link-dark span {
-  color: #1A2B35 !important;
-  border-bottom-color: rgba(26,43,53,0.2) !important;
+/* SCIENCE — dark, full-bleed ocean background */
+.science-section {
+  position: relative !important;
+  background: #14232D !important;
+  overflow: hidden !important;
 }
+.science-bg {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  animation: none !important;
+  z-index: 0 !important;
+}
+.science-overlay {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(rgba(20,35,45,0.85), rgba(20,35,45,0.92)) !important;
+  z-index: 1 !important;
+}
+.science-section > *:not(.science-bg):not(.science-overlay) {
+  position: relative;
+  z-index: 2;
+}
+
+.science-heading, .science-heading * { color: #FFFFFF !important; font-family: var(--font-heading) !important; }
+.science-heading em { color: #E8622A !important; font-style: italic !important; }
+.science-sub { color: rgba(255,255,255,0.75) !important; }
+
+.science-eyebrow span {
+  color: #E8622A !important;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+.science-eyebrow-line { background: #E8622A !important; }
+
+.science-label, .science-label-dark {
+  color: #E8622A !important;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+.science-title, .science-title-dark {
+  color: #FFFFFF !important;
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+}
+.science-quote, .science-quote-dark {
+  color: rgba(255,255,255,0.7) !important;
+  font-family: var(--font-body) !important;
+  font-style: italic !important;
+  font-size: 14px !important;
+}
+.science-source {
+  color: #E8622A !important;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+.science-link span, .science-link-dark span {
+  color: rgba(255,255,255,0.5) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  border-bottom-color: rgba(255,255,255,0.2) !important;
+}
+.science-disclaimer { color: rgba(255,255,255,0.55) !important; }
+
 .science-card,
 .science-card-dark,
 .science-card-light {
-  background: #FFFFFF !important;
-  border: 1px solid #D9D3C8 !important;
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 16px !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  color: #FFFFFF !important;
 }
-.science-card:hover { background: #FFFFFF !important; border-color: #E8622A !important; }
+.science-card:hover,
+.science-card-dark:hover,
+.science-card-light:hover {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+}
+
+.science-cta {
+  background: #E8622A !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid #E8622A !important;
+  border-radius: 999px !important;
+  padding: 14px 28px !important;
+}
+.science-cta:hover { background: #d4561f !important; border-color: #d4561f !important; }
 
 /* FAQ — white background */
 .faq-section { background: #FFFFFF !important; }
