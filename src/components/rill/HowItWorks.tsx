@@ -26,7 +26,7 @@ const steps: Step[] = [
     n: 4,
     title: "Ongoing clinical care.",
     body: "Every 90 days, a follow-up consultation and blood review. Your protocol is adjusted as you progress. Not a one-time prescription — a continuous clinical relationship.",
-    indent: "clamp(40px, 6vw, 100px)",
+    indent: "clamp(120px, 18vw, 280px)",
   },
 ];
 
@@ -86,21 +86,28 @@ const StepRow = ({
         gap: "0",
       }}
     >
-      <span
-        className="how-cascade-num"
+      <div
+        className="how-cascade-num-wrap"
         style={{
           flex: "0 0 80px",
           width: "80px",
-          fontFamily: "'Fraunces', serif",
-          fontWeight: 900,
-          fontSize: "20px",
-          lineHeight: 1.2,
-          color: active ? "#FF5003" : "rgba(255,80,3,0.3)",
-          transition: "color 300ms ease",
+          opacity: active ? 1 : 0.25,
+          transition: "opacity 300ms ease",
         }}
       >
-        {num}
-      </span>
+        <span
+          className="how-cascade-num"
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 900,
+            fontSize: "20px",
+            lineHeight: 1.2,
+            color: "#FF5003",
+          }}
+        >
+          {num}
+        </span>
+      </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <h3
           className="how-cascade-title"
@@ -286,13 +293,14 @@ const HowItWorks = () => {
 
         /* Hover (desktop only) */
         @media (hover: hover) {
-          .how-cascade-row:hover .how-cascade-num { color: #FF5003 !important; }
+          .how-cascade-row:hover .how-cascade-num-wrap { opacity: 1 !important; }
           .how-cascade-row:hover .how-cascade-title { transform: translateX(12px); }
           .how-cascade-row:hover .how-cascade-body-wrap {
-            max-height: 48px;
-            opacity: 0.5;
+            max-height: 52px;
+            opacity: 1;
             padding-top: 10px;
           }
+          .how-cascade-row:hover .how-cascade-body { color: rgba(255,255,255,0.5) !important; }
           .how-cascade-row:hover {
             border-left-color: #FF5003;
             padding-left: 16px;
@@ -300,7 +308,7 @@ const HowItWorks = () => {
         }
 
         /* Active (clicked) — overrides hover */
-        .how-cascade-row.is-active .how-cascade-num { color: #FF5003 !important; }
+        .how-cascade-row.is-active .how-cascade-num-wrap { opacity: 1 !important; }
         .how-cascade-row.is-active .how-cascade-title { transform: translateX(12px); }
         .how-cascade-row.is-active .how-cascade-body-wrap {
           max-height: 300px;
@@ -308,6 +316,7 @@ const HowItWorks = () => {
           padding-top: 16px;
           padding-bottom: 8px;
         }
+        .how-cascade-row.is-active .how-cascade-body { color: rgba(255,255,255,0.85) !important; }
         .how-cascade-row.is-active {
           border-left-color: #FF5003;
           padding-left: 16px;
