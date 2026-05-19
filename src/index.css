@@ -2605,3 +2605,58 @@ button.btn-ghost {
 
 .marquee-strip { background: #1F6B8E !important; }
 .marquee-item { color: #F7F4EF !important; }
+
+/* =====================================================================
+   Footer ghosted wordmark — REMOVE
+   ===================================================================== */
+.rill-footer::before { content: none !important; display: none !important; }
+
+/* =====================================================================
+   Ocean MEORA mask — standalone full-width section above footer
+   ===================================================================== */
+.mask-section {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 140px 0 !important;
+  margin: 0 !important;
+  background: #F7F4EF !important;
+  overflow: hidden;
+}
+.mask-section .mask-bg {
+  display: block !important;
+  position: absolute;
+  left: 0; right: 0;
+  top: 140px; bottom: 140px;
+  z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') !important;
+  background-size: cover;
+  background-position: center 45%;
+  animation: kenburnsmeora 24s ease-in-out infinite;
+}
+.mask-section .mask-tint,
+.mask-section .mask-vignette,
+.mask-section .mask-fade-top,
+.mask-section .mask-fade-bottom { display: none !important; }
+.mask-section .mask-svg {
+  display: block !important;
+  position: absolute;
+  left: 0; right: 0;
+  top: 140px; bottom: 140px;
+  width: 100%;
+  height: calc(100% - 280px);
+  z-index: 2;
+  pointer-events: none;
+}
+.mask-section .mask-label {
+  display: none !important;
+}
+/* Reserve the height of the letterform band */
+.mask-section::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: clamp(180px, 26vw, 360px);
+}
