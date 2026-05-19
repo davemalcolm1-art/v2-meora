@@ -35,15 +35,15 @@ const categories: CategoryWithImage[] = [
   { id: "energy", label: "Energy", line: "Restore drive, clarity and sustained output.", count: 5, tier: "primary",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" },
   { id: "performance", label: "Performance", line: "Build strength, speed and resilience.", count: 10, tier: "primary",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80" },
   { id: "balance", label: "Balance", line: "Hormonal equilibrium and whole-body calm.", count: 7, tier: "primary",
-    image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=800&q=80" },
   { id: "recovery", label: "Recovery", line: "Repair faster. Come back stronger.", count: 3, tier: "secondary",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80" },
   { id: "longevity", label: "Longevity", line: "Age well. On your terms.", count: 4, tier: "secondary",
     image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80" },
   { id: "beauty", label: "Beauty", line: "Skin health and collagen from within.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&q=80" },
 ];
 
 const allProtocols: Protocol[] = [
