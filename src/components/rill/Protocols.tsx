@@ -277,16 +277,14 @@ const Protocols = () => {
                     : "bg-[#EDE8DE] hover:bg-white hover:shadow-2xl hover:shadow-[#001830]/5"
                 }`}
               >
-                <div className="flex justify-between items-start font-['DM_Mono',monospace] text-[10px] tracking-widest text-[#001830]/40 uppercase">
-                  <span>{c.eyebrow}</span>
+                <div className="flex justify-between items-start">
+                  <span
+                    className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#E8622A]"
+                    style={{ fontSize: "11px", letterSpacing: "0.12em" }}
+                  >
+                    {c.eyebrow.split("/")[1]?.trim()}
+                  </span>
                   <Arrow />
-                </div>
-
-                <div className="relative flex items-center justify-center my-6">
-                  <div className="w-48 h-48 rounded-full bg-gradient-to-tr from-[#E2D9CE] to-[#F5F0E8] blur-2xl absolute opacity-60" />
-                  <div
-                    className={`w-32 h-32 ${c.blob} bg-gradient-to-br ${c.gradient} transition-transform duration-700 group-hover:scale-110`}
-                  />
                 </div>
 
                 <div>
