@@ -2,7 +2,7 @@ const steps = [
   { n: 1, title: "Start your assessment", desc: "Complete a short health questionnaire. Tell us your goals, health history, and what you want to achieve.", note: "Takes 5 minutes. No commitment." },
   { n: 2, title: "Complete your blood panel", desc: "We direct you to a private pathology clinic with the exact panel matched to your chosen protocol.", note: "ACL or Sonic Healthcare. Results within 48hrs." },
   { n: 3, title: "Telehealth consultation", desc: "An AHPRA-registered doctor reviews your results and conducts a thorough clinical assessment via telehealth.", note: "15–20 minute video consultation." },
-  { n: 4, title: "Prescription & delivery", desc: "If approved, your prescription is issued and your protocol is compounded and cold-chain delivered to your door.", note: "TGA-licensed pharmacy. Discreet packaging." },
+  { n: 4, title: "Prescription & delivery", desc: "If approved, your prescription is issued and your protocol is compounded and cold-chain delivered to your door.", note: "registered compounding pharmacy. Discreet packaging." },
   { n: 5, title: "Quarterly review", desc: "Every 90 days, repeat bloods and a follow-up consultation. Your protocol is adjusted as you progress.", note: "This is the difference. Ongoing clinical care." },
 ];
 

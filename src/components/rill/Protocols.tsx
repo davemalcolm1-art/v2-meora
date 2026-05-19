@@ -279,7 +279,7 @@ const Protocols = () => {
               >
                 <div className="flex justify-between items-start">
                   <span
-                    className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#E8622A]"
+                    className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#F05A28]"
                     style={{ fontSize: "11px", letterSpacing: "0.12em" }}
                   >
                     {c.eyebrow.split("/")[1]?.trim()}
