@@ -43,7 +43,7 @@ const categories: CategoryWithImage[] = [
   { id: "longevity", label: "Longevity", line: "Age well. On your terms.", count: 4, tier: "secondary",
     image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80" },
   { id: "beauty", label: "Beauty", line: "Skin health and collagen from within.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&q=80" },
 ];
 
 const allProtocols: Protocol[] = [
