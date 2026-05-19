@@ -7,7 +7,7 @@ const InterstitialBreak = ({ label }: { label: string }) => {
       className="protocol-banner"
       style={{
         background: "#FF5003",
-        padding: "80px 60px",
+        padding: "100px 80px",
         textAlign: "center",
       }}
     >
@@ -16,7 +16,7 @@ const InterstitialBreak = ({ label }: { label: string }) => {
           fontFamily: "'Fraunces', serif",
           fontWeight: 700,
           color: "#FFFFFF",
-          fontSize: "clamp(36px, 6vw, 64px)",
+          fontSize: "clamp(48px, 6vw, 80px)",
           lineHeight: 1.1,
           letterSpacing: "-0.01em",
           margin: 0,
@@ -28,13 +28,13 @@ const InterstitialBreak = ({ label }: { label: string }) => {
       <button
         onClick={open}
         style={{
-          marginTop: 36,
+          marginTop: 40,
           background: "#1A2B35",
           color: "#FFFFFF",
           border: "none",
           outline: "none",
           borderRadius: 999,
-          padding: "18px 36px",
+          padding: "18px 48px",
           fontFamily: "'DM Sans', sans-serif",
           fontWeight: 800,
           fontSize: 13,

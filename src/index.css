@@ -3290,3 +3290,37 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #FF5003 !important; }
 
 /* Footer ghosted wordmark — kill any remnants */
 .rill-footer::before { content: none !important; display: none !important; }
+
+/* =====================================================================
+   FINAL OVERRIDES — FAQ accordion + Mask section padding
+   ===================================================================== */
+.faq-item {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(26,43,53,0.12) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+  padding: 20px 24px !important;
+  margin-bottom: 12px !important;
+}
+.faq-item:hover {
+  padding-left: 24px !important;
+  border-color: rgba(26,43,53,0.2) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+}
+.faq-question {
+  font-family: var(--font-heading) !important;
+  font-weight: 500 !important;
+  color: #1A2B35 !important;
+}
+.faq-icon { color: #FF5003 !important; }
+
+/* Mask section — 80px padding, no hr lines, no duplicate watermark */
+.mask-section {
+  padding: 80px 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.mask-section .mask-bg { top: 80px !important; bottom: 80px !important; }
+.mask-section .mask-svg { top: 80px !important; bottom: 80px !important; height: calc(100% - 160px) !important; }
+.mask-section .mask-label { display: none !important; }
+

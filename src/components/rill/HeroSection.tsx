@@ -140,9 +140,9 @@ const HeroSection = () => {
           justify-content: space-between;
           gap: 32px;
           height: 56px;
-          padding: 0 12px 0 24px;
-          width: calc(100vw - 80px);
-          max-width: 1240px;
+          padding: 0 24px;
+          width: auto;
+          max-width: calc(100vw - 80px);
           border-radius: 999px;
           background: rgba(26, 43, 53, 0.45);
           backdrop-filter: blur(20px);
