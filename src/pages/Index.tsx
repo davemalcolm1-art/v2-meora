@@ -6,6 +6,7 @@ import Marquee from "@/components/rill/Marquee";
 import HowItWorks from "@/components/rill/HowItWorks";
 import WhatIsRill from "@/components/rill/WhatIsRill";
 import Protocols from "@/components/rill/Protocols";
+import Ticker from "@/components/rill/Ticker";
 import InterstitialBreak from "@/components/rill/InterstitialBreak";
 import Science from "@/components/rill/Science";
 import FAQ from "@/components/rill/FAQ";
@@ -28,6 +29,7 @@ const Index = () => {
         <Hero />
         <Marquee />
         <Protocols />
+        <Ticker />
         <HowItWorks />
         <WhatIsRill />
         <InterstitialBreak label="A Protocol. Not a Trend." />
