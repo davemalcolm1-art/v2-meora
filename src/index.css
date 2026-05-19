@@ -2549,3 +2549,44 @@ button.btn-ghost {
   .hero-content { padding: 0 24px; }
   .hero::after { margin: 0 24px; }
 }
+
+/* ---------- Lighten previously-dark sections ---------- */
+.what-section-dark {
+  background: #F7F4EF !important;
+  color: #1A2B35 !important;
+}
+.what-section-dark *,
+.what-section-dark h2, .what-section-dark h3 { color: #1A2B35 !important; }
+
+.science-section,
+.science-bg,
+.science-overlay {
+  background: #EDE8E0 !important;
+  color: #1A2B35 !important;
+}
+.science-bg { background-image: none !important; }
+.science-overlay { background: transparent !important; }
+.science-heading, .science-heading em, .science-sub,
+.science-eyebrow span, .science-eyebrow-line,
+.science-label, .science-label-dark,
+.science-title, .science-title-dark,
+.science-quote, .science-quote-dark,
+.science-source, .science-disclaimer,
+.science-link, .science-link-dark { color: #1A2B35 !important; }
+.science-heading em { color: #E8622A !important; }
+.science-card,
+.science-card-dark,
+.science-card-light {
+  background: #FFFFFF !important;
+  border: 1px solid #D9D3C8 !important;
+  color: #1A2B35 !important;
+}
+
+.interstitial,
+.interstitial-bg {
+  background: #EDE8E0 !important;
+  color: #1A2B35 !important;
+}
+.interstitial-bg::before,
+.interstitial-bg::after { display: none !important; }
+.interstitial * { color: #1A2B35 !important; }
