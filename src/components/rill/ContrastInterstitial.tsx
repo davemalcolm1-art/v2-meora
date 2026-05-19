@@ -86,6 +86,9 @@ const ContrastInterstitial = () => {
         </button>
       </div>
       <style>{`
+        .contrast-interstitial h2,
+        .contrast-interstitial h2 * { color: #FFFFFF !important; }
+        .contrast-interstitial p { color: rgba(255,255,255,0.65) !important; }
         @media (max-width: 768px) {
           .contrast-interstitial { padding: 60px 24px !important; }
           .ci-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
