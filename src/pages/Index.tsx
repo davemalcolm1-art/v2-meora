@@ -4,7 +4,6 @@ import HeroSection from "@/components/rill/HeroSection";
 import CredentialStrip from "@/components/rill/CredentialStrip";
 import ClinicalPhilosophy from "@/components/rill/ClinicalPhilosophy";
 import HowItWorks from "@/components/rill/HowItWorks";
-import MeasuredMe from "@/components/rill/MeasuredMe";
 import ContrastInterstitial from "@/components/rill/ContrastInterstitial";
 import ComplianceStrip from "@/components/rill/ComplianceStrip";
 import Protocols from "@/components/rill/Protocols";
@@ -32,7 +31,6 @@ const Index = () => {
         <Protocols />
         <Ticker />
         <HowItWorks />
-        <MeasuredMe />
         <ContrastInterstitial />
         <Science />
         <ComplianceStrip />
