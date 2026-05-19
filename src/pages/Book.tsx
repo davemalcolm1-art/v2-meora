@@ -98,7 +98,7 @@ const Book = () => {
               width: 8,
               height: 8,
               borderRadius: 999,
-              background: "var(--orange, #ff6a00)",
+              background: "var(--orange, #FF5003)",
               flexShrink: 0,
             }}
           />
