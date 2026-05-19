@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=DM+Sans:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=DM+Sans:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,57 +8,65 @@
   --font-heading: 'Fraunces', serif;
   --font-body: 'DM Sans', sans-serif;
 
-  /* Brand palette — updated 2026 */
+  /* Brand palette — Meora 2026 */
   --midnight: #1A2B35;
   --deep-navy: #1A2B35;
   --navy: #1F6B8E;
-  --ocean: #3B8DB0;
+  --ocean: #1F6B8E;
   --orange: #E8622A;
   --amber: #E8622A;
   --gold: #E8622A;
   --cream: #F7F4EF;
   --warm-white: #F7F4EF;
   --light-bg: #EDE8E0;
-  --light-card: #EDE8E0;
+  --light-card: #FFFFFF;
+  --surface-muted: #EDE8E0;
   --text-dark: #1A2B35;
-  --text-dark-dim: rgba(26,43,53,0.6);
-  --text-dim: rgba(247,244,239,0.55);
-  --text-dimmer: rgba(247,244,239,0.3);
-  --border: rgba(247,244,239,0.1);
-  --border-dark: rgba(26,43,53,0.12);
+  --text-muted: #6B6560;
+  --text-dark-dim: #6B6560;
+  --text-dim: rgba(247,244,239,0.65);
+  --text-dimmer: rgba(247,244,239,0.4);
+  --border: rgba(247,244,239,0.12);
+  --border-dark: #D9D3C8;
   --border-warm: rgba(232,98,42,0.25);
 
   /* shadcn semantic tokens */
-  --background: 50 20% 97%;
-  --foreground: 205 35% 15%;
-  --primary: 199 64% 34%;
-  --primary-foreground: 50 20% 97%;
-  --secondary: 30 35% 87%;
-  --secondary-foreground: 205 35% 15%;
-  --accent: 20 89% 57%;
-  --accent-foreground: 50 20% 97%;
-  --muted: 199 30% 90%;
-  --muted-foreground: 205 20% 40%;
-  --card: 50 20% 97%;
-  --card-foreground: 205 35% 15%;
-  --input: 199 20% 88%;
+  --background: 40 30% 95%;          /* #F7F4EF */
+  --foreground: 202 35% 15%;         /* #1A2B35 */
+  --primary: 199 64% 34%;            /* #1F6B8E */
+  --primary-foreground: 40 30% 95%;
+  --secondary: 36 23% 90%;           /* #EDE8E0 */
+  --secondary-foreground: 202 35% 15%;
+  --accent: 17 80% 54%;              /* #E8622A */
+  --accent-foreground: 40 30% 95%;
+  --muted: 36 23% 90%;
+  --muted-foreground: 25 8% 40%;     /* #6B6560 */
+  --card: 0 0% 100%;
+  --card-foreground: 202 35% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 202 35% 15%;
+  --border-color: 36 18% 82%;        /* #D9D3C8 */
+  --border: 36 18% 82%;
+  --input: 36 18% 82%;
   --ring: 199 64% 34%;
+  --destructive: 0 70% 45%;
+  --destructive-foreground: 40 30% 95%;
   --radius: 0.75rem;
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-pill: 999px;
 }
 
 .dark {
-  --background: 205 35% 13%;
-  --foreground: 50 20% 97%;
-  --card: 205 30% 17%;
-  --card-foreground: 50 20% 97%;
-  --muted: 205 25% 22%;
-  --muted-foreground: 199 20% 65%;
-  --border: 205 25% 22%;
+  --background: 202 35% 15%;
+  --foreground: 40 30% 95%;
+  --card: 202 30% 18%;
+  --card-foreground: 40 30% 95%;
+  --muted: 202 25% 22%;
+  --muted-foreground: 36 18% 75%;
+  --border: 202 25% 22%;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
