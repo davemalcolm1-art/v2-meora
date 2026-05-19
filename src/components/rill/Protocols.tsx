@@ -18,77 +18,26 @@ type Protocol = {
   badge: string;
   img: string;
   pills: string[];
-  categories: string[]; // category ids this protocol belongs to
+  categories: string[];
 };
-
 
 type Tier = "primary" | "secondary";
 
 type CategoryV2 = {
   id: string;
   label: string;
-  eyebrow: string;
-  blurb: string;
+  line: string;
+  count: number;
   tier: Tier;
-  blob: string; // tailwind border-radius arbitrary value for organic blob
-  gradient: string; // tailwind classes for blob gradient
 };
 
 const categories: CategoryV2[] = [
-  {
-    id: "longevity",
-    label: "Longevity",
-    eyebrow: "01 / Systemic",
-    blurb: "Cellular health, immune resilience, anti-ageing.",
-    tier: "primary",
-    blob: "rounded-[45%_55%_70%_30%/30%_60%_40%_70%]",
-    gradient: "from-[#FF5003]/25 to-[#001830]/15",
-  },
-  {
-    id: "for-him",
-    label: "For him",
-    eyebrow: "02 / Vitality",
-    blurb: "Drive, output, hormonal optimisation.",
-    tier: "primary",
-    blob: "rounded-[60%_40%_30%_70%/60%_30%_70%_40%]",
-    gradient: "from-[#001830]/25 to-[#FF5003]/10",
-  },
-  {
-    id: "for-her",
-    label: "For her",
-    eyebrow: "03 / Hormone",
-    blurb: "Skin, body composition, balance.",
-    tier: "primary",
-    blob: "rounded-[30%_70%_70%_30%/50%_60%_40%_50%]",
-    gradient: "from-[#FF5003]/15 to-[#001830]/5",
-  },
-  {
-    id: "strength",
-    label: "Strength",
-    eyebrow: "04 / Performance",
-    blurb: "Lean mass, athletic output.",
-    tier: "secondary",
-    blob: "rounded-full",
-    gradient: "from-[#001830]/20 to-transparent",
-  },
-  {
-    id: "recovery",
-    label: "Recovery",
-    eyebrow: "05 / Repair",
-    blurb: "Tissue repair, sleep, restoration.",
-    tier: "secondary",
-    blob: "rounded-full",
-    gradient: "from-[#FF5003]/20 to-transparent",
-  },
-  {
-    id: "weight-loss",
-    label: "Weight loss",
-    eyebrow: "06 / Metabolism",
-    blurb: "Fat loss, recomposition, metabolism.",
-    tier: "secondary",
-    blob: "rounded-full",
-    gradient: "from-[#E2D9CE] to-[#F5F0E8]",
-  },
+  { id: "energy", label: "Energy", line: "I want more energy.", count: 5, tier: "primary" },
+  { id: "performance", label: "Performance", line: "I want to perform at my best.", count: 10, tier: "primary" },
+  { id: "balance", label: "Balance", line: "I want to feel balanced.", count: 7, tier: "primary" },
+  { id: "recovery", label: "Recovery", line: "I want to recover faster.", count: 3, tier: "secondary" },
+  { id: "longevity", label: "Longevity", line: "I want to age well.", count: 4, tier: "secondary" },
+  { id: "beauty", label: "Beauty", line: "I want better skin and hair.", count: 4, tier: "secondary" },
 ];
 
 const allProtocols: Protocol[] = [
@@ -99,7 +48,7 @@ const allProtocols: Protocol[] = [
     desc: "Wake up restored. Build lean mass. Recover faster. The GH axis protocol that addresses the decline most people mistake for ageing.",
     img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80",
     pills: ["Lean out", "Sleep deeper", "Recover faster"],
-    categories: ["for-him", "longevity", "strength", "recovery"],
+    categories: ["energy", "performance", "recovery", "longevity"],
   },
   {
     name: "Opus.ME",
@@ -108,7 +57,7 @@ const allProtocols: Protocol[] = [
     desc: "Four compounds. Four biological systems. The most comprehensive protocol on the Meora menu.",
     img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=80",
     pills: ["Skin", "Composition", "Immunity", "Longevity"],
-    categories: ["for-her", "longevity"],
+    categories: ["performance", "balance", "longevity", "beauty"],
   },
   {
     name: "Radiance.ME",
@@ -117,7 +66,7 @@ const allProtocols: Protocol[] = [
     desc: "Renewed skin, improved texture, and collagen support — no injections required.",
     img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=80",
     pills: ["Glow", "Collagen", "Needle-free"],
-    categories: ["for-her"],
+    categories: ["balance", "beauty"],
   },
   {
     name: "Repair.ME",
@@ -126,7 +75,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80",
     desc: "For the injuries that won't fully heal. BPC-157 and TB-500 for tendons, ligaments, joints, and soft tissue.",
     pills: ["Tendons", "Ligaments", "Soft tissue"],
-    categories: ["for-him", "recovery"],
+    categories: ["performance", "recovery"],
   },
   {
     name: "Performance.ME",
@@ -135,7 +84,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80",
     desc: "Full GH axis support combined with dual-pathway tissue repair. The most comprehensive performance protocol.",
     pills: ["Output", "Recovery", "Athletic"],
-    categories: ["for-him", "strength", "recovery"],
+    categories: ["performance", "recovery"],
   },
   {
     name: "Recomposition.ME",
@@ -144,7 +93,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1552693673-1bf958298935?w=900&q=80",
     desc: "Combined GH axis support and targeted fat loss. Build lean mass while reducing body fat.",
     pills: ["Fat loss", "Lean mass", "Recompose"],
-    categories: ["for-her", "for-him", "weight-loss", "strength"],
+    categories: ["performance", "balance"],
   },
   {
     name: "Shield.ME",
@@ -153,7 +102,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=900&q=80",
     desc: "Three biological systems addressed in one protocol. The premium stack for patients playing a long game.",
     pills: ["Cellular", "Immune", "Anti-ageing"],
-    categories: ["for-her", "longevity"],
+    categories: ["performance", "balance", "longevity", "beauty"],
   },
   {
     name: "Vital.ME",
@@ -162,7 +111,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=900&q=80",
     desc: "Restore the drive, energy, and vitality that made you feel unstoppable.",
     pills: ["Energy", "Drive", "Vitality"],
-    categories: ["for-her", "for-him"],
+    categories: ["energy", "performance", "balance", "beauty"],
   },
   {
     name: "Foundation Pro.ME",
@@ -171,7 +120,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1549576490-b0b4831ef60a?w=900&q=80",
     desc: "Tesamorelin — the only FDA-approved GHRH analogue, with Phase 3 RCT evidence for visceral fat reduction.",
     pills: ["Visceral fat", "Phase 3 data", "Premium"],
-    categories: ["for-him", "longevity", "strength"],
+    categories: ["energy", "performance"],
   },
   {
     name: "Lean.ME",
@@ -180,7 +129,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80",
     desc: "AOD-9604 targets lipolysis directly without affecting blood sugar or insulin.",
     pills: ["Fat loss", "No blood sugar impact", "Cream option"],
-    categories: ["for-her", "for-him", "weight-loss"],
+    categories: ["balance"],
   },
   {
     name: "Lean Pro.ME",
@@ -189,7 +138,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=900&q=80",
     desc: "Three non-overlapping fat loss mechanisms. The most evidence-backed fat loss stack on the menu.",
     pills: ["Triple mechanism", "Visceral fat", "Maximum"],
-    categories: ["for-him", "weight-loss"],
+    categories: ["performance"],
   },
   {
     name: "GLP-1.ME",
@@ -198,7 +147,7 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80",
     desc: "Clinically proven GLP-1 receptor agonist therapy — Wegovy, Ozempic, or Mounjaro — prescribed and supervised by a Meora GP.",
     pills: ["Semaglutide", "Tirzepatide", "GP supervised"],
-    categories: ["for-her", "for-him", "weight-loss"],
+    categories: ["balance"],
   },
   {
     name: "Focus.ME",
@@ -207,14 +156,17 @@ const allProtocols: Protocol[] = [
     img: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=900&q=80",
     desc: "Semax and Selank — complementary neuropeptides in a once-daily nasal spray.",
     pills: ["Focus", "Memory", "Stress-free"],
-    categories: ["for-him", "longevity"],
+    categories: ["energy", "performance", "balance", "longevity"],
   },
 ];
 
 const Arrow = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-  </svg>
+  <span
+    aria-hidden="true"
+    style={{ color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}
+  >
+    →
+  </span>
 );
 
 const Protocols = () => {
@@ -235,10 +187,14 @@ const Protocols = () => {
     }
   }, [activeCategory]);
 
-  const countFor = (id: string) => allProtocols.filter((p) => p.categories.includes(id)).length;
-
   const primaries = categories.filter((c) => c.tier === "primary");
   const secondaries = categories.filter((c) => c.tier === "secondary");
+
+  const cardBaseStyle: React.CSSProperties = {
+    background: "#FFFFFF",
+    borderRadius: "20px",
+    boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+  };
 
   return (
     <section
@@ -258,7 +214,7 @@ const Protocols = () => {
             </h2>
           </div>
           <p className="max-w-xs text-[#001830]/60 text-sm leading-relaxed">
-            Each protocol is prescribed by an AHPRA-registered doctor. Choose a goal — your doctor will discuss the right prescription.
+            Choose what you want to achieve. Your doctor does the rest.
           </p>
         </div>
 
@@ -266,59 +222,68 @@ const Protocols = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 protocols-card-grid">
           {primaries.map((c, idx) => {
             const isActive = activeCategory === c.id;
-            const ghostLabel = (c.eyebrow.split("/")[1] || c.label).trim().toUpperCase();
             return (
               <button
                 key={c.id}
                 onClick={() => setActiveCategory(isActive ? null : c.id)}
                 aria-pressed={isActive}
-                style={{ transitionDelay: `${idx * 100}ms` }}
-                className={`group reveal rounded-[24px] overflow-hidden flex flex-col aspect-[4/5] text-left transition-all duration-500 cursor-pointer ${
-                  isActive
-                    ? "bg-white shadow-2xl shadow-[#001830]/10 ring-1 ring-[#FF5003]/30"
-                    : "bg-white hover:shadow-2xl hover:shadow-[#001830]/10"
-                }`}
+                style={{
+                  ...cardBaseStyle,
+                  padding: "40px 36px",
+                  transitionDelay: `${idx * 100}ms`,
+                  position: "relative",
+                  minHeight: "360px",
+                  outline: isActive ? "1.5px solid #FF5003" : "none",
+                }}
+                className="group reveal flex flex-col justify-between text-left transition-all duration-500 cursor-pointer hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]"
               >
-                {/* Dark ghosted top band */}
-                <div
-                  className="relative w-full flex items-center justify-center"
-                  style={{ height: "200px", background: "#1A2B35" }}
-                >
-                  <span
+                <span style={{ position: "absolute", top: "28px", right: "32px" }}>
+                  <Arrow />
+                </span>
+
+                {/* TOP: Big word */}
+                <div style={{ flex: "0 0 auto", paddingTop: "8px" }}>
+                  <h3
                     style={{
                       fontFamily: "'Fraunces', serif",
                       fontWeight: 900,
-                      fontSize: "48px",
-                      color: "rgba(255,255,255,0.08)",
-                      letterSpacing: "0.02em",
+                      color: "#FF5003",
+                      fontSize: "clamp(56px, 6vw, 80px)",
                       lineHeight: 1,
-                      textAlign: "center",
+                      letterSpacing: "-0.02em",
+                      margin: 0,
                     }}
                   >
-                    {ghostLabel}
-                  </span>
+                    {c.label}
+                  </h3>
                 </div>
 
-                {/* White content area */}
-                <div className="flex-1 p-8 flex flex-col justify-between bg-white">
-                  <div className="flex justify-between items-start">
-                    <span
-                      className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#FF5003]"
-                      style={{ fontSize: "11px", letterSpacing: "0.12em" }}
-                    >
-                      {c.eyebrow.split("/")[1]?.trim()}
-                    </span>
-                    <Arrow />
-                  </div>
-                  <div>
-                    <h3 className="text-4xl italic font-['Cormorant_Garamond',serif] text-[#111827] mb-2 leading-none">
-                      {c.label}
-                    </h3>
-                    <p className="text-[#001830]/60 text-xs tracking-tight mb-3">{c.blurb}</p>
-                    <div className="font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest text-[#FF5003]">
-                      {countFor(c.id)} {countFor(c.id) === 1 ? "protocol" : "protocols"}
-                      {isActive ? " · viewing below" : ""}
-                    </div>
+                {/* BOTTOM */}
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 400,
+                      color: "#374151",
+                      fontSize: "15px",
+                      marginTop: "16px",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {c.line}
+                  </p>
+                  <div
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      color: "#FF5003",
+                      fontSize: "11px",
+                      letterSpacing: "0.1em",
+                      marginTop: "20px",
+                    }}
+                  >
+                    {c.count} Protocols{isActive ? " · viewing below" : ""}
                   </div>
                 </div>
               </button>
@@ -326,7 +291,7 @@ const Protocols = () => {
           })}
         </div>
 
-        {/* Secondary cards */}
+        {/* Secondary cards — compact horizontal */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {secondaries.map((c) => {
             const isActive = activeCategory === c.id;
@@ -335,22 +300,58 @@ const Protocols = () => {
                 key={c.id}
                 onClick={() => setActiveCategory(isActive ? null : c.id)}
                 aria-pressed={isActive}
-                className={`group rounded-[32px] p-8 flex items-center gap-6 text-left transition-all duration-500 cursor-pointer ${
-                  isActive
-                    ? "bg-white shadow-xl shadow-[#001830]/10 ring-1 ring-[#FF5003]/30"
-                    : "bg-[#EDE8DE]/60 hover:bg-white hover:shadow-xl hover:shadow-[#001830]/5"
-                }`}
+                style={{
+                  ...cardBaseStyle,
+                  padding: "24px 28px",
+                  height: "120px",
+                  position: "relative",
+                  outline: isActive ? "1.5px solid #FF5003" : "none",
+                }}
+                className="group flex items-center gap-5 text-left transition-all duration-500 cursor-pointer hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]"
               >
-                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shrink-0">
-                  <div className={`w-8 h-8 ${c.blob} bg-gradient-to-br ${c.gradient}`} />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-2xl italic font-['Cormorant_Garamond',serif] text-[#001830] leading-none">
-                    {c.label}
-                  </h4>
-                  <span className="font-['DM_Mono',monospace] text-[9px] tracking-widest text-[#001830]/40 uppercase">
-                    {c.eyebrow.split("/")[1]?.trim()} · {countFor(c.id)}
-                  </span>
+                <span style={{ position: "absolute", top: "16px", right: "20px" }}>
+                  <Arrow />
+                </span>
+                <h4
+                  style={{
+                    fontFamily: "'Fraunces', serif",
+                    fontWeight: 900,
+                    color: "#FF5003",
+                    fontSize: "48px",
+                    lineHeight: 1,
+                    letterSpacing: "-0.02em",
+                    margin: 0,
+                    flex: "0 0 auto",
+                  }}
+                >
+                  {c.label}
+                </h4>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <p
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 400,
+                      color: "#374151",
+                      fontSize: "14px",
+                      lineHeight: 1.4,
+                      margin: 0,
+                    }}
+                  >
+                    {c.line}
+                  </p>
+                  <div
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      color: "#FF5003",
+                      fontSize: "11px",
+                      letterSpacing: "0.1em",
+                      marginTop: "8px",
+                    }}
+                  >
+                    {c.count} Protocols
+                  </div>
                 </div>
               </button>
             );
@@ -364,7 +365,7 @@ const Protocols = () => {
               <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
                 <div>
                   <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#FF5003] mb-3">
-                    {activeMeta.eyebrow} · {filtered.length} {filtered.length === 1 ? "protocol" : "protocols"}
+                    {filtered.length} {filtered.length === 1 ? "protocol" : "protocols"}
                   </span>
                   <h3 className="text-4xl md:text-5xl font-['Cormorant_Garamond',serif] text-[#001830]">
                     Protocols for <span className="italic text-[#FF5003]">{activeMeta.label.toLowerCase()}</span>.
@@ -383,7 +384,7 @@ const Protocols = () => {
                   <button
                     key={p.name}
                     onClick={() => openWithProtocol(p.name)}
-                    className="group bg-[#EDE8DE] hover:bg-white rounded-[32px] p-8 text-left transition-all duration-500 hover:shadow-2xl hover:shadow-[#001830]/5 flex flex-col"
+                    className="group bg-[#EDE8DE] hover:bg-white rounded-[20px] p-8 text-left transition-all duration-500 hover:shadow-2xl hover:shadow-[#001830]/5 flex flex-col"
                   >
                     <div className="flex justify-between items-start mb-6">
                       <span className="font-['DM_Mono',monospace] text-[9px] uppercase tracking-widest text-[#FF5003]">
