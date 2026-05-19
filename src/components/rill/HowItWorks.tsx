@@ -1,44 +1,156 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuiz } from "./quizContext";
 
-const steps = [
+type Step = { n: number; title: string; body: string; indent: string };
+
+const steps: Step[] = [
   {
     n: 1,
     title: "Tell us about yourself.",
     body: "Complete a short health assessment — your goals, history, and what you want to achieve. Takes 5 minutes. No commitment.",
+    indent: "0px",
   },
   {
     n: 2,
     title: "Meet your doctor.",
     body: "An AHPRA-registered GP reviews your assessment and conducts a thorough telehealth consultation. Where clinically appropriate, they'll request a targeted blood panel to personalise your protocol.",
+    indent: "clamp(40px, 6vw, 100px)",
   },
   {
     n: 3,
     title: "Receive your protocol.",
     body: "If approved, your prescription is written and your protocol is compounded by a registered pharmacy. Cold-chain delivered discreetly to your door.",
+    indent: "clamp(80px, 12vw, 200px)",
   },
   {
     n: 4,
     title: "Ongoing clinical care.",
     body: "Every 90 days, a follow-up consultation and blood review. Your protocol is adjusted as you progress. Not a one-time prescription — a continuous clinical relationship.",
+    indent: "clamp(40px, 6vw, 100px)",
   },
 ];
 
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
+const StepRow = ({
+  s,
+  index,
+  active,
+  onActivate,
+}: {
+  s: Step;
+  index: number;
+  active: boolean;
+  onActivate: () => void;
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setRevealed(true);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const num = String(s.n).padStart(2, "0");
+  const delay = index * 100;
+
+  return (
+    <div
+      ref={ref}
+      className={`how-cascade-row${active ? " is-active" : ""}`}
+      onClick={onActivate}
+      style={{
+        maxWidth: "680px",
+        marginLeft: s.indent,
+        padding: "32px 0",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        opacity: revealed ? 1 : 0,
+        transform: revealed ? "translateX(0)" : "translateX(-40px)",
+        transition: `opacity 600ms ${EASE} ${delay}ms, transform 600ms ${EASE} ${delay}ms`,
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "0",
+      }}
+    >
+      <span
+        className="how-cascade-num"
+        style={{
+          flex: "0 0 80px",
+          width: "80px",
+          fontFamily: "'Fraunces', serif",
+          fontWeight: 900,
+          fontSize: "20px",
+          lineHeight: 1.2,
+          color: active ? "#FF5003" : "rgba(255,80,3,0.3)",
+          transition: "color 300ms ease",
+        }}
+      >
+        {num}
+      </span>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <h3
+          className="how-cascade-title"
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 700,
+            color: "#FFFFFF",
+            fontSize: "clamp(22px, 2.5vw, 32px)",
+            lineHeight: 1.2,
+            letterSpacing: "-0.01em",
+            margin: 0,
+          }}
+        >
+          {s.title}
+        </h3>
+        <div
+          className="how-cascade-body-wrap"
+          style={{
+            overflow: "hidden",
+            transition: `max-height 500ms ${EASE}, opacity 400ms ease, padding 400ms ease`,
+          }}
+        >
+          <p
+            className="how-cascade-body"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "15px",
+              lineHeight: 1.75,
+              color: "rgba(255,255,255,0.65)",
+              margin: 0,
+            }}
+          >
+            {s.body}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HowItWorks = () => {
   const { open } = useQuiz();
-  const [openStep, setOpenStep] = useState<number | null>(1);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
 
   return (
     <section
       className="how-section how-section--v3"
       id="how"
-      style={{
-        background: "#1A2B35",
-        padding: 0,
-        margin: 0,
-      }}
+      style={{ background: "#1A2B35", padding: 0, margin: 0 }}
     >
       {/* Header */}
       <div className="how-v3-header" style={{ padding: "80px 80px 60px" }}>
@@ -87,108 +199,17 @@ const HowItWorks = () => {
         </p>
       </div>
 
-      {/* Accordion */}
-      <div>
-        {steps.map((s) => {
-          const isOpen = openStep === s.n;
-          const num = String(s.n).padStart(2, "0");
-          return (
-            <div
-              key={s.n}
-              className="how-v3-row"
-              style={{
-                background: isOpen ? "rgba(255,255,255,0.05)" : "transparent",
-                borderBottom: "1px solid rgba(255,255,255,0.1)",
-                transition: `background 300ms ${EASE}`,
-              }}
-            >
-              <button
-                onClick={() => setOpenStep(isOpen ? null : s.n)}
-                className="how-v3-trigger"
-                style={{
-                  width: "100%",
-                  background: "transparent",
-                  border: "none",
-                  padding: "28px 80px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0",
-                  textAlign: "left",
-                  cursor: "pointer",
-                  color: "inherit",
-                }}
-                aria-expanded={isOpen}
-              >
-                <span
-                  style={{
-                    fontFamily: "'Fraunces', serif",
-                    fontWeight: 900,
-                    color: isOpen ? "#FF5003" : "rgba(255,80,3,0.4)",
-                    fontSize: "18px",
-                    lineHeight: 1,
-                    width: "60px",
-                    flex: "0 0 60px",
-                    transition: `color 300ms ${EASE}`,
-                  }}
-                >
-                  {num}
-                </span>
-                <span
-                  style={{
-                    flex: 1,
-                    fontFamily: "'Fraunces', serif",
-                    fontWeight: 700,
-                    color: "#FFFFFF",
-                    fontSize: "clamp(20px, 2.5vw, 28px)",
-                    lineHeight: 1.2,
-                    letterSpacing: "-0.01em",
-                  }}
-                  className="how-v3-title"
-                >
-                  {s.title}
-                </span>
-                <span
-                  aria-hidden="true"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 400,
-                    color: "#FFFFFF",
-                    fontSize: "24px",
-                    lineHeight: 1,
-                    display: "inline-block",
-                    transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                    transition: "transform 300ms ease",
-                  }}
-                >
-                  +
-                </span>
-              </button>
-              <div
-                style={{
-                  maxHeight: isOpen ? "240px" : "0px",
-                  overflow: "hidden",
-                  transition: `max-height 400ms ${EASE}`,
-                }}
-              >
-                <p
-                  className="how-v3-body"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 400,
-                    color: "rgba(255,255,255,0.65)",
-                    fontSize: "16px",
-                    lineHeight: 1.75,
-                    maxWidth: "600px",
-                    margin: 0,
-                    padding: "0 80px 28px 140px",
-                  }}
-                >
-                  {s.body}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+      {/* Cascade steps */}
+      <div className="how-cascade" style={{ padding: "0 80px 80px" }}>
+        {steps.map((s, i) => (
+          <StepRow
+            key={s.n}
+            s={s}
+            index={i}
+            active={activeStep === s.n}
+            onActivate={() => setActiveStep((cur) => (cur === s.n ? null : s.n))}
+          />
+        ))}
       </div>
 
       {/* CTA row */}
@@ -245,11 +266,62 @@ const HowItWorks = () => {
         .how-section--v3 .section-eyebrow,
         .how-section--v3 .section-h2,
         .how-section--v3 .how-reassurance { display: none !important; }
+
+        /* Body collapsed by default */
+        .how-cascade-row .how-cascade-body-wrap {
+          max-height: 0;
+          opacity: 0;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .how-cascade-row .how-cascade-title {
+          transition: transform 300ms ${EASE};
+        }
+        .how-cascade-row {
+          border-left: 2px solid transparent;
+          padding-left: 0;
+          transition: border-color 200ms ease, padding-left 200ms ease,
+            opacity 600ms ${EASE}, transform 600ms ${EASE};
+        }
+
+        /* Hover (desktop only) */
+        @media (hover: hover) {
+          .how-cascade-row:hover .how-cascade-num { color: #FF5003 !important; }
+          .how-cascade-row:hover .how-cascade-title { transform: translateX(12px); }
+          .how-cascade-row:hover .how-cascade-body-wrap {
+            max-height: 48px;
+            opacity: 0.5;
+            padding-top: 10px;
+          }
+          .how-cascade-row:hover {
+            border-left-color: #FF5003;
+            padding-left: 16px;
+          }
+        }
+
+        /* Active (clicked) — overrides hover */
+        .how-cascade-row.is-active .how-cascade-num { color: #FF5003 !important; }
+        .how-cascade-row.is-active .how-cascade-title { transform: translateX(12px); }
+        .how-cascade-row.is-active .how-cascade-body-wrap {
+          max-height: 300px;
+          opacity: 1;
+          padding-top: 16px;
+          padding-bottom: 8px;
+        }
+        .how-cascade-row.is-active {
+          border-left-color: #FF5003;
+          padding-left: 16px;
+        }
+
         @media (max-width: 768px) {
           .how-v3-header { padding: 60px 24px 40px !important; }
-          .how-v3-trigger { padding: 24px !important; gap: 16px !important; }
-          .how-v3-title { font-size: 20px !important; }
-          .how-v3-body { padding: 0 24px 24px 24px !important; }
+          .how-cascade { padding: 0 24px 60px !important; }
+          .how-cascade-row {
+            margin-left: 0 !important;
+            padding-top: 24px !important;
+            padding-bottom: 24px !important;
+          }
+          .how-cascade-title { font-size: 20px !important; }
           .how-v3-cta { padding: 32px 24px !important; }
         }
       `}</style>
