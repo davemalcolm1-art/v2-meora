@@ -3176,3 +3176,6 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #FF5003 !important; }
 /* =====================================================================
    PROTOCOLS — v3 image cards (scoped via inline styles in component)
    ===================================================================== */
+@media (max-width: 900px) {
+  .protocols-grid-lg, .protocols-grid-sm { grid-template-columns: 1fr !important; }
+}
