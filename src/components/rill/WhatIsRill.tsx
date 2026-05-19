@@ -22,7 +22,7 @@ const WhatIsRill = () => (
       </div>
     </section>
 
-    <MaskSection />
+
 
     <section className="what-section-light">
       <div className="what-stats">
