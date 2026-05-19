@@ -6,9 +6,9 @@ import { useQuiz } from "./quizContext";
 // Ideal: real people, candid, warm light, 35-55 age range, 1920×1080px landscape.
 const SLIDES = [
   {
-    url: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1920&q=85",
-    alt: "Two people running on a coastal path at dawn",
-    position: "center 40%",
+    url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=85",
+    alt: "Two people running outdoors, dawn light",
+    position: "center 35%",
   },
   {
     url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=85",
@@ -395,16 +395,17 @@ const HeroSection = () => {
           margin-bottom: 4px;
         }
         .hero-rotating-sub {
-          margin-bottom: 32px;
-          min-height: 2em;
+          margin-top: 4px;
+          margin-bottom: 28px;
+          min-height: 1.6em;
         }
         .hero-sub-word {
           display: inline-block;
           font-family: 'Fraunces', serif;
-          font-weight: 700;
+          font-weight: 400;
           font-style: italic;
-          font-size: clamp(24px, 3vw, 40px);
-          color: #FF5003;
+          font-size: clamp(20px, 2.2vw, 30px);
+          color: rgba(255,255,255,0.65);
           letter-spacing: -0.01em;
           transition: opacity 350ms ease, transform 350ms ease;
         }
@@ -607,7 +608,10 @@ const HeroSection = () => {
             </span>
           </div>
 
-          <div className="hero-h1">It starts with ME.</div>
+          <div className="hero-h1">
+            It starts with{" "}
+            <span style={{ color: "#FF5003", fontStyle: "italic" }}>ME.</span>
+          </div>
 
           <div className="hero-rotating-sub">
             <span className={`hero-sub-word ${wordVisible ? "visible" : "hidden"}`}>
