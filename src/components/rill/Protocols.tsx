@@ -109,63 +109,100 @@ const Protocols = () => {
         position: "relative",
         minHeight: isExpanded ? "100vh" : undefined,
       }}
-      className="px-6 md:px-12 py-24 md:py-32 selection:bg-[#FF5003] selection:text-white"
+      className="selection:bg-[#FF5003] selection:text-white"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Header (hidden when expanded) */}
+      <div style={{ maxWidth: "1320px", margin: "0 auto", padding: isExpanded ? "120px 60px" : "80px 60px" }}>
         {!isExpanded && (
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline mb-16 md:mb-20 gap-8">
-            <div className="max-w-2xl">
-              <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#001830]/50 mb-6">
-                Our Protocols
-              </span>
-              <h2 className="text-5xl md:text-7xl font-light tracking-tight leading-[1.05] text-[#111827]">
-                Find your protocol.<br />
-                <span className="italic font-['Cormorant_Garamond',serif] text-[#FF5003]">Goal-specific.</span>
-              </h2>
-            </div>
-            <p className="max-w-xs text-[#001830]/60 text-sm leading-relaxed">
-              Choose what you want to achieve. Your doctor does the rest.
+          <div style={{ marginBottom: "56px" }}>
+            <span style={{
+              display: "block",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: "11px",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#FF5003",
+              marginBottom: "20px",
+            }}>
+              Our Protocols
+            </span>
+            <h2 style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 900,
+              fontSize: "clamp(44px, 5.5vw, 72px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+              color: "#111827",
+              margin: "0 0 20px",
+            }}>
+              Find your protocol.<br />
+              <span style={{ fontStyle: "italic", color: "#FF5003" }}>Goal-specific.</span>
+            </h2>
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "16px",
+              lineHeight: 1.6,
+              color: "#6B6560",
+              maxWidth: "480px",
+              margin: 0,
+            }}>
+              Choose what matters to you. Your doctor does the rest.
             </p>
           </div>
         )}
 
-        {/* GRID VIEW */}
         {!isExpanded && (
           <>
-            {/* Large cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }} className="protocols-grid-lg">
               {primaries.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => setActiveCategory(c.id)}
                   style={{
-                    background: CARD_BG,
+                    background: "#FFFFFF",
                     borderRadius: "20px",
-                    padding: "48px 40px",
-                    minHeight: "320px",
-                    position: "relative",
+                    boxShadow: "0 2px 20px rgba(0,0,0,0.08)",
                     border: "none",
+                    overflow: "hidden",
+                    padding: 0,
+                    textAlign: "left",
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
-                  className="group flex flex-col justify-between text-left cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                  className="group transition-transform duration-300 hover:-translate-y-1"
                 >
-                  <span style={{ position: "absolute", top: "32px", right: "36px" }}>
-                    <Arrow size={20} />
-                  </span>
-                  <h3 style={{
-                    fontFamily: "'Fraunces', serif",
-                    fontWeight: 900,
-                    color: "#FF5003",
-                    fontSize: "clamp(64px, 7vw, 96px)",
-                    lineHeight: 1,
-                    letterSpacing: "-0.02em",
-                    margin: 0,
-                  }}>{c.label}</h3>
-                  <div>
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#374151", fontSize: "15px", lineHeight: 1.5, margin: 0 }}>
+                  <div style={{ width: "100%", height: "220px", overflow: "hidden" }}>
+                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                  </div>
+                  <div style={{ padding: "24px 28px", position: "relative" }}>
+                    <span style={{ position: "absolute", top: "20px", right: "24px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "20px", lineHeight: 1 }}>→</span>
+                    <h3 style={{
+                      fontFamily: "'Fraunces', serif",
+                      fontWeight: 700,
+                      color: "#111827",
+                      fontSize: "32px",
+                      lineHeight: 1.1,
+                      margin: 0,
+                      paddingRight: "32px",
+                    }}>{c.label}</h3>
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#6B6560", fontSize: "14px", lineHeight: 1.5, margin: "6px 0 0" }}>
                       {c.line}
                     </p>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", color: "#FF5003", fontSize: "11px", letterSpacing: "0.1em", marginTop: "12px" }}>
+                    <div style={{
+                      display: "inline-block",
+                      background: "#FF5003",
+                      color: "#FFFFFF",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      fontSize: "10px",
+                      letterSpacing: "0.06em",
+                      padding: "3px 10px",
+                      borderRadius: "999px",
+                      marginTop: "16px",
+                    }}>
                       {c.count} Protocols
                     </div>
                   </div>
@@ -173,44 +210,61 @@ const Protocols = () => {
               ))}
             </div>
 
-            {/* Small cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", marginTop: "16px" }} className="protocols-grid-sm">
               {secondaries.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => setActiveCategory(c.id)}
                   style={{
-                    background: CARD_BG,
+                    background: "#FFFFFF",
                     borderRadius: "20px",
-                    padding: "24px 28px",
-                    height: "100px",
-                    position: "relative",
+                    boxShadow: "0 2px 20px rgba(0,0,0,0.08)",
                     border: "none",
+                    overflow: "hidden",
+                    padding: 0,
+                    textAlign: "left",
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
-                  className="group flex items-center gap-5 text-left cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                  className="group transition-transform duration-300 hover:-translate-y-1"
                 >
-                  <span style={{ position: "absolute", top: "16px", right: "20px" }}>
-                    <Arrow size={18} />
-                  </span>
-                  <h4 style={{ fontFamily: "'Fraunces', serif", fontWeight: 900, color: "#FF5003", fontSize: "40px", lineHeight: 1, letterSpacing: "-0.02em", margin: 0, flex: "0 0 auto" }}>
-                    {c.label}
-                  </h4>
-                  <div style={{ minWidth: 0, flex: 1 }}>
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#374151", fontSize: "14px", lineHeight: 1.4, margin: 0 }}>
+                  <div style={{ width: "100%", height: "160px", overflow: "hidden" }}>
+                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                  </div>
+                  <div style={{ padding: "20px 24px", position: "relative" }}>
+                    <span style={{ position: "absolute", top: "16px", right: "20px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}>→</span>
+                    <h4 style={{
+                      fontFamily: "'Fraunces', serif",
+                      fontWeight: 700,
+                      color: "#111827",
+                      fontSize: "24px",
+                      lineHeight: 1.1,
+                      margin: 0,
+                      paddingRight: "28px",
+                    }}>{c.label}</h4>
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#6B6560", fontSize: "13px", lineHeight: 1.5, margin: "6px 0 0" }}>
                       {c.line}
                     </p>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", color: "#FF5003", fontSize: "11px", letterSpacing: "0.1em", marginTop: "6px" }}>
+                    <div style={{
+                      display: "inline-block",
+                      background: "#FF5003",
+                      color: "#FFFFFF",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      fontSize: "10px",
+                      letterSpacing: "0.06em",
+                      padding: "3px 10px",
+                      borderRadius: "999px",
+                      marginTop: "14px",
+                    }}>
                       {c.count} Protocols
                     </div>
                   </div>
                 </button>
               ))}
             </div>
-
-            <p className="mt-24 text-center text-[#001830]/50 text-xs max-w-2xl mx-auto leading-relaxed">
-              All protocols are prescribed by AHPRA-registered Australian doctors following blood panel review and clinical
-              assessment. No protocol is dispensed without a valid prescription.
-            </p>
           </>
         )}
 
