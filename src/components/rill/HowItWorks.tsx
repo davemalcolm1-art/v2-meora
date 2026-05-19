@@ -26,7 +26,7 @@ const steps: Step[] = [
     n: 4,
     title: "Ongoing clinical care.",
     body: "Every 90 days, a follow-up consultation and blood review. Your protocol is adjusted as you progress. Not a one-time prescription — a continuous clinical relationship.",
-    indent: "clamp(40px, 6vw, 100px)",
+    indent: "clamp(120px, 18vw, 280px)",
   },
 ];
 
