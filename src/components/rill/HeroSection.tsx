@@ -206,7 +206,7 @@ const HeroSection = () => {
           background: #FF5003;
           border: none;
           border-radius: 999px;
-          padding: 11px 22px;
+          padding: 10px 20px;
           cursor: pointer;
           transition: opacity 200ms ease, transform 200ms ease;
         }
@@ -506,8 +506,13 @@ const HeroSection = () => {
 
         /* ── MOBILE ── */
         @media (max-width: 768px) {
-          .rill-nav { padding: 0 24px; }
+          .rill-nav {
+            width: calc(100vw - 32px);
+            padding: 0 8px 0 16px;
+            gap: 12px;
+          }
           .nav-links { display: none; }
+          .nav-cta { display: none; }
           .hero-content { padding: 0 24px 64px; }
           .hero-indicators { right: 24px; bottom: 72px; }
           .menu-overlay { padding: 0 32px; }
