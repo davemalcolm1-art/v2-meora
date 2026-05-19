@@ -86,21 +86,28 @@ const StepRow = ({
         gap: "0",
       }}
     >
-      <span
-        className="how-cascade-num"
+      <div
+        className="how-cascade-num-wrap"
         style={{
           flex: "0 0 80px",
           width: "80px",
-          fontFamily: "'Fraunces', serif",
-          fontWeight: 900,
-          fontSize: "20px",
-          lineHeight: 1.2,
-          color: active ? "#FF5003" : "rgba(255,80,3,0.3)",
-          transition: "color 300ms ease",
+          opacity: active ? 1 : 0.25,
+          transition: "opacity 300ms ease",
         }}
       >
-        {num}
-      </span>
+        <span
+          className="how-cascade-num"
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 900,
+            fontSize: "20px",
+            lineHeight: 1.2,
+            color: "#FF5003",
+          }}
+        >
+          {num}
+        </span>
+      </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <h3
           className="how-cascade-title"
