@@ -1922,7 +1922,7 @@ nav.rill-nav.scrolled {
 .mask-fade-bottom {
   position: absolute; bottom: 0; left: 0; right: 0;
   height: 60px; z-index: 3; pointer-events: none;
-  background: linear-gradient(to top, #EEE9DF 0%, transparent 100%);
+  background: linear-gradient(to top, #E8DDCC 0%, transparent 100%);
 }
 .mask-label {
   position: absolute; bottom: 24px; left: 0; right: 0;
