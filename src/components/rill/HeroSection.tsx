@@ -23,9 +23,8 @@ const SLIDES = [
 ];
 
 // ─── ROTATING WORDS ───────────────────────────────────────────────────────────
-const WORDS = ["energy.", "recovery.", "performance.", "longevity.", "beauty.", "ME."];
-// Last word gets a longer pause — it's the payoff line
-const INTERVALS = [2500, 2500, 2500, 2500, 2500, 3500];
+const WORDS = ["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty."];
+const INTERVALS = [2500, 2500, 2500, 2500, 2500];
 
 // ─── NAV LINKS ────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
