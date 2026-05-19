@@ -66,13 +66,17 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--deep-navy);
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body);
+  font-weight: 400;
   line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
 }
 
 /* Custom cursor */
