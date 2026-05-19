@@ -2472,7 +2472,7 @@ nav.rill-nav.scrolled {
 
 /* Floating protocol card on the right */
 .hero::after {
-  content: "Foundation.ME\A\A Doctor-prescribed peptide protocol for energy, recovery and long-term vitality.\A\A AHPRA · TGA-compliant";
+  content: "Foundation.ME\A\A Doctor-prescribed peptide protocol for energy, recovery and long-term vitality.\A\A AHPRA · Doctor-prescribed";
   white-space: pre-line;
   align-self: center;
   justify-self: center;
