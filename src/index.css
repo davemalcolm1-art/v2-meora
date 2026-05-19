@@ -2275,3 +2275,277 @@ input, textarea, select, button {
   transition: border-color 0.3s ease;
 }
 .footer-copy a:hover { border-bottom-color: var(--orange); }
+
+/* =====================================================================
+   MEORA 2026 — Brand override layer
+   Light, warm, editorial. Overrides legacy dark hero/nav/footer.
+   ===================================================================== */
+
+body {
+  background: #F7F4EF !important;
+  color: #1A2B35;
+  font-family: var(--font-body);
+  cursor: auto;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: #1A2B35;
+}
+
+/* ---------- NAV (white) ---------- */
+nav.rill-nav,
+nav.rill-nav.scrolled {
+  background: #FFFFFF;
+  backdrop-filter: none;
+  border-bottom: 1px solid #D9D3C8;
+  padding: 18px 60px;
+  box-shadow: 0 1px 0 rgba(26,43,53,0.02);
+}
+.nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: #1A2B35;
+}
+.nav-logo span { color: #E8622A; }
+.nav-links a {
+  color: #1A2B35;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav-links a:hover { color: #E8622A; }
+.nav-links a::after { background: #E8622A; }
+.nav-cta {
+  background: #E8622A;
+  color: #FFFFFF;
+  border: 1px solid #E8622A;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.nav-cta:hover {
+  background: #1A2B35;
+  border-color: #1A2B35;
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+/* ---------- HERO (light) ---------- */
+.hero {
+  background: #F7F4EF;
+  min-height: 92vh;
+  height: auto;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 60px;
+  align-items: center;
+  justify-content: normal;
+  overflow: visible;
+}
+.hero-bg-img,
+.hero .hero-overlay,
+.hero-video-placeholder,
+.video-play-indicator { display: none !important; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 0 0 60px;
+  max-width: none;
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow-line {
+  width: 40px;
+  height: 1px;
+  background: #6B6560;
+}
+.hero-eyebrow span {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6B6560;
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #1A2B35;
+  margin-bottom: 32px;
+}
+.hero h1 em {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 900;
+  color: #E8622A;
+}
+.hero-sub {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 17px;
+  color: #6B6560;
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.hero-bottom { display: none; }
+
+/* Floating protocol card on the right */
+.hero::after {
+  content: "Foundation.ME\A\A Doctor-prescribed peptide protocol for energy, recovery and long-term vitality.\A\A AHPRA · TGA-compliant";
+  white-space: pre-line;
+  align-self: center;
+  justify-self: center;
+  width: min(420px, 90%);
+  margin-right: 60px;
+  padding: 36px 32px;
+  background: #FFFFFF;
+  border: 1px solid #D9D3C8;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px -30px rgba(26,43,53,0.18), 0 8px 24px -12px rgba(26,43,53,0.08);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #6B6560;
+  font-weight: 400;
+}
+
+/* ---------- BUTTONS (pill, brand) ---------- */
+.btn-primary,
+button.btn-primary,
+a.btn-primary {
+  background: #E8622A;
+  color: #FFFFFF;
+  border: 1.5px solid #E8622A;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+.btn-primary:hover {
+  background: #1A2B35;
+  border-color: #1A2B35;
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+.btn-ghost,
+a.btn-ghost,
+button.btn-ghost {
+  background: transparent;
+  color: #1A2B35;
+  border: 1.5px solid #1A2B35;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.btn-ghost:hover {
+  background: #1A2B35;
+  color: #FFFFFF;
+  border-color: #1A2B35;
+}
+
+/* ---------- CARDS ---------- */
+.protocol-card, .card, .what-pillar, .faq-item, .science-card, .step-card {
+  background: #FFFFFF;
+  border: 1px solid #D9D3C8;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(26,43,53,0.04);
+}
+
+/* ---------- FOOTER (only dark surface) ---------- */
+.rill-footer {
+  position: relative;
+  background: #1A2B35;
+  color: #F7F4EF;
+  overflow: hidden;
+}
+.rill-footer::before {
+  content: "MEORA";
+  position: absolute;
+  left: 50%;
+  bottom: -0.15em;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(180px, 28vw, 420px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  opacity: 0.07;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+.rill-footer .footer-top,
+.rill-footer .footer-bottom { position: relative; z-index: 1; }
+.footer-logo,
+.footer-tagline,
+.footer-col ul li a,
+.footer-legal,
+.footer-copy,
+.footer-copy a {
+  color: #F7F4EF !important;
+  font-family: var(--font-body);
+  font-style: normal;
+}
+.footer-tagline { font-family: var(--font-heading); font-weight: 400; font-style: italic; opacity: 0.85; }
+.footer-col h5 { color: rgba(247,244,239,0.6); font-family: var(--font-body); }
+.footer-col ul li a { opacity: 0.75; font-weight: 400; }
+.footer-col ul li a:hover { color: #E8622A !important; opacity: 1; }
+.footer-socials a { color: #F7F4EF; border-color: rgba(247,244,239,0.25); }
+
+/* ---------- Custom cursor off (UX cleanup) ---------- */
+.cursor, .cursor-ring { display: none !important; }
+
+/* ---------- Hero responsive ---------- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+  .hero-content { padding: 0 24px; }
+  .hero::after { margin: 0 24px; }
+}
