@@ -5,7 +5,7 @@ import CredentialStrip from "@/components/rill/CredentialStrip";
 import ClinicalPhilosophy from "@/components/rill/ClinicalPhilosophy";
 import HowItWorks from "@/components/rill/HowItWorks";
 import ContrastInterstitial from "@/components/rill/ContrastInterstitial";
-import ComplianceStrip from "@/components/rill/ComplianceStrip";
+
 import Protocols from "@/components/rill/Protocols";
 import Ticker from "@/components/rill/Ticker";
 import InterstitialBreak from "@/components/rill/InterstitialBreak";
@@ -33,7 +33,6 @@ const Index = () => {
         <HowItWorks />
         <ContrastInterstitial />
         <Science />
-        <ComplianceStrip />
         <InterstitialBreak label="A Protocol. Not a Trend." />
         <FAQ />
         <ContentHub />
