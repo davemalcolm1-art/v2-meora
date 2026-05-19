@@ -2590,3 +2590,18 @@ button.btn-ghost {
 .interstitial-bg::before,
 .interstitial-bg::after { display: none !important; }
 .interstitial * { color: #1A2B35 !important; }
+
+/* ---------- Additional sections to lighten ---------- */
+.how-section { background: #F7F4EF !important; padding: 120px 60px; }
+.how-section .section-h2 { color: #1A2B35 !important; }
+.how-section .section-h2 em { color: #E8622A !important; }
+.how-section .section-eyebrow span { color: #E8622A !important; }
+.how-section * { color: inherit; }
+
+.mask-section { background: #EDE8E0 !important; }
+.mask-bg, .mask-tint, .mask-vignette, .mask-svg,
+.mask-fade-top, .mask-fade-bottom { display: none !important; }
+.mask-label { color: #6B6560 !important; }
+
+.marquee-strip { background: #1F6B8E !important; }
+.marquee-item { color: #F7F4EF !important; }
