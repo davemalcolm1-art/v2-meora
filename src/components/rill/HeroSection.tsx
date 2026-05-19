@@ -394,40 +394,22 @@ const HeroSection = () => {
           letter-spacing: -0.01em;
           margin-bottom: 4px;
         }
-        .hero-line2 {
-          display: flex;
-          align-items: baseline;
-          gap: 0.18em;
-          flex-wrap: wrap;
-          margin-bottom: 36px;
+        .hero-rotating-sub {
+          margin-bottom: 32px;
+          min-height: 2em;
         }
-        .hero-made-for {
-          font-family: 'Fraunces', serif;
-          font-weight: 900;
-          font-size: clamp(48px, 7.5vw, 104px);
-          line-height: 1.0;
-          color: #fff;
-          letter-spacing: -0.01em;
-        }
-        .hero-word-wrap {
-          display: inline-block;
-          min-height: 1.05em;
-          overflow: visible;
-          vertical-align: bottom;
-        }
-        .hero-word {
+        .hero-sub-word {
           display: inline-block;
           font-family: 'Fraunces', serif;
-          font-weight: 900;
+          font-weight: 700;
           font-style: italic;
-          font-size: clamp(48px, 7.5vw, 104px);
-          line-height: 1.05;
+          font-size: clamp(24px, 3vw, 40px);
           color: #FF5003;
           letter-spacing: -0.01em;
           transition: opacity 350ms ease, transform 350ms ease;
         }
-        .hero-word.visible { opacity: 1; transform: translateY(0); }
-        .hero-word.hidden  { opacity: 0; transform: translateY(10px); }
+        .hero-sub-word.visible { opacity: 1; transform: translateY(0); }
+        .hero-sub-word.hidden  { opacity: 0; transform: translateY(8px); }
 
         /* Subline */
         .hero-subline {
@@ -625,15 +607,12 @@ const HeroSection = () => {
             </span>
           </div>
 
-          <div className="hero-h1">Built by science.</div>
+          <div className="hero-h1">It starts with ME.</div>
 
-          <div className="hero-line2">
-            <span className="hero-made-for">Made for&nbsp;</span>
-            <div className="hero-word-wrap">
-              <span className={`hero-word ${wordVisible ? "visible" : "hidden"}`}>
-                {WORDS[wordIndex]}
-              </span>
-            </div>
+          <div className="hero-rotating-sub">
+            <span className={`hero-sub-word ${wordVisible ? "visible" : "hidden"}`}>
+              {["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty.", "For ME."][wordIndex]}
+            </span>
           </div>
 
           <p className="hero-subline">
