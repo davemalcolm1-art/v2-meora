@@ -296,6 +296,7 @@ const HowItWorks = () => {
         /* Hover (desktop only) — reveal full body, readable */
         @media (hover: hover) {
           .how-cascade-row:hover .how-cascade-num-wrap { opacity: 1 !important; }
+          .how-cascade-row:hover .how-cascade-num { font-size: 56px; }
           .how-cascade-row:hover .how-cascade-title { transform: translateX(12px); }
           .how-cascade-row:hover .how-cascade-body-wrap {
             max-height: 300px;
@@ -306,12 +307,13 @@ const HowItWorks = () => {
           .how-cascade-row:hover .how-cascade-body { color: rgba(255,255,255,0.85) !important; }
           .how-cascade-row:hover {
             border-left-color: #FF5003;
-            padding-left: 16px;
+            padding-left: 32px;
           }
         }
 
         /* Active (clicked) — overrides hover */
         .how-cascade-row.is-active .how-cascade-num-wrap { opacity: 1 !important; }
+        .how-cascade-row.is-active .how-cascade-num { font-size: 64px; }
         .how-cascade-row.is-active .how-cascade-title { transform: translateX(12px); }
         .how-cascade-row.is-active .how-cascade-body-wrap {
           max-height: 300px;
@@ -322,7 +324,7 @@ const HowItWorks = () => {
         .how-cascade-row.is-active .how-cascade-body { color: rgba(255,255,255,0.85) !important; }
         .how-cascade-row.is-active {
           border-left-color: #FF5003;
-          padding-left: 16px;
+          padding-left: 32px;
         }
 
         @media (max-width: 768px) {
