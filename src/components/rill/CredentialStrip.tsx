@@ -42,7 +42,7 @@ const CredentialStrip = () => (
     className="credential-strip"
     style={{
       background: "#FFFFFF",
-      padding: "28px 60px",
+      padding: "28px 80px",
     }}
   >
     <div
