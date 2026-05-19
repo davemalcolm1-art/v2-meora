@@ -522,15 +522,15 @@ const HeroSection = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <circle cx="600" cy="220" fill="none"
-              r="120" stroke="#FF5003" strokeWidth="6"/>
+              r="120" stroke="#FF5003" strokeWidth="14"/>
             <path
               d="M 530 300 L 530 170 L 600 250 L 670 170 L 670 300"
               fill="none" stroke="#FF5003"
               strokeLinecap="round" strokeLinejoin="round"
-              strokeWidth="7"/>
+              strokeWidth="16"/>
             <path
               d="M 600 310 C 560 260, 580 215, 600 195 C 620 215, 640 260, 600 310 Z"
-              fill="none" stroke="#FF5003" strokeWidth="6"/>
+              fill="none" stroke="#FF5003" strokeWidth="13"/>
           </svg>
           <span style={{
             fontFamily: "'Fraunces', serif",
