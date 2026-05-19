@@ -1,6 +1,6 @@
 const items = [
   "AHPRA-Registered Practitioners",
-  "TGA-Compliant Compounding",
+  "Registered Compounding Pharmacy",
   "Australia-Wide Telehealth",
   "Quarterly Blood Monitoring",
   "Cold-Chain Delivery",
