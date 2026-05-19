@@ -100,18 +100,51 @@ const Protocols = () => {
   const primaries = categories.filter((c) => c.tier === "primary");
   const secondaries = categories.filter((c) => c.tier === "secondary");
 
+  const bgImages: Record<string, string> = {
+    energy: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+    performance: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1600&q=80",
+    balance: "https://images.unsplash.com/photo-1532798442725-41036acc7489?w=1600&q=80",
+    recovery: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80",
+    longevity: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1600&q=80",
+    beauty: "https://images.unsplash.com/photo-1546961342-ea5f62d4e15b?w=1600&q=80",
+  };
+  const descriptors: Record<string, string> = {
+    energy: "Restore drive, clarity and sustained output.",
+    performance: "Build strength, speed and resilience.",
+    balance: "Hormonal equilibrium and whole-body calm.",
+    recovery: "Repair faster. Come back stronger.",
+    longevity: "Age well. On your terms.",
+    beauty: "Skin health and collagen from within.",
+  };
+  type Featured = { name: string; tags: string; desc: string };
+  const featuredMap: Record<string, Featured> = {
+    energy: { name: "Foundation.ME", tags: "MOST PRESCRIBED · ENERGY · RECOVERY", desc: "Wake up restored. Build lean mass. Recover faster. The GH axis protocol that addresses the decline most people mistake for ageing." },
+    performance: { name: "Vital.ME", tags: "ENERGY · DRIVE · PERFORMANCE", desc: "Restore the drive, energy and vitality that made you feel unstoppable." },
+    balance: { name: "Opus.ME", tags: "FLAGSHIP · COMPREHENSIVE · WOMEN'S HEALTH", desc: "Four compounds. Four biological systems. The most comprehensive protocol on the Meora menu." },
+    recovery: { name: "Recovery.ME", tags: "REPAIR · RECOVERY · PERFORMANCE", desc: "BPC-157 and TB-500 — the two most studied repair peptides, combined." },
+    longevity: { name: "Shield.ME", tags: "LONGEVITY · IMMUNE · CELLULAR HEALTH", desc: "Three biological systems addressed in one protocol. The premium stack for patients playing a long game." },
+    beauty: { name: "Radiance.ME", tags: "SKIN · COLLAGEN · NEEDLE-FREE OPTION", desc: "Renewed skin, improved texture and collagen support — no injections required." },
+  };
+  const featured = activeCategory ? featuredMap[activeCategory] : null;
+  const bgImage = activeCategory ? bgImages[activeCategory] : null;
+
   return (
     <section
       id="protocols"
       style={{
-        background: isExpanded ? "#1A2B35" : SECTION_BG,
+        background: isExpanded
+          ? `linear-gradient(135deg, rgba(26,43,53,0.93) 0%, rgba(26,43,53,0.78) 100%), url(${bgImage})`
+          : SECTION_BG,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         transition: "background 350ms ease",
         position: "relative",
         minHeight: isExpanded ? "100vh" : undefined,
+        overflow: "hidden",
       }}
       className="selection:bg-[#FF5003] selection:text-white"
     >
-      <div style={{ maxWidth: "1320px", margin: "0 auto", padding: isExpanded ? "120px 60px" : "80px 60px" }}>
+      <div style={{ maxWidth: isExpanded ? "none" : "1320px", margin: "0 auto", padding: isExpanded ? "0" : "80px 60px" }}>
         {!isExpanded && (
           <div style={{ marginBottom: "56px" }}>
             <span style={{
