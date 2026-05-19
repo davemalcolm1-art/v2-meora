@@ -240,6 +240,7 @@ const HowItWorks = () => {
       </div>
 
       <style>{`
+        .how-section.how-section--v3 { padding: 0 !important; background: #1A2B35 !important; }
         .how-section--v3 .how-steps { display: none !important; }
         .how-section--v3 .section-eyebrow,
         .how-section--v3 .section-h2,
