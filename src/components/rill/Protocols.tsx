@@ -33,17 +33,17 @@ type CategoryWithImage = Category & { image: string; imagePosition?: string };
 
 const categories: CategoryWithImage[] = [
   { id: "energy", label: "Energy", line: "Restore drive, clarity and sustained output.", count: 5, tier: "primary",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80" },
   { id: "performance", label: "Performance", line: "Build strength, speed and resilience.", count: 10, tier: "primary",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80", imagePosition: "center 40%" },
+    image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80" },
   { id: "balance", label: "Balance", line: "Hormonal equilibrium and whole-body calm.", count: 7, tier: "primary",
-    image: "https://images.unsplash.com/photo-1532798442725-41036acc7489?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80" },
   { id: "recovery", label: "Recovery", line: "Repair faster. Come back stronger.", count: 3, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80" },
   { id: "longevity", label: "Longevity", line: "Age well. On your terms.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1571019614099-85f1e2d2c7ba?w=800&q=80" },
   { id: "beauty", label: "Beauty", line: "Skin health and collagen from within.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&q=80", imagePosition: "center 35%" },
+    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80" },
 ];
 
 const allProtocols: Protocol[] = [
@@ -182,6 +182,78 @@ const Protocols = () => {
             }}>
               Choose what matters to you. Your doctor does the rest.
             </p>
+          </div>
+        )}
+
+        {!isExpanded && (
+          <div
+            style={{
+              background: "#FFFFFF",
+              borderRadius: 20,
+              boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+              padding: "40px",
+              display: "grid",
+              gridTemplateColumns: "1fr auto",
+              gap: 32,
+              alignItems: "center",
+              marginBottom: 40,
+            }}
+            className="featured-protocol"
+          >
+            <div>
+              <div style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#FF5003",
+                marginBottom: 12,
+              }}>
+                Featured Protocol
+              </div>
+              <div style={{
+                fontFamily: "'Fraunces', serif",
+                fontWeight: 700,
+                fontStyle: "italic",
+                fontSize: 36,
+                color: "#111827",
+                lineHeight: 1.1,
+                marginBottom: 10,
+              }}>
+                Foundation.<span style={{ color: "#FF5003" }}>ME</span>
+              </div>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 400,
+                fontSize: 15,
+                lineHeight: 1.65,
+                color: "#6B6560",
+                margin: 0,
+                maxWidth: 560,
+              }}>
+                Doctor-prescribed protocol for energy, recovery and long-term vitality. AHPRA-registered doctor consultation, registered compounding pharmacy, quarterly blood review included.
+              </p>
+            </div>
+            <button
+              onClick={() => openWithProtocol("Foundation.ME")}
+              style={{
+                background: "#FF5003",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: 999,
+                padding: "16px 30px",
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: 13,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Start your assessment →
+            </button>
           </div>
         )}
 

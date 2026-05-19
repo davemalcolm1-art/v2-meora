@@ -14,35 +14,25 @@ const steps: Step[] = [
     n: 2,
     title: "Meet your doctor.",
     body: "An AHPRA-registered GP reviews your assessment and conducts a thorough telehealth consultation. Where clinically appropriate, they'll request a targeted blood panel to personalise your protocol.",
-    indent: "clamp(40px, 6vw, 100px)",
+    indent: "0px",
   },
   {
     n: 3,
     title: "Receive your protocol.",
     body: "If approved, your prescription is written and your protocol is compounded by a registered pharmacy. Cold-chain delivered discreetly to your door.",
-    indent: "clamp(80px, 12vw, 200px)",
+    indent: "0px",
   },
   {
     n: 4,
     title: "Ongoing clinical care.",
     body: "Every 90 days, a follow-up consultation and blood review. Your protocol is adjusted as you progress. Not a one-time prescription — a continuous clinical relationship.",
-    indent: "clamp(120px, 18vw, 280px)",
+    indent: "0px",
   },
 ];
 
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-const StepRow = ({
-  s,
-  index,
-  active,
-  onActivate,
-}: {
-  s: Step;
-  index: number;
-  active: boolean;
-  onActivate: () => void;
-}) => {
+const StepRow = ({ s, index }: { s: Step; index: number }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [revealed, setRevealed] = useState(false);
 
@@ -58,66 +48,53 @@ const StepRow = ({
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
   const num = String(s.n).padStart(2, "0");
-  const delay = index * 100;
+  const delay = index * 80;
 
   return (
     <div
       ref={ref}
-      className={`how-cascade-row${active ? " is-active" : ""}`}
-      onClick={onActivate}
       style={{
-        maxWidth: "680px",
-        marginLeft: s.indent,
-        padding: "32px 0",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        position: "relative",
+        padding: "48px 0",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateX(0)" : "translateX(-40px)",
+        transform: revealed ? "translateY(0)" : "translateY(20px)",
         transition: `opacity 600ms ${EASE} ${delay}ms, transform 600ms ${EASE} ${delay}ms`,
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "0",
       }}
     >
-      <div
-        className="how-cascade-num-wrap"
+      <span
+        aria-hidden="true"
         style={{
-          flex: "0 0 80px",
-          width: "80px",
-          opacity: active ? 1 : 0.25,
-          transition: "opacity 300ms ease",
+          position: "absolute",
+          left: -8,
+          top: "50%",
+          transform: "translateY(-50%)",
+          fontFamily: "'Fraunces', serif",
+          fontWeight: 900,
+          fontSize: "clamp(120px, 16vw, 200px)",
+          lineHeight: 1,
+          color: "#FF5003",
+          opacity: 0.25,
+          pointerEvents: "none",
+          letterSpacing: "-0.04em",
         }}
       >
-        <span
-          className="how-cascade-num"
-          style={{
-            display: "inline-block",
-            fontFamily: "'Fraunces', serif",
-            fontWeight: 900,
-            fontSize: "32px",
-            lineHeight: 1,
-            color: "#FF5003",
-            transition: `font-size 300ms ${EASE}, transform 300ms ${EASE}`,
-          }}
-        >
-          {num}
-        </span>
-      </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
+        {num}
+      </span>
+      <div style={{ position: "relative", paddingLeft: "clamp(120px, 14vw, 200px)" }}>
         <h3
-          className="how-cascade-title"
           style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
             color: "#FFFFFF",
-            fontSize: "clamp(22px, 2.5vw, 32px)",
+            fontSize: "clamp(24px, 2.6vw, 32px)",
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
             margin: 0,
@@ -125,27 +102,19 @@ const StepRow = ({
         >
           {s.title}
         </h3>
-        <div
-          className="how-cascade-body-wrap"
+        <p
           style={{
-            overflow: "hidden",
-            transition: `max-height 500ms ${EASE}, opacity 400ms ease, padding 400ms ease`,
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: 15,
+            lineHeight: 1.75,
+            color: "rgba(255,255,255,0.7)",
+            margin: "12px 0 0",
+            maxWidth: 640,
           }}
         >
-          <p
-            className="how-cascade-body"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: "15px",
-              lineHeight: 1.75,
-              color: "rgba(255,255,255,0.65)",
-              margin: 0,
-            }}
-          >
-            {s.body}
-          </p>
-        </div>
+          {s.body}
+        </p>
       </div>
     </div>
   );
@@ -153,7 +122,6 @@ const StepRow = ({
 
 const HowItWorks = () => {
   const { open } = useQuiz();
-  const [activeStep, setActiveStep] = useState<number | null>(null);
 
   return (
     <section
@@ -208,16 +176,10 @@ const HowItWorks = () => {
         </p>
       </div>
 
-      {/* Cascade steps */}
-      <div className="how-cascade" style={{ padding: "0 80px 80px" }}>
+      {/* Steps */}
+      <div className="how-cascade" style={{ padding: "0 80px 40px" }}>
         {steps.map((s, i) => (
-          <StepRow
-            key={s.n}
-            s={s}
-            index={i}
-            active={activeStep === s.n}
-            onActivate={() => setActiveStep((cur) => (cur === s.n ? null : s.n))}
-          />
+          <StepRow key={s.n} s={s} index={i} />
         ))}
       </div>
 

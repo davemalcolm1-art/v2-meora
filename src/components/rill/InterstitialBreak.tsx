@@ -4,58 +4,50 @@ const InterstitialBreak = ({ label }: { label: string }) => {
   const { open } = useQuiz();
   return (
     <section
+      className="protocol-banner"
       style={{
-        background: "#1A2B35",
-        padding: "60px 80px",
+        background: "#FF5003",
+        padding: "80px 60px",
+        textAlign: "center",
       }}
     >
-      <div
-        className="ib-grid"
+      <h2
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 32,
-          maxWidth: 1320,
-          margin: "0 auto",
+          fontFamily: "'Fraunces', serif",
+          fontWeight: 700,
+          color: "#FFFFFF",
+          fontSize: "clamp(36px, 6vw, 64px)",
+          lineHeight: 1.1,
+          letterSpacing: "-0.01em",
+          margin: 0,
+          textTransform: "uppercase" as const,
         }}
       >
-        <div
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 700,
-            fontSize: 14,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#FFFFFF",
-          }}
-        >
-          {label}
-        </div>
-        <button
-          onClick={open}
-          style={{
-            background: "#FF5003",
-            color: "#FFFFFF",
-            border: "none",
-            outline: "none",
-            borderRadius: 999,
-            padding: "16px 32px",
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 800,
-            fontSize: 13,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Start your assessment →
-        </button>
-      </div>
+        {label.toUpperCase()}
+      </h2>
+      <button
+        onClick={open}
+        style={{
+          marginTop: 36,
+          background: "#1A2B35",
+          color: "#FFFFFF",
+          border: "none",
+          outline: "none",
+          borderRadius: 999,
+          padding: "18px 36px",
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 800,
+          fontSize: 13,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          cursor: "pointer",
+        }}
+      >
+        Start your assessment →
+      </button>
       <style>{`
         @media (max-width: 768px) {
-          .ib-grid { flex-direction: column !important; align-items: flex-start !important; }
+          .protocol-banner { padding: 56px 24px !important; }
         }
       `}</style>
     </section>

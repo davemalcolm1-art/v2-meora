@@ -2760,6 +2760,11 @@ button.btn-ghost {
 .how-section .how-step:hover .step-num { box-shadow: 0 0 16px rgba(255,80,3,0.4) !important; }
 
 /* SCIENCE — dark, full-bleed ocean background */
+@keyframes kenburns {
+  0%   { transform: scale(1.0)  translateX(0px); }
+  50%  { transform: scale(1.08) translateX(-20px); }
+  100% { transform: scale(1.0)  translateX(0px); }
+}
 .science-section {
   position: relative !important;
   background: #14232D !important;
@@ -2775,11 +2780,16 @@ button.btn-ghost {
   animation: none !important;
   z-index: 0 !important;
 }
+.science-bg {
+  animation: kenburns 25s ease-in-out infinite !important;
+}
 .science-overlay {
   display: block !important;
   position: absolute !important;
   inset: 0 !important;
-  background: linear-gradient(rgba(20,35,45,0.85), rgba(20,35,45,0.92)) !important;
+  background:
+    linear-gradient(to bottom, rgba(26,43,53,0.3) 0%, rgba(26,43,53,0.55) 50%, rgba(26,43,53,0.75) 100%),
+    rgba(26,43,53,0.6) !important;
   z-index: 1 !important;
 }
 .science-section > *:not(.science-bg):not(.science-overlay) {
@@ -2840,18 +2850,18 @@ button.btn-ghost {
 .science-card,
 .science-card-dark,
 .science-card-light {
-  background: rgba(255,255,255,0.07) !important;
+  background: rgba(255,255,255,0.08) !important;
   border: 1px solid rgba(255,255,255,0.12) !important;
   border-radius: 16px !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
 }
 .science-card:hover,
 .science-card-dark:hover,
 .science-card-light:hover {
-  background: rgba(255,255,255,0.12) !important;
-  border-color: rgba(255,255,255,0.2) !important;
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.22) !important;
 }
 
 .science-cta {
@@ -3063,14 +3073,14 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #FF5003 !important; }
 .faq-list { gap: 16px; }
 .faq-item {
   background: #FFFFFF !important;
-  border: none !important;
-  border-bottom: none !important;
+  border: 1px solid rgba(26,43,53,0.15) !important;
+  border-bottom: 1px solid rgba(26,43,53,0.15) !important;
   border-radius: 12px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
   padding: 20px 24px !important;
   margin-bottom: 16px !important;
 }
-.faq-item:hover { padding-left: 24px !important; box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important; }
+.faq-item:hover { padding-left: 24px !important; box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important; border-color: rgba(26,43,53,0.25) !important; }
 .faq-question { padding: 0 !important; color: #111827 !important; font-weight: 500 !important; }
 .faq-icon {
   color: #FF5003 !important;
