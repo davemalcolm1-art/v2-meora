@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Cursor from "@/components/rill/Cursor";
 import HeroSection from "@/components/rill/HeroSection";
-import Marquee from "@/components/rill/Marquee";
+import CredentialStrip from "@/components/rill/CredentialStrip";
+import ClinicalPhilosophy from "@/components/rill/ClinicalPhilosophy";
 import HowItWorks from "@/components/rill/HowItWorks";
-import WhatIsRill from "@/components/rill/WhatIsRill";
+import MeasuredMe from "@/components/rill/MeasuredMe";
+import ContrastInterstitial from "@/components/rill/ContrastInterstitial";
+import ComplianceStrip from "@/components/rill/ComplianceStrip";
 import Protocols from "@/components/rill/Protocols";
 import Ticker from "@/components/rill/Ticker";
 import InterstitialBreak from "@/components/rill/InterstitialBreak";
@@ -24,13 +27,16 @@ const Index = () => {
       <Cursor />
       <HeroSection />
       <main>
-        <Marquee />
+        <CredentialStrip />
+        <ClinicalPhilosophy />
         <Protocols />
         <Ticker />
         <HowItWorks />
-        <WhatIsRill />
-        <InterstitialBreak label="A Protocol. Not a Trend." />
+        <MeasuredMe />
+        <ContrastInterstitial />
         <Science />
+        <ComplianceStrip />
+        <InterstitialBreak label="A Protocol. Not a Trend." />
         <FAQ />
         <ContentHub />
       </main>
