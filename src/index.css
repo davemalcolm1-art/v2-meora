@@ -3237,3 +3237,46 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #FF5003 !important; }
 @media (max-width: 900px) {
   .protocols-grid-lg, .protocols-grid-sm { grid-template-columns: 1fr !important; }
 }
+
+/* =====================================================================
+   Meora homepage refactor — restore dark sections & clean overrides
+   ===================================================================== */
+
+/* HowItWorks — dark navy (override earlier light forcing) */
+.how-section,
+.how-section.how-section--v3 {
+  background: #1A2B35 !important;
+  padding: 0 !important;
+}
+.how-section.how-section--v3 .how-cascade-title,
+.how-section.how-section--v3 h2,
+.how-section.how-section--v3 h3 { color: #FFFFFF !important; }
+.how-section.how-section--v3 .how-cascade-body { color: rgba(255,255,255,0.65) !important; }
+.how-section--v3 .how-v3-cta { background: #1A2B35 !important; }
+
+/* InterstitialBreak — dark navy strip */
+.interstitial,
+.interstitial .interstitial-bg {
+  background: #1A2B35 !important;
+  color: #F7F4EF !important;
+}
+.interstitial * { color: #F7F4EF !important; }
+.interstitial .interstitial-pill span,
+.interstitial .interstitial-cta span {
+  color: #F7F4EF !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+.interstitial .interstitial-pill { border-color: rgba(247,244,239,0.35) !important; }
+.interstitial .interstitial-cta { border-color: rgba(247,244,239,0.35) !important; }
+.interstitial .interstitial-line { background: linear-gradient(to right, rgba(247,244,239,0.35), rgba(247,244,239,0.1)) !important; }
+.interstitial-bg-img { display: none !important; }
+
+/* Marquee — keep neutral cream, not dark */
+.marquee-strip { background: #F7F4EF !important; border-top: 1px solid #E8E2D9 !important; border-bottom: 1px solid #E8E2D9 !important; }
+.marquee-item { color: #6B6560 !important; }
+
+/* Footer ghosted wordmark — kill any remnants */
+.rill-footer::before { content: none !important; display: none !important; }
