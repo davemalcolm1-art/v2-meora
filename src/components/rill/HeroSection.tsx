@@ -23,9 +23,8 @@ const SLIDES = [
 ];
 
 // ─── ROTATING WORDS ───────────────────────────────────────────────────────────
-const WORDS = ["energy.", "recovery.", "performance.", "longevity.", "beauty.", "ME."];
-// Last word gets a longer pause — it's the payoff line
-const INTERVALS = [2500, 2500, 2500, 2500, 2500, 3500];
+const WORDS = ["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty."];
+const INTERVALS = [2500, 2500, 2500, 2500, 2500];
 
 // ─── NAV LINKS ────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
@@ -637,7 +636,7 @@ const HeroSection = () => {
           <div className="hero-credential">
             <div className="hero-credential-rule" />
             <span className="hero-credential-text">
-              AHPRA-Registered Doctors · TGA-Compliant · Australia-Wide
+              AHPRA-Registered Doctors · Doctor-Prescribed · Australia-Wide
             </span>
           </div>
 
@@ -648,7 +647,7 @@ const HeroSection = () => {
 
           <div className="hero-rotating-sub">
             <span className={`hero-sub-word ${wordVisible ? "visible" : "hidden"}`}>
-              {["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty.", "For ME."][wordIndex]}
+              {WORDS[wordIndex]}
             </span>
           </div>
 

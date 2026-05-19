@@ -29,13 +29,13 @@ type Category = {
   tier: Tier;
 };
 
-type CategoryWithImage = Category & { image: string };
+type CategoryWithImage = Category & { image: string; imagePosition?: string };
 
 const categories: CategoryWithImage[] = [
   { id: "energy", label: "Energy", line: "Restore drive, clarity and sustained output.", count: 5, tier: "primary",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" },
   { id: "performance", label: "Performance", line: "Build strength, speed and resilience.", count: 10, tier: "primary",
-    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80", imagePosition: "center 40%" },
   { id: "balance", label: "Balance", line: "Hormonal equilibrium and whole-body calm.", count: 7, tier: "primary",
     image: "https://images.unsplash.com/photo-1532798442725-41036acc7489?w=800&q=80" },
   { id: "recovery", label: "Recovery", line: "Repair faster. Come back stronger.", count: 3, tier: "secondary",
@@ -43,7 +43,7 @@ const categories: CategoryWithImage[] = [
   { id: "longevity", label: "Longevity", line: "Age well. On your terms.", count: 4, tier: "secondary",
     image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80" },
   { id: "beauty", label: "Beauty", line: "Skin health and collagen from within.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&q=80", imagePosition: "center 35%" },
 ];
 
 const allProtocols: Protocol[] = [
@@ -207,7 +207,7 @@ const Protocols = () => {
                   className="group transition-transform duration-300 hover:-translate-y-1"
                 >
                   <div style={{ width: "100%", height: "220px", overflow: "hidden" }}>
-                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
                   </div>
                   <div style={{ padding: "24px 28px", position: "relative" }}>
                     <span style={{ position: "absolute", top: "20px", right: "24px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "20px", lineHeight: 1 }}>→</span>
@@ -263,7 +263,7 @@ const Protocols = () => {
                   className="group transition-transform duration-300 hover:-translate-y-1"
                 >
                   <div style={{ width: "100%", height: "160px", overflow: "hidden" }}>
-                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
                   </div>
                   <div style={{ padding: "20px 24px", position: "relative" }}>
                     <span style={{ position: "absolute", top: "16px", right: "20px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}>→</span>
