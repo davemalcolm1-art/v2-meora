@@ -512,20 +512,33 @@ const HeroSection = () => {
         <a href="#" className="nav-logo" style={{
           display: "flex",
           alignItems: "center",
-          gap: "10px",
-          textDecoration: "none"
+          textDecoration: "none",
+          height: "44px"
         }}>
-          <img
-            src="/meora-mark-white.svg"
-            alt="Meora"
-            style={{ height: "36px", width: "auto" }}
-          />
+          <svg
+            viewBox="460 85 280 240"
+            height="44"
+            width="44"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="600" cy="220" fill="none"
+              r="120" stroke="#FF5003" strokeWidth="6"/>
+            <path
+              d="M 530 300 L 530 170 L 600 250 L 670 170 L 670 300"
+              fill="none" stroke="#FF5003"
+              strokeLinecap="round" strokeLinejoin="round"
+              strokeWidth="7"/>
+            <path
+              d="M 600 310 C 560 260, 580 215, 600 195 C 620 215, 640 260, 600 310 Z"
+              fill="none" stroke="#FF5003" strokeWidth="6"/>
+          </svg>
           <span style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
             fontSize: "18px",
             color: "#fff",
-            letterSpacing: "0.08em"
+            letterSpacing: "0.08em",
+            marginLeft: "10px"
           }}>
             MEORA
           </span>
