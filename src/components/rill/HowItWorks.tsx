@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useQuiz } from "./quizContext";
 
 const steps = [
   {
@@ -23,79 +24,24 @@ const steps = [
   },
 ];
 
-const StepBand = ({ s, index }: { s: typeof steps[number]; index: number }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [shown, setShown] = useState(false);
+const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setShown(true);
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const dark = index % 2 === 0;
-  const bg = dark ? "#1A2B35" : "#162030";
-  const num = String(s.n).padStart(2, "0");
-  const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
+const HowItWorks = () => {
+  const { open } = useQuiz();
+  const [openStep, setOpenStep] = useState<number | null>(1);
 
   return (
-    <div
-      ref={ref}
+    <section
+      className="how-section how-section--v3"
+      id="how"
       style={{
-        background: bg,
-        position: "relative",
-        overflow: "hidden",
-        padding: "60px 80px",
-        minHeight: "260px",
-        display: "flex",
-        alignItems: "center",
+        background: "#1A2B35",
+        padding: 0,
+        margin: 0,
       }}
-      className="how-band"
     >
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          left: "60px",
-          top: "50%",
-          transform: `translateY(-50%) scale(${shown ? 1 : 0.85})`,
-          opacity: shown ? 1 : 0,
-          transition: `opacity 700ms ${ease}, transform 700ms ${ease}`,
-          fontFamily: "'Fraunces', serif",
-          fontWeight: 900,
-          fontSize: "clamp(80px, 12vw, 160px)",
-          lineHeight: 1,
-          color: "rgba(255,80,3,0.12)",
-          pointerEvents: "none",
-          letterSpacing: "-0.04em",
-        }}
-      >
-        {num}
-      </div>
-
-      <div
-        style={{
-          position: "relative",
-          marginLeft: "35%",
-          width: "65%",
-          opacity: shown ? 1 : 0,
-          transform: shown ? "translateX(0)" : "translateX(40px)",
-          transition: `opacity 600ms ${ease} 200ms, transform 600ms ${ease} 200ms`,
-        }}
-        className="how-band-content"
-      >
+      {/* Header */}
+      <div className="how-v3-header" style={{ padding: "80px 80px 60px" }}>
         <div
           style={{
             fontFamily: "'DM Sans', sans-serif",
@@ -104,73 +50,210 @@ const StepBand = ({ s, index }: { s: typeof steps[number]; index: number }) => {
             color: "#FF5003",
             fontSize: "11px",
             letterSpacing: "0.12em",
-            marginBottom: "16px",
+            marginBottom: "20px",
           }}
         >
-          STEP {num}
+          How It Works
         </div>
-        <h3
+        <h2
           style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
             color: "#FFFFFF",
-            fontSize: "clamp(28px, 3vw, 42px)",
-            lineHeight: 1.15,
-            letterSpacing: "-0.01em",
+            fontSize: "clamp(32px, 4vw, 52px)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
             margin: 0,
           }}
         >
-          {s.title}
-        </h3>
+          Four steps to
+          <br />
+          <span style={{ fontStyle: "italic", fontWeight: 900, color: "#FF5003" }}>
+            a new standard.
+          </span>
+        </h2>
         <p
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
-            color: "rgba(255,255,255,0.65)",
+            color: "rgba(255,255,255,0.6)",
             fontSize: "16px",
-            lineHeight: 1.7,
-            maxWidth: "480px",
-            marginTop: "16px",
-            marginBottom: 0,
+            lineHeight: 1.6,
+            marginTop: "24px",
+            maxWidth: "560px",
           }}
         >
-          {s.body}
+          Most patients complete the full process in under two weeks.
         </p>
       </div>
-    </div>
+
+      {/* Accordion */}
+      <div>
+        {steps.map((s) => {
+          const isOpen = openStep === s.n;
+          const num = String(s.n).padStart(2, "0");
+          return (
+            <div
+              key={s.n}
+              className="how-v3-row"
+              style={{
+                background: isOpen ? "rgba(255,255,255,0.05)" : "transparent",
+                borderBottom: "1px solid rgba(255,255,255,0.1)",
+                transition: `background 300ms ${EASE}`,
+              }}
+            >
+              <button
+                onClick={() => setOpenStep(isOpen ? null : s.n)}
+                className="how-v3-trigger"
+                style={{
+                  width: "100%",
+                  background: "transparent",
+                  border: "none",
+                  padding: "28px 80px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  color: "inherit",
+                }}
+                aria-expanded={isOpen}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Fraunces', serif",
+                    fontWeight: 900,
+                    color: isOpen ? "#FF5003" : "rgba(255,80,3,0.4)",
+                    fontSize: "18px",
+                    lineHeight: 1,
+                    width: "60px",
+                    flex: "0 0 60px",
+                    transition: `color 300ms ${EASE}`,
+                  }}
+                >
+                  {num}
+                </span>
+                <span
+                  style={{
+                    flex: 1,
+                    fontFamily: "'Fraunces', serif",
+                    fontWeight: 700,
+                    color: "#FFFFFF",
+                    fontSize: "clamp(20px, 2.5vw, 28px)",
+                    lineHeight: 1.2,
+                    letterSpacing: "-0.01em",
+                  }}
+                  className="how-v3-title"
+                >
+                  {s.title}
+                </span>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 400,
+                    color: "#FFFFFF",
+                    fontSize: "24px",
+                    lineHeight: 1,
+                    display: "inline-block",
+                    transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+                    transition: "transform 300ms ease",
+                  }}
+                >
+                  +
+                </span>
+              </button>
+              <div
+                style={{
+                  maxHeight: isOpen ? "240px" : "0px",
+                  overflow: "hidden",
+                  transition: `max-height 400ms ${EASE}`,
+                }}
+              >
+                <p
+                  className="how-v3-body"
+                  style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.65)",
+                    fontSize: "16px",
+                    lineHeight: 1.75,
+                    maxWidth: "600px",
+                    margin: 0,
+                    padding: "0 80px 28px 140px",
+                  }}
+                >
+                  {s.body}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* CTA row */}
+      <div
+        className="how-v3-cta"
+        style={{
+          background: "rgba(255,80,3,0.1)",
+          borderTop: "1px solid rgba(255,80,3,0.2)",
+          padding: "40px 80px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "24px",
+          flexWrap: "wrap",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 700,
+            color: "#FFFFFF",
+            fontSize: "24px",
+            lineHeight: 1.2,
+          }}
+        >
+          Ready to start?
+        </div>
+        <button
+          onClick={open}
+          style={{
+            background: "#FF5003",
+            color: "#FFFFFF",
+            border: "none",
+            borderRadius: "999px",
+            padding: "14px 28px",
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 800,
+            fontSize: "13px",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            cursor: "pointer",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          Start your assessment →
+        </button>
+      </div>
+
+      <style>{`
+        .how-section--v3 .how-steps { display: none !important; }
+        .how-section--v3 .section-eyebrow,
+        .how-section--v3 .section-h2,
+        .how-section--v3 .how-reassurance { display: none !important; }
+        @media (max-width: 768px) {
+          .how-v3-header { padding: 60px 24px 40px !important; }
+          .how-v3-trigger { padding: 24px !important; gap: 16px !important; }
+          .how-v3-title { font-size: 20px !important; }
+          .how-v3-body { padding: 0 24px 24px 24px !important; }
+          .how-v3-cta { padding: 32px 24px !important; }
+        }
+      `}</style>
+    </section>
   );
 };
-
-const HowItWorks = () => (
-  <section className="how-section" id="how" style={{ padding: 0, background: "#F7F4EF" }}>
-    <div style={{ padding: "120px 60px 60px", background: "#F7F4EF" }}>
-      <div className="section-eyebrow reveal">
-        <div className="section-eyebrow-line"></div>
-        <span>How It Works</span>
-      </div>
-      <h2 className="section-h2 reveal reveal-delay-1">
-        Four steps to<br />
-        <em>a new standard.</em>
-      </h2>
-      <p className="how-reassurance reveal reveal-delay-2">
-        Most patients complete the full process in under two weeks — from first visit to protocol delivered.
-      </p>
-    </div>
-
-    <div>
-      {steps.map((s, i) => (
-        <StepBand key={s.n} s={s} index={i} />
-      ))}
-    </div>
-
-    <style>{`
-      .how-section .how-steps { display: none !important; }
-      @media (max-width: 900px) {
-        .how-band { padding: 48px 24px !important; }
-        .how-band-content { margin-left: 0 !important; width: 100% !important; }
-      }
-    `}</style>
-  </section>
-);
 
 export default HowItWorks;
