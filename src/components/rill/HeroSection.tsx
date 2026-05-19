@@ -636,7 +636,7 @@ const HeroSection = () => {
           <div className="hero-credential">
             <div className="hero-credential-rule" />
             <span className="hero-credential-text">
-              AHPRA-Registered Doctors · TGA-Compliant · Australia-Wide
+              AHPRA-Registered Doctors · Doctor-Prescribed · Australia-Wide
             </span>
           </div>
 
