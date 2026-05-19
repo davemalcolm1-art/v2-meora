@@ -322,6 +322,11 @@ const HeroSection = () => {
         }
 
         /* ── HERO SECTION ── */
+        @keyframes kenburns {
+          0%   { transform: scale(1.0)  translateX(0px); }
+          50%  { transform: scale(1.08) translateX(-20px); }
+          100% { transform: scale(1.0)  translateX(0px); }
+        }
         .hero-section {
           position: relative;
           width: 100%;
@@ -613,12 +618,29 @@ const HeroSection = () => {
           />
         )}
 
+        {/* Ken Burns fallback — visible while video loads or if it fails */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            animation: "kenburns 25s ease-in-out infinite",
+            transformOrigin: "center center",
+          }}
+        />
+
         {/* Background video */}
         <video
           autoPlay
           muted
           loop
           playsInline
+          poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
           style={{
             position: "absolute",
             inset: 0,
