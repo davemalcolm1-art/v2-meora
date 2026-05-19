@@ -35,7 +35,7 @@ const categories: CategoryWithImage[] = [
   { id: "energy", label: "Energy", line: "Restore drive, clarity and sustained output.", count: 5, tier: "primary",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" },
   { id: "performance", label: "Performance", line: "Build strength, speed and resilience.", count: 10, tier: "primary",
-    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80" },
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80", imagePosition: "center 40%" } as CategoryWithImage & { imagePosition?: string },
   { id: "balance", label: "Balance", line: "Hormonal equilibrium and whole-body calm.", count: 7, tier: "primary",
     image: "https://images.unsplash.com/photo-1532798442725-41036acc7489?w=800&q=80" },
   { id: "recovery", label: "Recovery", line: "Repair faster. Come back stronger.", count: 3, tier: "secondary",
