@@ -509,7 +509,27 @@ const HeroSection = () => {
 
       {/* ── NAV ─────────────────────────────────────────────────────────────── */}
       <nav className={`rill-nav ${menuOpen ? "menu-open" : scrolled ? "scrolled" : ""}`}>
-        <a href="#" className="nav-logo">MEORA</a>
+        <a href="#" className="nav-logo" style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          textDecoration: "none"
+        }}>
+          <img
+            src="/meora-mark-white.svg"
+            alt="Meora"
+            style={{ height: "36px", width: "auto" }}
+          />
+          <span style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 700,
+            fontSize: "18px",
+            color: "#fff",
+            letterSpacing: "0.08em"
+          }}>
+            MEORA
+          </span>
+        </a>
 
         <ul className="nav-links">
           {NAV_LINKS.map(link => (
