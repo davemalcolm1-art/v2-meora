@@ -402,10 +402,10 @@ const HeroSection = () => {
         .hero-sub-word {
           display: inline-block;
           font-family: 'Fraunces', serif;
-          font-weight: 400;
+          font-weight: 700;
           font-style: italic;
-          font-size: clamp(20px, 2.2vw, 30px);
-          color: rgba(255,255,255,0.65);
+          font-size: clamp(36px, 5vw, 72px);
+          color: #FF5003;
           letter-spacing: -0.01em;
           transition: opacity 350ms ease, transform 350ms ease;
         }
