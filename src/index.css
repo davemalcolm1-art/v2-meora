@@ -1821,9 +1821,12 @@ nav.rill-nav.scrolled {
   .hero-content { padding: 0 24px 60px; }
   .hero-bottom { padding: 0 24px 24px; }
   .rill-section, .protocols-section, .science-section, .how-section, .faq-section, .hub-section, .cta-final, .what-section { padding-left: 24px; padding-right: 24px; }
+  .what-section-redesign { padding: 80px 24px; }
+  .what-headline { margin-bottom: 60px; }
   .what-stats, .what-pillars-row { grid-template-columns: 1fr; gap: 40px; }
-  .what-stat { border-left: none; border-top: 0.5px solid rgba(247,244,239,0.1); padding: 40px 0 0; }
-  .what-stat:first-child { border-top: none; padding-top: 0; }
+  .what-stat { border-left: none; border-top: 0.5px solid rgba(26,43,53,0.12); padding: 40px 0 0; }
+  .what-stats-redesign .what-stat { border-left: none; border-top: 0.5px solid rgba(26,43,53,0.12); padding: 40px 0 0; }
+  .what-stat:first-child, .what-stats-redesign .what-stat:first-child { border-top: none; padding-top: 0; }
   .protocols-header { flex-direction: column; align-items: flex-start; gap: 24px; }
   .protocols-hero-row { grid-template-columns: 1fr; }
   .protocols-small-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
