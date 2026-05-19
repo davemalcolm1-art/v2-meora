@@ -225,7 +225,7 @@ const HowItWorks = () => {
       <div
         className="how-v3-cta"
         style={{
-          background: "rgba(255,80,3,0.1)",
+          background: "#1A2B35",
           borderTop: "1px solid rgba(255,80,3,0.2)",
           padding: "40px 80px",
           display: "flex",
