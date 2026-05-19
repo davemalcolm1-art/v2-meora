@@ -35,7 +35,9 @@ const Index = () => {
         <FAQ />
         <ContentHub />
       </main>
+      <MaskSection />
       <Footer />
+
       <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
     </QuizProvider>
   );
