@@ -1,11 +1,11 @@
 const stats = [
   { stat: "30+", label: "AGE WHEN GH AXIS DECLINE BEGINS", note: "Source: established endocrinology" },
   { stat: "AHPRA", label: "REGISTERED PRACTITIONERS — EVERY TIME", note: "No exceptions. No workarounds." },
-  { stat: "TGA", label: "LICENSED COMPOUNDING PHARMACY", note: "Every prescription. Every compound." },
+  { stat: "TGA", label: "REGISTERED COMPOUNDING PHARMACY", note: "Every prescription. Every compound. Registered." },
 ];
 
 const pillars = [
-  { num: "01", title: "Medical-grade peptides", body: "Compounded by TGA-licensed pharmacies, prescribed by licensed clinicians, tested for purity and potency." },
+  { num: "01", title: "Clinically compounded protocols", body: "Compounded by a registered compounding pharmacy, prescribed by licensed clinicians, tested for purity and potency." },
   { num: "02", title: "Clinical guidance", body: "Physician-designed protocols, continuously optimised to support your changing goals." },
   { num: "03", title: "Ongoing monitoring", body: "Quarterly blood panels and doctor review — not a one-time prescription, a continuous clinical relationship." },
 ];
