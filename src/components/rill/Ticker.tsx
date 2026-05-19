@@ -39,7 +39,7 @@ const Ticker = () => {
                 fontSize: "13px",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(26,43,53,0.5)",
                 paddingRight: "2em",
                 flexShrink: 0,
               }}
