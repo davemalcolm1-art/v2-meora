@@ -243,7 +243,7 @@ const Protocols = () => {
   return (
     <section
       id="protocols"
-      className="bg-[#F5F0E8] text-[#001830] px-6 md:px-12 py-24 md:py-32 selection:bg-[#ff6a00] selection:text-white"
+      className="bg-white text-[#001830] px-6 md:px-12 py-24 md:py-32 selection:bg-[#ff6a00] selection:text-white"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
