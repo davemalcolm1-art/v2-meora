@@ -291,16 +291,17 @@ const HowItWorks = () => {
             opacity 600ms ${EASE}, transform 600ms ${EASE};
         }
 
-        /* Hover (desktop only) */
+        /* Hover (desktop only) — reveal full body, readable */
         @media (hover: hover) {
           .how-cascade-row:hover .how-cascade-num-wrap { opacity: 1 !important; }
           .how-cascade-row:hover .how-cascade-title { transform: translateX(12px); }
           .how-cascade-row:hover .how-cascade-body-wrap {
-            max-height: 52px;
+            max-height: 300px;
             opacity: 1;
-            padding-top: 10px;
+            padding-top: 16px;
+            padding-bottom: 8px;
           }
-          .how-cascade-row:hover .how-cascade-body { color: rgba(255,255,255,0.5) !important; }
+          .how-cascade-row:hover .how-cascade-body { color: rgba(255,255,255,0.85) !important; }
           .how-cascade-row:hover {
             border-left-color: #FF5003;
             padding-left: 16px;
