@@ -1,41 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuiz } from "./quizContext";
 
-const ROTATING_WORDS = [
-  "energy.",
-  "recovery.",
-  "performance.",
-  "longevity.",
-  "beauty.",
-  "ME.",
+const ROTATING_PHRASES = [
+  "Made for energy.",
+  "Made for recovery.",
+  "Made for longevity.",
+  "Made for ME.",
 ];
-
-const BASE_INTERVAL = 2500;
-const ME_EXTRA_HOLD = 1000;
-const FADE_MS = 400;
 
 const Hero = () => {
   const { open } = useQuiz();
-  const [wordIdx, setWordIdx] = useState(0);
+  const [phraseIdx, setPhraseIdx] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const currentWord = ROTATING_WORDS[wordIdx];
-    const hold = currentWord === "ME." ? BASE_INTERVAL + ME_EXTRA_HOLD : BASE_INTERVAL;
-
-    timeoutRef.current = setTimeout(() => {
+    const interval = setInterval(() => {
       setFadeIn(false);
-      timeoutRef.current = setTimeout(() => {
-        setWordIdx((i) => (i + 1) % ROTATING_WORDS.length);
+      const t = setTimeout(() => {
+        setPhraseIdx((i) => (i + 1) % ROTATING_PHRASES.length);
         setFadeIn(true);
-      }, FADE_MS);
-    }, hold);
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [wordIdx]);
+      }, 400);
+      return () => clearTimeout(t);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="hero">
@@ -54,13 +42,12 @@ const Hero = () => {
         </div>
         <h1 className="reveal reveal-delay-1">
           Built by science.<br />
-          Made for{" "}
           <span className="hero-rotator" aria-live="polite">
             <em
               className="hero-rotator-text"
-              style={{ opacity: fadeIn ? 1 : 0, transition: `opacity ${FADE_MS}ms ease` }}
+              style={{ opacity: fadeIn ? 1 : 0, transition: "opacity 400ms ease" }}
             >
-              {ROTATING_WORDS[wordIdx]}
+              {ROTATING_PHRASES[phraseIdx]}
             </em>
           </span>
         </h1>

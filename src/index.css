@@ -2959,12 +2959,9 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #FF5003 !important; }
 
 /* Rotating headline — fixed height, no layout shift */
 .hero-rotator {
-  display: block;
-  min-height: 88px;
+  display: inline-block;
+  min-height: 1.05em;
   line-height: 1.05;
-}
-@media (max-width: 768px) {
-  .hero-rotator { min-height: 64px; }
 }
 .hero-rotator-text {
   display: inline-block;
@@ -2972,7 +2969,6 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #FF5003 !important; }
   font-family: var(--font-heading);
   font-weight: 900;
   color: #FF5003;
-  will-change: opacity;
 }
 
 /* =====================================================================
