@@ -647,7 +647,7 @@ const HeroSection = () => {
 
           <div className="hero-rotating-sub">
             <span className={`hero-sub-word ${wordVisible ? "visible" : "hidden"}`}>
-              {["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty.", "For ME."][wordIndex]}
+              {WORDS[wordIndex]}
             </span>
           </div>
 
