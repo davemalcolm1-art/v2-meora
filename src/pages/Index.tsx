@@ -19,13 +19,11 @@ import useReveal from "@/components/rill/useReveal";
 const Index = () => {
   const [quizOpen, setQuizOpen] = useState(false);
   useReveal();
-
   return (
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
-      <Nav />
+      <HeroSection />
       <main>
-        <Hero />
         <Marquee />
         <Protocols />
         <Ticker />
@@ -38,7 +36,6 @@ const Index = () => {
       </main>
       <MaskSection />
       <Footer />
-
       <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
     </QuizProvider>
   );
