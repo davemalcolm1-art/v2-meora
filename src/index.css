@@ -2868,3 +2868,67 @@ button.btn-ghost {
 @media (max-width: 900px) {
   .hero-foundation-card { margin: 24px; }
 }
+
+/* === Brand contrast & typography pass === */
+
+/* Headings on light backgrounds */
+.hero-foundation-card h1, .hero-foundation-card h2, .hero-foundation-card h3,
+.what-section-light h1, .what-section-light h2, .what-section-light h3,
+.science-section.science-section--light h1, .science-section.science-section--light h2, .science-section.science-section--light h3,
+.protocols-section h1, .protocols-section h2, .protocols-section h3,
+.faq-section h1, .faq-section h2, .faq-section h3,
+.hub-section h1, .hub-section h2, .hub-section h3,
+body:not(.dark) section:not(.hero):not(.how-section):not(.science-section):not(.what-section-dark):not(.marquee-strip) h1,
+body:not(.dark) section:not(.hero):not(.how-section):not(.science-section):not(.what-section-dark):not(.marquee-strip) h2,
+body:not(.dark) section:not(.hero):not(.how-section):not(.science-section):not(.what-section-dark):not(.marquee-strip) h3 {
+  color: #111827 !important;
+}
+
+/* Display h1 weight */
+h1, .hero h1, .section-h2 + h1 {
+  font-weight: 900 !important;
+}
+.hero h1 em, h1 em { font-weight: 900 !important; }
+
+/* h2 section headings */
+h2, .section-h2 {
+  font-weight: 700 !important;
+}
+
+/* Body text on light backgrounds */
+.what-section-light p, .what-section-light .what-pillar-body, .what-section-light .what-stat-note,
+.protocols-section p, .faq-section p, .hub-section p,
+.how-reassurance, .step-desc, .step-note,
+.what-pillar-body, .what-stat-note {
+  color: #374151 !important;
+}
+
+/* Section eyebrows (light bg) */
+.section-eyebrow span,
+.protocols-section .section-eyebrow span,
+.faq-section .section-eyebrow span,
+.hub-section .section-eyebrow span,
+.what-section-light .section-eyebrow span {
+  color: #F05A28 !important;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+}
+
+/* Nav links */
+.nav-links a {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+}
+nav.rill-nav.scrolled .nav-links a { color: #F7F4EF !important; }
+nav.rill-nav.scrolled .nav-links a:hover { color: #F05A28 !important; }
+
+/* CTA buttons */
+.btn-primary, .nav-cta, .science-cta, button.btn-primary {
+  font-family: var(--font-body) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+}
