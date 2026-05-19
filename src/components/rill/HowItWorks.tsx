@@ -122,7 +122,6 @@ const StepRow = ({ s, index }: { s: Step; index: number }) => {
 
 const HowItWorks = () => {
   const { open } = useQuiz();
-  const [activeStep, setActiveStep] = useState<number | null>(null);
 
   return (
     <section
@@ -177,16 +176,10 @@ const HowItWorks = () => {
         </p>
       </div>
 
-      {/* Cascade steps */}
-      <div className="how-cascade" style={{ padding: "0 80px 80px" }}>
+      {/* Steps */}
+      <div className="how-cascade" style={{ padding: "0 80px 40px" }}>
         {steps.map((s, i) => (
-          <StepRow
-            key={s.n}
-            s={s}
-            index={i}
-            active={activeStep === s.n}
-            onActivate={() => setActiveStep((cur) => (cur === s.n ? null : s.n))}
-          />
+          <StepRow key={s.n} s={s} index={i} />
         ))}
       </div>
 
