@@ -11,7 +11,7 @@ const SLIDES = [
     position: "center 40%",
   },
   {
-    url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=85",
+    url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=85",
     alt: "Person running outdoors in morning light",
     position: "center 30%",
   },
