@@ -11,6 +11,7 @@ import Science from "@/components/rill/Science";
 import FAQ from "@/components/rill/FAQ";
 import ContentHub from "@/components/rill/ContentHub";
 import Footer from "@/components/rill/Footer";
+import MaskSection from "@/components/rill/MaskSection";
 import QuizModal from "@/components/rill/QuizModal";
 import { QuizProvider } from "@/components/rill/quizContext";
 import useReveal from "@/components/rill/useReveal";
