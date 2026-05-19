@@ -29,6 +29,7 @@ const Index = () => {
         <Hero />
         <Marquee />
         <Protocols />
+        <Ticker />
         <HowItWorks />
         <WhatIsRill />
         <InterstitialBreak label="A Protocol. Not a Trend." />
