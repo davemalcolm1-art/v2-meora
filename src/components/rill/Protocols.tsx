@@ -207,7 +207,7 @@ const Protocols = () => {
                   className="group transition-transform duration-300 hover:-translate-y-1"
                 >
                   <div style={{ width: "100%", height: "220px", overflow: "hidden" }}>
-                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
                   </div>
                   <div style={{ padding: "24px 28px", position: "relative" }}>
                     <span style={{ position: "absolute", top: "20px", right: "24px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "20px", lineHeight: 1 }}>→</span>
