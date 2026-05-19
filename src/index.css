@@ -119,11 +119,11 @@ nav.rill-nav {
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  width: fit-content;
+  width: calc(100vw - 80px);
   max-width: calc(100vw - 80px);
   height: 56px;
   padding: 0 24px;
-  border-radius: 999px;
+  border-radius: 16px;
   background: rgba(26,43,53,0.55);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
