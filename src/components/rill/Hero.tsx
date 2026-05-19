@@ -1,7 +1,30 @@
+import { useEffect, useState } from "react";
 import { useQuiz } from "./quizContext";
+
+const ROTATING_PHRASES = [
+  "Made for energy.",
+  "Made for recovery.",
+  "Made for longevity.",
+  "Made for ME.",
+];
 
 const Hero = () => {
   const { open } = useQuiz();
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [fadeIn, setFadeIn] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFadeIn(false);
+      const t = setTimeout(() => {
+        setPhraseIdx((i) => (i + 1) % ROTATING_PHRASES.length);
+        setFadeIn(true);
+      }, 400);
+      return () => clearTimeout(t);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="hero">
       <img
@@ -18,7 +41,15 @@ const Hero = () => {
           <span>AHPRA-Registered Doctors · TGA-Compliant · Australia-Wide</span>
         </div>
         <h1 className="reveal reveal-delay-1">
-          Built by science.<br /><em>Made for ME.</em>
+          Built by science.<br />
+          <span className="hero-rotator" aria-live="polite">
+            <em
+              className="hero-rotator-text"
+              style={{ opacity: fadeIn ? 1 : 0, transition: "opacity 400ms ease" }}
+            >
+              {ROTATING_PHRASES[phraseIdx]}
+            </em>
+          </span>
         </h1>
         <p className="hero-sub reveal reveal-delay-2">
           Doctor-prescribed peptide protocols for energy, recovery, and long-term health. Available anywhere in Australia.

@@ -263,38 +263,62 @@ const Protocols = () => {
         </div>
 
         {/* Primary cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {primaries.map((c) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 protocols-card-grid">
+          {primaries.map((c, idx) => {
             const isActive = activeCategory === c.id;
+            const ghostLabel = (c.eyebrow.split("/")[1] || c.label).trim().toUpperCase();
             return (
               <button
                 key={c.id}
                 onClick={() => setActiveCategory(isActive ? null : c.id)}
                 aria-pressed={isActive}
-                className={`group rounded-[40px] p-10 flex flex-col aspect-[4/5] justify-between text-left transition-all duration-500 cursor-pointer ${
+                style={{ transitionDelay: `${idx * 100}ms` }}
+                className={`group reveal rounded-[24px] overflow-hidden flex flex-col aspect-[4/5] text-left transition-all duration-500 cursor-pointer ${
                   isActive
-                    ? "bg-white shadow-2xl shadow-[#001830]/10 ring-1 ring-[#ff6a00]/30"
-                    : "bg-[#EDE8DE] hover:bg-white hover:shadow-2xl hover:shadow-[#001830]/5"
+                    ? "bg-white shadow-2xl shadow-[#001830]/10 ring-1 ring-[#F05A28]/30"
+                    : "bg-white hover:shadow-2xl hover:shadow-[#001830]/10"
                 }`}
               >
-                <div className="flex justify-between items-start">
+                {/* Dark ghosted top band */}
+                <div
+                  className="relative w-full flex items-center justify-center"
+                  style={{ height: "200px", background: "#1A2B35" }}
+                >
                   <span
-                    className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#F05A28]"
-                    style={{ fontSize: "11px", letterSpacing: "0.12em" }}
+                    style={{
+                      fontFamily: "'Fraunces', serif",
+                      fontWeight: 900,
+                      fontSize: "48px",
+                      color: "rgba(255,255,255,0.08)",
+                      letterSpacing: "0.02em",
+                      lineHeight: 1,
+                      textAlign: "center",
+                    }}
                   >
-                    {c.eyebrow.split("/")[1]?.trim()}
+                    {ghostLabel}
                   </span>
-                  <Arrow />
                 </div>
 
-                <div>
-                  <h3 className="text-4xl italic font-['Cormorant_Garamond',serif] text-[#001830] mb-2 leading-none">
-                    {c.label}
-                  </h3>
-                  <p className="text-[#001830]/60 text-xs tracking-tight mb-3">{c.blurb}</p>
-                  <div className="font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest text-[#ff6a00]">
-                    {countFor(c.id)} {countFor(c.id) === 1 ? "protocol" : "protocols"}
-                    {isActive ? " · viewing below" : ""}
+                {/* White content area */}
+                <div className="flex-1 p-8 flex flex-col justify-between bg-white">
+                  <div className="flex justify-between items-start">
+                    <span
+                      className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#F05A28]"
+                      style={{ fontSize: "11px", letterSpacing: "0.12em" }}
+                    >
+                      {c.eyebrow.split("/")[1]?.trim()}
+                    </span>
+                    <Arrow />
+                  </div>
+                  <div>
+                    <h3 className="text-4xl italic font-['Cormorant_Garamond',serif] text-[#111827] mb-2 leading-none">
+                      {c.label}
+                    </h3>
+                    <p className="text-[#001830]/60 text-xs tracking-tight mb-3">{c.blurb}</p>
+                    <div className="font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest text-[#F05A28]">
+                      {countFor(c.id)} {countFor(c.id) === 1 ? "protocol" : "protocols"}
+                      {isActive ? " · viewing below" : ""}
+                    </div>
                   </div>
                 </div>
               </button>

@@ -2932,3 +2932,128 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #F05A28 !important; }
   font-weight: 800 !important;
   letter-spacing: 0.04em !important;
 }
+
+/* =====================================================================
+   Hero — credential bar spacing, foundation card, padding bottom
+   ===================================================================== */
+.hero .hero-eyebrow { padding-top: 40px !important; }
+.hero { padding-bottom: 60px !important; }
+
+.hero-foundation-card {
+  padding: 28px 28px 28px 24px !important;
+  border-left: 3px solid #F05A28 !important;
+  border-radius: 16px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+}
+.hero-foundation-label {
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #F05A28 !important;
+  margin-bottom: 12px !important;
+  display: block;
+}
+
+/* Rotating headline — fixed height, no layout shift */
+.hero-rotator {
+  display: inline-block;
+  min-height: 1.05em;
+  line-height: 1.05;
+}
+.hero-rotator-text {
+  display: inline-block;
+  font-style: italic;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  color: #F05A28;
+}
+
+/* =====================================================================
+   FAQ — single column, card-style accordion items, heading
+   ===================================================================== */
+.faq-section {
+  display: block !important;
+  grid-template-columns: none !important;
+  background: #F7F4EF !important;
+  padding: 120px 60px !important;
+}
+.faq-image-col { display: none !important; }
+.faq-content-col,
+.faq-content-col--full {
+  padding: 0 !important;
+  max-width: 880px;
+  margin: 0 auto;
+  width: 100%;
+}
+.faq-heading {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  font-size: 48px !important;
+  line-height: 1.1 !important;
+  color: #111827 !important;
+  margin-bottom: 48px !important;
+}
+.faq-heading em {
+  display: block;
+  font-style: italic !important;
+  font-weight: 900 !important;
+  color: #F05A28 !important;
+}
+.faq-list { gap: 16px; }
+.faq-item {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  padding: 20px 24px !important;
+  margin-bottom: 16px !important;
+}
+.faq-item:hover { padding-left: 24px !important; box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important; }
+.faq-question { padding: 0 !important; color: #111827 !important; font-weight: 500 !important; }
+.faq-icon {
+  color: #F05A28 !important;
+  border: none !important;
+  font-size: 22px !important;
+}
+.faq-answer { padding: 16px 0 0 !important; color: #374151 !important; }
+
+/* =====================================================================
+   Stats section — distinct warm-grey background
+   ===================================================================== */
+.what-section-light { background: #EDE8E0 !important; }
+
+/* =====================================================================
+   Mask section — tight padding, no border lines
+   ===================================================================== */
+.mask-section {
+  padding: 60px 0 !important;
+}
+.mask-section .mask-bg {
+  top: 60px !important;
+  bottom: 60px !important;
+}
+.mask-section .mask-svg {
+  top: 60px !important;
+  bottom: 60px !important;
+  height: calc(100% - 120px) !important;
+}
+.mask-section::after {
+  height: clamp(180px, 26vw, 360px) !important;
+}
+.mask-section .mask-fade-top,
+.mask-section .mask-fade-bottom { display: none !important; }
+
+/* =====================================================================
+   Scroll-reveal enhancements — h2, card grids, stats, FAQ items
+   ===================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+  will-change: opacity, transform;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }

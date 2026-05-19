@@ -14,25 +14,18 @@ const FAQ = () => {
   const [open, setOpen] = useState<number | null>(null);
   return (
     <section className="faq-section" id="about">
-      <div className="faq-image-col">
-        <img
-          className="faq-image"
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          alt=""
-          aria-hidden="true"
-        />
-      </div>
-      <div className="faq-content-col">
+      <div className="faq-content-col faq-content-col--full">
         <div className="section-eyebrow reveal">
           <div className="section-eyebrow-line"></div>
           <span>FAQ</span>
         </div>
         <h2 className="faq-heading reveal reveal-delay-1">
-          Common<br /><em>questions.</em>
+          Common questions.<br />
+          <em>We have answers.</em>
         </h2>
         <div className="faq-list">
           {faqs.map((f, i) => (
-            <div className={`faq-item ${open === i ? "open" : ""}`} key={i}>
+            <div className={`faq-item reveal ${open === i ? "open" : ""}`} key={i} style={{ transitionDelay: `${i * 100}ms` }}>
               <div className="faq-question" onClick={() => setOpen(open === i ? null : i)}>
                 {f.q}
                 <div className="faq-icon">+</div>
