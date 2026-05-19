@@ -613,6 +613,37 @@ const HeroSection = () => {
           />
         )}
 
+        {/* Background video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 2,
+          }}
+        >
+          <source
+            src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/hero-bg.mp4"
+            type="video/mp4"
+          />
+        </video>
+
+        {/* Dark overlay for legibility */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 3,
+            background: "rgba(0,0,0,0.45)",
+          }}
+        />
+
         {/* Dark gradient overlay */}
         <div className="hero-overlay" />
 
