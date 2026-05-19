@@ -113,7 +113,7 @@ nav.rill-nav.scrolled {
   border-bottom: 0.5px solid rgba(245,240,232,0.1);
 }
 .nav-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 32px; font-weight: 700;
   letter-spacing: 0.25em;
   color: var(--cream);
@@ -240,7 +240,7 @@ nav.rill-nav.scrolled {
   font-family: 'DM Mono', monospace;
 }
 .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(64px, 9vw, 120px);
   font-weight: 300;
   line-height: 0.95;
@@ -363,7 +363,7 @@ nav.rill-nav.scrolled {
   font-family: 'DM Mono', monospace;
 }
 .section-h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(44px, 5vw, 72px);
   font-weight: 300;
   line-height: 1.0;
@@ -392,7 +392,7 @@ nav.rill-nav.scrolled {
   text-align: center;
 }
 .what-line-1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(36px, 4.5vw, 60px);
   font-weight: 300;
   line-height: 1.0;
@@ -401,7 +401,7 @@ nav.rill-nav.scrolled {
   white-space: nowrap;
 }
 .what-line-2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(36px, 4.5vw, 60px);
   font-weight: 300;
   font-style: italic;
@@ -411,7 +411,7 @@ nav.rill-nav.scrolled {
   margin-top: 4px;
 }
 .what-line-3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(18px, 2.2vw, 30px);
   font-weight: 300;
   line-height: 1.0;
@@ -433,7 +433,7 @@ nav.rill-nav.scrolled {
 }
 .what-stat:first-child { border-left: none; }
 .what-stat-num {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 64px;
   font-weight: 300;
   color: var(--orange);
@@ -512,7 +512,7 @@ nav.rill-nav.scrolled {
   color: #FF5003;
 }
 .protocols-heading {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(44px, 5vw, 64px);
   font-weight: 300;
   line-height: 1.0;
@@ -599,7 +599,7 @@ nav.rill-nav.scrolled {
   margin-bottom: 14px;
 }
 .protocol-hero-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 36px;
   font-weight: 300;
   color: #F5F0E8;
@@ -718,7 +718,7 @@ nav.rill-nav.scrolled {
   opacity: 0.85;
 }
 .protocol-small-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 32px;
   color: #F5F0E8;
   font-weight: 300;
@@ -827,7 +827,7 @@ nav.rill-nav.scrolled {
   margin-bottom: 14px;
 }
 .protocol-detail-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 44px;
   font-weight: 300;
   color: #F5F0E8;
@@ -1008,7 +1008,7 @@ nav.rill-nav.scrolled {
 }
 .science-title,
 .science-title-dark {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 24px;
   font-weight: 300;
   color: var(--cream);
@@ -1200,7 +1200,7 @@ nav.rill-nav.scrolled {
   box-shadow: 0 0 16px rgba(255,80,3,0.3);
 }
 .how-step:hover .step-title { color: #fff; }
-.step-superscript { font-size: 20px; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+.step-superscript { font-size: 20px; font-family: var(--font-heading); font-style: italic; }
 .step-title {
   font-size: 16px; font-weight: 500;
   color: #F5F0E8;
@@ -1245,7 +1245,7 @@ nav.rill-nav.scrolled {
   flex-direction: column;
 }
 .faq-heading {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(36px, 4vw, 52px);
   font-weight: 300;
   line-height: 1.0;
@@ -1316,7 +1316,7 @@ nav.rill-nav.scrolled {
   margin-bottom: 20px; display: block;
 }
 .cta-h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(44px, 5vw, 72px);
   font-weight: 300; line-height: 1.0;
   color: var(--cream);
@@ -1352,7 +1352,7 @@ nav.rill-nav.scrolled {
 .hub-section .section-eyebrow { margin-bottom: 18px; }
 .hub-section .section-eyebrow span { color: var(--orange); }
 .hub-heading {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(48px, 6vw, 76px);
   font-weight: 300;
   line-height: 0.98;
@@ -1477,7 +1477,7 @@ nav.rill-nav.scrolled {
   margin-bottom: 14px;
 }
 .hub-card-feature .hub-card-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(30px, 3.4vw, 42px);
   font-weight: 300;
   line-height: 1.05;
@@ -1486,7 +1486,7 @@ nav.rill-nav.scrolled {
   margin: 0;
 }
 .hub-card-secondary .hub-card-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: clamp(22px, 2.2vw, 28px);
   font-weight: 300;
   line-height: 1.1;
@@ -1510,7 +1510,7 @@ nav.rill-nav.scrolled {
   margin-bottom: 60px;
 }
 .footer-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 32px; font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--cream);
@@ -1526,7 +1526,7 @@ nav.rill-nav.scrolled {
 .footer-tagline {
   color: var(--text-dimmer);
   font-style: italic;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 16px; line-height: 1.5;
   max-width: 240px;
 }
@@ -1619,7 +1619,7 @@ nav.rill-nav.scrolled {
   margin-bottom: 12px;
 }
 .quiz-question {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 28px; font-weight: 300;
   color: var(--cream); line-height: 1.2;
   margin-bottom: 32px;
@@ -1690,7 +1690,7 @@ nav.rill-nav.scrolled {
   color: var(--orange); font-size: 24px;
 }
 .quiz-result h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-size: 32px; font-weight: 300;
   color: var(--cream); margin-bottom: 12px;
 }
@@ -2177,7 +2177,7 @@ input, textarea, select, button {
 }
 .privacy-back:hover { border-bottom-color: var(--orange); }
 .privacy-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: clamp(48px, 6vw, 72px);
   line-height: 1.05;
@@ -2197,7 +2197,7 @@ input, textarea, select, button {
 }
 .privacy-page section { margin-bottom: 48px; }
 .privacy-page h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-heading);
   font-weight: 500;
   font-size: 28px;
   color: var(--cream);
