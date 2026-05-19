@@ -2760,6 +2760,11 @@ button.btn-ghost {
 .how-section .how-step:hover .step-num { box-shadow: 0 0 16px rgba(255,80,3,0.4) !important; }
 
 /* SCIENCE — dark, full-bleed ocean background */
+@keyframes kenburns {
+  0%   { transform: scale(1.0)  translateX(0px); }
+  50%  { transform: scale(1.08) translateX(-20px); }
+  100% { transform: scale(1.0)  translateX(0px); }
+}
 .science-section {
   position: relative !important;
   background: #14232D !important;
