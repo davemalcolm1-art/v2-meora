@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Cursor from "@/components/rill/Cursor";
-import Nav from "@/components/rill/Nav";
-import Hero from "@/components/rill/Hero";
+import HeroSection from "@/components/rill/HeroSection";
 import Marquee from "@/components/rill/Marquee";
 import HowItWorks from "@/components/rill/HowItWorks";
 import WhatIsRill from "@/components/rill/WhatIsRill";
