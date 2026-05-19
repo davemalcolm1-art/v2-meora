@@ -128,33 +128,38 @@ const HeroSection = () => {
   return (
     <>
       <style>{`
-        /* ── NAV ── */
+        /* ── NAV ── floating centred pill ── */
         .rill-nav {
           position: fixed;
-          top: 0; left: 0; right: 0;
-          z-index: 100;
+          top: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 50;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 48px;
-          height: 72px;
-          transition: background 400ms ease,
-                      backdrop-filter 400ms ease,
-                      border-bottom 400ms ease;
-          background: transparent;
-          backdrop-filter: none;
-          border-bottom: none;
+          gap: 32px;
+          height: 56px;
+          padding: 0 12px 0 24px;
+          width: calc(100vw - 80px);
+          max-width: 1240px;
+          border-radius: 999px;
+          background: rgba(26, 43, 53, 0.45);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,0.12);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+          transition: background 400ms ease, border-color 400ms ease;
         }
         .rill-nav.scrolled {
-          background: rgba(26, 43, 53, 0.75);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border-bottom: 1px solid rgba(255,255,255,0.08);
+          background: rgba(26, 43, 53, 0.72);
+          border-color: rgba(255,255,255,0.16);
         }
         .rill-nav.menu-open {
           background: transparent !important;
+          border-color: transparent !important;
+          box-shadow: none !important;
           backdrop-filter: none !important;
-          border-bottom: none !important;
         }
         .nav-logo {
           font-family: 'Fraunces', serif;
@@ -169,7 +174,7 @@ const HeroSection = () => {
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 36px;
+          gap: 32px;
           list-style: none;
           margin: 0; padding: 0;
         }
@@ -177,9 +182,9 @@ const HeroSection = () => {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 13px;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.72);
+          color: rgba(255,255,255,0.85);
           text-decoration: none;
           transition: color 200ms ease;
         }
@@ -201,7 +206,7 @@ const HeroSection = () => {
           background: #FF5003;
           border: none;
           border-radius: 999px;
-          padding: 11px 22px;
+          padding: 10px 20px;
           cursor: pointer;
           transition: opacity 200ms ease, transform 200ms ease;
         }
@@ -501,8 +506,13 @@ const HeroSection = () => {
 
         /* ── MOBILE ── */
         @media (max-width: 768px) {
-          .rill-nav { padding: 0 24px; }
+          .rill-nav {
+            width: calc(100vw - 32px);
+            padding: 0 8px 0 16px;
+            gap: 12px;
+          }
           .nav-links { display: none; }
+          .nav-cta { display: none; }
           .hero-content { padding: 0 24px 64px; }
           .hero-indicators { right: 24px; bottom: 72px; }
           .menu-overlay { padding: 0 32px; }
