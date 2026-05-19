@@ -179,7 +179,7 @@ nav.rill-nav.scrolled {
 }
 .hero-video-placeholder {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, #162330 0%, #162330 40%, #162330 100%);
+  background: linear-gradient(135deg, #162330 0%, #1a2a3a 40%, #162330 100%);
   display: flex; align-items: center; justify-content: center;
 }
 .hero-video-placeholder::before {
