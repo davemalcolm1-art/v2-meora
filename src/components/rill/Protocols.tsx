@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuiz } from "./quizContext";
 
 const ProtocolName = ({ name }: { name: string }) => {
@@ -16,14 +16,12 @@ type Protocol = {
   name: string;
   desc: string;
   badge: string;
-  img: string;
-  pills: string[];
   categories: string[];
 };
 
 type Tier = "primary" | "secondary";
 
-type CategoryV2 = {
+type Category = {
   id: string;
   label: string;
   line: string;
@@ -31,7 +29,7 @@ type CategoryV2 = {
   tier: Tier;
 };
 
-const categories: CategoryV2[] = [
+const categories: Category[] = [
   { id: "energy", label: "Energy", line: "I want more energy.", count: 5, tier: "primary" },
   { id: "performance", label: "Performance", line: "I want to perform at my best.", count: 10, tier: "primary" },
   { id: "balance", label: "Balance", line: "I want to feel balanced.", count: 7, tier: "primary" },
@@ -41,380 +39,304 @@ const categories: CategoryV2[] = [
 ];
 
 const allProtocols: Protocol[] = [
-  {
-    name: "Foundation.ME",
-    badge: "MOST PRESCRIBED",
-    tag: "BODY COMPOSITION · SLEEP · RECOVERY",
-    desc: "Wake up restored. Build lean mass. Recover faster. The GH axis protocol that addresses the decline most people mistake for ageing.",
-    img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80",
-    pills: ["Lean out", "Sleep deeper", "Recover faster"],
-    categories: ["energy", "performance", "recovery", "longevity"],
-  },
-  {
-    name: "Opus.ME",
-    badge: "FLAGSHIP",
-    tag: "COLLAGEN · IMMUNITY · BODY COMPOSITION · LONGEVITY",
-    desc: "Four compounds. Four biological systems. The most comprehensive protocol on the Meora menu.",
-    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=80",
-    pills: ["Skin", "Composition", "Immunity", "Longevity"],
-    categories: ["performance", "balance", "longevity", "beauty"],
-  },
-  {
-    name: "Radiance.ME",
-    badge: "NEEDLE-FREE",
-    tag: "SKIN · COLLAGEN · ANTI-AGEING",
-    desc: "Renewed skin, improved texture, and collagen support — no injections required.",
-    img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=80",
-    pills: ["Glow", "Collagen", "Needle-free"],
-    categories: ["balance", "beauty"],
-  },
-  {
-    name: "Repair.ME",
-    badge: "INJURY & REPAIR",
-    tag: "INJURY · TISSUE REPAIR · MOBILITY",
-    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80",
-    desc: "For the injuries that won't fully heal. BPC-157 and TB-500 for tendons, ligaments, joints, and soft tissue.",
-    pills: ["Tendons", "Ligaments", "Soft tissue"],
-    categories: ["performance", "recovery"],
-  },
-  {
-    name: "Performance.ME",
-    badge: "PEAK",
-    tag: "TRAINING · RECOVERY · PHYSICAL OUTPUT",
-    img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80",
-    desc: "Full GH axis support combined with dual-pathway tissue repair. The most comprehensive performance protocol.",
-    pills: ["Output", "Recovery", "Athletic"],
-    categories: ["performance", "recovery"],
-  },
-  {
-    name: "Recomposition.ME",
-    badge: "RECOMP",
-    tag: "FAT LOSS · LEAN MASS",
-    img: "https://images.unsplash.com/photo-1552693673-1bf958298935?w=900&q=80",
-    desc: "Combined GH axis support and targeted fat loss. Build lean mass while reducing body fat.",
-    pills: ["Fat loss", "Lean mass", "Recompose"],
-    categories: ["performance", "balance"],
-  },
-  {
-    name: "Shield.ME",
-    badge: "LONGEVITY",
-    tag: "CELLULAR · IMMUNE · ANTI-AGEING",
-    img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=900&q=80",
-    desc: "Three biological systems addressed in one protocol. The premium stack for patients playing a long game.",
-    pills: ["Cellular", "Immune", "Anti-ageing"],
-    categories: ["performance", "balance", "longevity", "beauty"],
-  },
-  {
-    name: "Vital.ME",
-    badge: "ENERGY",
-    tag: "ENERGY · DRIVE · PERFORMANCE",
-    img: "https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=900&q=80",
-    desc: "Restore the drive, energy, and vitality that made you feel unstoppable.",
-    pills: ["Energy", "Drive", "Vitality"],
-    categories: ["energy", "performance", "balance", "beauty"],
-  },
-  {
-    name: "Foundation Pro.ME",
-    badge: "ADVANCED",
-    tag: "ADVANCED GH AXIS · VISCERAL FAT",
-    img: "https://images.unsplash.com/photo-1549576490-b0b4831ef60a?w=900&q=80",
-    desc: "Tesamorelin — the only FDA-approved GHRH analogue, with Phase 3 RCT evidence for visceral fat reduction.",
-    pills: ["Visceral fat", "Phase 3 data", "Premium"],
-    categories: ["energy", "performance"],
-  },
-  {
-    name: "Lean.ME",
-    badge: "GLP-1 ALTERNATIVE",
-    tag: "FAT LOSS · PEPTIDE-BASED",
-    img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80",
-    desc: "AOD-9604 targets lipolysis directly without affecting blood sugar or insulin.",
-    pills: ["Fat loss", "No blood sugar impact", "Cream option"],
-    categories: ["balance"],
-  },
-  {
-    name: "Lean Pro.ME",
-    badge: "ADVANCED FAT LOSS",
-    tag: "TRIPLE MECHANISM",
-    img: "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=900&q=80",
-    desc: "Three non-overlapping fat loss mechanisms. The most evidence-backed fat loss stack on the menu.",
-    pills: ["Triple mechanism", "Visceral fat", "Maximum"],
-    categories: ["performance"],
-  },
-  {
-    name: "GLP-1.ME",
-    badge: "GP SUPERVISED",
-    tag: "SEMAGLUTIDE · TIRZEPATIDE",
-    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80",
-    desc: "Clinically proven GLP-1 receptor agonist therapy — Wegovy, Ozempic, or Mounjaro — prescribed and supervised by a Meora GP.",
-    pills: ["Semaglutide", "Tirzepatide", "GP supervised"],
-    categories: ["balance"],
-  },
-  {
-    name: "Focus.ME",
-    badge: "NEEDLE-FREE",
-    tag: "FOCUS · MEMORY · STRESS",
-    img: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=900&q=80",
-    desc: "Semax and Selank — complementary neuropeptides in a once-daily nasal spray.",
-    pills: ["Focus", "Memory", "Stress-free"],
-    categories: ["energy", "performance", "balance", "longevity"],
-  },
+  { name: "Foundation.ME", badge: "MOST PRESCRIBED", tag: "BODY COMPOSITION · SLEEP · RECOVERY", desc: "Wake up restored. Build lean mass. Recover faster. The GH axis protocol that addresses the decline most people mistake for ageing.", categories: ["energy","performance","recovery","longevity"] },
+  { name: "Opus.ME", badge: "FLAGSHIP", tag: "COLLAGEN · IMMUNITY · LONGEVITY", desc: "Four compounds. Four biological systems. The most comprehensive protocol on the Meora menu.", categories: ["performance","balance","longevity","beauty"] },
+  { name: "Radiance.ME", badge: "NEEDLE-FREE", tag: "SKIN · COLLAGEN · ANTI-AGEING", desc: "Renewed skin, improved texture, and collagen support — no injections required.", categories: ["balance","beauty"] },
+  { name: "Repair.ME", badge: "INJURY & REPAIR", tag: "INJURY · TISSUE REPAIR", desc: "For the injuries that won't fully heal. BPC-157 and TB-500 for tendons, ligaments, joints, and soft tissue.", categories: ["performance","recovery"] },
+  { name: "Performance.ME", badge: "PEAK", tag: "TRAINING · RECOVERY", desc: "Full GH axis support combined with dual-pathway tissue repair. The most comprehensive performance protocol.", categories: ["performance","recovery"] },
+  { name: "Recomposition.ME", badge: "RECOMP", tag: "FAT LOSS · LEAN MASS", desc: "Combined GH axis support and targeted fat loss. Build lean mass while reducing body fat.", categories: ["performance","balance"] },
+  { name: "Shield.ME", badge: "LONGEVITY", tag: "CELLULAR · IMMUNE · ANTI-AGEING", desc: "Three biological systems addressed in one protocol. The premium stack for patients playing a long game.", categories: ["performance","balance","longevity","beauty"] },
+  { name: "Vital.ME", badge: "ENERGY", tag: "ENERGY · DRIVE · PERFORMANCE", desc: "Restore the drive, energy, and vitality that made you feel unstoppable.", categories: ["energy","performance","balance","beauty"] },
+  { name: "Foundation Pro.ME", badge: "ADVANCED", tag: "ADVANCED GH AXIS · VISCERAL FAT", desc: "Tesamorelin — the only FDA-approved GHRH analogue, with Phase 3 RCT evidence for visceral fat reduction.", categories: ["energy","performance"] },
+  { name: "Lean.ME", badge: "GLP-1 ALTERNATIVE", tag: "FAT LOSS · PEPTIDE-BASED", desc: "AOD-9604 targets lipolysis directly without affecting blood sugar or insulin.", categories: ["balance"] },
+  { name: "Lean Pro.ME", badge: "ADVANCED FAT LOSS", tag: "TRIPLE MECHANISM", desc: "Three non-overlapping fat loss mechanisms. The most evidence-backed fat loss stack on the menu.", categories: ["performance"] },
+  { name: "GLP-1.ME", badge: "GP SUPERVISED", tag: "SEMAGLUTIDE · TIRZEPATIDE", desc: "Clinically proven GLP-1 receptor agonist therapy — Wegovy, Ozempic, or Mounjaro — prescribed and supervised by a Meora GP.", categories: ["balance"] },
+  { name: "Focus.ME", badge: "NEEDLE-FREE", tag: "FOCUS · MEMORY · STRESS", desc: "Semax and Selank — complementary neuropeptides in a once-daily nasal spray.", categories: ["energy","performance","balance","longevity"] },
 ];
 
-const Arrow = () => (
-  <span
-    aria-hidden="true"
-    style={{ color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}
-  >
-    →
-  </span>
+const Arrow = ({ size = 20, color = "#FF5003" }: { size?: number; color?: string }) => (
+  <span aria-hidden="true" style={{ color, fontFamily: "'DM Sans', sans-serif", fontSize: `${size}px`, lineHeight: 1 }}>→</span>
 );
+
+const CARD_BG = "#F0EBE3";
+const SECTION_BG = "#F7F4EF";
 
 const Protocols = () => {
   const { openWithProtocol } = useQuiz();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const drillRef = useRef<HTMLDivElement>(null);
 
   const filtered = useMemo(
     () => (activeCategory ? allProtocols.filter((p) => p.categories.includes(activeCategory)) : []),
     [activeCategory]
   );
-
   const activeMeta = categories.find((c) => c.id === activeCategory) ?? null;
+  const isExpanded = !!activeCategory;
 
+  // Lock body scroll when expanded
   useEffect(() => {
-    if (activeCategory && drillRef.current) {
-      drillRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (isExpanded) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = prev; };
     }
-  }, [activeCategory]);
+  }, [isExpanded]);
+
+  // ESC to close
+  useEffect(() => {
+    if (!isExpanded) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setActiveCategory(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isExpanded]);
 
   const primaries = categories.filter((c) => c.tier === "primary");
   const secondaries = categories.filter((c) => c.tier === "secondary");
 
-  const cardBaseStyle: React.CSSProperties = {
-    background: "#FFFFFF",
-    borderRadius: "20px",
-    boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
-  };
-
   return (
     <section
       id="protocols"
-      className="bg-white text-[#001830] px-6 md:px-12 py-24 md:py-32 selection:bg-[#FF5003] selection:text-white"
+      style={{
+        background: isExpanded ? "#1A2B35" : SECTION_BG,
+        transition: "background 350ms ease",
+        position: "relative",
+        minHeight: isExpanded ? "100vh" : undefined,
+      }}
+      className="px-6 md:px-12 py-24 md:py-32 selection:bg-[#FF5003] selection:text-white"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline mb-16 md:mb-20 gap-8">
-          <div className="max-w-2xl">
-            <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#001830]/50 mb-6">
-              Our Protocols
-            </span>
-            <h2 className="text-5xl md:text-7xl font-light tracking-tight leading-[1.05]">
-              Find your protocol.<br />
-              <span className="italic font-['Cormorant_Garamond',serif] text-[#FF5003]">Goal-specific.</span>
-            </h2>
+        {/* Header (hidden when expanded) */}
+        {!isExpanded && (
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline mb-16 md:mb-20 gap-8">
+            <div className="max-w-2xl">
+              <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#001830]/50 mb-6">
+                Our Protocols
+              </span>
+              <h2 className="text-5xl md:text-7xl font-light tracking-tight leading-[1.05] text-[#111827]">
+                Find your protocol.<br />
+                <span className="italic font-['Cormorant_Garamond',serif] text-[#FF5003]">Goal-specific.</span>
+              </h2>
+            </div>
+            <p className="max-w-xs text-[#001830]/60 text-sm leading-relaxed">
+              Choose what you want to achieve. Your doctor does the rest.
+            </p>
           </div>
-          <p className="max-w-xs text-[#001830]/60 text-sm leading-relaxed">
-            Choose what you want to achieve. Your doctor does the rest.
-          </p>
-        </div>
+        )}
 
-        {/* Primary cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 protocols-card-grid">
-          {primaries.map((c, idx) => {
-            const isActive = activeCategory === c.id;
-            return (
-              <button
-                key={c.id}
-                onClick={() => setActiveCategory(isActive ? null : c.id)}
-                aria-pressed={isActive}
-                style={{
-                  ...cardBaseStyle,
-                  padding: "40px 36px",
-                  transitionDelay: `${idx * 100}ms`,
-                  position: "relative",
-                  minHeight: "360px",
-                  outline: isActive ? "1.5px solid #FF5003" : "none",
-                }}
-                className="group reveal flex flex-col justify-between text-left transition-all duration-500 cursor-pointer hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]"
-              >
-                <span style={{ position: "absolute", top: "28px", right: "32px" }}>
-                  <Arrow />
-                </span>
-
-                {/* TOP: Big word */}
-                <div style={{ flex: "0 0 auto", paddingTop: "8px" }}>
-                  <h3
-                    style={{
-                      fontFamily: "'Fraunces', serif",
-                      fontWeight: 900,
-                      color: "#FF5003",
-                      fontSize: "clamp(56px, 6vw, 80px)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                      margin: 0,
-                    }}
-                  >
-                    {c.label}
-                  </h3>
-                </div>
-
-                {/* BOTTOM */}
-                <div>
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 400,
-                      color: "#374151",
-                      fontSize: "15px",
-                      marginTop: "16px",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {c.line}
-                  </p>
-                  <div
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
-                      color: "#FF5003",
-                      fontSize: "11px",
-                      letterSpacing: "0.1em",
-                      marginTop: "20px",
-                    }}
-                  >
-                    {c.count} Protocols{isActive ? " · viewing below" : ""}
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Secondary cards — compact horizontal */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          {secondaries.map((c) => {
-            const isActive = activeCategory === c.id;
-            return (
-              <button
-                key={c.id}
-                onClick={() => setActiveCategory(isActive ? null : c.id)}
-                aria-pressed={isActive}
-                style={{
-                  ...cardBaseStyle,
-                  padding: "24px 28px",
-                  height: "120px",
-                  position: "relative",
-                  outline: isActive ? "1.5px solid #FF5003" : "none",
-                }}
-                className="group flex items-center gap-5 text-left transition-all duration-500 cursor-pointer hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]"
-              >
-                <span style={{ position: "absolute", top: "16px", right: "20px" }}>
-                  <Arrow />
-                </span>
-                <h4
+        {/* GRID VIEW */}
+        {!isExpanded && (
+          <>
+            {/* Large cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {primaries.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setActiveCategory(c.id)}
                   style={{
+                    background: CARD_BG,
+                    borderRadius: "20px",
+                    padding: "48px 40px",
+                    minHeight: "320px",
+                    position: "relative",
+                    border: "none",
+                  }}
+                  className="group flex flex-col justify-between text-left cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <span style={{ position: "absolute", top: "32px", right: "36px" }}>
+                    <Arrow size={20} />
+                  </span>
+                  <h3 style={{
                     fontFamily: "'Fraunces', serif",
                     fontWeight: 900,
                     color: "#FF5003",
-                    fontSize: "48px",
+                    fontSize: "clamp(64px, 7vw, 96px)",
                     lineHeight: 1,
                     letterSpacing: "-0.02em",
                     margin: 0,
-                    flex: "0 0 auto",
-                  }}
-                >
-                  {c.label}
-                </h4>
-                <div style={{ minWidth: 0, flex: 1 }}>
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 400,
-                      color: "#374151",
-                      fontSize: "14px",
-                      lineHeight: 1.4,
-                      margin: 0,
-                    }}
-                  >
-                    {c.line}
-                  </p>
-                  <div
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
-                      color: "#FF5003",
-                      fontSize: "11px",
-                      letterSpacing: "0.1em",
-                      marginTop: "8px",
-                    }}
-                  >
-                    {c.count} Protocols
+                  }}>{c.label}</h3>
+                  <div>
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#374151", fontSize: "15px", lineHeight: 1.5, margin: 0 }}>
+                      {c.line}
+                    </p>
+                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", color: "#FF5003", fontSize: "11px", letterSpacing: "0.1em", marginTop: "12px" }}>
+                      {c.count} Protocols
+                    </div>
                   </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+                </button>
+              ))}
+            </div>
 
-        {/* Drill-in */}
-        <div ref={drillRef}>
-          {activeCategory && activeMeta && (
-            <div className="mt-20 md:mt-24 animate-in fade-in duration-500">
-              <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
-                <div>
-                  <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#FF5003] mb-3">
-                    {filtered.length} {filtered.length === 1 ? "protocol" : "protocols"}
+            {/* Small cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+              {secondaries.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setActiveCategory(c.id)}
+                  style={{
+                    background: CARD_BG,
+                    borderRadius: "20px",
+                    padding: "24px 28px",
+                    height: "100px",
+                    position: "relative",
+                    border: "none",
+                  }}
+                  className="group flex items-center gap-5 text-left cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <span style={{ position: "absolute", top: "16px", right: "20px" }}>
+                    <Arrow size={18} />
                   </span>
-                  <h3 className="text-4xl md:text-5xl font-['Cormorant_Garamond',serif] text-[#001830]">
-                    Protocols for <span className="italic text-[#FF5003]">{activeMeta.label.toLowerCase()}</span>.
-                  </h3>
-                </div>
+                  <h4 style={{ fontFamily: "'Fraunces', serif", fontWeight: 900, color: "#FF5003", fontSize: "40px", lineHeight: 1, letterSpacing: "-0.02em", margin: 0, flex: "0 0 auto" }}>
+                    {c.label}
+                  </h4>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#374151", fontSize: "14px", lineHeight: 1.4, margin: 0 }}>
+                      {c.line}
+                    </p>
+                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", color: "#FF5003", fontSize: "11px", letterSpacing: "0.1em", marginTop: "6px" }}>
+                      {c.count} Protocols
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            <p className="mt-24 text-center text-[#001830]/50 text-xs max-w-2xl mx-auto leading-relaxed">
+              All protocols are prescribed by AHPRA-registered Australian doctors following blood panel review and clinical
+              assessment. No protocol is dispensed without a valid prescription.
+            </p>
+          </>
+        )}
+
+        {/* EXPANDED VIEW */}
+        {isExpanded && activeMeta && (
+          <div
+            onClick={(e) => { if (e.target === e.currentTarget) setActiveCategory(null); }}
+            style={{ animation: "fade-in 350ms ease-out" }}
+          >
+            <div className="flex items-start justify-between gap-6 mb-12">
+              <div>
+                <h2 style={{
+                  fontFamily: "'Fraunces', serif",
+                  fontWeight: 900,
+                  color: "#FF5003",
+                  fontSize: "clamp(64px, 8vw, 120px)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.02em",
+                  margin: 0,
+                }}>{activeMeta.label}</h2>
                 <button
                   onClick={() => setActiveCategory(null)}
-                  className="font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest text-[#001830]/50 hover:text-[#001830] transition-colors"
+                  style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 500,
+                    color: "rgba(255,255,255,0.5)",
+                    fontSize: "14px",
+                    marginTop: "16px",
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                  className="hover:text-white transition-colors"
                 >
                   ← All categories
                 </button>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filtered.map((p) => (
-                  <button
-                    key={p.name}
-                    onClick={() => openWithProtocol(p.name)}
-                    className="group bg-[#EDE8DE] hover:bg-white rounded-[20px] p-8 text-left transition-all duration-500 hover:shadow-2xl hover:shadow-[#001830]/5 flex flex-col"
-                  >
-                    <div className="flex justify-between items-start mb-6">
-                      <span className="font-['DM_Mono',monospace] text-[9px] uppercase tracking-widest text-[#FF5003]">
-                        {p.badge}
-                      </span>
-                      <Arrow />
-                    </div>
-                    <div className="font-['DM_Mono',monospace] text-[10px] tracking-widest text-[#001830]/40 mb-3 uppercase">
-                      {p.tag}
-                    </div>
-                    <h4 className="text-3xl font-['Cormorant_Garamond',serif] italic text-[#001830] mb-4 leading-none">
-                      <ProtocolName name={p.name} />
-                    </h4>
-                    <p className="text-[#001830]/65 text-sm leading-relaxed mb-6 flex-1">{p.desc}</p>
-                    <div className="flex items-center gap-2 text-[#FF5003] font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest">
-                      <span>Start assessment</span>
-                      <Arrow />
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <button
+                onClick={() => setActiveCategory(null)}
+                aria-label="Close"
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  color: "#FFFFFF",
+                  fontSize: "24px",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  lineHeight: 1,
+                  padding: "8px",
+                }}
+              >
+                ×
+              </button>
             </div>
-          )}
-        </div>
 
-        <p className="mt-24 text-center text-[#001830]/50 text-xs max-w-2xl mx-auto leading-relaxed">
-          All protocols are prescribed by AHPRA-registered Australian doctors following blood panel review and clinical
-          assessment. No protocol is dispensed without a valid prescription.
-        </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map((p, i) => (
+                <button
+                  key={p.name}
+                  onClick={() => openWithProtocol(p.name)}
+                  style={{
+                    background: "rgba(255,255,255,0.07)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderRadius: "16px",
+                    padding: "32px",
+                    textAlign: "left",
+                    animation: `slide-in-right 400ms ease-out both`,
+                    animationDelay: `${i * 100}ms`,
+                    opacity: 0,
+                    cursor: "pointer",
+                  }}
+                  className="flex flex-col hover:bg-[rgba(255,255,255,0.10)] transition-colors"
+                >
+                  <div style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    color: "#FF5003",
+                    fontSize: "10px",
+                    letterSpacing: "0.1em",
+                    marginBottom: "16px",
+                  }}>
+                    {p.badge} · {p.tag}
+                  </div>
+                  <h4 style={{
+                    fontFamily: "'Fraunces', serif",
+                    fontWeight: 700,
+                    fontStyle: "italic",
+                    color: "#FFFFFF",
+                    fontSize: "28px",
+                    lineHeight: 1.1,
+                    margin: 0,
+                    marginBottom: "16px",
+                  }}>
+                    <ProtocolName name={p.name} />
+                  </h4>
+                  <p style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.7)",
+                    fontSize: "14px",
+                    lineHeight: 1.6,
+                    margin: 0,
+                    marginBottom: "24px",
+                    flex: 1,
+                  }}>
+                    {p.desc}
+                  </p>
+                  <span style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 600,
+                    color: "#FFFFFF",
+                    fontSize: "13px",
+                  }}>
+                    Start Assessment →
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
+
+      <style>{`
+        @keyframes slide-in-right {
+          from { opacity: 0; transform: translateX(40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
     </section>
   );
 };
