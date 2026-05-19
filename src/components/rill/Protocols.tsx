@@ -6,7 +6,7 @@ const ProtocolName = ({ name }: { name: string }) => {
   return (
     <>
       <span>{base}</span>
-      <span style={{ color: "#ff6a00" }}>.ME</span>
+      <span style={{ color: "#FF5003" }}>.ME</span>
     </>
   );
 };
@@ -42,7 +42,7 @@ const categories: CategoryV2[] = [
     blurb: "Cellular health, immune resilience, anti-ageing.",
     tier: "primary",
     blob: "rounded-[45%_55%_70%_30%/30%_60%_40%_70%]",
-    gradient: "from-[#ff6a00]/25 to-[#001830]/15",
+    gradient: "from-[#FF5003]/25 to-[#001830]/15",
   },
   {
     id: "for-him",
@@ -51,7 +51,7 @@ const categories: CategoryV2[] = [
     blurb: "Drive, output, hormonal optimisation.",
     tier: "primary",
     blob: "rounded-[60%_40%_30%_70%/60%_30%_70%_40%]",
-    gradient: "from-[#001830]/25 to-[#ff6a00]/10",
+    gradient: "from-[#001830]/25 to-[#FF5003]/10",
   },
   {
     id: "for-her",
@@ -60,7 +60,7 @@ const categories: CategoryV2[] = [
     blurb: "Skin, body composition, balance.",
     tier: "primary",
     blob: "rounded-[30%_70%_70%_30%/50%_60%_40%_50%]",
-    gradient: "from-[#ff6a00]/15 to-[#001830]/5",
+    gradient: "from-[#FF5003]/15 to-[#001830]/5",
   },
   {
     id: "strength",
@@ -78,7 +78,7 @@ const categories: CategoryV2[] = [
     blurb: "Tissue repair, sleep, restoration.",
     tier: "secondary",
     blob: "rounded-full",
-    gradient: "from-[#ff6a00]/20 to-transparent",
+    gradient: "from-[#FF5003]/20 to-transparent",
   },
   {
     id: "weight-loss",
@@ -243,7 +243,7 @@ const Protocols = () => {
   return (
     <section
       id="protocols"
-      className="bg-white text-[#001830] px-6 md:px-12 py-24 md:py-32 selection:bg-[#ff6a00] selection:text-white"
+      className="bg-white text-[#001830] px-6 md:px-12 py-24 md:py-32 selection:bg-[#FF5003] selection:text-white"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -254,7 +254,7 @@ const Protocols = () => {
             </span>
             <h2 className="text-5xl md:text-7xl font-light tracking-tight leading-[1.05]">
               Find your protocol.<br />
-              <span className="italic font-['Cormorant_Garamond',serif] text-[#ff6a00]">Goal-specific.</span>
+              <span className="italic font-['Cormorant_Garamond',serif] text-[#FF5003]">Goal-specific.</span>
             </h2>
           </div>
           <p className="max-w-xs text-[#001830]/60 text-sm leading-relaxed">
@@ -275,7 +275,7 @@ const Protocols = () => {
                 style={{ transitionDelay: `${idx * 100}ms` }}
                 className={`group reveal rounded-[24px] overflow-hidden flex flex-col aspect-[4/5] text-left transition-all duration-500 cursor-pointer ${
                   isActive
-                    ? "bg-white shadow-2xl shadow-[#001830]/10 ring-1 ring-[#F05A28]/30"
+                    ? "bg-white shadow-2xl shadow-[#001830]/10 ring-1 ring-[#FF5003]/30"
                     : "bg-white hover:shadow-2xl hover:shadow-[#001830]/10"
                 }`}
               >
@@ -303,7 +303,7 @@ const Protocols = () => {
                 <div className="flex-1 p-8 flex flex-col justify-between bg-white">
                   <div className="flex justify-between items-start">
                     <span
-                      className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#F05A28]"
+                      className="font-['DM_Sans',sans-serif] font-bold uppercase text-[#FF5003]"
                       style={{ fontSize: "11px", letterSpacing: "0.12em" }}
                     >
                       {c.eyebrow.split("/")[1]?.trim()}
@@ -315,7 +315,7 @@ const Protocols = () => {
                       {c.label}
                     </h3>
                     <p className="text-[#001830]/60 text-xs tracking-tight mb-3">{c.blurb}</p>
-                    <div className="font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest text-[#F05A28]">
+                    <div className="font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest text-[#FF5003]">
                       {countFor(c.id)} {countFor(c.id) === 1 ? "protocol" : "protocols"}
                       {isActive ? " · viewing below" : ""}
                     </div>
@@ -337,7 +337,7 @@ const Protocols = () => {
                 aria-pressed={isActive}
                 className={`group rounded-[32px] p-8 flex items-center gap-6 text-left transition-all duration-500 cursor-pointer ${
                   isActive
-                    ? "bg-white shadow-xl shadow-[#001830]/10 ring-1 ring-[#ff6a00]/30"
+                    ? "bg-white shadow-xl shadow-[#001830]/10 ring-1 ring-[#FF5003]/30"
                     : "bg-[#EDE8DE]/60 hover:bg-white hover:shadow-xl hover:shadow-[#001830]/5"
                 }`}
               >
@@ -363,11 +363,11 @@ const Protocols = () => {
             <div className="mt-20 md:mt-24 animate-in fade-in duration-500">
               <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
                 <div>
-                  <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#ff6a00] mb-3">
+                  <span className="block font-['DM_Mono',monospace] text-[10px] uppercase tracking-[0.25em] text-[#FF5003] mb-3">
                     {activeMeta.eyebrow} · {filtered.length} {filtered.length === 1 ? "protocol" : "protocols"}
                   </span>
                   <h3 className="text-4xl md:text-5xl font-['Cormorant_Garamond',serif] text-[#001830]">
-                    Protocols for <span className="italic text-[#ff6a00]">{activeMeta.label.toLowerCase()}</span>.
+                    Protocols for <span className="italic text-[#FF5003]">{activeMeta.label.toLowerCase()}</span>.
                   </h3>
                 </div>
                 <button
@@ -386,7 +386,7 @@ const Protocols = () => {
                     className="group bg-[#EDE8DE] hover:bg-white rounded-[32px] p-8 text-left transition-all duration-500 hover:shadow-2xl hover:shadow-[#001830]/5 flex flex-col"
                   >
                     <div className="flex justify-between items-start mb-6">
-                      <span className="font-['DM_Mono',monospace] text-[9px] uppercase tracking-widest text-[#ff6a00]">
+                      <span className="font-['DM_Mono',monospace] text-[9px] uppercase tracking-widest text-[#FF5003]">
                         {p.badge}
                       </span>
                       <Arrow />
@@ -398,7 +398,7 @@ const Protocols = () => {
                       <ProtocolName name={p.name} />
                     </h4>
                     <p className="text-[#001830]/65 text-sm leading-relaxed mb-6 flex-1">{p.desc}</p>
-                    <div className="flex items-center gap-2 text-[#ff6a00] font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-[#FF5003] font-['DM_Mono',monospace] text-[10px] uppercase tracking-widest">
                       <span>Start assessment</span>
                       <Arrow />
                     </div>
