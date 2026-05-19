@@ -3,24 +3,62 @@ import { useQuiz } from "./quizContext";
 const InterstitialBreak = ({ label }: { label: string }) => {
   const { open } = useQuiz();
   return (
-    <div className="interstitial">
-      <img
-        className="interstitial-bg-img"
-        src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1920&q=80"
-        alt=""
-        aria-hidden="true"
-      />
-      <div className="interstitial-bg"></div>
-      <div className="interstitial-content">
-        <div className="interstitial-pill">
-          <span>{label}</span>
+    <section
+      style={{
+        background: "#1A2B35",
+        padding: "60px 80px",
+      }}
+    >
+      <div
+        className="ib-grid"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 32,
+          maxWidth: 1320,
+          margin: "0 auto",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: 14,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "#FFFFFF",
+          }}
+        >
+          {label}
         </div>
-        <div className="interstitial-line"></div>
-        <button className="interstitial-cta" onClick={open}>
-          <span>Start your assessment</span>
+        <button
+          onClick={open}
+          style={{
+            background: "#FF5003",
+            color: "#FFFFFF",
+            border: "none",
+            outline: "none",
+            borderRadius: 999,
+            padding: "16px 32px",
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 800,
+            fontSize: 13,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Start your assessment →
         </button>
       </div>
-    </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ib-grid { flex-direction: column !important; align-items: flex-start !important; }
+        }
+      `}</style>
+    </section>
   );
 };
 
