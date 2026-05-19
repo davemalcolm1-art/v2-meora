@@ -34,6 +34,15 @@ const Hero = () => {
         </div>
       </div>
 
+      <aside className="hero-foundation-card" aria-label="Featured protocol">
+        <span className="hero-foundation-label">Featured Protocol</span>
+        <h3 className="hero-foundation-title">Foundation.ME</h3>
+        <p className="hero-foundation-desc">
+          Doctor-prescribed peptide protocol for energy, recovery and long-term vitality.
+        </p>
+        <p className="hero-foundation-meta">AHPRA · TGA-compliant</p>
+      </aside>
+
       <div className="hero-bottom">
         <div className="hero-scroll-hint">
           <div className="scroll-line"></div>
