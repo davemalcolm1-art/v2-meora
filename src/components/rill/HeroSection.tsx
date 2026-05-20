@@ -357,7 +357,7 @@ const HeroSection = () => {
             155deg,
             rgba(26,43,53,0.10) 0%,
             rgba(26,43,53,0.30) 40%,
-            rgba(26,43,53,0.88) 100%
+            rgba(26,43,53,0.55) 100%
           );
         }
 
@@ -672,7 +672,7 @@ const HeroSection = () => {
             position: "absolute",
             inset: 0,
             zIndex: 3,
-            background: "rgba(0,0,0,0.45)",
+            background: "rgba(0,0,0,0.25)",
           }}
         />
 
