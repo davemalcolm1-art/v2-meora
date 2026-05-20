@@ -1,32 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuiz } from "./quizContext";
 
-type Step = { n: number; title: string; body: string; indent: string };
+type Step = { n: number; title: string; body: string };
 
 const steps: Step[] = [
   {
     n: 1,
     title: "Tell us about yourself.",
     body: "Complete a short health assessment — your goals, history, and what you want to achieve. Takes 5 minutes. No commitment.",
-    indent: "0px",
   },
   {
     n: 2,
     title: "Meet your doctor.",
     body: "An AHPRA-registered GP reviews your assessment and conducts a thorough telehealth consultation. Where clinically appropriate, they'll request a targeted blood panel to personalise your protocol.",
-    indent: "0px",
   },
   {
     n: 3,
     title: "Receive your protocol.",
     body: "If approved, your prescription is written and your protocol is compounded by a registered pharmacy. Cold-chain delivered discreetly to your door.",
-    indent: "0px",
   },
   {
     n: 4,
     title: "Ongoing clinical care.",
     body: "Every 90 days, a follow-up consultation and blood review. Your protocol is adjusted as you progress. Not a one-time prescription — a continuous clinical relationship.",
-    indent: "0px",
   },
 ];
 
@@ -55,47 +51,51 @@ const StepRow = ({ s, index }: { s: Step; index: number }) => {
   }, []);
 
   const num = String(s.n).padStart(2, "0");
-  const delay = index * 80;
+  const delay = index * 100;
 
   return (
     <div
       ref={ref}
       style={{
-        position: "relative",
+        display: "flex",
+        alignItems: "flex-start",
         padding: "48px 0",
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
         opacity: revealed ? 1 : 0,
         transform: revealed ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity 600ms ${EASE} ${delay}ms, transform 600ms ${EASE} ${delay}ms`,
+        transition: `opacity 500ms ${EASE} ${delay}ms, transform 500ms ${EASE} ${delay}ms`,
       }}
     >
       <span
-        aria-hidden="true"
         style={{
-          position: "absolute",
-          left: -8,
-          top: "50%",
-          transform: "translateY(-50%)",
-          fontFamily: "'Fraunces', serif",
-          fontWeight: 900,
-          fontSize: "clamp(120px, 16vw, 200px)",
-          lineHeight: 1,
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 700,
+          fontSize: 11,
+          letterSpacing: "0.2em",
           color: "#FF5003",
-          opacity: 0.25,
-          pointerEvents: "none",
-          letterSpacing: "-0.04em",
+          lineHeight: 1,
+          flexShrink: 0,
+          paddingTop: 6,
         }}
       >
         {num}
       </span>
-      <div style={{ position: "relative", paddingLeft: "clamp(120px, 14vw, 200px)" }}>
+      <div
+        style={{
+          width: 1,
+          height: 40,
+          background: "rgba(255,255,255,0.2)",
+          margin: "0 32px",
+          flexShrink: 0,
+        }}
+      />
+      <div>
         <h3
           style={{
             fontFamily: "'Fraunces', serif",
-            fontWeight: 700,
+            fontWeight: 500,
+            fontSize: 32,
             color: "#FFFFFF",
-            fontSize: "clamp(24px, 2.6vw, 32px)",
-            lineHeight: 1.2,
+            lineHeight: 1.1,
             letterSpacing: "-0.01em",
             margin: 0,
           }}
@@ -107,10 +107,10 @@ const StepRow = ({ s, index }: { s: Step; index: number }) => {
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
             fontSize: 15,
-            lineHeight: 1.75,
-            color: "rgba(255,255,255,0.7)",
-            margin: "12px 0 0",
-            maxWidth: 640,
+            lineHeight: 1.7,
+            color: "rgba(255,255,255,0.6)",
+            margin: "8px 0 0",
+            maxWidth: 600,
           }}
         >
           {s.body}
@@ -127,73 +127,81 @@ const HowItWorks = () => {
     <section
       className="how-section how-section--v3"
       id="how"
-      style={{ background: "#1A2B35", padding: 0, margin: 0 }}
+      style={{ background: "#1A2B35", padding: "120px 80px 0", margin: 0 }}
     >
-      {/* Header */}
-      <div className="how-v3-header" style={{ padding: "80px 80px 60px" }}>
-        <div
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            color: "#FF5003",
-            fontSize: "11px",
-            letterSpacing: "0.12em",
-            marginBottom: "20px",
-          }}
-        >
-          How It Works
+      <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+        {/* Header */}
+        <div style={{ marginBottom: 60 }}>
+          <div
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              color: "#FF5003",
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              marginBottom: 20,
+            }}
+          >
+            How It Works
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 700,
+              color: "#FFFFFF",
+              fontSize: "clamp(32px, 4vw, 52px)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              margin: 0,
+            }}
+          >
+            Four steps to
+            <br />
+            <span style={{ fontStyle: "italic", fontWeight: 900, color: "#FF5003" }}>
+              a new standard.
+            </span>
+          </h2>
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.6)",
+              fontSize: 16,
+              lineHeight: 1.6,
+              marginTop: 24,
+              maxWidth: 560,
+            }}
+          >
+            Most patients complete the full process in under two weeks.
+          </p>
         </div>
-        <h2
-          style={{
-            fontFamily: "'Fraunces', serif",
-            fontWeight: 700,
-            color: "#FFFFFF",
-            fontSize: "clamp(32px, 4vw, 52px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            margin: 0,
-          }}
-        >
-          Four steps to
-          <br />
-          <span style={{ fontStyle: "italic", fontWeight: 900, color: "#FF5003" }}>
-            a new standard.
-          </span>
-        </h2>
-        <p
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 400,
-            color: "rgba(255,255,255,0.6)",
-            fontSize: "16px",
-            lineHeight: 1.6,
-            marginTop: "24px",
-            maxWidth: "560px",
-          }}
-        >
-          Most patients complete the full process in under two weeks.
-        </p>
+
+        {/* Steps */}
+        <div>
+          {steps.map((s, i) => (
+            <div key={s.n}>
+              <StepRow s={s} index={i} />
+              {i < steps.length - 1 && (
+                <div style={{ height: 1, background: "rgba(255,255,255,0.1)" }} />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Steps */}
-      <div className="how-cascade" style={{ padding: "0 80px 40px" }}>
-        {steps.map((s, i) => (
-          <StepRow key={s.n} s={s} index={i} />
-        ))}
-      </div>
-
-      {/* CTA row */}
+      {/* CTA bar */}
       <div
-        className="how-v3-cta"
         style={{
-          background: "#1A2B35",
           borderTop: "1px solid rgba(255,80,3,0.2)",
           padding: "40px 80px",
+          marginTop: 80,
+          marginLeft: -80,
+          marginRight: -80,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: "24px",
+          gap: 24,
           flexWrap: "wrap",
         }}
       >
@@ -202,7 +210,7 @@ const HowItWorks = () => {
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
             color: "#FFFFFF",
-            fontSize: "24px",
+            fontSize: 24,
             lineHeight: 1.2,
           }}
         >
@@ -214,93 +222,22 @@ const HowItWorks = () => {
             background: "#FF5003",
             color: "#FFFFFF",
             border: "none",
-            borderRadius: "999px",
+            borderRadius: 999,
             padding: "14px 28px",
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 800,
-            fontSize: "13px",
+            fontSize: 13,
             letterSpacing: "0.06em",
             textTransform: "uppercase",
             cursor: "pointer",
             display: "inline-flex",
             alignItems: "center",
-            gap: "10px",
+            gap: 10,
           }}
         >
           Start your assessment →
         </button>
       </div>
-
-      <style>{`
-        .how-section.how-section--v3 { padding: 0 !important; background: #1A2B35 !important; }
-        .how-section--v3 .how-steps { display: none !important; }
-        .how-section--v3 .section-eyebrow,
-        .how-section--v3 .section-h2,
-        .how-section--v3 .how-reassurance { display: none !important; }
-
-        /* Body collapsed by default */
-        .how-cascade-row .how-cascade-body-wrap {
-          max-height: 0;
-          opacity: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-        }
-        .how-cascade-row .how-cascade-title {
-          transition: transform 300ms ${EASE};
-        }
-        .how-cascade-row {
-          border-left: 2px solid transparent;
-          padding-left: 0;
-          transition: border-color 200ms ease, padding-left 200ms ease,
-            opacity 600ms ${EASE}, transform 600ms ${EASE};
-        }
-
-        /* Hover (desktop only) — reveal full body, readable */
-        @media (hover: hover) {
-          .how-cascade-row:hover .how-cascade-num-wrap { opacity: 1 !important; }
-          .how-cascade-row:hover .how-cascade-num { font-size: 56px; }
-          .how-cascade-row:hover .how-cascade-title { transform: translateX(12px); }
-          .how-cascade-row:hover .how-cascade-body-wrap {
-            max-height: 300px;
-            opacity: 1;
-            padding-top: 16px;
-            padding-bottom: 8px;
-          }
-          .how-cascade-row:hover .how-cascade-body { color: rgba(255,255,255,0.85) !important; }
-          .how-cascade-row:hover {
-            border-left-color: #FF5003;
-            padding-left: 32px;
-          }
-        }
-
-        /* Active (clicked) — overrides hover */
-        .how-cascade-row.is-active .how-cascade-num-wrap { opacity: 1 !important; }
-        .how-cascade-row.is-active .how-cascade-num { font-size: 64px; }
-        .how-cascade-row.is-active .how-cascade-title { transform: translateX(12px); }
-        .how-cascade-row.is-active .how-cascade-body-wrap {
-          max-height: 300px;
-          opacity: 1;
-          padding-top: 16px;
-          padding-bottom: 8px;
-        }
-        .how-cascade-row.is-active .how-cascade-body { color: rgba(255,255,255,0.85) !important; }
-        .how-cascade-row.is-active {
-          border-left-color: #FF5003;
-          padding-left: 32px;
-        }
-
-        @media (max-width: 768px) {
-          .how-v3-header { padding: 60px 24px 40px !important; }
-          .how-cascade { padding: 0 24px 60px !important; }
-          .how-cascade-row {
-            margin-left: 0 !important;
-            padding-top: 24px !important;
-            padding-bottom: 24px !important;
-          }
-          .how-cascade-title { font-size: 20px !important; }
-          .how-v3-cta { padding: 32px 24px !important; }
-        }
-      `}</style>
     </section>
   );
 };

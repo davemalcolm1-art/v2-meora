@@ -2803,8 +2803,8 @@ button.btn-ghost {
   position: absolute !important;
   inset: 0 !important;
   background:
-    linear-gradient(to bottom, rgba(26,43,53,0.3) 0%, rgba(26,43,53,0.55) 50%, rgba(26,43,53,0.75) 100%),
-    rgba(26,43,53,0.6) !important;
+    linear-gradient(to bottom, rgba(26,43,53,0.3) 0%, rgba(26,43,53,0.25) 50%, rgba(26,43,53,0.25) 100%),
+    rgba(26,43,53,0.25) !important;
   z-index: 1 !important;
 }
 .science-section > *:not(.science-bg):not(.science-overlay) {
