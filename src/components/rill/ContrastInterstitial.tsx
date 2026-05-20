@@ -3,7 +3,7 @@ const ContrastInterstitial = () => {
     <section
       className="contrast-interstitial"
       style={{
-        background: "linear-gradient(135deg, #1A2B35 0%, #243B47 50%, #1A2B35 100%)",
+        background: "linear-gradient(135deg, #1A2B35 0%, #243B47 100%)",
         padding: "100px 80px",
         position: "relative",
         overflow: "hidden",

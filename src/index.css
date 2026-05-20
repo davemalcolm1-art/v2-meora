@@ -119,24 +119,24 @@ h1, h2, h3 {
 /* NAV — floating centred pill */
 nav.rill-nav {
   position: fixed;
-  top: 20px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 80px);
+  width: calc(100vw - 80px);
   max-width: 1280px;
-  height: 60px;
-  border-radius: 16px;
-  background: rgba(15, 15, 15, 0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(10, 10, 10, 0.38);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
-  z-index: 100;
+  padding: 0 28px;
+  z-index: 1000;
   box-sizing: border-box;
+  overflow: hidden;
 }
 nav.rill-nav.scrolled {
   background: rgba(26,43,53,0.72);

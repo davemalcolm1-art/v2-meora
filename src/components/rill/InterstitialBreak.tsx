@@ -19,7 +19,7 @@ const InterstitialBreak = ({ label }: { label: string }) => {
           fontFamily: "'Fraunces', serif",
           fontWeight: 700,
           color: "#FFFFFF",
-          fontSize: "clamp(48px, 6vw, 80px)",
+          fontSize: "clamp(36px, 5vw, 64px)",
           lineHeight: 1.1,
           letterSpacing: "-0.01em",
           margin: 0,

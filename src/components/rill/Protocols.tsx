@@ -97,9 +97,6 @@ const Protocols = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [isExpanded]);
 
-  const primaries = categories.filter((c) => c.tier === "primary");
-  const secondaries = categories.filter((c) => c.tier === "secondary");
-
   const bgImages: Record<string, string> = {
     energy: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
     performance: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1600&q=80",
@@ -146,7 +143,7 @@ const Protocols = () => {
       }}
       className="selection:bg-[#E8571A] selection:text-white"
     >
-      <div style={{ maxWidth: isExpanded ? "none" : "1200px", margin: "0 auto", padding: isExpanded ? "0" : "100px 80px" }}>
+      <div style={{ maxWidth: isExpanded ? "none" : "1200px", margin: "0 auto", padding: isExpanded ? "0" : "80px 60px" }}>
         {!isExpanded && (
           <div style={{ marginBottom: "56px" }}>
             <span style={{
@@ -189,119 +186,80 @@ const Protocols = () => {
 
 
         {!isExpanded && (
-          <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }} className="protocols-grid-lg">
-              {primaries.map((c) => (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }} className="protocols-grid">
+            {categories.map((c, i) => {
+              const cardGradients = [
+                "linear-gradient(160deg, #C8DCF0 0%, #A8C4E4 100%)",
+                "linear-gradient(160deg, #BDD4EC 0%, #9CBCE0 100%)",
+                "linear-gradient(160deg, #B2CCE8 0%, #90B4DC 100%)",
+                "linear-gradient(160deg, #A8C4E4 0%, #86ACD8 100%)",
+                "linear-gradient(160deg, #9EBCE0 0%, #7CA4D4 100%)",
+                "linear-gradient(160deg, #94B4DC 0%, #729CD0 100%)",
+              ];
+              return (
                 <button
                   key={c.id}
                   onClick={() => setActiveCategory(c.id)}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 40px rgba(26,43,53,0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                  }}
                   style={{
-                    background: "#FFFFFF",
-                    borderRadius: "20px",
-                    boxShadow: "0 2px 20px rgba(0,0,0,0.08)",
-                    border: "none",
-                    overflow: "hidden",
-                    padding: 0,
-                    textAlign: "left",
-                    cursor: "pointer",
+                    background: cardGradients[i],
+                    borderRadius: 14,
+                    padding: "24px 20px",
+                    height: 200,
                     display: "flex",
                     flexDirection: "column",
+                    justifyContent: "space-between",
+                    cursor: "pointer",
+                    border: "none",
+                    textAlign: "left",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   }}
-                  className="group transition-transform duration-300 hover:-translate-y-1"
                 >
-                  <div style={{ width: "100%", height: "220px", overflow: "hidden" }}>
-                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
+                  <div style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
+                    color: "rgba(26,43,53,0.55)",
+                    textTransform: "uppercase",
+                  }}>
+                    {c.label}
                   </div>
-                  <div style={{ padding: "24px 28px", position: "relative" }}>
-                    <span style={{ position: "absolute", top: "20px", right: "24px", color: "#E8571A", fontFamily: "'DM Sans', sans-serif", fontSize: "20px", lineHeight: 1 }}>→</span>
+                  <div>
                     <h3 style={{
                       fontFamily: "'Fraunces', serif",
-                      fontWeight: 700,
-                      color: "#111827",
-                      fontSize: "32px",
-                      lineHeight: 1.1,
-                      margin: 0,
-                      paddingRight: "32px",
-                    }}>{c.label}</h3>
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#6B6560", fontSize: "14px", lineHeight: 1.5, margin: "6px 0 0" }}>
+                      fontWeight: 600,
+                      fontSize: 18,
+                      color: "#1A2B35",
+                      lineHeight: 1.2,
+                      margin: "0 0 8px",
+                    }}>
                       {c.line}
-                    </p>
-                    <div style={{
+                    </h3>
+                    <span style={{
                       display: "inline-block",
-                      background: "#E8571A",
-                      color: "#FFFFFF",
+                      background: "rgba(26,43,53,0.1)",
+                      borderRadius: 999,
+                      padding: "3px 10px",
                       fontFamily: "'DM Sans', sans-serif",
                       fontWeight: 700,
-                      textTransform: "uppercase",
-                      fontSize: "10px",
-                      letterSpacing: "0.06em",
-                      padding: "3px 10px",
-                      borderRadius: "999px",
-                      marginTop: "16px",
+                      fontSize: 9,
+                      color: "rgba(26,43,53,0.6)",
                     }}>
                       {c.count} Protocols
-                    </div>
+                    </span>
                   </div>
                 </button>
-              ))}
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", marginTop: "16px" }} className="protocols-grid-sm">
-              {secondaries.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => setActiveCategory(c.id)}
-                  style={{
-                    background: "#FFFFFF",
-                    borderRadius: "20px",
-                    boxShadow: "0 2px 20px rgba(0,0,0,0.08)",
-                    border: "none",
-                    overflow: "hidden",
-                    padding: 0,
-                    textAlign: "left",
-                    cursor: "pointer",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                  className="group transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <div style={{ width: "100%", height: "160px", overflow: "hidden" }}>
-                    <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
-                  </div>
-                  <div style={{ padding: "20px 24px", position: "relative" }}>
-                    <span style={{ position: "absolute", top: "16px", right: "20px", color: "#E8571A", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}>→</span>
-                    <h4 style={{
-                      fontFamily: "'Fraunces', serif",
-                      fontWeight: 700,
-                      color: "#111827",
-                      fontSize: "24px",
-                      lineHeight: 1.1,
-                      margin: 0,
-                      paddingRight: "28px",
-                    }}>{c.label}</h4>
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, color: "#6B6560", fontSize: "13px", lineHeight: 1.5, margin: "6px 0 0" }}>
-                      {c.line}
-                    </p>
-                    <div style={{
-                      display: "inline-block",
-                      background: "#E8571A",
-                      color: "#FFFFFF",
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
-                      fontSize: "10px",
-                      letterSpacing: "0.06em",
-                      padding: "3px 10px",
-                      borderRadius: "999px",
-                      marginTop: "14px",
-                    }}>
-                      {c.count} Protocols
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </>
+              );
+            })}
+          </div>
         )}
 
         {/* EXPANDED VIEW */}
