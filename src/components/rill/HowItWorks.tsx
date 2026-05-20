@@ -1,32 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuiz } from "./quizContext";
 
-type Step = { n: number; title: string; body: string };
-
-const steps: Step[] = [
+const steps = [
   {
     n: 1,
     title: "Tell us about yourself.",
-    body: "Complete a short health assessment — your goals, history, and what you want to achieve. Takes 5 minutes. No commitment.",
+    body: "Complete a short health assessment — your goals, history, and what you want to achieve. Takes 5 minutes.",
+    bg: "linear-gradient(160deg, #EDE8DE 0%, #FAF7F2 100%)",
   },
   {
     n: 2,
     title: "Meet your doctor.",
-    body: "An AHPRA-registered GP reviews your assessment and conducts a thorough telehealth consultation. Where clinically appropriate, they'll request a targeted blood panel to personalise your protocol.",
+    body: "An AHPRA-registered GP reviews your assessment and conducts a thorough telehealth consultation.",
+    bg: "linear-gradient(160deg, #E8E2D8 0%, #F5F0E8 100%)",
   },
   {
     n: 3,
     title: "Receive your protocol.",
-    body: "If approved, your prescription is written and your protocol is compounded by a registered pharmacy. Cold-chain delivered discreetly to your door.",
+    body: "Your prescription is written and compounded by a registered pharmacy. Cold-chain delivered to your door.",
+    bg: "linear-gradient(160deg, #E2DCD2 0%, #EFEAD8 100%)",
   },
   {
     n: 4,
     title: "Ongoing clinical care.",
-    body: "Every 90 days, a follow-up consultation and blood review. Your protocol is adjusted as you progress. Not a one-time prescription — a continuous clinical relationship.",
+    body: "Every 90 days, a follow-up consultation and blood review. A continuous clinical relationship, not a one-time prescription.",
+    bg: "linear-gradient(160deg, #1A2B35 0%, #243B47 100%)",
   },
 ];
 
-const StepCard = ({ s, index }: { s: Step; index: number }) => {
+const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -49,7 +51,8 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
     return () => io.disconnect();
   }, []);
 
-  const num = String(s.n).padStart(2, "0");
+  const isDark = index === 3;
+  const num = String(step.n).padStart(2, "0");
   const delay = index * 120;
 
   return (
@@ -58,30 +61,31 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered
-          ? "linear-gradient(145deg, #1A2B35 0%, #243B47 100%)"
-          : "linear-gradient(145deg, #F5F0E8 0%, #FAF7F2 100%)",
-        padding: "40px 32px",
-        position: "relative",
-        overflow: "hidden",
-        border: "1px solid rgba(232,87,26,0.08)",
-        boxShadow: "var(--shadow-soft)",
+        background: step.bg,
+        borderRadius: 16,
+        padding: "28px 24px",
+        border: "1px solid rgba(26,43,53,0.06)",
+        transition: "all 0.3s ease",
+        cursor: "pointer",
+        transform: revealed
+          ? hovered ? "translateY(-4px)" : "translateY(0)"
+          : "translateY(24px)",
+        boxShadow: hovered
+          ? isDark ? "0 12px 40px rgba(0,0,0,0.25)" : "0 12px 40px rgba(26,43,53,0.12)"
+          : "none",
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(24px)",
-        transition: `opacity 500ms ease ${delay}ms, transform 500ms ease ${delay}ms, background 0.3s ease`,
-        cursor: "default",
+        transitionDelay: revealed ? "0ms" : `${delay}ms`,
       }}
     >
       <div
         style={{
           fontFamily: "'Fraunces', serif",
           fontWeight: 900,
-          fontSize: 80,
+          fontSize: 56,
           color: "#E8571A",
-          opacity: hovered ? 0.08 : 0.15,
+          opacity: isDark ? 0.3 : 0.15,
           lineHeight: 1,
-          marginBottom: 24,
-          transition: "opacity 0.3s ease",
+          marginBottom: 16,
         }}
       >
         {num}
@@ -90,27 +94,25 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
         style={{
           fontFamily: "'Fraunces', serif",
           fontWeight: 600,
-          fontSize: 24,
-          color: hovered ? "#FFFFFF" : "#1A2B35",
+          fontSize: 18,
+          color: isDark ? "#FFFFFF" : "#1A2B35",
           lineHeight: 1.2,
-          margin: "0 0 12px",
-          transition: "color 0.3s ease",
+          margin: "0 0 10px",
         }}
       >
-        {s.title}
+        {step.title}
       </h3>
       <p
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
-          fontSize: 14,
-          color: hovered ? "rgba(255,255,255,0.6)" : "rgba(26,43,53,0.6)",
+          fontSize: 13,
+          color: isDark ? "rgba(255,255,255,0.55)" : "rgba(26,43,53,0.55)",
           lineHeight: 1.7,
           margin: 0,
-          transition: "color 0.3s ease",
         }}
       >
-        {s.body}
+        {step.body}
       </p>
     </div>
   );
@@ -132,15 +134,24 @@ const HowItWorks = () => {
       className="how-section how-section--v3"
       id="how"
       style={{
-        background: "linear-gradient(180deg, #F2EDE4 0%, #FAF7F2 100%)",
-        padding: "100px 80px",
-        margin: 0,
+        background: "#FAF7F2",
+        margin: "0 40px",
         borderRadius: 24,
+        padding: "80px 60px",
         overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        {/* Header */}
+      {/* Header row */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: isMobile ? "flex-start" : "center",
+          flexWrap: "wrap",
+          gap: 24,
+          marginBottom: 48,
+        }}
+      >
         <div>
           <div
             style={{
@@ -148,100 +159,69 @@ const HowItWorks = () => {
               fontWeight: 700,
               textTransform: "uppercase",
               color: "#E8571A",
-              fontSize: 11,
+              fontSize: 10,
               letterSpacing: "0.15em",
-              marginBottom: 20,
+              marginBottom: 8,
             }}
           >
             HOW IT WORKS
           </div>
-          <h2
-            style={{
-              fontFamily: "'Fraunces', serif",
-              fontWeight: 700,
-              color: "#1A2B35",
-              fontSize: "clamp(40px, 5vw, 64px)",
-              lineHeight: 1.1,
-              letterSpacing: "-0.02em",
-              margin: 0,
-            }}
-          >
-            Four steps to
-            <br />
-            <span style={{ fontStyle: "italic", fontWeight: 700, color: "#E8571A" }}>
-              a new standard.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 400,
-              color: "rgba(26,43,53,0.55)",
-              fontSize: 16,
-              lineHeight: 1.6,
-              marginTop: 16,
-              maxWidth: 560,
-            }}
-          >
-            Most patients complete the full process in under two weeks.
-          </p>
-        </div>
-
-        {/* Step Cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
-            gap: 2,
-            marginTop: 80,
-          }}
-        >
-          {steps.map((s, i) => (
-            <StepCard key={s.n} s={s} index={i} />
-          ))}
-        </div>
-
-        {/* CTA Row */}
-        <div
-          style={{
-            marginTop: 60,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 24,
-            flexWrap: "wrap",
-          }}
-        >
           <div
             style={{
               fontFamily: "'Fraunces', serif",
-              fontWeight: 500,
-              fontSize: 24,
-              color: "#1A2B35",
-              lineHeight: 1.2,
-            }}
-          >
-            Ready to start?
-          </div>
-          <button
-            onClick={open}
-            style={{
-              background: "#E8571A",
-              color: "#FFFFFF",
-              border: "none",
-              borderRadius: 999,
-              padding: "14px 32px",
-              fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              fontSize: 13,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              cursor: "pointer",
+              color: "#1A2B35",
+              fontSize: "clamp(32px, 4vw, 48px)",
+              lineHeight: 1.1,
             }}
           >
-            START YOUR ASSESSMENT →
-          </button>
+            Four steps to
+          </div>
+          <div
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 700,
+              fontStyle: "italic",
+              color: "#E8571A",
+              fontSize: "clamp(32px, 4vw, 48px)",
+              lineHeight: 1.1,
+            }}
+          >
+            a new standard.
+          </div>
         </div>
+        <button
+          onClick={open}
+          style={{
+            background: "#E8571A",
+            color: "#FFFFFF",
+            border: "none",
+            borderRadius: 999,
+            padding: "14px 28px",
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: 11,
+            letterSpacing: "0.04em",
+            textTransform: "uppercase",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+          }}
+        >
+          START YOUR ASSESSMENT →
+        </button>
+      </div>
+
+      {/* Cards */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
+          gap: 8,
+        }}
+      >
+        {steps.map((s, i) => (
+          <StepCard key={s.n} step={s} index={i} />
+        ))}
       </div>
     </section>
   );
