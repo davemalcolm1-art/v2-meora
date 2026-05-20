@@ -124,9 +124,9 @@ nav.rill-nav {
   height: 56px;
   padding: 0 24px;
   border-radius: 16px;
-  background: rgba(26,43,53,0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15,15,15,0.35);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.1);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   transition: background 0.4s ease;
@@ -2650,9 +2650,9 @@ button.btn-ghost {
 .science-card,
 .science-card-dark,
 .science-card-light {
-  background: #FFFFFF !important;
-  border: 1px solid #D9D3C8 !important;
-  color: #1A2B35 !important;
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: #FFFFFF !important;
 }
 
 .interstitial,
@@ -2865,18 +2865,18 @@ button.btn-ghost {
 .science-card,
 .science-card-dark,
 .science-card-light {
-  background: rgba(255,255,255,0.08) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
   border-radius: 16px !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
   color: #FFFFFF !important;
 }
 .science-card:hover,
 .science-card-dark:hover,
 .science-card-light:hover {
-  background: rgba(255,255,255,0.14) !important;
-  border-color: rgba(255,255,255,0.22) !important;
+  background: rgba(255,255,255,0.2) !important;
+  border-color: rgba(255,255,255,0.15) !important;
 }
 
 .science-cta {
