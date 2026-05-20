@@ -6,9 +6,12 @@ const InterstitialBreak = ({ label }: { label: string }) => {
     <section
       className="protocol-banner"
       style={{
-        background: "#E8571A",
+        background: "linear-gradient(135deg, #E8571A 0%, #C4420A 60%, #1A2B35 100%)",
         padding: "100px 80px",
         textAlign: "center",
+        margin: "0 40px",
+        borderRadius: 24,
+        overflow: "hidden",
       }}
     >
       <h2
@@ -29,8 +32,8 @@ const InterstitialBreak = ({ label }: { label: string }) => {
         onClick={open}
         style={{
           marginTop: 40,
-          background: "#1A2B35",
-          color: "#FFFFFF",
+          background: "#FFFFFF",
+          color: "#1A2B35",
           border: "none",
           outline: "none",
           borderRadius: 999,
@@ -47,7 +50,7 @@ const InterstitialBreak = ({ label }: { label: string }) => {
       </button>
       <style>{`
         @media (max-width: 768px) {
-          .protocol-banner { padding: 56px 24px !important; }
+          .protocol-banner { padding: 56px 24px !important; margin: 0 16px !important; }
         }
       `}</style>
     </section>

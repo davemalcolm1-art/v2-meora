@@ -230,7 +230,7 @@ const HowItWorks = () => {
               color: "#FFFFFF",
               border: "none",
               borderRadius: 999,
-              padding: "16px 40px",
+              padding: "14px 32px",
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
               fontSize: 13,
