@@ -34,8 +34,20 @@ const ClinicalPhilosophy = () => {
         borderRadius: 24,
         overflow: "hidden",
         marginBottom: 0,
+        position: "relative",
       }}
     >
+      {/* Ambient glow */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse at 15% 50%, rgba(232,87,26,0.06) 0%, transparent 60%), radial-gradient(ellipse at 85% 20%, rgba(184,210,230,0.12) 0%, transparent 55%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
       <div
         className="cp-grid"
         style={{
@@ -45,6 +57,8 @@ const ClinicalPhilosophy = () => {
           maxWidth: 1200,
           margin: "0 auto",
           alignItems: "start",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <div>

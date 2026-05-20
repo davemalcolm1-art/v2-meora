@@ -7,24 +7,28 @@ const steps = [
     title: "Tell us about yourself.",
     body: "Complete a short health assessment — your goals, history, and what you want to achieve. Takes 5 minutes.",
     bg: "linear-gradient(160deg, #EDE8DE 0%, #FAF7F2 100%)",
+    glow: "radial-gradient(ellipse at 90% 10%, rgba(232,87,26,0.12) 0%, transparent 50%)",
   },
   {
     n: 2,
     title: "Meet your doctor.",
     body: "An AHPRA-registered GP reviews your assessment and conducts a thorough telehealth consultation.",
     bg: "linear-gradient(160deg, #E8E2D8 0%, #F5F0E8 100%)",
+    glow: "radial-gradient(ellipse at 90% 10%, rgba(232,87,26,0.09) 0%, transparent 50%)",
   },
   {
     n: 3,
     title: "Receive your protocol.",
     body: "Your prescription is written and compounded by a registered pharmacy. Cold-chain delivered to your door.",
     bg: "linear-gradient(160deg, #E2DCD2 0%, #EFEAD8 100%)",
+    glow: "radial-gradient(ellipse at 90% 10%, rgba(184,210,230,0.15) 0%, transparent 50%)",
   },
   {
     n: 4,
     title: "Ongoing clinical care.",
     body: "Every 90 days, a follow-up consultation and blood review. A continuous clinical relationship, not a one-time prescription.",
     bg: "linear-gradient(160deg, #1A2B35 0%, #243B47 100%)",
+    glow: "radial-gradient(ellipse at 20% 20%, rgba(232,87,26,0.2) 0%, transparent 50%)",
   },
 ];
 
@@ -75,45 +79,60 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
           : "none",
         opacity: revealed ? 1 : 0,
         transitionDelay: revealed ? "0ms" : `${delay}ms`,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Card glow */}
       <div
+        aria-hidden="true"
         style={{
-          fontFamily: "'Fraunces', serif",
-          fontWeight: 900,
-          fontSize: 56,
-          color: "#E8571A",
-          opacity: isDark ? 0.3 : 0.15,
-          lineHeight: 1,
-          marginBottom: 16,
+          position: "absolute",
+          inset: 0,
+          background: step.glow,
+          pointerEvents: "none",
+          zIndex: 0,
         }}
-      >
-        {num}
+      />
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 900,
+            fontSize: 56,
+            color: "#E8571A",
+            opacity: isDark ? 0.3 : 0.15,
+            lineHeight: 1,
+            marginBottom: 16,
+          }}
+        >
+          {num}
+        </div>
+        <h3
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 600,
+            fontSize: 18,
+            color: isDark ? "#FFFFFF" : "#1A2B35",
+            lineHeight: 1.2,
+            margin: "0 0 10px",
+          }}
+        >
+          {step.title}
+        </h3>
+        <p
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: 13,
+            color: isDark ? "rgba(255,255,255,0.55)" : "rgba(26,43,53,0.55)",
+            lineHeight: 1.7,
+            margin: 0,
+          }}
+        >
+          {step.body}
+        </p>
       </div>
-      <h3
-        style={{
-          fontFamily: "'Fraunces', serif",
-          fontWeight: 600,
-          fontSize: 18,
-          color: isDark ? "#FFFFFF" : "#1A2B35",
-          lineHeight: 1.2,
-          margin: "0 0 10px",
-        }}
-      >
-        {step.title}
-      </h3>
-      <p
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: 13,
-          color: isDark ? "rgba(255,255,255,0.55)" : "rgba(26,43,53,0.55)",
-          lineHeight: 1.7,
-          margin: 0,
-        }}
-      >
-        {step.body}
-      </p>
     </div>
   );
 };
@@ -139,8 +158,21 @@ const HowItWorks = () => {
         borderRadius: 24,
         padding: "80px 60px",
         overflow: "hidden",
+        position: "relative",
       }}
     >
+      {/* Ambient glow */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse at 15% 50%, rgba(232,87,26,0.06) 0%, transparent 60%), radial-gradient(ellipse at 85% 20%, rgba(184,210,230,0.12) 0%, transparent 55%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
       {/* Header row */}
       <div
         style={{
@@ -150,6 +182,8 @@ const HowItWorks = () => {
           flexWrap: "wrap",
           gap: 24,
           marginBottom: 48,
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <div>
@@ -217,6 +251,8 @@ const HowItWorks = () => {
           display: "grid",
           gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
           gap: 8,
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {steps.map((s, i) => (
