@@ -6,7 +6,7 @@ const ProtocolName = ({ name }: { name: string }) => {
   return (
     <>
       <span>{base}</span>
-      <span style={{ color: "#FF5003" }}>.ME</span>
+      <span style={{ color: "#E8571A" }}>.ME</span>
     </>
   );
 };
@@ -62,12 +62,12 @@ const allProtocols: Protocol[] = [
   { name: "Focus.ME", badge: "NEEDLE-FREE", tag: "FOCUS · MEMORY · STRESS", desc: "Semax and Selank — complementary neuropeptides in a once-daily nasal spray.", categories: ["energy","performance","balance","longevity"] },
 ];
 
-const Arrow = ({ size = 20, color = "#FF5003" }: { size?: number; color?: string }) => (
+const Arrow = ({ size = 20, color = "#E8571A" }: { size?: number; color?: string }) => (
   <span aria-hidden="true" style={{ color, fontFamily: "'DM Sans', sans-serif", fontSize: `${size}px`, lineHeight: 1 }}>→</span>
 );
 
 const CARD_BG = "#F0EBE3";
-const SECTION_BG = "#F7F4EF";
+const SECTION_BG = "#FAF7F2";
 
 const Protocols = () => {
   const { openWithProtocol } = useQuiz();
@@ -142,7 +142,7 @@ const Protocols = () => {
         minHeight: isExpanded ? "100vh" : undefined,
         overflow: "hidden",
       }}
-      className="selection:bg-[#FF5003] selection:text-white"
+      className="selection:bg-[#E8571A] selection:text-white"
     >
       <div style={{ maxWidth: isExpanded ? "none" : "1320px", margin: "0 auto", padding: isExpanded ? "0" : "80px 60px" }}>
         {!isExpanded && (
@@ -154,7 +154,7 @@ const Protocols = () => {
               fontSize: "11px",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#FF5003",
+              color: "#E8571A",
               marginBottom: "20px",
             }}>
               Our Protocols
@@ -169,7 +169,7 @@ const Protocols = () => {
               margin: "0 0 20px",
             }}>
               Find your protocol.<br />
-              <span style={{ fontStyle: "italic", color: "#FF5003" }}>Goal-specific.</span>
+              <span style={{ fontStyle: "italic", color: "#E8571A" }}>Goal-specific.</span>
             </h2>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -211,7 +211,7 @@ const Protocols = () => {
                     <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
                   </div>
                   <div style={{ padding: "24px 28px", position: "relative" }}>
-                    <span style={{ position: "absolute", top: "20px", right: "24px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "20px", lineHeight: 1 }}>→</span>
+                    <span style={{ position: "absolute", top: "20px", right: "24px", color: "#E8571A", fontFamily: "'DM Sans', sans-serif", fontSize: "20px", lineHeight: 1 }}>→</span>
                     <h3 style={{
                       fontFamily: "'Fraunces', serif",
                       fontWeight: 700,
@@ -226,7 +226,7 @@ const Protocols = () => {
                     </p>
                     <div style={{
                       display: "inline-block",
-                      background: "#FF5003",
+                      background: "#E8571A",
                       color: "#FFFFFF",
                       fontFamily: "'DM Sans', sans-serif",
                       fontWeight: 700,
@@ -267,7 +267,7 @@ const Protocols = () => {
                     <img src={c.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: c.imagePosition || "center", display: "block" }} />
                   </div>
                   <div style={{ padding: "20px 24px", position: "relative" }}>
-                    <span style={{ position: "absolute", top: "16px", right: "20px", color: "#FF5003", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}>→</span>
+                    <span style={{ position: "absolute", top: "16px", right: "20px", color: "#E8571A", fontFamily: "'DM Sans', sans-serif", fontSize: "18px", lineHeight: 1 }}>→</span>
                     <h4 style={{
                       fontFamily: "'Fraunces', serif",
                       fontWeight: 700,
@@ -282,7 +282,7 @@ const Protocols = () => {
                     </p>
                     <div style={{
                       display: "inline-block",
-                      background: "#FF5003",
+                      background: "#E8571A",
                       color: "#FFFFFF",
                       fontFamily: "'DM Sans', sans-serif",
                       fontWeight: 700,
@@ -341,7 +341,7 @@ const Protocols = () => {
               }}>
                 <div style={{
                   fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
-                  textTransform: "uppercase", color: "#FF5003",
+                  textTransform: "uppercase", color: "#E8571A",
                   fontSize: "11px", letterSpacing: "0.12em", marginBottom: "16px",
                 }}>
                   Category
@@ -362,7 +362,7 @@ const Protocols = () => {
                   onClick={() => openWithProtocol(featured.name)}
                   className="protocols-expanded-cta"
                   style={{
-                    background: "#FF5003", color: "#FFFFFF",
+                    background: "#E8571A", color: "#FFFFFF",
                     fontFamily: "'DM Sans', sans-serif", fontWeight: 800,
                     fontSize: "13px", letterSpacing: "0.06em",
                     borderRadius: "999px", padding: "16px 32px",
@@ -401,7 +401,7 @@ const Protocols = () => {
                 >
                   <div style={{
                     fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
-                    textTransform: "uppercase", color: "#FF5003",
+                    textTransform: "uppercase", color: "#E8571A",
                     fontSize: "10px", letterSpacing: "0.1em", marginBottom: "20px",
                   }}>
                     {featured.tags}

@@ -59,11 +59,15 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "#1A2B35" : "#FFFFFF",
+        background: hovered
+          ? "linear-gradient(145deg, #1A2B35 0%, #243B47 100%)"
+          : "linear-gradient(145deg, #F5F0E8 0%, #FAF7F2 100%)",
         padding: "40px 32px",
         position: "relative",
         overflow: "hidden",
-        borderRight: isLast ? "none" : "1px solid #E8E2D9",
+        border: "1px solid rgba(232,87,26,0.08)",
+        borderRight: isLast ? "1px solid rgba(232,87,26,0.08)" : "1px solid rgba(232,87,26,0.08)",
+        boxShadow: "var(--shadow-soft)",
         opacity: revealed ? 1 : 0,
         transform: revealed ? "translateY(0)" : "translateY(24px)",
         transition: `opacity 500ms ease ${delay}ms, transform 500ms ease ${delay}ms, background 0.3s ease`,
@@ -75,7 +79,7 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
           fontFamily: "'Fraunces', serif",
           fontWeight: 900,
           fontSize: 80,
-          color: "#FF5003",
+          color: "#E8571A",
           opacity: hovered ? 0.08 : 0.15,
           lineHeight: 1,
           marginBottom: 24,
@@ -129,7 +133,7 @@ const HowItWorks = () => {
     <section
       className="how-section how-section--v3"
       id="how"
-      style={{ background: "#F7F4EF", padding: "120px 80px", margin: 0 }}
+      style={{ background: "#FAF7F2", padding: "120px 80px", margin: 0 }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Header */}
@@ -139,7 +143,7 @@ const HowItWorks = () => {
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
               textTransform: "uppercase",
-              color: "#FF5003",
+              color: "#E8571A",
               fontSize: 11,
               letterSpacing: "0.15em",
               marginBottom: 20,
@@ -160,7 +164,7 @@ const HowItWorks = () => {
           >
             Four steps to
             <br />
-            <span style={{ fontStyle: "italic", fontWeight: 700, color: "#FF5003" }}>
+            <span style={{ fontStyle: "italic", fontWeight: 700, color: "#E8571A" }}>
               a new standard.
             </span>
           </h2>
@@ -218,7 +222,7 @@ const HowItWorks = () => {
           <button
             onClick={open}
             style={{
-              background: "#FF5003",
+              background: "#E8571A",
               color: "#FFFFFF",
               border: "none",
               borderRadius: 999,

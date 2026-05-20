@@ -7,11 +7,11 @@ const Footer = () => (
       <div className="footer-brand">
         <div className="footer-logo" style={{ display: "flex", alignItems: "center", height: "44px" }}>
           <svg viewBox="460 85 280 240" height="44" width="44" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="600" cy="220" fill="none" r="120" stroke="#FF5003" strokeWidth="14" />
-            <path d="M 530 300 L 530 170 L 600 250 L 670 170 L 670 300" fill="none" stroke="#FF5003" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16" />
-            <path d="M 600 310 C 560 260, 580 215, 600 195 C 620 215, 640 260, 600 310 Z" fill="none" stroke="#FF5003" strokeWidth="13" />
+            <circle cx="600" cy="220" fill="none" r="120" stroke="#E8571A" strokeWidth="14" />
+            <path d="M 530 300 L 530 170 L 600 250 L 670 170 L 670 300" fill="none" stroke="#E8571A" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16" />
+            <path d="M 600 310 C 560 260, 580 215, 600 195 C 620 215, 640 260, 600 310 Z" fill="none" stroke="#E8571A" strokeWidth="13" />
           </svg>
-          <span style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: "18px", color: "#FF5003", letterSpacing: "0.08em", marginLeft: "10px" }}>
+          <span style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: "18px", color: "#E8571A", letterSpacing: "0.08em", marginLeft: "10px" }}>
             MEORA
           </span>
         </div>

@@ -29,7 +29,7 @@ const ClinicalPhilosophy = () => {
       ref={ref}
       className="clinical-philosophy"
       style={{
-        background: "#F7F4EF",
+        background: "#FAF7F2",
         padding: "100px 80px",
       }}
     >
@@ -52,7 +52,7 @@ const ClinicalPhilosophy = () => {
               fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#FF5003",
+              color: "#E8571A",
               marginBottom: 24,
             }}
           >
@@ -80,7 +80,7 @@ const ClinicalPhilosophy = () => {
               marginTop: 24,
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              color: "#FF5003",
+              color: "#E8571A",
               fontSize: 13,
               letterSpacing: "0.06em",
               textDecoration: "none",

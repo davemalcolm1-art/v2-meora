@@ -12,7 +12,7 @@ const MeasuredMe = () => {
     <section
       className="measured-me"
       style={{
-        background: "#F7F4EF",
+        background: "#FAF7F2",
         padding: "100px 80px",
       }}
     >
@@ -35,7 +35,7 @@ const MeasuredMe = () => {
               fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#FF5003",
+              color: "#E8571A",
               marginBottom: 20,
             }}
           >
@@ -54,7 +54,7 @@ const MeasuredMe = () => {
           >
             Data that drives
             <br />
-            <span style={{ fontStyle: "italic", fontWeight: 900, color: "#FF5003" }}>
+            <span style={{ fontStyle: "italic", fontWeight: 900, color: "#E8571A" }}>
               better outcomes.
             </span>
           </h2>
@@ -80,7 +80,7 @@ const MeasuredMe = () => {
               marginTop: 28,
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              color: "#FF5003",
+              color: "#E8571A",
               fontSize: 13,
               letterSpacing: "0.06em",
               textDecoration: "none",
@@ -105,7 +105,7 @@ const MeasuredMe = () => {
               fontSize: 10,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#FF5003",
+              color: "#E8571A",
               marginBottom: 20,
             }}
           >
@@ -122,7 +122,7 @@ const MeasuredMe = () => {
               lineHeight: 1.1,
             }}
           >
-            Foundation.<span style={{ color: "#FF5003" }}>ME</span>
+            Foundation.<span style={{ color: "#E8571A" }}>ME</span>
           </div>
 
           <p
@@ -143,7 +143,7 @@ const MeasuredMe = () => {
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
             {bullets.map((b) => (
               <li key={b} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF5003", flexShrink: 0 }} />
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#E8571A", flexShrink: 0 }} />
                 <span
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
@@ -168,7 +168,7 @@ const MeasuredMe = () => {
               padding: 0,
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              color: "#FF5003",
+              color: "#E8571A",
               fontSize: 13,
               letterSpacing: "0.06em",
               cursor: "pointer",

@@ -27,7 +27,7 @@ const MaskSection = () => (
           </text>
         </mask>
       </defs>
-      <rect width="100%" height="100%" fill="#F7F4EF" mask="url(#meoramask)" />
+      <rect width="100%" height="100%" fill="#FAF7F2" mask="url(#meoramask)" />
     </svg>
     <div className="mask-fade-top" />
     <div className="mask-fade-bottom" />

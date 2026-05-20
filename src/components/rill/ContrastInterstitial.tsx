@@ -29,7 +29,7 @@ const ContrastInterstitial = () => {
               fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#FF5003",
+              color: "#E8571A",
               marginBottom: 20,
             }}
           >
@@ -68,7 +68,7 @@ const ContrastInterstitial = () => {
         <button
           onClick={open}
           style={{
-            background: "#FF5003",
+            background: "#E8571A",
             color: "#FFFFFF",
             border: "none",
             borderRadius: 999,
