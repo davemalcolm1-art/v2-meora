@@ -26,11 +26,10 @@ const steps: Step[] = [
   },
 ];
 
-const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
-
-const StepRow = ({ s, index }: { s: Step; index: number }) => {
+const StepCard = ({ s, index }: { s: Step; index: number }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -51,87 +50,90 @@ const StepRow = ({ s, index }: { s: Step; index: number }) => {
   }, []);
 
   const num = String(s.n).padStart(2, "0");
-  const delay = index * 100;
+  const delay = index * 120;
+  const isLast = index === steps.length - 1;
 
   return (
     <div
       ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        display: "flex",
-        alignItems: "flex-start",
-        padding: "48px 0",
+        background: hovered ? "#1A2B35" : "#FFFFFF",
+        padding: "40px 32px",
+        position: "relative",
+        overflow: "hidden",
+        borderRight: isLast ? "none" : "1px solid #E8E2D9",
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity 500ms ${EASE} ${delay}ms, transform 500ms ${EASE} ${delay}ms`,
+        transform: revealed ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 500ms ease ${delay}ms, transform 500ms ease ${delay}ms, background 0.3s ease`,
+        cursor: "default",
       }}
     >
-      <span
+      <div
         style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 700,
-          fontSize: 11,
-          letterSpacing: "0.2em",
+          fontFamily: "'Fraunces', serif",
+          fontWeight: 900,
+          fontSize: 80,
           color: "#FF5003",
+          opacity: hovered ? 0.08 : 0.15,
           lineHeight: 1,
-          flexShrink: 0,
-          paddingTop: 6,
+          marginBottom: 24,
+          transition: "opacity 0.3s ease",
         }}
       >
         {num}
-      </span>
-      <div
-        style={{
-          width: 1,
-          height: 40,
-          background: "rgba(255,255,255,0.2)",
-          margin: "0 32px",
-          flexShrink: 0,
-        }}
-      />
-      <div>
-        <h3
-          style={{
-            fontFamily: "'Fraunces', serif",
-            fontWeight: 500,
-            fontSize: 32,
-            color: "#FFFFFF",
-            lineHeight: 1.1,
-            letterSpacing: "-0.01em",
-            margin: 0,
-          }}
-        >
-          {s.title}
-        </h3>
-        <p
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 400,
-            fontSize: 15,
-            lineHeight: 1.7,
-            color: "rgba(255,255,255,0.6)",
-            margin: "8px 0 0",
-            maxWidth: 600,
-          }}
-        >
-          {s.body}
-        </p>
       </div>
+      <h3
+        style={{
+          fontFamily: "'Fraunces', serif",
+          fontWeight: 600,
+          fontSize: 24,
+          color: hovered ? "#FFFFFF" : "#1A2B35",
+          lineHeight: 1.2,
+          margin: "0 0 12px",
+          transition: "color 0.3s ease",
+        }}
+      >
+        {s.title}
+      </h3>
+      <p
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: 14,
+          color: hovered ? "rgba(255,255,255,0.6)" : "rgba(26,43,53,0.6)",
+          lineHeight: 1.7,
+          margin: 0,
+          transition: "color 0.3s ease",
+        }}
+      >
+        {s.body}
+      </p>
     </div>
   );
 };
 
 const HowItWorks = () => {
   const { open } = useQuiz();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   return (
     <section
       className="how-section how-section--v3"
       id="how"
-      style={{ background: "#1A2B35", padding: "120px 80px 0", margin: 0 }}
+      style={{ background: "#F7F4EF", padding: "120px 80px", margin: 0 }}
     >
-      <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Header */}
-        <div style={{ marginBottom: 60 }}>
+        <div>
           <div
             style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -139,18 +141,18 @@ const HowItWorks = () => {
               textTransform: "uppercase",
               color: "#FF5003",
               fontSize: 11,
-              letterSpacing: "0.12em",
+              letterSpacing: "0.15em",
               marginBottom: 20,
             }}
           >
-            How It Works
+            HOW IT WORKS
           </div>
           <h2
             style={{
               fontFamily: "'Fraunces', serif",
               fontWeight: 700,
-              color: "#FFFFFF",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              color: "#1A2B35",
+              fontSize: "clamp(40px, 5vw, 64px)",
               lineHeight: 1.1,
               letterSpacing: "-0.02em",
               margin: 0,
@@ -158,7 +160,7 @@ const HowItWorks = () => {
           >
             Four steps to
             <br />
-            <span style={{ fontStyle: "italic", fontWeight: 900, color: "#FF5003" }}>
+            <span style={{ fontStyle: "italic", fontWeight: 700, color: "#FF5003" }}>
               a new standard.
             </span>
           </h2>
@@ -166,10 +168,10 @@ const HowItWorks = () => {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(26,43,53,0.55)",
               fontSize: 16,
               lineHeight: 1.6,
-              marginTop: 24,
+              marginTop: 16,
               maxWidth: 560,
             }}
           >
@@ -177,66 +179,61 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* Steps */}
-        <div>
-          {steps.map((s, i) => (
-            <div key={s.n}>
-              <StepRow s={s} index={i} />
-              {i < steps.length - 1 && (
-                <div style={{ height: 1, background: "rgba(255,255,255,0.1)" }} />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* CTA bar */}
-      <div
-        style={{
-          borderTop: "1px solid rgba(255,80,3,0.2)",
-          padding: "40px 80px",
-          marginTop: 80,
-          marginLeft: -80,
-          marginRight: -80,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 24,
-          flexWrap: "wrap",
-        }}
-      >
+        {/* Step Cards */}
         <div
           style={{
-            fontFamily: "'Fraunces', serif",
-            fontWeight: 700,
-            color: "#FFFFFF",
-            fontSize: 24,
-            lineHeight: 1.2,
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
+            gap: 2,
+            marginTop: 80,
           }}
         >
-          Ready to start?
+          {steps.map((s, i) => (
+            <StepCard key={s.n} s={s} index={i} />
+          ))}
         </div>
-        <button
-          onClick={open}
+
+        {/* CTA Row */}
+        <div
           style={{
-            background: "#FF5003",
-            color: "#FFFFFF",
-            border: "none",
-            borderRadius: 999,
-            padding: "14px 28px",
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 800,
-            fontSize: 13,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            display: "inline-flex",
+            marginTop: 60,
+            display: "flex",
+            justifyContent: "space-between",
             alignItems: "center",
-            gap: 10,
+            gap: 24,
+            flexWrap: "wrap",
           }}
         >
-          Start your assessment →
-        </button>
+          <div
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 500,
+              fontSize: 24,
+              color: "#1A2B35",
+              lineHeight: 1.2,
+            }}
+          >
+            Ready to start?
+          </div>
+          <button
+            onClick={open}
+            style={{
+              background: "#FF5003",
+              color: "#FFFFFF",
+              border: "none",
+              borderRadius: 999,
+              padding: "16px 40px",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              cursor: "pointer",
+            }}
+          >
+            START YOUR ASSESSMENT →
+          </button>
+        </div>
       </div>
     </section>
   );
