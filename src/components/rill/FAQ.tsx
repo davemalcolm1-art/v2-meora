@@ -13,7 +13,16 @@ const faqs = [
 const FAQ = () => {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <section className="faq-section" id="about">
+    <section
+      className="faq-section"
+      id="about"
+      style={{
+        background: "linear-gradient(180deg, #FAF7F2 0%, #F5F0E8 100%)",
+        borderRadius: 24,
+        overflow: "hidden",
+        marginBottom: 0,
+      }}
+    >
       <div className="faq-content-col faq-content-col--full">
         <div className="section-eyebrow reveal">
           <div className="section-eyebrow-line"></div>

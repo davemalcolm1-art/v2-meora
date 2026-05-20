@@ -1,5 +1,13 @@
 const ContentHub = () => (
-  <section className="hub-section" id="journal">
+  <section
+    className="hub-section"
+    id="journal"
+    style={{
+      borderRadius: 24,
+      overflow: "hidden",
+      marginBottom: 0,
+    }}
+  >
     <div className="hub-header">
       <div className="hub-header-left">
         <div className="section-eyebrow">

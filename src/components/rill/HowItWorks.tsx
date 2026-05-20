@@ -51,7 +51,6 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
 
   const num = String(s.n).padStart(2, "0");
   const delay = index * 120;
-  const isLast = index === steps.length - 1;
 
   return (
     <div
@@ -66,7 +65,6 @@ const StepCard = ({ s, index }: { s: Step; index: number }) => {
         position: "relative",
         overflow: "hidden",
         border: "1px solid rgba(232,87,26,0.08)",
-        borderRight: isLast ? "1px solid rgba(232,87,26,0.08)" : "1px solid rgba(232,87,26,0.08)",
         boxShadow: "var(--shadow-soft)",
         opacity: revealed ? 1 : 0,
         transform: revealed ? "translateY(0)" : "translateY(24px)",
@@ -133,7 +131,13 @@ const HowItWorks = () => {
     <section
       className="how-section how-section--v3"
       id="how"
-      style={{ background: "#FAF7F2", padding: "120px 80px", margin: 0 }}
+      style={{
+        background: "linear-gradient(180deg, #F2EDE4 0%, #FAF7F2 100%)",
+        padding: "100px 80px",
+        margin: 0,
+        borderRadius: 24,
+        overflow: "hidden",
+      }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Header */}

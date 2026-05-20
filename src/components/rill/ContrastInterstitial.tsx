@@ -6,10 +6,22 @@ const ContrastInterstitial = () => {
     <section
       className="contrast-interstitial"
       style={{
-        background: "#1A2B35",
+        background: "linear-gradient(135deg, #1A2B35 0%, #243B47 50%, #1A2B35 100%)",
         padding: "80px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Radial spotlight */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse at 30% 50%, rgba(232,87,26,0.15) 0%, transparent 60%)",
+          pointerEvents: "none",
+        }}
+      />
       <div
         className="ci-grid"
         style={{
@@ -17,8 +29,10 @@ const ContrastInterstitial = () => {
           gridTemplateColumns: "1fr auto",
           gap: 48,
           alignItems: "center",
-          maxWidth: 1320,
+          maxWidth: 1200,
           margin: "0 auto",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <div>

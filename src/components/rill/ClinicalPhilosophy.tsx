@@ -29,8 +29,11 @@ const ClinicalPhilosophy = () => {
       ref={ref}
       className="clinical-philosophy"
       style={{
-        background: "#FAF7F2",
+        background: "linear-gradient(180deg, #FAF7F2 0%, #F2EDE4 100%)",
         padding: "100px 80px",
+        borderRadius: 24,
+        overflow: "hidden",
+        marginBottom: 0,
       }}
     >
       <div
@@ -39,7 +42,7 @@ const ClinicalPhilosophy = () => {
           display: "grid",
           gridTemplateColumns: "40% 55%",
           gap: "5%",
-          maxWidth: 1320,
+          maxWidth: 1200,
           margin: "0 auto",
           alignItems: "start",
         }}

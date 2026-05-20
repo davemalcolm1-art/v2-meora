@@ -119,26 +119,24 @@ h1, h2, h3 {
 /* NAV — floating centred pill */
 nav.rill-nav {
   position: fixed;
-  top: 24px;
+  top: 20px;
   left: 50%;
-  right: auto;
   transform: translateX(-50%);
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  width: calc(100vw - 80px);
-  max-width: calc(100vw - 80px);
-  height: 56px;
-  padding: 0 24px;
+  width: calc(100% - 80px);
+  max-width: 1280px;
+  height: 60px;
   border-radius: 16px;
-  background: rgba(15,15,15,0.35);
+  background: rgba(15, 15, 15, 0.4);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  transition: background 0.4s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+  box-sizing: border-box;
 }
 nav.rill-nav.scrolled {
   background: rgba(26,43,53,0.72);
@@ -2674,7 +2672,7 @@ button.btn-ghost {
 .interstitial * { color: #1A2B35 !important; }
 
 /* ---------- Additional sections to lighten ---------- */
-.how-section { background: #FAF7F2 !important; padding: 120px 60px; }
+.how-section { background: linear-gradient(180deg, #F2EDE4 0%, #FAF7F2 100%) !important; padding: 100px 80px; }
 .how-section .section-h2 { color: #1A2B35 !important; }
 .how-section .section-h2 em { color: #E8571A !important; }
 .how-section .section-eyebrow span { color: #E8571A !important; }
@@ -2751,7 +2749,7 @@ button.btn-ghost {
 .marquee-strip { background: #1A2B35 !important; }
 
 /* HOW IT WORKS — dark section */
-.how-section { background: #1A2B35 !important; padding: 120px 60px !important; }
+.how-section { background: linear-gradient(180deg, #F2EDE4 0%, #FAF7F2 100%) !important; padding: 100px 80px !important; }
 .how-section .section-h2,
 .how-section .section-h2 *,
 .how-section .how-reassurance,
@@ -2812,8 +2810,7 @@ button.btn-ghost {
   position: absolute !important;
   inset: 0 !important;
   background:
-    linear-gradient(to bottom, rgba(26,43,53,0.3) 0%, rgba(26,43,53,0.25) 50%, rgba(26,43,53,0.25) 100%),
-    rgba(26,43,53,0.25) !important;
+    linear-gradient(180deg, rgba(26,43,53,0.2) 0%, rgba(26,43,53,0.5) 100%) !important;
   z-index: 1 !important;
 }
 .science-section > *:not(.science-bg):not(.science-overlay) {
@@ -2897,8 +2894,8 @@ button.btn-ghost {
 }
 .science-cta:hover { background: #d4561f !important; border-color: #d4561f !important; }
 
-/* FAQ — white background */
-.faq-section { background: #FAF7F2 !important; }
+/* FAQ — gradient background */
+.faq-section { background: linear-gradient(180deg, #FAF7F2 0%, #F5F0E8 100%) !important; }
 
 /* JOURNAL / Resources — keep warm cream */
 .hub-section { background: #FAF7F2 !important; }
@@ -3069,8 +3066,8 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
 .faq-section {
   display: block !important;
   grid-template-columns: none !important;
-  background: #FAF7F2 !important;
-  padding: 120px 60px !important;
+  background: linear-gradient(180deg, #FAF7F2 0%, #F5F0E8 100%) !important;
+  padding: 100px 80px !important;
 }
 .faq-image-col { display: none !important; }
 .faq-content-col,

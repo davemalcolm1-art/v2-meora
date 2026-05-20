@@ -141,10 +141,11 @@ const Protocols = () => {
         position: "relative",
         minHeight: isExpanded ? "100vh" : undefined,
         overflow: "hidden",
+        borderRadius: isExpanded ? 0 : 24,
       }}
       className="selection:bg-[#E8571A] selection:text-white"
     >
-      <div style={{ maxWidth: isExpanded ? "none" : "1320px", margin: "0 auto", padding: isExpanded ? "0" : "80px 60px" }}>
+      <div style={{ maxWidth: isExpanded ? "none" : "1200px", margin: "0 auto", padding: isExpanded ? "0" : "100px 80px" }}>
         {!isExpanded && (
           <div style={{ marginBottom: "56px" }}>
             <span style={{

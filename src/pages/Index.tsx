@@ -25,18 +25,33 @@ const Index = () => {
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
       <HeroSection />
-      <main>
+      <div style={{ background: "#FAF7F2", padding: 0 }}>
         <CredentialStrip />
-        <ClinicalPhilosophy />
-        <Protocols />
+        <div style={{ padding: "0 40px" }}>
+          <ClinicalPhilosophy />
+        </div>
+        <div style={{ height: 40 }} />
+        <div style={{ padding: "0 40px" }}>
+          <Protocols />
+        </div>
         <Ticker />
-        <HowItWorks />
+        <div style={{ padding: "0 40px" }}>
+          <HowItWorks />
+        </div>
+        <div style={{ height: 40 }} />
         <ContrastInterstitial />
+        <div style={{ height: 40 }} />
         <Science />
+        <div style={{ height: 40 }} />
         <InterstitialBreak label="A Protocol. Not a Trend." />
-        <FAQ />
-        <ContentHub />
-      </main>
+        <div style={{ padding: "0 40px" }}>
+          <FAQ />
+        </div>
+        <div style={{ height: 40 }} />
+        <div style={{ padding: "0 40px" }}>
+          <ContentHub />
+        </div>
+      </div>
       <MaskSection />
       <Footer />
       <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
