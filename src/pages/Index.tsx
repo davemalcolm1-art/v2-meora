@@ -18,6 +18,8 @@ import QuizModal from "@/components/rill/QuizModal";
 import { QuizProvider } from "@/components/rill/quizContext";
 import useReveal from "@/components/rill/useReveal";
 
+const Spacer = () => <div style={{ height: 16 }} />;
+
 const Index = () => {
   const [quizOpen, setQuizOpen] = useState(false);
   useReveal();
@@ -25,32 +27,26 @@ const Index = () => {
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
       <HeroSection />
-      <div style={{ background: "#FAF7F2", padding: 0 }}>
+      <div style={{ background: "#FAF7F2", padding: "16px 0" }}>
         <CredentialStrip />
-        <div style={{ padding: "0 40px" }}>
-          <ClinicalPhilosophy />
-        </div>
-        <div style={{ height: 40 }} />
-        <div style={{ padding: "0 40px" }}>
-          <Protocols />
-        </div>
+        <Spacer />
+        <ClinicalPhilosophy />
+        <Spacer />
+        <Protocols />
+        <Spacer />
         <Ticker />
-        <div style={{ padding: "0 40px" }}>
-          <HowItWorks />
-        </div>
-        <div style={{ height: 40 }} />
+        <Spacer />
+        <HowItWorks />
+        <Spacer />
         <ContrastInterstitial />
-        <div style={{ height: 40 }} />
+        <Spacer />
         <Science />
-        <div style={{ height: 40 }} />
+        <Spacer />
         <InterstitialBreak label="A Protocol. Not a Trend." />
-        <div style={{ padding: "0 40px" }}>
-          <FAQ />
-        </div>
-        <div style={{ height: 40 }} />
-        <div style={{ padding: "0 40px" }}>
-          <ContentHub />
-        </div>
+        <Spacer />
+        <FAQ />
+        <Spacer />
+        <ContentHub />
       </div>
       <MaskSection />
       <Footer />

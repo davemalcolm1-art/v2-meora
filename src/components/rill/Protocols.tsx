@@ -142,6 +142,7 @@ const Protocols = () => {
         minHeight: isExpanded ? "100vh" : undefined,
         overflow: "hidden",
         borderRadius: isExpanded ? 0 : 24,
+        margin: isExpanded ? 0 : "0 40px",
       }}
       className="selection:bg-[#E8571A] selection:text-white"
     >

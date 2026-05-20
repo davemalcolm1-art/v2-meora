@@ -33,7 +33,7 @@ const ClinicalPhilosophy = () => {
         padding: "100px 80px",
         borderRadius: 24,
         overflow: "hidden",
-        marginBottom: 0,
+        margin: "0 40px",
         position: "relative",
       }}
     >

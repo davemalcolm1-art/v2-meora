@@ -20,7 +20,7 @@ const FAQ = () => {
         background: "linear-gradient(180deg, #FAF7F2 0%, #F5F0E8 100%)",
         borderRadius: 24,
         overflow: "hidden",
-        marginBottom: 0,
+        margin: "0 40px",
         position: "relative",
       }}
     >

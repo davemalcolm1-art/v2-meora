@@ -20,6 +20,8 @@ const Ticker = () => {
         background: "#FAF7F2",
         padding: "28px 0",
         overflow: "hidden",
+        margin: "0 40px",
+        borderRadius: 24,
       }}
     >
       {/* Row 1 — scrolls left */}

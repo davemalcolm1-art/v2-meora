@@ -4,7 +4,7 @@ const Science = () => {
   const { open } = useQuiz();
 
   return (
-    <section className="science-section">
+    <section className="science-section" style={{ margin: "0 40px", borderRadius: 24, overflow: "hidden" }}>
       <div className="science-bg" aria-hidden="true"></div>
       <div className="science-overlay" aria-hidden="true"></div>
 

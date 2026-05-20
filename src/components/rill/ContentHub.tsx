@@ -5,7 +5,7 @@ const ContentHub = () => (
     style={{
       borderRadius: 24,
       overflow: "hidden",
-      marginBottom: 0,
+      margin: "0 40px",
     }}
   >
     <div className="hub-header">

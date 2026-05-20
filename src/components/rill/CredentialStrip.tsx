@@ -44,6 +44,9 @@ const CredentialStrip = () => (
       background: "#FAF7F2",
       padding: "28px 80px",
       boxShadow: "0 1px 0 rgba(26,43,53,0.08)",
+      margin: "0 40px",
+      borderRadius: 24,
+      overflow: "hidden",
     }}
   >
     <div
