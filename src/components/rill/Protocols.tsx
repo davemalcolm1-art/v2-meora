@@ -200,83 +200,165 @@ const Protocols = () => {
                 <button
                   key={c.id}
                   onClick={() => setActiveCategory(c.id)}
+                  className={i === 0 ? "energy-card" : ""}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 40px rgba(26,43,53,0.15)";
+                    const el = e.currentTarget as HTMLElement;
+                    if (i === 0) {
+                      el.style.transform = "translateY(-4px)";
+                      el.style.boxShadow = "0 12px 40px rgba(26,43,53,0.15)";
+                      const mark = el.querySelector(".energy-mark") as HTMLElement;
+                      if (mark) {
+                        mark.style.transform = "translate(-50%, -52%) scale(1.05)";
+                        mark.style.opacity = "0.5";
+                        mark.style.filter = "drop-shadow(0px 8px 16px rgba(0,0,0,0.2))";
+                      }
+                    } else {
+                      el.style.transform = "translateY(-6px)";
+                      el.style.boxShadow = "0 16px 40px rgba(26,43,53,0.15)";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                    const el = e.currentTarget as HTMLElement;
+                    if (i === 0) {
+                      el.style.transform = "translateY(0)";
+                      el.style.boxShadow = "none";
+                      const mark = el.querySelector(".energy-mark") as HTMLElement;
+                      if (mark) {
+                        mark.style.transform = "translate(-50%, -50%)";
+                        mark.style.opacity = "0.35";
+                        mark.style.filter = "none";
+                      }
+                    } else {
+                      el.style.transform = "translateY(0)";
+                      el.style.boxShadow = "none";
+                    }
                   }}
                   style={{
                     background: cardGradients[i],
                     borderRadius: 14,
-                    padding: "24px 20px",
-                    height: 200,
+                    padding: i === 0 ? "20px 20px 20px" : "24px 20px",
+                    minHeight: i === 0 ? 320 : 200,
+                    height: i === 0 ? undefined : 200,
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-between",
+                    justifyContent: i === 0 ? "flex-start" : "space-between",
                     cursor: "pointer",
                     border: "none",
                     textAlign: "left",
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    transition: "all 0.3s ease, box-shadow 0.3s ease",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   {i === 0 && (
                     <img
+                      className="energy-mark"
                       src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-gold.png"
                       style={{
                         position: 'absolute',
-                        top: '50%',
+                        top: '35%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: '70%',
-                        height: '70%',
+                        width: '80%',
                         objectFit: 'contain',
-                        opacity: 0.2,
+                        opacity: 0.35,
                         pointerEvents: 'none',
                         zIndex: 0,
+                        transition: 'transform 0.6s ease, opacity 0.3s ease, filter 0.3s ease',
                       }}
                     />
                   )}
-                  <div style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 700,
-                    fontSize: 10,
-                    letterSpacing: "0.14em",
-                    color: "rgba(26,43,53,0.55)",
-                    textTransform: "uppercase",
-                    position: "relative",
-                    zIndex: 1,
-                  }}>
-                    {c.label}
-                  </div>
-                  <div style={{ position: "relative", zIndex: 1 }}>
-                    <h3 style={{
-                      fontFamily: "'Fraunces', serif",
-                      fontWeight: 600,
-                      fontSize: 18,
-                      color: "#1A2B35",
-                      lineHeight: 1.2,
-                      margin: "0 0 8px",
-                    }}>
-                      {c.line}
-                    </h3>
-                    <span style={{
-                      display: "inline-block",
-                      background: "rgba(26,43,53,0.1)",
-                      borderRadius: 999,
-                      padding: "3px 10px",
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 700,
-                      fontSize: 9,
-                      color: "rgba(26,43,53,0.6)",
-                    }}>
-                      {c.count} Protocols
-                    </span>
-                  </div>
+                  {i === 0 ? (
+                    <>
+                      <div style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                        position: "relative",
+                        zIndex: 1,
+                      }}>
+                        <div style={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontWeight: 700,
+                          fontSize: 10,
+                          letterSpacing: "0.14em",
+                          color: "rgba(26,43,53,0.55)",
+                          textTransform: "uppercase",
+                        }}>
+                          {c.label}
+                        </div>
+                        <span style={{
+                          display: "inline-block",
+                          background: "rgba(26,43,53,0.1)",
+                          borderRadius: 999,
+                          padding: "3px 10px",
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontWeight: 700,
+                          fontSize: 9,
+                          color: "rgba(26,43,53,0.6)",
+                        }}>
+                          {c.count} Protocols
+                        </span>
+                      </div>
+                      <div style={{
+                        marginTop: "auto",
+                        paddingBottom: 20,
+                        position: "relative",
+                        zIndex: 1,
+                      }}>
+                        <h3 style={{
+                          fontFamily: "'Fraunces', serif",
+                          fontWeight: 600,
+                          fontSize: 18,
+                          color: "#1A2B35",
+                          lineHeight: 1.2,
+                          margin: 0,
+                        }}>
+                          {c.line}
+                        </h3>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontWeight: 700,
+                        fontSize: 10,
+                        letterSpacing: "0.14em",
+                        color: "rgba(26,43,53,0.55)",
+                        textTransform: "uppercase",
+                        position: "relative",
+                        zIndex: 1,
+                      }}>
+                        {c.label}
+                      </div>
+                      <div style={{ position: "relative", zIndex: 1 }}>
+                        <h3 style={{
+                          fontFamily: "'Fraunces', serif",
+                          fontWeight: 600,
+                          fontSize: 18,
+                          color: "#1A2B35",
+                          lineHeight: 1.2,
+                          margin: "0 0 8px",
+                        }}>
+                          {c.line}
+                        </h3>
+                        <span style={{
+                          display: "inline-block",
+                          background: "rgba(26,43,53,0.1)",
+                          borderRadius: 999,
+                          padding: "3px 10px",
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontWeight: 700,
+                          fontSize: 9,
+                          color: "rgba(26,43,53,0.6)",
+                        }}>
+                          {c.count} Protocols
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </button>
               );
             })}
