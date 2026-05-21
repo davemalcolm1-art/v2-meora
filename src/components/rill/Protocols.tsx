@@ -220,8 +220,27 @@ const Protocols = () => {
                     border: "none",
                     textAlign: "left",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    position: "relative",
+                    overflow: "hidden",
                   }}
                 >
+                  {i === 0 && (
+                    <img
+                      src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-gold.png"
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '70%',
+                        height: '70%',
+                        objectFit: 'contain',
+                        opacity: 0.2,
+                        pointerEvents: 'none',
+                        zIndex: 0,
+                      }}
+                    />
+                  )}
                   <div style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontWeight: 700,
@@ -229,10 +248,12 @@ const Protocols = () => {
                     letterSpacing: "0.14em",
                     color: "rgba(26,43,53,0.55)",
                     textTransform: "uppercase",
+                    position: "relative",
+                    zIndex: 1,
                   }}>
                     {c.label}
                   </div>
-                  <div>
+                  <div style={{ position: "relative", zIndex: 1 }}>
                     <h3 style={{
                       fontFamily: "'Fraunces', serif",
                       fontWeight: 600,
