@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useQuiz } from "./quizContext";
+import meoraLogo from "@/assets/meora-logo.png";
 
 // ─── SLIDES ───────────────────────────────────────────────────────────────────
 // Replace these URLs with your own images when available.
@@ -529,23 +530,14 @@ const HeroSection = () => {
           textDecoration: "none",
           height: "44px"
         }}>
-          <svg
-            viewBox="460 85 280 240"
-            height="44"
-            width="44"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="600" cy="220" fill="none"
-              r="120" stroke="#FF5003" strokeWidth="14"/>
-            <path
-              d="M 530 300 L 530 170 L 600 250 L 670 170 L 670 300"
-              fill="none" stroke="#FF5003"
-              strokeLinecap="round" strokeLinejoin="round"
-              strokeWidth="16"/>
-            <path
-              d="M 600 310 C 560 260, 580 215, 600 195 C 620 215, 640 260, 600 310 Z"
-              fill="none" stroke="#FF5003" strokeWidth="13"/>
-          </svg>
+          <img
+            src={meoraLogo}
+            alt="Meora"
+            height={44}
+            width={44}
+            style={{ height: "44px", width: "44px", display: "block" }}
+          />
+
           <span style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
