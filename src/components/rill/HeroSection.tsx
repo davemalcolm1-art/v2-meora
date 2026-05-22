@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useQuiz } from "./quizContext";
+import meoraLogo from "@/assets/meora-logo.png";
 
 // ─── SLIDES ───────────────────────────────────────────────────────────────────
 // Replace these URLs with your own images when available.
