@@ -1,545 +1,287 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useQuiz } from "./quizContext";
 
-const ProtocolName = ({ name }: { name: string }) => {
-  const base = name.replace(/\.ME$/, "");
-  return (
-    <>
-      <span>{base}</span>
-      <span style={{ color: "#E8571A" }}>.ME</span>
-    </>
-  );
-};
-
-type Protocol = {
-  tag: string;
-  name: string;
-  desc: string;
-  badge: string;
-  categories: string[];
-};
-
-type Tier = "primary" | "secondary";
-
-type Category = {
-  id: string;
-  label: string;
-  line: string;
-  count: number;
-  tier: Tier;
-};
-
-type CategoryWithImage = Category & { image: string; imagePosition?: string };
-
-const categories: CategoryWithImage[] = [
-  { id: "energy", label: "Energy", line: "Restore drive, clarity and sustained output.", count: 5, tier: "primary",
-    image: "https://images.unsplash.com/photo-1600618528240-fb9fc964b853?w=800&q=80" },
-  { id: "performance", label: "Performance", line: "Build strength, speed and resilience.", count: 10, tier: "primary",
-    image: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=80" },
-  { id: "balance", label: "Balance", line: "Hormonal equilibrium and whole-body calm.", count: 7, tier: "primary",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80" },
-  { id: "recovery", label: "Recovery", line: "Repair faster. Come back stronger.", count: 3, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80" },
-  { id: "longevity", label: "Longevity", line: "Age well. On your terms.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1571019614099-85f1e2d2c7ba?w=800&q=80" },
-  { id: "beauty", label: "Beauty", line: "Skin health and collagen from within.", count: 4, tier: "secondary",
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80" },
+const cards = [
+  { id: "energy", label: "ENERGY", count: 5, line: "Restore drive, clarity and sustained output.", mark: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-gold.png" },
+  { id: "performance", label: "PERFORMANCE", count: 10, line: "Build strength, speed and resilience.", mark: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-steel.png" },
+  { id: "balance", label: "BALANCE", count: 7, line: "Hormonal equilibrium and whole-body calm.", mark: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-marble.png" },
+  { id: "recovery", label: "RECOVERY", count: 3, line: "Repair faster. Come back stronger.", mark: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-water.png" },
+  { id: "longevity", label: "LONGEVITY", count: 4, line: "Age well. On your terms.", mark: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-jungle.png" },
+  { id: "beauty", label: "BEAUTY", count: 4, line: "Skin health and collagen from within.", mark: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-rosegold.png" },
 ];
 
-const allProtocols: Protocol[] = [
-  { name: "Foundation.ME", badge: "MOST PRESCRIBED", tag: "BODY COMPOSITION · SLEEP · RECOVERY", desc: "Wake up restored. Build lean mass. Recover faster. The GH axis protocol that addresses the decline most people mistake for ageing.", categories: ["energy","performance","recovery","longevity"] },
-  { name: "Opus.ME", badge: "FLAGSHIP", tag: "COLLAGEN · IMMUNITY · LONGEVITY", desc: "Four compounds. Four biological systems. The most comprehensive protocol on the Meora menu.", categories: ["performance","balance","longevity","beauty"] },
-  { name: "Radiance.ME", badge: "NEEDLE-FREE", tag: "SKIN · COLLAGEN · ANTI-AGEING", desc: "Renewed skin, improved texture, and collagen support — no injections required.", categories: ["balance","beauty"] },
-  { name: "Repair.ME", badge: "INJURY & REPAIR", tag: "INJURY · TISSUE REPAIR", desc: "For the injuries that won't fully heal. BPC-157 and TB-500 for tendons, ligaments, joints, and soft tissue.", categories: ["performance","recovery"] },
-  { name: "Performance.ME", badge: "PEAK", tag: "TRAINING · RECOVERY", desc: "Full GH axis support combined with dual-pathway tissue repair. The most comprehensive performance protocol.", categories: ["performance","recovery"] },
-  { name: "Recomposition.ME", badge: "RECOMP", tag: "FAT LOSS · LEAN MASS", desc: "Combined GH axis support and targeted fat loss. Build lean mass while reducing body fat.", categories: ["performance","balance"] },
-  { name: "Shield.ME", badge: "LONGEVITY", tag: "CELLULAR · IMMUNE · ANTI-AGEING", desc: "Three biological systems addressed in one protocol. The premium stack for patients playing a long game.", categories: ["performance","balance","longevity","beauty"] },
-  { name: "Vital.ME", badge: "ENERGY", tag: "ENERGY · DRIVE · PERFORMANCE", desc: "Restore the drive, energy, and vitality that made you feel unstoppable.", categories: ["energy","performance","balance","beauty"] },
-  { name: "Foundation Pro.ME", badge: "ADVANCED", tag: "ADVANCED GH AXIS · VISCERAL FAT", desc: "Tesamorelin — the only FDA-approved GHRH analogue, with Phase 3 RCT evidence for visceral fat reduction.", categories: ["energy","performance"] },
-  { name: "Lean.ME", badge: "GLP-1 ALTERNATIVE", tag: "FAT LOSS · PEPTIDE-BASED", desc: "AOD-9604 targets lipolysis directly without affecting blood sugar or insulin.", categories: ["balance"] },
-  { name: "Lean Pro.ME", badge: "ADVANCED FAT LOSS", tag: "TRIPLE MECHANISM", desc: "Three non-overlapping fat loss mechanisms. The most evidence-backed fat loss stack on the menu.", categories: ["performance"] },
-  { name: "GLP-1.ME", badge: "GP SUPERVISED", tag: "SEMAGLUTIDE · TIRZEPATIDE", desc: "Clinically proven GLP-1 receptor agonist therapy — Wegovy, Ozempic, or Mounjaro — prescribed and supervised by a Meora GP.", categories: ["balance"] },
-  { name: "Focus.ME", badge: "NEEDLE-FREE", tag: "FOCUS · MEMORY · STRESS", desc: "Semax and Selank — complementary neuropeptides in a once-daily nasal spray.", categories: ["energy","performance","balance","longevity"] },
-];
-
-const Arrow = ({ size = 20, color = "#E8571A" }: { size?: number; color?: string }) => (
-  <span aria-hidden="true" style={{ color, fontFamily: "'DM Sans', sans-serif", fontSize: `${size}px`, lineHeight: 1 }}>→</span>
-);
-
-const CARD_BG = "#F0EBE3";
-const SECTION_BG = "#FAF7F2";
+const tripleCards = [...cards, ...cards, ...cards];
 
 const Protocols = () => {
-  const { openWithProtocol } = useQuiz();
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const animFrame = useRef<number>();
+  const isDragging = useRef(false);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const filtered = useMemo(
-    () => (activeCategory ? allProtocols.filter((p) => p.categories.includes(activeCategory)) : []),
-    [activeCategory]
-  );
-  const activeMeta = categories.find((c) => c.id === activeCategory) ?? null;
-  const isExpanded = !!activeCategory;
-
-  // Lock body scroll when expanded
   useEffect(() => {
-    if (isExpanded) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => { document.body.style.overflow = prev; };
-    }
-  }, [isExpanded]);
+    const el = carouselRef.current;
+    if (!el) return;
+    const cardSetWidth = el.scrollWidth / 3;
+    el.scrollLeft = cardSetWidth;
 
-  // ESC to close
-  useEffect(() => {
-    if (!isExpanded) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setActiveCategory(null); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [isExpanded]);
+    const autoScroll = () => {
+      if (!isDragging.current) {
+        el.scrollLeft += 0.4;
+        if (el.scrollLeft >= cardSetWidth * 2) el.scrollLeft = cardSetWidth;
+        if (el.scrollLeft <= 0) el.scrollLeft = cardSetWidth;
+      }
+      animFrame.current = requestAnimationFrame(autoScroll);
+    };
+    animFrame.current = requestAnimationFrame(autoScroll);
+    return () => { if (animFrame.current) cancelAnimationFrame(animFrame.current); };
+  }, []);
 
-  const bgImages: Record<string, string> = {
-    energy: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
-    performance: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1600&q=80",
-    balance: "https://images.unsplash.com/photo-1532798442725-41036acc7489?w=1600&q=80",
-    recovery: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80",
-    longevity: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1600&q=80",
-    beauty: "https://images.unsplash.com/photo-1546961342-ea5f62d4e15b?w=1600&q=80",
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    isDragging.current = true;
+    isDown.current = true;
+    startX.current = e.pageX - el.offsetLeft;
+    scrollLeftRef.current = el.scrollLeft;
+    el.style.cursor = "grabbing";
   };
-  const descriptors: Record<string, string> = {
-    energy: "Restore drive, clarity and sustained output.",
-    performance: "Build strength, speed and resilience.",
-    balance: "Hormonal equilibrium and whole-body calm.",
-    recovery: "Repair faster. Come back stronger.",
-    longevity: "Age well. On your terms.",
-    beauty: "Skin health and collagen from within.",
+
+  const handleMouseLeave = () => {
+    isDown.current = false;
+    isDragging.current = false;
+    if (carouselRef.current) carouselRef.current.style.cursor = "grab";
   };
-  type Featured = { name: string; tags: string; desc: string };
-  const featuredMap: Record<string, Featured> = {
-    energy: { name: "Foundation.ME", tags: "MOST PRESCRIBED · ENERGY · RECOVERY", desc: "Wake up restored. Build lean mass. Recover faster. The GH axis protocol that addresses the decline most people mistake for ageing." },
-    performance: { name: "Vital.ME", tags: "ENERGY · DRIVE · PERFORMANCE", desc: "Restore the drive, energy and vitality that made you feel unstoppable." },
-    balance: { name: "Opus.ME", tags: "FLAGSHIP · COMPREHENSIVE · WOMEN'S HEALTH", desc: "Four compounds. Four biological systems. The most comprehensive protocol on the Meora menu." },
-    recovery: { name: "Recovery.ME", tags: "REPAIR · RECOVERY · PERFORMANCE", desc: "BPC-157 and TB-500 — the two most studied repair peptides, combined." },
-    longevity: { name: "Shield.ME", tags: "LONGEVITY · IMMUNE · CELLULAR HEALTH", desc: "Three biological systems addressed in one protocol. The premium stack for patients playing a long game." },
-    beauty: { name: "Radiance.ME", tags: "SKIN · COLLAGEN · NEEDLE-FREE OPTION", desc: "Renewed skin, improved texture and collagen support — no injections required." },
+
+  const handleMouseUp = () => {
+    isDown.current = false;
+    isDragging.current = false;
+    if (carouselRef.current) carouselRef.current.style.cursor = "grab";
   };
-  const featured = activeCategory ? featuredMap[activeCategory] : null;
-  const bgImage = activeCategory ? bgImages[activeCategory] : null;
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown.current) return;
+    e.preventDefault();
+    const el = carouselRef.current;
+    if (!el) return;
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    el.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const noiseBg = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")`;
 
   return (
     <section
       id="protocols"
       style={{
-        background: isExpanded
-          ? `linear-gradient(135deg, rgba(26,43,53,0.93) 0%, rgba(26,43,53,0.78) 100%), url(${bgImage})`
-          : SECTION_BG,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        transition: "background 350ms ease",
-        position: "relative",
-        minHeight: isExpanded ? "100vh" : undefined,
+        background: "radial-gradient(ellipse at 5% 5%, rgba(255,245,225,0.6) 0%, transparent 40%), radial-gradient(ellipse at 15% 20%, #E8D8C0 0%, #D4BC9A 30%, #BEA07A 60%, #A8886A 100%)",
+        padding: "80px 0",
+        margin: "0 40px",
+        borderRadius: 24,
         overflow: "hidden",
-        borderRadius: isExpanded ? 0 : 24,
-        margin: isExpanded ? 0 : "0 40px",
+        position: "relative",
       }}
-      className="selection:bg-[#E8571A] selection:text-white"
     >
-      <div style={{ maxWidth: isExpanded ? "none" : "1200px", margin: "0 auto", padding: isExpanded ? "0" : "80px 60px" }}>
-        {!isExpanded && (
-          <div style={{ marginBottom: "56px" }}>
-            <span style={{
-              display: "block",
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: "11px",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#E8571A",
-              marginBottom: "20px",
-            }}>
-              Our Protocols
-            </span>
-            <h2 style={{
-              fontFamily: "'Fraunces', serif",
-              fontWeight: 900,
-              fontSize: "clamp(44px, 5.5vw, 72px)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              color: "#111827",
-              margin: "0 0 20px",
-            }}>
-              Find your protocol.<br />
-              <span style={{ fontStyle: "italic", color: "#E8571A" }}>Goal-specific.</span>
-            </h2>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: 1.6,
-              color: "#6B6560",
-              maxWidth: "480px",
-              margin: 0,
-            }}>
-              Choose what matters to you. Your doctor does the rest.
-            </p>
-          </div>
-        )}
+      {/* HEADER */}
+      <div style={{ padding: "0 60px 48px" }}>
+        <span style={{
+          display: "block",
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 700,
+          fontSize: "10px",
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+          color: "#E8571A",
+          marginBottom: "16px",
+        }}>
+          OUR PROTOCOLS
+        </span>
+        <h2 style={{
+          fontFamily: "'Fraunces', serif",
+          fontWeight: 700,
+          fontSize: "clamp(32px, 4vw, 48px)",
+          lineHeight: 1.1,
+          color: "#2A1F14",
+          margin: "0 0 16px",
+        }}>
+          Find your protocol.<br />
+          <span style={{ fontStyle: "italic", color: "#E8571A" }}>Goal-specific.</span>
+        </h2>
+        <p style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "15px",
+          color: "rgba(42,31,20,0.6)",
+          margin: 0,
+        }}>
+          Choose what matters to you. Your doctor does the rest.
+        </p>
+      </div>
 
-
-        {!isExpanded && (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }} className="protocols-grid">
-            {categories.map((c, i) => {
-              const cardGradients = [
-                "linear-gradient(160deg, #C8DCF0 0%, #A8C4E4 100%)",
-                "linear-gradient(160deg, #BDD4EC 0%, #9CBCE0 100%)",
-                "linear-gradient(160deg, #B2CCE8 0%, #90B4DC 100%)",
-                "linear-gradient(160deg, #A8C4E4 0%, #86ACD8 100%)",
-                "linear-gradient(160deg, #9EBCE0 0%, #7CA4D4 100%)",
-                "linear-gradient(160deg, #94B4DC 0%, #729CD0 100%)",
-              ];
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => setActiveCategory(c.id)}
-                  className={i === 0 ? "energy-card" : ""}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    if (i === 0) {
-                      el.style.transform = "translateY(-4px)";
-                      el.style.boxShadow = "0 12px 40px rgba(26,43,53,0.15)";
-                      const mark = el.querySelector(".energy-mark") as HTMLElement;
-                      if (mark) {
-                        mark.style.transform = "translate(-50%, -52%) scale(1.05)";
-                        mark.style.opacity = "0.5";
-                        mark.style.filter = "drop-shadow(0px 8px 16px rgba(0,0,0,0.2))";
-                      }
-                    } else {
-                      el.style.transform = "translateY(-6px)";
-                      el.style.boxShadow = "0 16px 40px rgba(26,43,53,0.15)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    if (i === 0) {
-                      el.style.transform = "translateY(0)";
-                      el.style.boxShadow = "none";
-                      const mark = el.querySelector(".energy-mark") as HTMLElement;
-                      if (mark) {
-                        mark.style.transform = "translate(-50%, -50%)";
-                        mark.style.opacity = "0.35";
-                        mark.style.filter = "none";
-                      }
-                    } else {
-                      el.style.transform = "translateY(0)";
-                      el.style.boxShadow = "none";
-                    }
-                  }}
-                  style={{
-                    background: cardGradients[i],
-                    borderRadius: 14,
-                    padding: i === 0 ? "20px 20px 20px" : "24px 20px",
-                    minHeight: i === 0 ? 320 : 200,
-                    height: i === 0 ? undefined : 200,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: i === 0 ? "flex-start" : "space-between",
-                    cursor: "pointer",
-                    border: "none",
-                    textAlign: "left",
-                    transition: "all 0.3s ease, box-shadow 0.3s ease",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {i === 0 && (
-                    <img
-                      className="energy-mark"
-                      src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-gold.png"
-                      style={{
-                        position: 'absolute',
-                        top: '35%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '80%',
-                        objectFit: 'contain',
-                        opacity: 0.35,
-                        pointerEvents: 'none',
-                        zIndex: 0,
-                        transition: 'transform 0.6s ease, opacity 0.3s ease, filter 0.3s ease',
-                      }}
-                    />
-                  )}
-                  {i === 0 ? (
-                    <>
-                      <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%",
-                        position: "relative",
-                        zIndex: 1,
-                      }}>
-                        <div style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 700,
-                          fontSize: 10,
-                          letterSpacing: "0.14em",
-                          color: "rgba(26,43,53,0.55)",
-                          textTransform: "uppercase",
-                        }}>
-                          {c.label}
-                        </div>
-                        <span style={{
-                          display: "inline-block",
-                          background: "rgba(26,43,53,0.1)",
-                          borderRadius: 999,
-                          padding: "3px 10px",
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 700,
-                          fontSize: 9,
-                          color: "rgba(26,43,53,0.6)",
-                        }}>
-                          {c.count} Protocols
-                        </span>
-                      </div>
-                      <div style={{
-                        marginTop: "auto",
-                        paddingBottom: 20,
-                        position: "relative",
-                        zIndex: 1,
-                      }}>
-                        <h3 style={{
-                          fontFamily: "'Fraunces', serif",
-                          fontWeight: 600,
-                          fontSize: 18,
-                          color: "#1A2B35",
-                          lineHeight: 1.2,
-                          margin: 0,
-                        }}>
-                          {c.line}
-                        </h3>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontWeight: 700,
-                        fontSize: 10,
-                        letterSpacing: "0.14em",
-                        color: "rgba(26,43,53,0.55)",
-                        textTransform: "uppercase",
-                        position: "relative",
-                        zIndex: 1,
-                      }}>
-                        {c.label}
-                      </div>
-                      <div style={{ position: "relative", zIndex: 1 }}>
-                        <h3 style={{
-                          fontFamily: "'Fraunces', serif",
-                          fontWeight: 600,
-                          fontSize: 18,
-                          color: "#1A2B35",
-                          lineHeight: 1.2,
-                          margin: "0 0 8px",
-                        }}>
-                          {c.line}
-                        </h3>
-                        <span style={{
-                          display: "inline-block",
-                          background: "rgba(26,43,53,0.1)",
-                          borderRadius: 999,
-                          padding: "3px 10px",
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 700,
-                          fontSize: 9,
-                          color: "rgba(26,43,53,0.6)",
-                        }}>
-                          {c.count} Protocols
-                        </span>
-                      </div>
-                    </>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        )}
-
-        {/* EXPANDED VIEW */}
-        {isExpanded && activeMeta && featured && (
-          <div style={{ position: "relative", minHeight: "100vh", animation: "fade-in 500ms ease-out" }}>
-            <button
-              onClick={() => setActiveCategory(null)}
-              style={{
-                position: "absolute", top: "36px", left: "80px",
-                fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
-                color: "rgba(255,255,255,0.5)", fontSize: "14px",
-                background: "transparent", border: "none", cursor: "pointer", padding: 0,
-                zIndex: 2,
-              }}
-              className="hover:text-white transition-colors protocols-back-link"
-            >
-              ← All categories
-            </button>
-            <button
-              onClick={() => setActiveCategory(null)}
-              aria-label="Close"
-              style={{
-                position: "absolute", top: "32px", right: "32px",
-                fontFamily: "'DM Sans', sans-serif", color: "#FFFFFF",
-                fontSize: "28px", background: "transparent", border: "none",
-                cursor: "pointer", lineHeight: 1, padding: "4px 8px", zIndex: 2,
-              }}
-            >
-              ×
-            </button>
-
-            <div className="protocols-expanded-grid" style={{
-              display: "flex", alignItems: "center", gap: "80px",
-              padding: "100px 80px", minHeight: "100vh",
-            }}>
-              <div className="protocols-expanded-left" style={{
-                flex: "0 0 45%",
-                animation: "exp-slide-left 600ms cubic-bezier(0.16,1,0.3,1) both",
-              }}>
+      {/* CAROUSEL OUTER */}
+      <div style={{
+        overflow: "hidden",
+        maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+      }}>
+        {/* CAROUSEL INNER */}
+        <div
+          ref={carouselRef}
+          className="carousel-track"
+          style={{
+            display: "flex",
+            gap: "16px",
+            padding: "20px 60px 40px",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none" as any,
+            cursor: "grab",
+            userSelect: "none",
+          }}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
+          {tripleCards.map((card, index) => {
+            const isHovered = hoveredCard === card.id + index;
+            return (
+              <button
+                key={card.id + index}
+                onMouseEnter={() => setHoveredCard(card.id + index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  minWidth: 280,
+                  height: 380,
+                  borderRadius: 20,
+                  position: "relative",
+                  overflow: "visible",
+                  flexShrink: 0,
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease",
+                  background: isHovered
+                    ? `${noiseBg}, linear-gradient(145deg, #F5F0E8 0%, #EDE8DE 100%)`
+                    : `${noiseBg}, linear-gradient(145deg, #E8DDD0 0%, #D8CCBC 100%)`,
+                  transform: isHovered ? "translateY(-10px)" : "translateY(0)",
+                  boxShadow: isHovered ? "0 24px 60px rgba(0,0,0,0.2)" : "none",
+                }}
+              >
+                {/* TOP ROW */}
                 <div style={{
-                  fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
-                  textTransform: "uppercase", color: "#E8571A",
-                  fontSize: "11px", letterSpacing: "0.12em", marginBottom: "16px",
+                  position: "absolute",
+                  top: 20,
+                  left: 20,
+                  right: 20,
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}>
-                  Category
+                  <span style={{
+                    background: "rgba(26,43,53,0.1)",
+                    borderRadius: 999,
+                    padding: "4px 12px",
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 9,
+                    letterSpacing: "0.12em",
+                    color: "rgba(26,43,53,0.6)",
+                  }}>
+                    {card.label}
+                  </span>
+                  <span style={{
+                    background: "rgba(26,43,53,0.1)",
+                    borderRadius: 999,
+                    padding: "4px 12px",
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 9,
+                    letterSpacing: "0.12em",
+                    color: "rgba(26,43,53,0.6)",
+                  }}>
+                    {card.count} PROTOCOLS
+                  </span>
                 </div>
-                <h2 style={{
-                  fontFamily: "'Fraunces', serif", fontWeight: 900, color: "#FFFFFF",
-                  fontSize: "clamp(56px, 7vw, 88px)", lineHeight: 1,
-                  margin: "0 0 20px",
-                }} className="protocols-expanded-title">{activeMeta.label}</h2>
-                <p style={{
-                  fontFamily: "'DM Sans', sans-serif", fontWeight: 400,
-                  color: "rgba(255,255,255,0.65)", fontSize: "18px",
-                  lineHeight: 1.6, maxWidth: "400px", margin: "0 0 40px",
-                }}>
-                  {descriptors[activeCategory!]}
-                </p>
-                <button
-                  onClick={() => openWithProtocol(featured.name)}
-                  className="protocols-expanded-cta"
-                  style={{
-                    background: "#E8571A", color: "#FFFFFF",
-                    fontFamily: "'DM Sans', sans-serif", fontWeight: 800,
-                    fontSize: "13px", letterSpacing: "0.06em",
-                    borderRadius: "999px", padding: "16px 32px",
-                    border: "none", cursor: "pointer",
-                    display: "inline-block", marginBottom: "16px",
-                  }}
-                >
-                  START YOUR ASSESSMENT →
-                </button>
-                <a href="/protocols" style={{
-                  display: "block",
-                  fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
-                  color: "rgba(255,255,255,0.4)", fontSize: "14px",
-                  textDecoration: "none",
-                }} className="hover:text-white transition-colors">
-                  Explore all protocols →
-                </a>
-              </div>
 
-              <div className="protocols-expanded-right" style={{
-                flex: "0 0 50%",
-                animation: "exp-slide-right 600ms cubic-bezier(0.16,1,0.3,1) 120ms both",
-              }}>
-                <button
-                  onClick={() => openWithProtocol(featured.name)}
-                  className="protocols-featured-card"
+                {/* MARK IMAGE */}
+                <img
+                  src={card.mark}
+                  alt=""
                   style={{
-                    width: "100%", textAlign: "left",
-                    background: "rgba(255,255,255,0.07)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: "20px", padding: "40px",
-                    backdropFilter: "blur(8px)",
-                    WebkitBackdropFilter: "blur(8px)",
-                    cursor: "pointer",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -60%) rotate(-6deg)",
+                    width: "55%",
+                    height: "auto",
+                    objectFit: "contain",
+                    zIndex: 1,
+                    pointerEvents: "none",
+                    transition: "transform 0.5s ease",
+                    animation: isHovered ? "smoothFloat 3s ease-in-out infinite" : "none",
                   }}
-                >
-                  <div style={{
-                    fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
-                    textTransform: "uppercase", color: "#E8571A",
-                    fontSize: "10px", letterSpacing: "0.1em", marginBottom: "20px",
-                  }}>
-                    {featured.tags}
-                  </div>
-                  <h3 style={{
-                    fontFamily: "'Fraunces', serif", fontWeight: 700,
-                    fontStyle: "italic", color: "#FFFFFF",
-                    fontSize: "32px", lineHeight: 1.1, margin: 0,
-                  }}>
-                    <ProtocolName name={featured.name} />
-                  </h3>
+                />
+
+                {/* CAST SHADOW */}
+                <div style={{
+                  position: "absolute",
+                  bottom: "34%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "35%",
+                  height: 10,
+                  background: "radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)",
+                  borderRadius: "50%",
+                  zIndex: 0,
+                  pointerEvents: "none",
+                  transition: "opacity 0.4s ease",
+                  opacity: isHovered ? 0.08 : 1,
+                }} />
+
+                {/* CARD BOTTOM */}
+                <div style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: "20px 24px",
+                }}>
                   <p style={{
-                    fontFamily: "'DM Sans', sans-serif", fontWeight: 400,
-                    color: "rgba(255,255,255,0.7)", fontSize: "15px",
-                    lineHeight: 1.75, marginTop: "16px", marginBottom: 0,
+                    opacity: isHovered ? 1 : 0,
+                    height: isHovered ? "auto" : 0,
+                    overflow: "hidden",
+                    paddingBottom: isHovered ? 8 : 0,
+                    transition: "opacity 0.3s ease 0.1s",
+                    fontFamily: "'Fraunces', serif",
+                    fontWeight: 600,
+                    fontSize: 16,
+                    color: "#1A2B35",
+                    lineHeight: 1.3,
+                    margin: 0,
                   }}>
-                    {featured.desc}
+                    {card.line}
                   </p>
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "28px 0" }} />
-                  <p style={{
-                    fontFamily: "'DM Sans', sans-serif", fontWeight: 400,
-                    fontStyle: "italic", color: "rgba(255,255,255,0.35)",
-                    fontSize: "13px", margin: 0,
-                  }}>
-                    Your doctor will confirm the right protocol after your consultation.
-                  </p>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <style>{`
-        @keyframes slide-in-right {
-          from { opacity: 0; transform: translateX(40px); }
-          to { opacity: 1; transform: translateX(0); }
+        @keyframes smoothFloat {
+          0% { transform: translate(-50%, -60%) rotate(-6deg); }
+          50% { transform: translate(-50%, -67%) rotate(-6deg); }
+          100% { transform: translate(-50%, -60%) rotate(-6deg); }
         }
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
+        @keyframes float {
+          0% { transform: translate(-50%, -60%) rotate(-6deg); }
+          50% { transform: translate(-50%, -67%) rotate(-6deg); }
+          100% { transform: translate(-50%, -60%) rotate(-6deg); }
         }
-        @keyframes exp-slide-left {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes exp-slide-right {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        @media (max-width: 768px) {
-          .protocols-expanded-grid {
-            flex-direction: column !important;
-            align-items: stretch !important;
-            padding: 80px 24px 40px !important;
-            gap: 32px !important;
-          }
-          .protocols-expanded-left, .protocols-expanded-right {
-            flex: 1 1 auto !important;
-            width: 100%;
-          }
-          .protocols-expanded-title {
-            font-size: 52px !important;
-          }
-          .protocols-expanded-cta {
-            width: 100%;
-          }
-          .protocols-back-link {
-            left: 24px !important;
-          }
-          .protocols-featured-card {
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-          }
-        }
+        .carousel-track::-webkit-scrollbar { display: none; }
       `}</style>
     </section>
   );
