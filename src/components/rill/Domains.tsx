@@ -2,12 +2,12 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useStaggerAnimation } from "@/hooks/useStaggerAnimation";
 
 const domains = [
-  { num: "01", name: "ENERGY", desc: "Designed for sustained drive, clarity and output." },
-  { num: "02", name: "PERFORMANCE", desc: "Designed for strength, body composition and endurance." },
-  { num: "03", name: "BALANCE", desc: "Designed for hormonal equilibrium and whole-body calm." },
-  { num: "04", name: "RECOVERY", desc: "Designed to support repair, resilience and tissue health." },
-  { num: "05", name: "LONGEVITY", desc: "Designed for healthy ageing and cellular optimisation." },
-  { num: "06", name: "BEAUTY", desc: "Designed for skin health, collagen and radiance from within." },
+  { num: "01", name: "ENERGY", desc: "Designed for sustained drive, clarity and output.", gradient: "linear-gradient(145deg, #2C3E2D 0%, #1A2B1A 100%)" },
+  { num: "02", name: "PERFORMANCE", desc: "Designed for strength, body composition and endurance.", gradient: "linear-gradient(145deg, #2C2535 0%, #1A1525 100%)" },
+  { num: "03", name: "BALANCE", desc: "Designed for hormonal equilibrium and whole-body calm.", gradient: "linear-gradient(145deg, #1F3040 0%, #0F1E2A 100%)" },
+  { num: "04", name: "RECOVERY", desc: "Designed to support repair, resilience and tissue health.", gradient: "linear-gradient(145deg, #352520 0%, #251510 100%)" },
+  { num: "05", name: "LONGEVITY", desc: "Designed for healthy ageing and cellular optimisation.", gradient: "linear-gradient(145deg, #1A2B35 0%, #0F1A20 100%)" },
+  { num: "06", name: "BEAUTY", desc: "Designed for skin health, collagen and radiance from within.", gradient: "linear-gradient(145deg, #352535 0%, #200F20 100%)" },
 ];
 
 const noiseSvg = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")`;
