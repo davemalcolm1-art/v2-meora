@@ -29,18 +29,12 @@ const Index = () => {
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
       <HeroSection />
-      <Fade from="rgba(247,244,239,0)" to={CREAM} />
       <Positioning />
       <Domains />
-      <Fade from={CREAM} to={DARK} />
-      <div style={{ background: DARK }}>
-        <HowItWorks />
-      </div>
-      <Fade from={DARK} to={CREAM} />
+      <HowItWorks />
       <ScienceCards />
-        {/* <Stats /> */}
-        <Journal />
-        <CtaBanner />
+      <Journal />
+      <CtaBanner />
       <FAQ />
       <MaskSection />
       <Footer />
