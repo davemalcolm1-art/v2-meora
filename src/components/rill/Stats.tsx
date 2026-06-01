@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 const stats = [
   { num: "90%", label: "OF PREVENTABLE DEATHS LINKED TO CHRONIC LIFESTYLE CONDITIONS", source: "(Australian Prevention Partnership Centre)" },
   { num: "87%", label: "OF LOST HEALTHY YEARS DRIVEN BY PREVENTABLE CHRONIC DISEASE", source: "(AIHW Australian Burden of Disease Study)" },
