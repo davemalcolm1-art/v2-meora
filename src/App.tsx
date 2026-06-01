@@ -18,6 +18,31 @@ const App = () => {
     return () => cancelAnimationFrame(id);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+    const scan = () => {
+      document
+        .querySelectorAll(".scroll-animate:not(.animate-in), .scroll-fade:not(.animate-in), .scroll-scale:not(.animate-in)")
+        .forEach((el) => observer.observe(el));
+    };
+    scan();
+    const interval = setInterval(scan, 1000);
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

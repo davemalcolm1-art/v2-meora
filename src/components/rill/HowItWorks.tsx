@@ -126,10 +126,10 @@ export default function HowItWorks() {
 
       <div style={{ padding: '0 60px 48px' }}>
         <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E8571A', marginBottom: 12 }}>HOW IT WORKS</p>
-        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 700, color: '#fff', margin: '0 0 4px', lineHeight: 1.1 }}>
-          Simple steps.<br /><em style={{ color: '#E8571A' }}>Serious medicine.</em>
+        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 700, color: '#FFFFFF', margin: '0 0 4px', lineHeight: 1.1 }}>
+          Simple steps.<br /><em style={{ color: '#FF5003', fontStyle: 'italic' }}>Serious medicine.</em>
         </h2>
-        <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', margin: 0 }}>From your first consultation to compounds at your door.</p>
+        <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', margin: 0 }}>From your first consultation to compounds at your door.</p>
       </div>
 
       <div ref={stageRef} style={{ position: 'relative', height: 150, margin: '0 60px 36px' }}>

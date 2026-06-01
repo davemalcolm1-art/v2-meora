@@ -38,7 +38,7 @@ const Index = () => {
       </div>
       <Fade from={DARK} to={CREAM} />
       <ScienceCards />
-        <Stats />
+        {/* <Stats /> */}
         <Journal />
         <CtaBanner />
       <FAQ />
