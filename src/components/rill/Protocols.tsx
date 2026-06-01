@@ -78,10 +78,9 @@ const Protocols = () => {
       id="protocols"
       style={{
         background: "radial-gradient(ellipse at 5% 5%, rgba(255,245,225,0.6) 0%, transparent 40%), radial-gradient(ellipse at 15% 20%, #E8D8C0 0%, #D4BC9A 30%, #BEA07A 60%, #A8886A 100%)",
-        padding: "80px 0",
-        margin: "0 40px",
+        padding: "120px 0",
+        margin: "60px 40px",
         borderRadius: 24,
-        overflow: "hidden",
         position: "relative",
       }}
     >
