@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useScrollAnimation from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const GHOST_URL = "https://longevity-for-me.ghost.io";
 const GHOST_KEY = "217fd7d51d284f842cc9582c56";
