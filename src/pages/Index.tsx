@@ -6,6 +6,7 @@ import Domains from "@/components/rill/Domains";
 import HowItWorks from "@/components/rill/HowItWorks";
 import ScienceCards from "@/components/rill/ScienceCards";
 import Stats from "@/components/rill/Stats";
+import Journal from "@/components/rill/Journal";
 import CtaBanner from "@/components/rill/CtaBanner";
 import FAQ from "@/components/rill/FAQ";
 import Footer from "@/components/rill/Footer";
@@ -37,8 +38,9 @@ const Index = () => {
       </div>
       <Fade from={DARK} to={CREAM} />
       <ScienceCards />
-      <Stats />
-      <CtaBanner />
+        <Stats />
+        <Journal />
+        <CtaBanner />
       <FAQ />
       <MaskSection />
       <Footer />
