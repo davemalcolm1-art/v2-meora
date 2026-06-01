@@ -2,7 +2,7 @@ const items = [
   {
     label: "AHPRA REGISTERED",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2B35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" />
         <path d="M9 12l2 2 4-4" />
       </svg>
@@ -11,7 +11,7 @@ const items = [
   {
     label: "DOCTOR PRESCRIBED",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2B35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M6 3h9l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
         <path d="M8 8h6M8 12h8M8 16h5" />
       </svg>
@@ -20,7 +20,7 @@ const items = [
   {
     label: "REGISTERED COMPOUNDING PHARMACY",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2B35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 3h6v4l4 10a3 3 0 0 1-3 4H8a3 3 0 0 1-3-4l4-10V3z" />
         <path d="M9 7h6M7 15h10" />
       </svg>
@@ -29,7 +29,7 @@ const items = [
   {
     label: "AUSTRALIAN MADE",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2B35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="9" />
         <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
       </svg>
@@ -41,12 +41,8 @@ const CredentialStrip = () => (
   <section
     className="credential-strip"
     style={{
-      background: "#FAF7F2",
-      padding: "28px 80px",
-      boxShadow: "0 1px 0 rgba(26,43,53,0.08)",
-      margin: "0 40px",
-      borderRadius: 24,
-      overflow: "hidden",
+      background: "#F7F4EF",
+      padding: "40px 80px",
     }}
   >
     <div
@@ -55,7 +51,7 @@ const CredentialStrip = () => (
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         gap: 24,
-        maxWidth: 1320,
+        maxWidth: 1200,
         margin: "0 auto",
       }}
     >
@@ -69,7 +65,7 @@ const CredentialStrip = () => (
             gap: 12,
           }}
         >
-          <div style={{ flexShrink: 0, display: "flex" }}>{it.icon}</div>
+          <div style={{ flexShrink: 0, display: "flex", opacity: 0.7 }}>{it.icon}</div>
           <div
             style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -77,7 +73,7 @@ const CredentialStrip = () => (
               fontSize: 11,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "#1A2B35",
+              color: "rgba(26,43,53,0.7)",
             }}
           >
             {it.label}
@@ -87,7 +83,7 @@ const CredentialStrip = () => (
     </div>
     <style>{`
       @media (max-width: 768px) {
-        .credential-strip { padding: 24px !important; }
+        .credential-strip { padding: 32px 24px !important; }
         .credential-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
       }
     `}</style>
