@@ -1,21 +1,22 @@
 import { Fragment } from "react";
 
 const stats = [
-  { num: "90%", label: "OF PREVENTABLE DEATHS LINKED TO CHRONIC LIFESTYLE CONDITIONS", source: "(Australian Prevention Partnership Centre)" },
-  { num: "87%", label: "OF LOST HEALTHY YEARS DRIVEN BY PREVENTABLE CHRONIC DISEASE", source: "(AIHW Australian Burden of Disease Study)" },
-  { num: "50%", label: "OF AUSTRALIANS HAVE AT LEAST ONE CHRONIC HEALTH CONDITION", source: "(Australian Bureau of Statistics)" },
+  { num: "90%", label: "OF AUSTRALIANS WANT TO LIVE HEALTHIER, NOT JUST LONGER", source: "(Australian Institute of Health and Welfare)" },
+  { num: "87%", label: "OF CHRONIC DISEASE BURDEN IS DRIVEN BY PREVENTABLE LIFESTYLE FACTORS", source: "(AIHW Burden of Disease Study)" },
+  { num: "1 IN 2", label: "AUSTRALIANS WILL DEVELOP A CHRONIC CONDITION BY AGE 45", source: "(Australian Bureau of Statistics)" },
 ];
 
 const Stats = () => (
   <section style={{ background: "#F7F4EF", padding: "120px 0" }}>
     <div className="stats-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 80px" }}>
       <div style={{ marginBottom: 64, maxWidth: 720 }}>
-        <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>WHY IT MATTERS</div>
+        <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>THE OPPORTUNITY</div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#1A2B35", fontSize: "clamp(36px,4vw,52px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0 }}>
-          Australians are living longer. <em style={{ fontStyle: "italic", color: "#FF5003" }}>Not always better.</em>
+          More years ahead.<br />
+          <em style={{ fontStyle: "italic", color: "#FF5003" }}>Make them count.</em>
         </h2>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, lineHeight: 1.75, color: "rgba(26,43,53,0.6)", marginTop: 16 }}>
-          Preventable chronic conditions are reshaping Australian health. Personalised, proactive care is the response.
+          The science of longevity has never been more advanced. The question is whether you're paying attention to it.
         </p>
       </div>
       <div className="stats-row" style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 48, alignItems: "start" }}>
