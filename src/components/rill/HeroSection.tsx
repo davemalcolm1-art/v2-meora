@@ -24,8 +24,8 @@ const SLIDES = [
 ];
 
 // ─── ROTATING WORDS ───────────────────────────────────────────────────────────
-const WORDS = ["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty."];
-const INTERVALS = [2500, 2500, 2500, 2500, 2500];
+const WORDS = ["For energy.", "For performance.", "For balance.", "For recovery.", "For longevity.", "For beauty."];
+const INTERVALS = [3000, 3000, 3000, 3000, 3000, 3000];
 
 // ─── NAV LINKS ────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
