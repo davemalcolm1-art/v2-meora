@@ -3520,3 +3520,11 @@ nav.scrolled {
 @media (max-width: 768px) {
   .container { padding: 0 24px; }
 }
+
+/* ============================================
+   SECTION EXIT BLUR
+   ============================================ */
+.section-exit-blur {
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  will-change: filter, opacity;
+}

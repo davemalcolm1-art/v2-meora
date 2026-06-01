@@ -43,6 +43,20 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      document.querySelectorAll<HTMLElement>(".section-exit-blur").forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const exitProgress = Math.max(0, Math.min(1, -rect.top / (rect.height * 0.3)));
+        section.style.filter = `blur(${exitProgress * 4}px)`;
+        section.style.opacity = `${1 - exitProgress * 0.4}`;
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
