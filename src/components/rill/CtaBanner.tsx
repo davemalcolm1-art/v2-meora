@@ -5,10 +5,12 @@ const NOISE = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http
 const CtaBanner = () => {
   const { open } = useQuiz();
   return (
-    <section style={{
+    <section className="section-exit-blur" style={{
       position: "relative",
       overflow: "hidden",
-      width: "100%",
+      width: "calc(100% - 96px)",
+      margin: "0 48px",
+      borderRadius: 32,
       background: "linear-gradient(135deg, #1A2B35 0%, #243B47 50%, #1A2B35 100%)",
       padding: "100px 0",
     }}>
@@ -25,9 +27,9 @@ const CtaBanner = () => {
         justifyContent: "space-between",
         gap: 48,
       }}>
-        <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#FFFFFF", fontSize: "clamp(28px,3vw,42px)", lineHeight: 1.1, margin: 0, letterSpacing: "-0.01em" }}>
+        <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#FFFFFF", fontSize: "clamp(32px,4vw,52px)", lineHeight: 1.1, margin: 0, letterSpacing: "-0.01em" }}>
           Personalised longevity.<br />
-          <em style={{ fontStyle: "italic", color: "#FF5003" }}>It starts with you.</em>
+          <span style={{ color: "#FFFFFF" }}>It starts with you.</span>
         </h2>
         <button onClick={open} className="cta-btn" style={{
           background: "#FF5003", color: "#fff", border: "none", borderRadius: 999,

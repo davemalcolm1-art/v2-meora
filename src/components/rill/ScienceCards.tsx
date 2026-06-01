@@ -32,7 +32,7 @@ const ScienceCards = () => {
   const cardsRef = useStaggerAnimation<HTMLDivElement>(cards.length, 100);
 
   return (
-    <section ref={sectionRef} className="scroll-animate" style={{ position: "relative", width: "100%", background: `url(${BG}) center/cover no-repeat`, padding: "140px 0", overflow: "hidden" }}>
+    <section ref={sectionRef} className="scroll-animate section-exit-blur" style={{ position: "relative", width: "calc(100% - 96px)", margin: "0 48px", borderRadius: 32, background: `url(${BG}) center/cover no-repeat`, padding: "140px 0", overflow: "hidden", WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)' }}>
       <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(26,43,53,0.68) 0%, rgba(26,43,53,0.52) 100%)", zIndex: 0 }} />
       <div className="sci-wrap" style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
         <div style={{ marginBottom: 56 }}>
