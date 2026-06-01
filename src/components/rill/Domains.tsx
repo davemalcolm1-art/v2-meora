@@ -17,8 +17,8 @@ const Domains = () => {
   const gridRef = useStaggerAnimation<HTMLDivElement>(domains.length, 80);
 
   return (
-    <section ref={sectionRef} className="scroll-animate" style={{ background: "#F7F4EF", padding: "120px 0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 80px" }} className="domains-wrap">
+    <section ref={sectionRef} className="scroll-animate" style={{ width: "100%", background: "#F7F4EF", padding: "120px 0" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }} className="domains-wrap">
         <div style={{ marginBottom: 56 }}>
           <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>
             YOUR GOALS

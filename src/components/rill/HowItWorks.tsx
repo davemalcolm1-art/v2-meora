@@ -118,7 +118,7 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section style={{ background: '#1A2B35', padding: '80px 0', overflow: 'hidden', position: 'relative' }}>
+    <section style={{ width: '100%', background: '#1A2B35', padding: '140px 0', overflow: 'hidden', position: 'relative', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)' }}>
       <style>{`
         @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         .hiw-fade { animation: fadeUp 0.3s ease both; }
