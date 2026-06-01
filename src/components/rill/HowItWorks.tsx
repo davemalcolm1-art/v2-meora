@@ -118,18 +118,18 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section style={{ width: '100%', background: '#1A2B35', padding: '140px 0', overflow: 'hidden', position: 'relative', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)' }}>
+    <section className="section-exit-blur" style={{ width: '100%', background: '#1A2B35', padding: '140px 0', overflow: 'hidden', position: 'relative', borderRadius: 32, WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)' }}>
       <style>{`
         @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         .hiw-fade { animation: fadeUp 0.3s ease both; }
       `}</style>
 
       <div style={{ padding: '0 60px 48px' }}>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E8571A', marginBottom: 12 }}>HOW IT WORKS</p>
-        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 700, color: '#FFFFFF', margin: '0 0 4px', lineHeight: 1.1 }}>
-          Simple steps.<br /><em style={{ color: '#FF5003', fontStyle: 'italic' }}>Serious medicine.</em>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 12 }}>HOW IT WORKS</p>
+        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(36px,4vw,52px)', fontWeight: 700, color: '#FFFFFF', margin: '0 0 4px', lineHeight: 1.1 }}>
+          Simple steps.<br /><em style={{ color: '#FFFFFF', fontStyle: 'italic' }}>Serious medicine.</em>
         </h2>
-        <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', margin: 0 }}>From your first consultation to compounds at your door.</p>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 16, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.75 }}>From your first consultation to compounds at your door.</p>
       </div>
 
       <div ref={stageRef} style={{ position: 'relative', height: 150, margin: '0 60px 36px' }}>
