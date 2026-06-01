@@ -20,14 +20,14 @@ const Stats = () => (
       </div>
       <div className="stats-row" style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 48, alignItems: "start" }}>
         {stats.map((s, i) => (
-          <>
-            {i > 0 && <div key={`d${i}`} style={{ width: 1, height: 120, background: "rgba(26,43,53,0.1)", justifySelf: "center" }} />}
-            <div key={i} style={{ textAlign: "center" }}>
+          <Fragment key={i}>
+            {i > 0 && <div style={{ width: 1, height: 120, background: "rgba(26,43,53,0.1)", justifySelf: "center" }} />}
+            <div style={{ textAlign: "center" }}>
               <div style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: "clamp(48px,6vw,72px)", color: "#1A2B35", lineHeight: 1 }}>{s.num}</div>
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: "0.1em", color: "rgba(26,43,53,0.5)", textTransform: "uppercase", marginTop: 16, maxWidth: 220, marginLeft: "auto", marginRight: "auto", lineHeight: 1.5 }}>{s.label}</div>
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "rgba(26,43,53,0.3)", marginTop: 8 }}>{s.source}</div>
             </div>
-          </>
+          </Fragment>
         ))}
       </div>
     </div>
