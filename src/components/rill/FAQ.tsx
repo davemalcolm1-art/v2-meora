@@ -46,7 +46,7 @@ const FAQ = () => {
           }}
         >
           Common questions.<br />
-          <em style={{ fontStyle: "italic", color: "#FF5003" }}>Clear answers.</em>
+          <span style={{ color: "#1A2B35" }}>Clear answers.</span>
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {faqs.map((f, i) => {

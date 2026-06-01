@@ -246,7 +246,7 @@ const Journal = () => {
             >
               Longevity research.
               <br />
-              <span style={{ fontStyle: "italic", color: "#FF5003" }}>
+              <span style={{ color: "#1A2B35" }}>
                 &amp; resources.
               </span>
             </h2>

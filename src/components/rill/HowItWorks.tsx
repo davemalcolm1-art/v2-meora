@@ -118,18 +118,18 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section style={{ width: '100%', background: '#1A2B35', padding: '140px 0', overflow: 'hidden', position: 'relative', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)' }}>
+    <section className="section-exit-blur" style={{ width: '100%', background: '#1A2B35', padding: '140px 0', overflow: 'hidden', position: 'relative', borderRadius: 32, WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)' }}>
       <style>{`
         @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         .hiw-fade { animation: fadeUp 0.3s ease both; }
       `}</style>
 
       <div style={{ padding: '0 60px 48px' }}>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E8571A', marginBottom: 12 }}>HOW IT WORKS</p>
-        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 700, color: '#FFFFFF', margin: '0 0 4px', lineHeight: 1.1 }}>
-          Simple steps.<br /><em style={{ color: '#FF5003', fontStyle: 'italic' }}>Serious medicine.</em>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 12 }}>HOW IT WORKS</p>
+        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(36px,4vw,52px)', fontWeight: 700, color: '#FFFFFF', margin: '0 0 4px', lineHeight: 1.1 }}>
+          Simple steps.<br /><em style={{ color: '#FFFFFF', fontStyle: 'italic' }}>Serious medicine.</em>
         </h2>
-        <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', margin: 0 }}>From your first consultation to compounds at your door.</p>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 16, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.75 }}>From your first consultation to compounds at your door.</p>
       </div>
 
       <div ref={stageRef} style={{ position: 'relative', height: 150, margin: '0 60px 36px' }}>
@@ -160,6 +160,26 @@ export default function HowItWorks() {
         {steps.map((_, i) => (
           <button key={i} onClick={() => { go(i); clearInterval(timerRef.current); }} style={{ width: cur === i ? 20 : 6, height: 6, borderRadius: cur === i ? 3 : '50%', background: cur === i ? '#E8571A' : 'rgba(255,255,255,0.15)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s ease' }} />
         ))}
+      </div>
+
+      <div style={{ display: 'flex', gap: 12, margin: '48px 60px 0', flexWrap: 'wrap' }}>
+        {steps.map((s, i) => {
+          const active = cur === i;
+          return (
+            <div key={i} onClick={() => { go(i); clearInterval(timerRef.current); }} style={{
+              flex: '1 1 200px', height: 320, borderRadius: 16,
+              background: active ? 'rgba(255,80,3,0.12)' : 'rgba(255,255,255,0.05)',
+              border: `1px solid ${active ? 'rgba(255,80,3,0.3)' : 'rgba(255,255,255,0.08)'}`,
+              position: 'relative', overflow: 'hidden', cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+              padding: 24, transition: 'all 0.4s ease',
+            }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 8, textTransform: 'uppercase' }}>{s.label}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 16, color: '#FFFFFF', lineHeight: 1.3, marginBottom: 6 }}>{s.title}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{s.desc}</div>
+            </div>
+          );
+        })}
       </div>
 
       <button style={{ display: 'block', margin: '24px auto 0', background: '#E8571A', color: '#fff', fontFamily: 'DM Sans, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.06em', border: 'none', borderRadius: 999, padding: '13px 32px', cursor: 'pointer' }}>
