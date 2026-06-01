@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
 import { useQuiz } from "./quizContext";
+import { useNavScroll } from "@/hooks/useNavScroll";
 
 const Nav = () => {
-  const [scrolled, setScrolled] = useState(false);
   const { open } = useQuiz();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useNavScroll();
 
   return (
-    <nav className={`rill-nav ${scrolled ? "scrolled" : ""}`}>
+    <nav className="rill-nav">
       <a href="#" className="nav-logo">MEORA</a>
       <ul className="nav-links">
         <li><a href="#protocols">Protocols</a></li>
