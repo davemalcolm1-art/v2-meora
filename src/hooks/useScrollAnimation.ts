@@ -18,6 +18,9 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(optio
         if (entry.isIntersecting) {
           setTimeout(() => {
             el.classList.add('animate-in');
+            el.querySelectorAll(
+              '.scroll-animate, .scroll-animate-sm, .scroll-fade, .scroll-scale'
+            ).forEach((child) => child.classList.add('animate-in'));
           }, options.delay || 0);
           observer.unobserve(el);
         }
