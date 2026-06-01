@@ -162,6 +162,26 @@ export default function HowItWorks() {
         ))}
       </div>
 
+      <div style={{ display: 'flex', gap: 12, margin: '48px 60px 0', flexWrap: 'wrap' }}>
+        {steps.map((s, i) => {
+          const active = cur === i;
+          return (
+            <div key={i} onClick={() => { go(i); clearInterval(timerRef.current); }} style={{
+              flex: '1 1 200px', height: 320, borderRadius: 16,
+              background: active ? 'rgba(255,80,3,0.12)' : 'rgba(255,255,255,0.05)',
+              border: `1px solid ${active ? 'rgba(255,80,3,0.3)' : 'rgba(255,255,255,0.08)'}`,
+              position: 'relative', overflow: 'hidden', cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+              padding: 24, transition: 'all 0.4s ease',
+            }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 8, textTransform: 'uppercase' }}>{s.label}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 16, color: '#FFFFFF', lineHeight: 1.3, marginBottom: 6 }}>{s.title}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{s.desc}</div>
+            </div>
+          );
+        })}
+      </div>
+
       <button style={{ display: 'block', margin: '24px auto 0', background: '#E8571A', color: '#fff', fontFamily: 'DM Sans, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.06em', border: 'none', borderRadius: 999, padding: '13px 32px', cursor: 'pointer' }}>
         START YOUR ASSESSMENT →
       </button>
