@@ -2714,7 +2714,7 @@ button.btn-ghost {
   background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') !important;
   background-size: cover;
   background-position: center 45%;
-  animation: kenburnsmeora 24s ease-in-out infinite;
+  animation: none !important;
 }
 .mask-section .mask-tint,
 .mask-section .mask-vignette,
