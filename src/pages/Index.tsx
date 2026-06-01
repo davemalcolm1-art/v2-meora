@@ -29,8 +29,6 @@ const Index = () => {
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
       <HeroSection />
-      {/* Hero (dark) → cream fade */}
-      <SectionFade from={DARK} to={CREAM} />
       <div style={{ background: CREAM }}>
         <Ticker />
         <ClinicalPhilosophy />
