@@ -32,7 +32,7 @@ const FAQ = () => {
             marginBottom: 16,
           }}
         >
-          FAQ
+          COMMON QUESTIONS
         </div>
         <h2
           style={{
@@ -46,7 +46,7 @@ const FAQ = () => {
           }}
         >
           Common questions.<br />
-          <em style={{ fontStyle: "italic", color: "#E8571A" }}>We have answers.</em>
+          <em style={{ fontStyle: "italic", color: "#FF5003" }}>Clear answers.</em>
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {faqs.map((f, i) => {

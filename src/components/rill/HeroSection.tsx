@@ -24,8 +24,8 @@ const SLIDES = [
 ];
 
 // ─── ROTATING WORDS ───────────────────────────────────────────────────────────
-const WORDS = ["For energy.", "For recovery.", "For performance.", "For longevity.", "For beauty."];
-const INTERVALS = [2500, 2500, 2500, 2500, 2500];
+const WORDS = ["For energy.", "For performance.", "For balance.", "For recovery.", "For longevity.", "For beauty."];
+const INTERVALS = [3000, 3000, 3000, 3000, 3000, 3000];
 
 // ─── NAV LINKS ────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
@@ -712,11 +712,8 @@ const HeroSection = () => {
           </p>
 
           <div className="hero-buttons">
-            <button className="hero-btn-primary" onClick={open}>
-              Start Your Assessment →
-            </button>
-            <a href="#protocols" className="hero-btn-secondary">
-              Explore Protocols
+            <a href="#assessment-placeholder" className="hero-btn-primary" style={{ textDecoration: "none", display: "inline-block" }}>
+              Start your assessment
             </a>
           </div>
 
