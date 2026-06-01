@@ -712,11 +712,8 @@ const HeroSection = () => {
           </p>
 
           <div className="hero-buttons">
-            <button className="hero-btn-primary" onClick={open}>
-              Start Your Assessment →
-            </button>
-            <a href="#protocols" className="hero-btn-secondary">
-              Explore Protocols
+            <a href="#assessment-placeholder" className="hero-btn-primary" style={{ textDecoration: "none", display: "inline-block" }}>
+              Start your assessment
             </a>
           </div>
 
