@@ -33,7 +33,7 @@ const ScienceCards = () => {
 
   return (
     <section ref={sectionRef} className="scroll-animate" style={{ position: "relative", background: `url(${BG}) center/cover no-repeat`, padding: "120px 0", overflow: "hidden" }}>
-      <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(26,43,53,0.82) 0%, rgba(26,43,53,0.65) 100%)", zIndex: 0 }} />
+      <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(26,43,53,0.68) 0%, rgba(26,43,53,0.52) 100%)", zIndex: 0 }} />
       <div className="sci-wrap" style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "0 80px" }}>
         <div style={{ marginBottom: 56 }}>
           <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 20 }}>THE SCIENCE</div>
@@ -48,10 +48,10 @@ const ScienceCards = () => {
         <div ref={cardsRef} className="sci-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {cards.map((c, i) => (
             <div key={i} className="sci-card card-hover" style={{
-              background: "rgba(255,255,255,0.08)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.15)",
+              background: "rgba(255,255,255,0.10)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              border: "1px solid rgba(255,255,255,0.18)",
               borderRadius: 16,
               padding: 28,
             }}>

@@ -1,49 +1,34 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useStaggerAnimation } from "@/hooks/useStaggerAnimation";
 
-const signals = [
-  { title: "AHPRA-Registered GPs", desc: "Every protocol supervised by a licensed Australian doctor." },
-  { title: "Registered Compounding Pharmacies", desc: "Prescribed and dispensed to the highest Australian standards." },
-  { title: "Evidence-informed protocols", desc: "Built on peer-reviewed research, not trends." },
+const pills = [
+  "✓ AHPRA-Registered GPs",
+  "✓ Registered Compounding Pharmacies",
+  "✓ Evidence-informed Protocols",
 ];
 
 const Positioning = () => {
   const sectionRef = useScrollAnimation<HTMLElement>();
-  const signalsRef = useStaggerAnimation<HTMLDivElement>(signals.length, 100);
 
   return (
-    <section ref={sectionRef} className="scroll-animate" style={{ background: "#F7F4EF", padding: "120px 0" }}>
-      <div className="meora-container" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 80px", display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 80, alignItems: "center" }}>
-        <div>
-          <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>
-            WHAT WE DO
-          </div>
-          <h2 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#1A2B35", fontSize: "clamp(40px,5vw,64px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0 }}>
-            Personalised.<br />
-            Evidence-informed.<br />
-            <em style={{ fontStyle: "italic", color: "#FF5003" }}>Designed around you.</em>
-          </h2>
-          <p className="scroll-animate delay-200" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, lineHeight: 1.75, color: "rgba(26,43,53,0.6)", maxWidth: 480, marginTop: 28 }}>
-            Meora is a GP-supervised longevity clinic. Our compounding peptide protocols are built on peer-reviewed research and tailored to your biology, your goals, and your life.
-          </p>
+    <section ref={sectionRef} className="scroll-animate" style={{ background: "#F7F4EF", padding: "120px 80px" }}>
+      <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
+        <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 16 }}>
+          WHAT WE DO
         </div>
-        <div ref={signalsRef} style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          {signals.map((s, i) => (
-            <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-              <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(26,43,53,0.08)", flexShrink: 0, marginTop: 2 }} />
-              <div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 14, color: "#1A2B35", marginBottom: 4 }}>{s.title}</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(26,43,53,0.55)", lineHeight: 1.6 }}>{s.desc}</div>
-              </div>
-            </div>
+        <h2 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0 }}>
+          <span style={{ color: "#1A2B35", display: "block" }}>Personalised.</span>
+          <span style={{ color: "#1A2B35", display: "block" }}>Evidence-informed.</span>
+          <em style={{ fontStyle: "italic", color: "#FF5003", display: "block" }}>Designed around you.</em>
+        </h2>
+        <p className="scroll-animate delay-200" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: "rgba(26,43,53,0.55)", lineHeight: 1.75, maxWidth: 560, margin: "24px auto 0" }}>
+          Meora is a GP-supervised longevity clinic. Our compounding peptide protocols are built on peer-reviewed research and tailored to your biology, your goals, and your life.
+        </p>
+        <div className="scroll-animate delay-300" style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", marginTop: 36 }}>
+          {pills.map((p) => (
+            <span key={p} style={{ background: "rgba(26,43,53,0.06)", border: "1px solid rgba(26,43,53,0.1)", borderRadius: 999, padding: "8px 20px", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: "#1A2B35", display: "inline-flex", alignItems: "center", gap: 8 }}>{p}</span>
           ))}
         </div>
       </div>
-      <style>{`
-        @media (max-width: 900px) {
-          .meora-container { grid-template-columns: 1fr !important; gap: 48px !important; padding: 0 24px !important; }
-        }
-      `}</style>
     </section>
   );
 };
