@@ -70,6 +70,7 @@ const Domains = () => {
         </div>
       </div>
       <style>{`
+        .domain-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
         .domain-card:hover .domain-arrow { background: #FF5003; border-color: #FF5003; color: #fff; }
         @media (max-width: 900px) {
           .domains-grid { grid-template-columns: 1fr !important; }
