@@ -17,10 +17,11 @@ const Domains = () => (
           YOUR GOALS
         </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#1A2B35", fontSize: "clamp(36px,4vw,52px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0 }}>
-          Find your <em style={{ fontStyle: "italic", color: "#FF5003" }}>domain.</em>
+          Six domains.<br />
+          <em style={{ fontStyle: "italic", color: "#FF5003" }}>One protocol, built for you.</em>
         </h2>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, lineHeight: 1.75, color: "rgba(26,43,53,0.6)", marginTop: 16 }}>
-          Six areas of optimisation. One personalised protocol.
+          Choose the area of your life you want to optimise. Your doctor does the rest.
         </p>
       </div>
 
@@ -35,13 +36,14 @@ const Domains = () => (
               height: 320,
               borderRadius: 20,
               overflow: "hidden",
-              background: "linear-gradient(145deg, #1A2B35 0%, #243B47 100%)",
+              background: "radial-gradient(ellipse at 30% 20%, #2D4459 0%, #1A2B35 60%, #141F28 100%)",
               textDecoration: "none",
               display: "block",
               transition: "transform 0.4s ease, box-shadow 0.4s ease",
             }}
           >
             <div style={{ position: "absolute", inset: 0, opacity: 0.04, backgroundImage: noiseSvg, pointerEvents: "none" }} />
+            <img src="/meora-mark-white.svg" alt="" aria-hidden="true" style={{ position: "absolute", bottom: -20, right: -20, width: 140, opacity: 0.04, pointerEvents: "none" }} />
             <div className="domain-arrow" style={{
               position: "absolute", top: 20, right: 20,
               width: 36, height: 36, borderRadius: "50%",

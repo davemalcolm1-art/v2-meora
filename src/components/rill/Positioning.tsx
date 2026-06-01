@@ -12,17 +12,18 @@ const Positioning = () => (
           WHAT WE DO
         </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#1A2B35", fontSize: "clamp(40px,5vw,64px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0 }}>
-          We don't treat illness.<br />
-          <em style={{ fontStyle: "italic", color: "#FF5003" }}>We optimise life.</em>
+          Personalised.<br />
+          Evidence-informed.<br />
+          <em style={{ fontStyle: "italic", color: "#FF5003" }}>Designed around you.</em>
         </h2>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, lineHeight: 1.75, color: "rgba(26,43,53,0.6)", maxWidth: 480, marginTop: 28 }}>
-          Meora is a personalised longevity clinic. GP-supervised peptide therapy protocols, designed around your biology, your goals, and your life.
+          Meora is a GP-supervised longevity clinic. Our compounding peptide protocols are built on peer-reviewed research and tailored to your biology, your goals, and your life.
         </p>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         {signals.map((s, i) => (
           <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-            <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(26,43,53,0.12)", flexShrink: 0, marginTop: 2 }} />
+            <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(26,43,53,0.08)", flexShrink: 0, marginTop: 2 }} />
             <div>
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 14, color: "#1A2B35", marginBottom: 4 }}>{s.title}</div>
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(26,43,53,0.55)", lineHeight: 1.6 }}>{s.desc}</div>
