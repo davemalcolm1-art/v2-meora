@@ -25,8 +25,8 @@ export default function HowItWorks() {
   const pillW = useRef(0);
   const targetX = useRef(0);
   const targetW = useRef(0);
-  const animRef = useRef();
-  const timerRef = useRef();
+  const animRef = useRef<number | undefined>(undefined);
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   function getCardRect(i) {
     const sr = stageRef.current.getBoundingClientRect();

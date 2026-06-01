@@ -14,11 +14,13 @@ import FAQ from "@/components/rill/FAQ";
 import ContentHub from "@/components/rill/ContentHub";
 import Footer from "@/components/rill/Footer";
 import MaskSection from "@/components/rill/MaskSection";
+import SectionFade from "@/components/rill/SectionFade";
 import QuizModal from "@/components/rill/QuizModal";
 import { QuizProvider } from "@/components/rill/quizContext";
 import useReveal from "@/components/rill/useReveal";
 
-const Spacer = () => <div style={{ height: 16 }} />;
+const CREAM = "#F7F4EF";
+const DARK = "#1A2B35";
 
 const Index = () => {
   const [quizOpen, setQuizOpen] = useState(false);
@@ -27,25 +29,21 @@ const Index = () => {
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
       <HeroSection />
-      <div style={{ background: "#FAF7F2", padding: "16px 0" }}>
-        <CredentialStrip />
-        <Spacer />
-        <ClinicalPhilosophy />
-        <Spacer />
-        <Protocols />
-        <Spacer />
+      {/* Hero (dark) → cream fade */}
+      <SectionFade from={DARK} to={CREAM} />
+      <div style={{ background: CREAM }}>
         <Ticker />
-        <Spacer />
+        <ClinicalPhilosophy />
+        <CredentialStrip />
+        <Protocols />
+        {/* Cream → dark HowItWorks */}
+        <SectionFade from={CREAM} to={DARK} />
         <HowItWorks />
-        <Spacer />
+        <SectionFade from={DARK} to={CREAM} />
         <ContrastInterstitial />
-        <Spacer />
         <Science />
-        <Spacer />
         <InterstitialBreak label="A Protocol. Not a Trend." />
-        <Spacer />
         <FAQ />
-        <Spacer />
         <ContentHub />
       </div>
       <MaskSection />

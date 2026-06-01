@@ -11,17 +11,15 @@ const row2Items = [
 ];
 
 const Ticker = () => {
-  const row1Text = row1Items.join(" · ") + " · ";
-  const row2Text = row2Items.join(" · ") + " · ";
+  const row1Text = row1Items.join("  ·  ") + "  ·  ";
+  const row2Text = row2Items.join("  ·  ") + "  ·  ";
 
   return (
     <section
       style={{
-        background: "#FAF7F2",
-        padding: "28px 0",
+        background: "#F7F4EF",
+        padding: "40px 0",
         overflow: "hidden",
-        margin: "0 40px",
-        borderRadius: 24,
       }}
     >
       {/* Row 1 — scrolls left */}
@@ -39,7 +37,7 @@ const Ticker = () => {
                 fontFamily: "'DM Sans', sans-serif",
                 fontWeight: 600,
                 fontSize: "13px",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 color: "rgba(26,43,53,0.5)",
                 paddingRight: "2em",
@@ -53,7 +51,7 @@ const Ticker = () => {
       </div>
 
       {/* Row 2 — scrolls right */}
-      <div style={{ display: "flex", overflow: "hidden", whiteSpace: "nowrap", marginTop: "12px" }}>
+      <div style={{ display: "flex", overflow: "hidden", whiteSpace: "nowrap", marginTop: "16px" }}>
         <div
           style={{
             display: "flex",
@@ -67,9 +65,9 @@ const Ticker = () => {
                 fontFamily: "'DM Sans', sans-serif",
                 fontWeight: 600,
                 fontSize: "13px",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "#E8571A",
+                color: "rgba(26,43,53,0.5)",
                 paddingRight: "2em",
                 flexShrink: 0,
               }}

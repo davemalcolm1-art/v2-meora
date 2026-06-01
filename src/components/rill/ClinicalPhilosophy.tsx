@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { useQuiz } from "./quizContext";
 
 const lines = ["Personalised.", "Evidence-informed.", "Designed around you."];
 
 const ClinicalPhilosophy = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const { open } = useQuiz();
 
   useEffect(() => {
     const el = ref.current;
@@ -29,34 +31,20 @@ const ClinicalPhilosophy = () => {
       ref={ref}
       className="clinical-philosophy"
       style={{
-        background: "linear-gradient(180deg, #FAF7F2 0%, #F2EDE4 100%)",
-        padding: "100px 80px",
-        borderRadius: 24,
-        overflow: "hidden",
-        margin: "0 40px",
+        background: "#F7F4EF",
+        padding: "120px 80px",
         position: "relative",
       }}
     >
-      {/* Ambient glow */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "radial-gradient(ellipse at 15% 50%, rgba(232,87,26,0.06) 0%, transparent 60%), radial-gradient(ellipse at 85% 20%, rgba(184,210,230,0.12) 0%, transparent 55%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
       <div
         className="cp-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "40% 55%",
-          gap: "5%",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "80px",
           maxWidth: 1200,
           margin: "0 auto",
-          alignItems: "start",
+          alignItems: "center",
           position: "relative",
           zIndex: 1,
         }}
@@ -67,22 +55,42 @@ const ClinicalPhilosophy = () => {
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
               fontSize: 11,
-              letterSpacing: "0.12em",
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "#E8571A",
+              color: "rgba(26,43,53,0.45)",
               marginBottom: 24,
             }}
           >
             CLINICAL PHILOSOPHY
           </div>
+          {lines.map((line, i) => (
+            <div
+              key={line}
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontWeight: 700,
+                color: "#1A2B35",
+                fontSize: "clamp(36px, 4vw, 52px)",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(20px)",
+                transition: `opacity 700ms ease ${i * 150}ms, transform 700ms ease ${i * 150}ms`,
+              }}
+            >
+              {i === 1 ? <em style={{ fontStyle: "italic", color: "#E8571A" }}>{line}</em> : line}
+            </div>
+          ))}
+        </div>
+        <div>
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: 15,
-              lineHeight: 1.75,
-              color: "#6B6560",
-              maxWidth: 320,
+              fontSize: 16,
+              lineHeight: 1.7,
+              color: "rgba(26,43,53,0.7)",
+              maxWidth: 460,
               margin: 0,
             }}
           >
@@ -90,47 +98,31 @@ const ClinicalPhilosophy = () => {
             your individual assessment to support long-term vitality, performance
             and healthy ageing.
           </p>
-          <a
-            href="#about"
+          <button
+            onClick={open}
             style={{
-              display: "inline-block",
-              marginTop: 24,
+              marginTop: 32,
+              background: "#E8571A",
+              color: "#FFFFFF",
+              border: "none",
+              borderRadius: 999,
+              padding: "16px 32px",
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              color: "#E8571A",
               fontSize: 13,
-              letterSpacing: "0.06em",
-              textDecoration: "none",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              cursor: "pointer",
             }}
           >
-            OUR APPROACH →
-          </a>
-        </div>
-        <div>
-          {lines.map((line, i) => (
-            <div
-              key={line}
-              style={{
-                fontFamily: "'Fraunces', serif",
-                fontWeight: 700,
-                color: "#111827",
-                fontSize: "clamp(32px, 4vw, 52px)",
-                lineHeight: 1.2,
-                letterSpacing: "-0.02em",
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(20px)",
-                transition: `opacity 700ms ease ${i * 150}ms, transform 700ms ease ${i * 150}ms`,
-              }}
-            >
-              {line}
-            </div>
-          ))}
+            Start your assessment →
+          </button>
         </div>
       </div>
       <style>{`
         @media (max-width: 900px) {
-          .clinical-philosophy { padding: 64px 24px !important; }
-          .cp-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .clinical-philosophy { padding: 80px 24px !important; }
+          .cp-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
         }
       `}</style>
     </section>

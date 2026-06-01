@@ -3,24 +3,12 @@ const ContrastInterstitial = () => {
     <section
       className="contrast-interstitial"
       style={{
-        background: "linear-gradient(135deg, #1A2B35 0%, #243B47 100%)",
-        padding: "100px 80px",
+        background: "#F7F4EF",
+        padding: "120px 80px",
         position: "relative",
         overflow: "hidden",
-        margin: "0 40px",
-        borderRadius: 24,
       }}
     >
-      {/* Radial spotlight */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "radial-gradient(ellipse at 30% 50%, rgba(232,87,26,0.15) 0%, transparent 60%)",
-          pointerEvents: "none",
-        }}
-      />
       <div
         style={{
           maxWidth: 1200,
@@ -34,9 +22,9 @@ const ContrastInterstitial = () => {
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 700,
             fontSize: 11,
-            letterSpacing: "0.12em",
+            letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "#E8571A",
+            color: "rgba(26,43,53,0.45)",
             marginBottom: 20,
           }}
         >
@@ -46,26 +34,26 @@ const ContrastInterstitial = () => {
           style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
-            color: "#FFFFFF",
-            fontSize: "clamp(36px, 5vw, 64px)",
-            lineHeight: 1.05,
+            color: "#1A2B35",
+            fontSize: "clamp(36px, 4vw, 52px)",
+            lineHeight: 1.1,
             letterSpacing: "-0.02em",
             margin: 0,
           }}
         >
           Energy for today.
           <br />
-          Health for tomorrow.
+          <em style={{ fontStyle: "italic", color: "#E8571A" }}>Health for tomorrow.</em>
         </h2>
         <p
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
             fontSize: 16,
-            lineHeight: 1.6,
-            color: "rgba(255,255,255,0.65)",
-            maxWidth: 480,
-            marginTop: 16,
+            lineHeight: 1.7,
+            color: "rgba(26,43,53,0.7)",
+            maxWidth: 560,
+            marginTop: 24,
           }}
         >
           Meora combines modern medicine with simplified routines so you can
@@ -73,11 +61,8 @@ const ContrastInterstitial = () => {
         </p>
       </div>
       <style>{`
-        .contrast-interstitial h2,
-        .contrast-interstitial h2 * { color: #FFFFFF !important; }
-        .contrast-interstitial p { color: rgba(255,255,255,0.65) !important; }
         @media (max-width: 768px) {
-          .contrast-interstitial { padding: 60px 24px !important; margin: 0 16px !important; }
+          .contrast-interstitial { padding: 80px 24px !important; }
         }
       `}</style>
     </section>

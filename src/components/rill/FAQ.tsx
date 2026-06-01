@@ -11,49 +11,108 @@ const faqs = [
 ];
 
 const FAQ = () => {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(0);
   return (
     <section
-      className="faq-section"
       id="about"
       style={{
-        background: "linear-gradient(180deg, #FAF7F2 0%, #F5F0E8 100%)",
-        borderRadius: 24,
-        overflow: "hidden",
-        margin: "0 40px",
-        position: "relative",
+        background: "#F7F4EF",
+        padding: "120px 80px",
       }}
     >
-      {/* Ambient glow */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "radial-gradient(ellipse at 15% 50%, rgba(232,87,26,0.06) 0%, transparent 60%), radial-gradient(ellipse at 85% 20%, rgba(184,210,230,0.12) 0%, transparent 55%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-      <div className="faq-content-col faq-content-col--full" style={{ position: "relative", zIndex: 1 }}>
-        <div className="section-eyebrow reveal">
-          <div className="section-eyebrow-line"></div>
-          <span>FAQ</span>
+      <div style={{ maxWidth: 880, margin: "0 auto" }}>
+        <div
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: 11,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "rgba(26,43,53,0.45)",
+            marginBottom: 16,
+          }}
+        >
+          FAQ
         </div>
-        <h2 className="faq-heading reveal reveal-delay-1">
+        <h2
+          style={{
+            fontFamily: "'Fraunces', serif",
+            fontWeight: 700,
+            color: "#1A2B35",
+            fontSize: "clamp(32px, 4vw, 48px)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
+            margin: "0 0 48px",
+          }}
+        >
           Common questions.<br />
-          <em>We have answers.</em>
+          <em style={{ fontStyle: "italic", color: "#E8571A" }}>We have answers.</em>
         </h2>
-        <div className="faq-list">
-          {faqs.map((f, i) => (
-            <div className={`faq-item reveal ${open === i ? "open" : ""}`} key={i} style={{ transitionDelay: `${i * 100}ms` }}>
-              <div className="faq-question" onClick={() => setOpen(open === i ? null : i)}>
-                {f.q}
-                <div className="faq-icon">+</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={i}
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid rgba(26,43,53,0.08)",
+                  borderRadius: 12,
+                  padding: "20px 24px",
+                  boxShadow: "0 2px 16px rgba(0,0,43,0.04)",
+                }}
+              >
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                    textAlign: "left",
+                    fontFamily: "'Fraunces', serif",
+                    fontWeight: 600,
+                    fontSize: 18,
+                    color: "#1A2B35",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  <span>{f.q}</span>
+                  <span
+                    style={{
+                      flexShrink: 0,
+                      marginLeft: 20,
+                      color: "#FF5003",
+                      fontSize: 22,
+                      fontWeight: 300,
+                      transition: "transform 0.3s ease",
+                      transform: isOpen ? "rotate(45deg)" : "rotate(0)",
+                      lineHeight: 1,
+                    }}
+                  >
+                    +
+                  </span>
+                </button>
+                {isOpen && (
+                  <div
+                    style={{
+                      marginTop: 16,
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 16,
+                      lineHeight: 1.7,
+                      color: "rgba(26,43,53,0.7)",
+                    }}
+                  >
+                    {f.a}
+                  </div>
+                )}
               </div>
-              <div className="faq-answer">{f.a}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
