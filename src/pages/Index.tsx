@@ -36,10 +36,7 @@ const Index = () => {
         <ClinicalPhilosophy />
         <CredentialStrip />
         <Protocols />
-        {/* Cream → dark HowItWorks */}
-        <SectionFade from={CREAM} to={DARK} />
         <HowItWorks />
-        <SectionFade from={DARK} to={CREAM} />
         <ContrastInterstitial />
         <Science />
         <InterstitialBreak label="A Protocol. Not a Trend." />
