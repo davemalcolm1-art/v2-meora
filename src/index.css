@@ -2698,7 +2698,9 @@ button.btn-ghost {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: hsl(204 34% 15%) !important;
+  background:
+    radial-gradient(120% 90% at 34% 42%, hsl(196 36% 22% / 0.72) 0%, hsl(204 34% 15% / 0) 58%),
+    linear-gradient(132deg, hsl(204 34% 15%) 0%, hsl(198 32% 19%) 42%, hsl(204 34% 15%) 72%, hsl(204 40% 12%) 100%) !important;
   border-radius: 32px 32px 0 0;
 }
 .meora-footer-shell::before {
@@ -2709,13 +2711,13 @@ button.btn-ghost {
   pointer-events: none;
   background:
     linear-gradient(118deg,
-      transparent 25%,
-      hsl(39 100% 88% / 0.05) 39%,
-      hsl(39 100% 88% / 0.17) 49%,
-      hsl(196 72% 78% / 0.08) 57%,
-      transparent 73%);
+      transparent 22%,
+      hsl(38 100% 90% / 0.08) 38%,
+      hsl(38 100% 90% / 0.26) 49%,
+      hsl(194 76% 78% / 0.12) 58%,
+      transparent 76%);
   mix-blend-mode: screen;
-  animation: meoraLightSweep 12s ease-in-out infinite alternate;
+  animation: meoraLightSweep 10s ease-in-out infinite alternate;
 }
 @keyframes meoraLightSweep {
   from { transform: translate3d(-8%, -5%, 0); }
@@ -2727,6 +2729,11 @@ button.btn-ghost {
 .meora-footer-shell > * {
   position: relative;
   z-index: 1;
+}
+.meora-footer-shell .rill-footer {
+  border-top: 0 !important;
+  margin-top: -1px;
+  overflow: visible !important;
 }
 .mask-section {
   position: relative;
