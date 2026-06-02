@@ -73,13 +73,11 @@ const Domains = () => {
         {/* Header */}
         <div style={{ marginBottom: 40, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 32, flexWrap: "wrap" }}>
           <div>
-            <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FF5003", marginBottom: 18 }}>
-              YOUR GOALS
-            </div>
-            <h1 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#1A2B35", fontSize: "clamp(36px,4.4vw,60px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0 }}>
-              <span style={{ color: "#FF5003", fontStyle: "italic" }}>Your</span> Protocol
+            <h1 className="scroll-animate" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#1A2B35", fontSize: "clamp(36px,4.4vw,60px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, whiteSpace: "nowrap" }}>
+              <span style={{ color: "#FF5003", fontStyle: "italic" }}>Your</span> Goals. <span style={{ color: "#FF5003", fontStyle: "italic" }}>Your</span> Protocol.
             </h1>
           </div>
+
         </div>
 
         {/* Bento */}
