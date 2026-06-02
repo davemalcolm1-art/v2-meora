@@ -14,15 +14,16 @@ type Domain = {
   desc: string;
   image: string;
   tagline: string;
+  textTone?: "light" | "dark";
 };
 
 const domains: Domain[] = [
-  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output" },
-  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition" },
-  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health" },
-  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience" },
-  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing" },
-  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen" },
+  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output",         textTone: "light" },
+  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition",    textTone: "light" },
+  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health",          textTone: "light" },
+  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience",      textTone: "light" },
+  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing",           textTone: "light" },
+  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen",          textTone: "light" },
 ];
 
 type Variant = "hero" | "a" | "b" | "c" | "d" | "e";
@@ -152,8 +153,17 @@ const Domains = () => {
           position: absolute; inset: 0; z-index: 1;
           background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
         }
-        .tile-image-mask, .domain-label-panel { display: none !important; }
-        .domain-content { position: absolute; inset: 0; z-index: 3; color: hsl(0 0% 100%) !important; }
+        .domain-content {
+          --tile-text: hsl(0 0% 100%);
+          --tile-text-shadow: rgba(0,0,0,0.9);
+          --tile-title-stroke: rgba(255,255,255,0.75);
+          position: absolute; inset: 0; z-index: 3; color: var(--tile-text);
+        }
+        .domain-content[data-tone="dark"] {
+          --tile-text: hsl(202 34% 15%);
+          --tile-text-shadow: rgba(255,255,255,0.65);
+          --tile-title-stroke: rgba(26,43,53,0.28);
+        }
         .domain-copy-block {
           display: inline-block;
           align-self: flex-start;
@@ -171,10 +181,10 @@ const Domains = () => {
           line-height: 1.2;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: hsl(0 0% 100%) !important;
-          -webkit-text-fill-color: hsl(0 0% 100%) !important;
+          color: var(--tile-text);
+          -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.85);
+          text-shadow: 0 2px 10px var(--tile-text-shadow), 0 1px 2px var(--tile-text-shadow);
           margin-bottom: 12px;
         }
         .domain-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
@@ -184,11 +194,11 @@ const Domains = () => {
           line-height: 1;
           letter-spacing: 0;
           margin: 0;
-          color: hsl(0 0% 100%) !important;
-          -webkit-text-fill-color: hsl(0 0% 100%) !important;
-          -webkit-text-stroke: 0.35px rgba(255,255,255,0.75);
+          color: var(--tile-text);
+          -webkit-text-fill-color: var(--tile-text);
+          -webkit-text-stroke: 0.35px var(--tile-title-stroke);
           opacity: 1 !important;
-          text-shadow: 0 4px 22px rgba(0,0,0,0.95), 0 2px 5px rgba(0,0,0,0.85);
+          text-shadow: 0 4px 22px var(--tile-text-shadow), 0 2px 5px var(--tile-text-shadow);
           filter: none !important;
           mix-blend-mode: normal !important;
         }
@@ -197,10 +207,10 @@ const Domains = () => {
           font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           line-height: 1.55;
-          color: hsl(0 0% 100%) !important;
-          -webkit-text-fill-color: hsl(0 0% 100%) !important;
+          color: var(--tile-text);
+          -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+          text-shadow: 0 2px 12px var(--tile-text-shadow);
           margin: 0;
         }
         .domain-desc.small { font-size: 15px; line-height: 1.35; max-width: 230px; }
@@ -245,8 +255,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
       <>
         <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
-        <div className="domain-label-panel" />
-        <div className="domain-content" style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div className="domain-content" data-tone={domain.textTone ?? "light"} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title + tagline */}
           <div className="domain-copy-block">
             <div className="domain-eyebrow hero">
@@ -273,7 +282,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
-      <div className="domain-content" style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div className="domain-content" data-tone={domain.textTone ?? "light"} style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div className="domain-copy-block">
           <div className="domain-eyebrow">{domain.tagline}</div>
           <h3 className="domain-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
