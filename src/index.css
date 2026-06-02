@@ -3530,4 +3530,4 @@ nav.scrolled:not(.rill-nav) {
 }
 
 /* Scoped overrides for ScienceCards section */
-.sci-cards-section h2 { color: #fff !important; }
+body:not(.dark) section.sci-cards-section:not(.hero):not(.how-section):not(.science-section):not(.what-section-dark):not(.marquee-strip) h2 { color: #fff !important; }
