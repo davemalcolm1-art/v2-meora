@@ -121,14 +121,25 @@ const Domains = () => {
           grid-auto-rows: 270px;
           gap: 16px;
         }
-        .domain-tile { box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35); isolation: isolate; }
-        .domain-tile:hover { box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
+        .goal-tile {
+          position: relative;
+          overflow: hidden;
+          border-radius: 32px;
+          text-align: left;
+          padding: 0;
+          border: 0;
+          background: hsl(0 0% 0%);
+          box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35);
+          isolation: isolate;
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
 
         .tile-img {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
           object-fit: cover; transition: transform 1.2s ease; filter: brightness(0.72) contrast(1.08) saturate(0.98);
         }
-        .domain-tile:hover .tile-img { transform: scale(1.04); }
+        .goal-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
           position: absolute; inset: 0; z-index: 1;
@@ -138,18 +149,18 @@ const Domains = () => {
           position: absolute; inset: 0; z-index: 1;
           background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
         }
-        .domain-content {
+        .goal-content {
           --tile-text: hsl(0 0% 100%);
           --tile-text-shadow: rgba(0,0,0,0.9);
           --tile-title-stroke: rgba(255,255,255,0.75);
           position: absolute; inset: 0; z-index: 3; color: var(--tile-text);
         }
-        .domain-content[data-tone="dark"] {
+        .goal-content[data-tone="dark"] {
           --tile-text: hsl(202 34% 15%);
           --tile-text-shadow: rgba(255,255,255,0.65);
           --tile-title-stroke: rgba(26,43,53,0.28);
         }
-        .domain-copy-block {
+        .goal-copy {
           display: inline-block;
           align-self: flex-start;
           max-width: min(520px, 100%);
@@ -159,7 +170,7 @@ const Domains = () => {
           background: transparent !important;
           box-shadow: none !important;
         }
-        .domain-eyebrow {
+        .goal-eyebrow {
           font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           font-weight: 800;
@@ -172,8 +183,8 @@ const Domains = () => {
           text-shadow: 0 2px 10px var(--tile-text-shadow), 0 1px 2px var(--tile-text-shadow);
           margin-bottom: 12px;
         }
-        .domain-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
-        .domain-title {
+        .goal-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
+        .goal-title {
           font-family: 'Fraunces', serif;
           font-weight: 400;
           line-height: 1;
@@ -187,8 +198,8 @@ const Domains = () => {
           filter: none !important;
           mix-blend-mode: normal !important;
         }
-        .domain-title-dot { color: hsl(18 100% 51%) !important; -webkit-text-fill-color: hsl(18 100% 51%) !important; text-shadow: none; }
-        .domain-desc {
+        .goal-title-dot { color: hsl(18 100% 51%) !important; -webkit-text-fill-color: hsl(18 100% 51%) !important; text-shadow: none; }
+        .goal-desc {
           font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           line-height: 1.55;
@@ -198,8 +209,7 @@ const Domains = () => {
           text-shadow: 0 2px 12px var(--tile-text-shadow);
           margin: 0;
         }
-        .domain-desc.small { font-size: 15px; line-height: 1.35; max-width: 230px; }
-        .domain-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
+        .goal-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
 
         .arrow-bubble {
           width: 44px; height: 44px; border-radius: 999px;
@@ -211,7 +221,7 @@ const Domains = () => {
           color: #fff;
           transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
-        .domain-tile:hover .arrow-bubble {
+        .goal-tile:hover .arrow-bubble {
           transform: translate(2px,-2px);
           background: #FF5003; border-color: #FF5003;
         }
@@ -222,7 +232,7 @@ const Domains = () => {
         }
         @media (max-width: 768px) {
           .domains-bento { grid-template-columns: 1fr !important; grid-auto-rows: auto; }
-          .domain-tile {
+          .goal-tile {
             grid-column: 1 / -1 !important;
             grid-row: auto !important;
             min-height: 260px !important;
