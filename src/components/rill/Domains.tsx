@@ -134,24 +134,46 @@ const Domains = () => {
           grid-auto-rows: 270px;
           gap: 16px;
         }
-        .domain-tile { box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35); }
+        .domain-tile { box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35); isolation: isolate; }
         .domain-tile:hover { box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
 
         .tile-img {
-          position: absolute; inset: 0; width: 100%; height: 100%;
-          object-fit: cover; transition: transform 1.2s ease;
+          position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
+          object-fit: cover; transition: transform 1.2s ease; filter: brightness(0.72) contrast(1.08) saturate(0.98);
         }
         .domain-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.24) 36%, rgba(0,0,0,0.0) 55%, rgba(0,0,0,0.6) 100%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.48) 38%, rgba(0,0,0,0.18) 62%, rgba(0,0,0,0.78) 100%);
         }
         .tile-scrim {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.42) 34%, rgba(0,0,0,0.06) 78%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
         }
-        .domain-content { position: absolute; inset: 0; z-index: 2; }
+        .domain-content { position: absolute; inset: 0; z-index: 3; color: hsl(0 0% 100%) !important; }
+        .domain-copy-block {
+          display: inline-block;
+          max-width: min(520px, 100%);
+          padding: 12px 14px 14px;
+          margin: -12px 0 0 -14px;
+          border-radius: 18px;
+          background: linear-gradient(90deg, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.48) 64%, rgba(0,0,0,0) 100%);
+        }
+        .domain-eyebrow {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1.1;
+          letter-spacing: 0.24em;
+          text-transform: uppercase;
+          color: hsl(0 0% 100%) !important;
+          -webkit-text-fill-color: hsl(0 0% 100%) !important;
+          opacity: 1 !important;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.85);
+          margin-bottom: 12px;
+        }
+        .domain-eyebrow.hero { font-size: 14px; margin-bottom: 14px; }
         .domain-title {
           font-family: 'Fraunces', serif;
           font-weight: 400;
@@ -159,12 +181,26 @@ const Domains = () => {
           letter-spacing: 0;
           margin: 0;
           color: hsl(0 0% 100%) !important;
+          -webkit-text-fill-color: hsl(0 0% 100%) !important;
+          -webkit-text-stroke: 0.35px rgba(255,255,255,0.75);
           opacity: 1 !important;
-          text-shadow: 0 2px 14px rgba(0,0,0,0.78), 0 1px 2px rgba(0,0,0,0.65);
+          text-shadow: 0 4px 22px rgba(0,0,0,0.95), 0 2px 5px rgba(0,0,0,0.85);
           filter: none !important;
           mix-blend-mode: normal !important;
         }
-        .domain-title-dot { color: #FF5003 !important; text-shadow: none; }
+        .domain-title-dot { color: hsl(18 100% 51%) !important; -webkit-text-fill-color: hsl(18 100% 51%) !important; text-shadow: none; }
+        .domain-desc {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 16px;
+          line-height: 1.55;
+          color: hsl(0 0% 100%) !important;
+          -webkit-text-fill-color: hsl(0 0% 100%) !important;
+          opacity: 1 !important;
+          text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+          margin: 0;
+        }
+        .domain-desc.small { font-size: 14px; line-height: 1.35; max-width: 210px; }
+        .domain-tile-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
 
         .arrow-bubble {
           width: 44px; height: 44px; border-radius: 999px;
@@ -205,10 +241,10 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
       <>
         <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
-        <div style={{ position: "absolute", inset: 0, padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
+        <div className="domain-content" style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title + tagline */}
-          <div>
-            <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.65)", marginBottom: 14 }}>
+          <div className="domain-copy-block">
+            <div className="domain-eyebrow hero">
               {domain.tagline}
             </div>
             <h2 className="domain-title" style={{ fontSize: "clamp(40px,4.4vw,64px)", letterSpacing: "-0.02em" }}>
@@ -217,7 +253,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
           </div>
           {/* BOTTOM: description + arrow */}
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,0.78)", margin: 0, maxWidth: 380 }}>
+            <p className="domain-desc" style={{ maxWidth: 380 }}>
               {domain.desc}
             </p>
             <div className="arrow-bubble">{arrow}</div>
@@ -232,11 +268,15 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
-      <div style={{ position: "absolute", inset: 0, padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
-        <h3 className="domain-title" style={{ fontSize: 28, letterSpacing: "-0.01em" }}>
-          {titleCase(domain.name)}<span className="domain-title-dot">.</span>
-        </h3>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div className="domain-content" style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div className="domain-copy-block">
+          <div className="domain-eyebrow">{domain.tagline}</div>
+          <h3 className="domain-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
+            {titleCase(domain.name)}<span className="domain-title-dot">.</span>
+          </h3>
+        </div>
+        <div className="domain-tile-footer">
+          <p className="domain-desc small">{domain.desc}</p>
           <div className="arrow-bubble sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
