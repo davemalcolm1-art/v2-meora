@@ -2699,8 +2699,8 @@ button.btn-ghost {
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(120% 90% at 34% 42%, hsl(196 36% 22% / 0.72) 0%, hsl(204 34% 15% / 0) 58%),
-    linear-gradient(132deg, hsl(204 34% 15%) 0%, hsl(198 32% 19%) 42%, hsl(204 34% 15%) 72%, hsl(204 40% 12%) 100%) !important;
+    radial-gradient(120% 90% at 34% 42%, hsl(198 38% 14% / 0.7) 0%, hsl(204 40% 8% / 0) 58%),
+    linear-gradient(132deg, hsl(204 42% 8%) 0%, hsl(200 38% 11%) 42%, hsl(204 44% 7%) 72%, hsl(206 50% 5%) 100%) !important;
   border-radius: 32px 32px 0 0;
 }
 .meora-footer-shell::before {
@@ -2760,7 +2760,7 @@ button.btn-ghost {
   color: transparent;
   background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') !important;
   background-size: cover;
-  background-position: center 45%;
+  background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
 }
