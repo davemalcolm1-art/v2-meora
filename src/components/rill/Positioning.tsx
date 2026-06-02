@@ -89,13 +89,14 @@ const Positioning = () => {
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
-          height: 78%;
+          height: 62%;
           width: auto;
           object-fit: contain;
           object-position: bottom center;
           z-index: 1;
           filter: drop-shadow(0 30px 40px rgba(26,43,53,0.18));
         }
+
         .positioning-hero::after {
           content: "";
           position: absolute;
