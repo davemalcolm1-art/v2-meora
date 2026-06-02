@@ -171,7 +171,7 @@ const Positioning = () => {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          margin-top: 22px;
+          margin-top: auto;
           align-self: flex-start;
           padding: 13px 22px;
           background: #FF5003;
@@ -186,11 +186,8 @@ const Positioning = () => {
         }
         .pos-card-cta:hover { transform: translateY(-2px); background: #ff6320; }
 
-
-
-
         .pos-card-foot {
-          margin-top: auto;
+          margin-top: 14px;
           padding-top: 18px;
           border-top: 1px solid rgba(255,255,255,0.12);
           display: flex;
