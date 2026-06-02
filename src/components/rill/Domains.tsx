@@ -213,7 +213,7 @@ const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot[
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
             <div style={{ maxWidth: 460 }}>
-              <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#fff", fontSize: "clamp(40px,4.4vw,64px)", lineHeight: 1.0, letterSpacing: "-0.02em", margin: 0 }}>
+              <h2 className="hero-title" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#fff", fontSize: "clamp(40px,4.4vw,64px)", lineHeight: 1.0, letterSpacing: "-0.02em", margin: 0 }}>
                 {titleCase(domain.name)}<span style={{ color: "#FF5003" }}>.</span>
               </h2>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,0.72)", marginTop: 16, maxWidth: 380 }}>{domain.desc}</p>
