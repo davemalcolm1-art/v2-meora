@@ -127,6 +127,8 @@ const Domains = () => {
 
       <style>{`
         .domains-bento { grid-auto-rows: 270px; }
+        .domain-tile.hero .hero-title { color: #fff !important; }
+        .domain-tile.hero .hero-title span { color: #FF5003 !important; }
         @media (min-width: 768px) {
           .domains-bento .domain-tile.md\\:row-span-2 { grid-row: span 2 / span 2; }
         }
