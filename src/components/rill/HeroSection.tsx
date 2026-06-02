@@ -679,7 +679,7 @@ const HeroSection = () => {
           }}
         >
           <source
-            src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/heroV2.mp4"
+            src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/heroV3.mp4"
             type="video/mp4"
           />
         </video>
