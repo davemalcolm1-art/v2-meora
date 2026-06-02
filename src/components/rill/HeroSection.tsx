@@ -132,19 +132,19 @@ const HeroSection = () => {
         /* ── NAV ── floating centred pill ── */
         .rill-nav {
           position: fixed;
-          top: 24px;
-          left: 50%;
-          transform: translateX(-50%);
+          top: 16px;
+          left: 24px;
+          right: 24px;
           z-index: 50;
           isolation: isolate;
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 32px;
-          height: 56px;
-          padding: 0 24px;
+          height: 48px;
+          padding: 0 20px;
           width: auto;
-          max-width: calc(100vw - 80px);
+          max-width: none;
           border-radius: 999px;
           background: rgba(247, 244, 239, 0.16);
           backdrop-filter: blur(22px) saturate(190%);
@@ -522,7 +522,9 @@ const HeroSection = () => {
         /* ── MOBILE ── */
         @media (max-width: 768px) {
           .rill-nav {
-            width: calc(100vw - 32px);
+            left: 16px;
+            right: 16px;
+            width: auto;
             padding: 0 8px 0 16px;
             gap: 12px;
           }
