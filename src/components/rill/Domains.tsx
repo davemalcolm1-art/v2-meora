@@ -144,14 +144,27 @@ const Domains = () => {
         .domain-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
-          position: absolute; inset: 0;
-          background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.0) 55%, rgba(0,0,0,0.55) 100%);
+          position: absolute; inset: 0; z-index: 1;
+          background: linear-gradient(180deg, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.24) 36%, rgba(0,0,0,0.0) 55%, rgba(0,0,0,0.6) 100%);
         }
         .tile-scrim {
-          position: absolute; inset: 0;
-          background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.0) 80%);
+          position: absolute; inset: 0; z-index: 1;
+          background: linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.42) 34%, rgba(0,0,0,0.06) 78%);
         }
-        .domains-bento .domain-tile h2, .domains-bento .domain-tile h3 { color: #ffffff !important; }
+        .domain-content { position: absolute; inset: 0; z-index: 2; }
+        .domain-title {
+          font-family: 'Fraunces', serif;
+          font-weight: 400;
+          line-height: 1;
+          letter-spacing: 0;
+          margin: 0;
+          color: hsl(0 0% 100%) !important;
+          opacity: 1 !important;
+          text-shadow: 0 2px 14px rgba(0,0,0,0.78), 0 1px 2px rgba(0,0,0,0.65);
+          filter: none !important;
+          mix-blend-mode: normal !important;
+        }
+        .domain-title-dot { color: #FF5003 !important; text-shadow: none; }
 
         .arrow-bubble {
           width: 44px; height: 44px; border-radius: 999px;
