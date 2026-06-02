@@ -92,11 +92,11 @@ export default function HowItWorks() {
                   width={1024}
                   height={1024}
                   style={{
-                    width: "85%",
-                    maxWidth: 280,
+                    width: "100%",
+                    maxWidth: 300,
                     height: "auto",
                     display: "block",
-                    mixBlendMode: "multiply",
+                    borderRadius: 18,
                   }}
                 />
               </div>
