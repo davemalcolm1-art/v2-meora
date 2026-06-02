@@ -2730,50 +2730,40 @@ button.btn-ghost {
 }
 .mask-section {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: auto;
+  height: clamp(120px, 18vw, 240px);
   min-height: 0;
-  padding: 140px 0 !important;
+  padding: 24px 0 0 !important;
   margin: 0 !important;
   background: transparent !important;
   border-radius: 0 !important;
   overflow: hidden;
 }
-.mask-section .mask-bg {
-  display: block !important;
-  position: absolute;
-  left: 0; right: 0;
-  top: 140px; bottom: 140px;
-  z-index: 0;
+.mask-word {
+  position: relative;
+  z-index: 2;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(140px, 22vw, 280px);
+  font-weight: 600;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  color: transparent;
   background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') !important;
   background-size: cover;
   background-position: center 45%;
-  animation: none !important;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
-.mask-section .mask-tint,
-.mask-section .mask-vignette,
-.mask-section .mask-fade-top,
-.mask-section .mask-fade-bottom { display: none !important; }
-.mask-section .mask-svg {
-  display: block !important;
-  position: absolute;
-  left: 0; right: 0;
-  top: 140px; bottom: 140px;
-  width: 100%;
-  height: calc(100% - 280px);
-  z-index: 2;
-  pointer-events: none;
-}
-.mask-section .mask-label {
+.mask-bg, .mask-tint, .mask-vignette, .mask-svg,
+.mask-fade-top, .mask-fade-bottom, .mask-label {
   display: none !important;
 }
-/* Reserve the height of the letterform band */
 .mask-section::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: clamp(180px, 26vw, 360px);
+  content: none !important;
+  display: none !important;
 }
 
 /* =====================================================================
