@@ -45,10 +45,12 @@ const App = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const vh = window.innerHeight;
       document.querySelectorAll<HTMLElement>(".section-exit-blur").forEach((section) => {
         const rect = section.getBoundingClientRect();
-        const exitProgress = Math.max(0, Math.min(1, -rect.top / (rect.height * 0.3)));
-        section.style.filter = `blur(${exitProgress * 4}px)`;
+        // Only blur when the section's bottom is approaching/passing the top of the viewport
+        const exitProgress = Math.max(0, Math.min(1, 1 - rect.bottom / (vh * 0.4)));
+        section.style.filter = exitProgress > 0 ? `blur(${exitProgress * 4}px)` : "";
         section.style.opacity = `${1 - exitProgress * 0.4}`;
       });
     };
