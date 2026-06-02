@@ -3146,20 +3146,11 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
 .mask-section {
   padding: 24px 0 0 !important;
 }
-.mask-section .mask-bg {
-  top: 24px !important;
-  bottom: 0 !important;
-}
-.mask-section .mask-svg {
-  top: 24px !important;
-  bottom: 0 !important;
-  height: calc(100% - 24px) !important;
-}
-.mask-section::after {
-  height: clamp(120px, 18vw, 240px) !important;
-}
+.mask-section::after { display: none !important; }
 .mask-section .mask-fade-top,
-.mask-section .mask-fade-bottom { display: none !important; }
+.mask-section .mask-fade-bottom,
+.mask-section .mask-bg,
+.mask-section .mask-svg { display: none !important; }
 
 /* =====================================================================
    Scroll-reveal enhancements — h2, card grids, stats, FAQ items
@@ -3363,8 +3354,8 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
   border-top: none !important;
   border-bottom: none !important;
 }
-.mask-section .mask-bg { top: 24px !important; bottom: 0 !important; }
-.mask-section .mask-svg { top: 24px !important; bottom: 0 !important; height: calc(100% - 24px) !important; }
+.mask-section .mask-bg,
+.mask-section .mask-svg,
 .mask-section .mask-label { display: none !important; }
 
 
