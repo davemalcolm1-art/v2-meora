@@ -1,5 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import heroImg from "@/assets/positioning-hero.jpg";
+import heroAsset from "@/assets/positioning-hero.jpg.asset.json";
+const heroImg = heroAsset.url;
 
 const pills = [
   "AHPRA-Registered GPs",
