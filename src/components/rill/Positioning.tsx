@@ -55,6 +55,9 @@ const Positioning = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: 72% center;
+          transform: scale(1.45);
+          transform-origin: 72% 55%;
         }
         .positioning-glow-1 {
           position: absolute;
