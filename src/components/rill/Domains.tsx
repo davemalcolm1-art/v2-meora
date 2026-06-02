@@ -145,11 +145,21 @@ const Domains = () => {
 
         .tile-scrim-hero {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.48) 38%, rgba(0,0,0,0.18) 62%, rgba(0,0,0,0.78) 100%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.26) 62%, rgba(0,0,0,0.84) 100%);
         }
         .tile-scrim {
           position: absolute; inset: 0; z-index: 1;
           background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
+        }
+        .tile-image-mask {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 58%;
+          height: 44%;
+          z-index: 2;
+          background: linear-gradient(135deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.94) 58%, rgba(0,0,0,0) 100%);
+          pointer-events: none;
         }
         .domain-content { position: absolute; inset: 0; z-index: 3; color: hsl(0 0% 100%) !important; }
         .domain-copy-block {
@@ -243,6 +253,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
       <>
         <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
+        <div className="tile-image-mask" />
         <div className="domain-content" style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title + tagline */}
           <div className="domain-copy-block">
@@ -270,6 +281,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
+      <div className="tile-image-mask" />
       <div className="domain-content" style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div className="domain-copy-block">
           <div className="domain-eyebrow">{domain.tagline}</div>
