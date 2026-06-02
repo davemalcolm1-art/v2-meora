@@ -697,19 +697,8 @@ const HeroSection = () => {
         {/* Dark gradient overlay */}
         <div className="hero-overlay" />
 
-        {/* Slide dots */}
-        <div className="hero-indicators">
-          {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              className={`hero-dot ${i === currentSlide ? "active" : ""}`}
-              onClick={() => {
-                if (!isTransitioning && i !== currentSlide) setCurrentSlide(i);
-              }}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        {/* Slide dots removed */}
+
 
         {/* Content */}
         <div className="hero-content">
