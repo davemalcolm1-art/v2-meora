@@ -1,190 +1,122 @@
-import { useState, useEffect, useRef } from 'react';
+import bloodImg from "@/assets/howitworks/step-blood.jpg";
+import gpImg from "@/assets/howitworks/step-gp.jpg";
+import deliveryImg from "@/assets/howitworks/step-delivery.jpg";
+import ongoingImg from "@/assets/howitworks/step-ongoing.jpg";
 
 const steps = [
-  { label: 'Step 01', title: 'Complete your assessment', desc: 'Tell us your goals and health history. Takes five minutes. Our clinical intake guides you through everything.' },
-  { label: 'Step 02', title: 'Consult your GP', desc: 'An AHPRA-registered doctor reviews your intake and discusses the right protocol for you via telehealth.' },
-  { label: 'Step 03', title: 'Blood panel & approval', desc: 'A targeted blood test confirms your baseline. Your doctor reviews results and releases your prescription.' },
-  { label: 'Step 04', title: 'Compounds delivered', desc: 'Your protocol is prepared by a registered compounding pharmacy and dispatched cold-chain to your door.' },
+  { n: "01", title: "Blood panel", desc: "Targeted diagnostics establish your baseline biomarkers.", img: bloodImg },
+  { n: "02", title: "Meet your GP", desc: "An AHPRA-registered doctor reviews your results via telehealth.", img: gpImg },
+  { n: "03", title: "Protocols delivered", desc: "Compounded by a registered pharmacy. Cold-chain to your door.", img: deliveryImg },
+  { n: "04", title: "Ongoing review", desc: "Continuous adjustment as your numbers and goals evolve.", img: ongoingImg },
 ];
 
-const cardData = [
-  { num: '01', label: 'Complete your\nassessment' },
-  { num: '02', label: 'Consult\nyour GP' },
-  { num: '03', label: 'Blood panel\n& approval' },
-  { num: '04', label: 'Compounds\ndelivered' },
+const trust = [
+  { label: "AHPRA-registered", sub: "Australian doctors only" },
+  { label: "Cold-chain delivery", sub: "Pharmacy to your door" },
+  { label: "Ongoing review", sub: "Care that adapts to you" },
 ];
 
 export default function HowItWorks() {
-  const [cur, setCur] = useState(0);
-  const [infoKey, setInfoKey] = useState(0);
-  const stageRef = useRef(null);
-  const canvasRef = useRef(null);
-  const ringRef = useRef(null);
-  const cardRefs = useRef([]);
-  const pillX = useRef(0);
-  const pillW = useRef(0);
-  const targetX = useRef(0);
-  const targetW = useRef(0);
-  const animRef = useRef<number | undefined>(undefined);
-  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
-
-  function getCardRect(i) {
-    const sr = stageRef.current.getBoundingClientRect();
-    const cr = cardRefs.current[i].getBoundingClientRect();
-    return { x: cr.left - sr.left, w: cr.width };
-  }
-
-  function drawFrost(px, pw) {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const dpr = window.devicePixelRatio || 1;
-    const W = canvas.width / dpr;
-    const H = canvas.height / dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = 'rgba(20,35,45,0.75)';
-    ctx.beginPath();
-    ctx.roundRect(0, 0, W, H, 14);
-    ctx.fill();
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.fillStyle = 'rgba(0,0,0,1)';
-    ctx.beginPath();
-    ctx.roundRect(px + 4, 4, pw - 8, H - 8, 10);
-    ctx.fill();
-    ctx.globalCompositeOperation = 'source-over';
-  }
-
-  function updateCanvas() {
-    const canvas = canvasRef.current;
-    const stage = stageRef.current;
-    if (!canvas || !stage) return;
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = stage.offsetWidth * dpr;
-    canvas.height = stage.offsetHeight * dpr;
-    drawFrost(pillX.current, pillW.current);
-  }
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
-
-  function animate() {
-    pillX.current = lerp(pillX.current, targetX.current, 0.1);
-    pillW.current = lerp(pillW.current, targetW.current, 0.1);
-    drawFrost(pillX.current, pillW.current);
-    if (ringRef.current) {
-      ringRef.current.style.left = (pillX.current + 4) + 'px';
-      ringRef.current.style.width = (pillW.current - 8) + 'px';
-    }
-    if (Math.abs(pillX.current - targetX.current) > 0.5 || Math.abs(pillW.current - targetW.current) > 0.5) {
-      animRef.current = requestAnimationFrame(animate);
-    }
-  }
-
-  function go(i) {
-    setCur(i);
-    setInfoKey(k => k + 1);
-    const r = getCardRect(i);
-    targetX.current = r.x;
-    targetW.current = r.w;
-    cancelAnimationFrame(animRef.current);
-    animRef.current = requestAnimationFrame(animate);
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      const r = getCardRect(0);
-      pillX.current = targetX.current = r.x;
-      pillW.current = targetW.current = r.w;
-      updateCanvas();
-      if (ringRef.current) {
-        ringRef.current.style.left = (r.x + 4) + 'px';
-        ringRef.current.style.width = (r.w - 8) + 'px';
-      }
-      timerRef.current = setInterval(() => {
-        setCur(c => {
-          const next = (c + 1) % 4;
-          setTimeout(() => go(next), 0);
-          return c;
-        });
-      }, 4000);
-    }, 150);
-    window.addEventListener('resize', updateCanvas);
-    return () => {
-      window.removeEventListener('resize', updateCanvas);
-      clearInterval(timerRef.current);
-      cancelAnimationFrame(animRef.current);
-    };
-  }, []);
-
   return (
-    <section className="section-exit-blur" style={{ width: 'auto', margin: '24px', background: 'radial-gradient(ellipse at 50% 0%, #2D5470 0%, #1A3347 20%, #1A2B35 55%, #0F1E27 100%)', padding: '140px 0', overflow: 'hidden', position: 'relative', borderRadius: 32, WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)' }}>
-      <style>{`
-        @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-        .hiw-fade { animation: fadeUp 0.3s ease both; }
-      `}</style>
+    <section style={{ background: "#F7F4EF", padding: "140px 0 120px", color: "#1A2B35" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px" }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(26,43,53,0.5)", margin: "0 0 18px" }}>
+            How it works
+          </p>
+          <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: "clamp(40px,4.4vw,64px)", fontWeight: 400, lineHeight: 1.05, letterSpacing: "-0.02em", margin: "0 0 18px" }}>
+            Designed to be <em style={{ fontStyle: "italic" }}>simple.</em>
+          </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 17, color: "rgba(26,43,53,0.6)", margin: 0, lineHeight: 1.6 }}>
+            From blood panel to protocol — a clinically guided journey, end to end.
+          </p>
+        </div>
 
-      <div style={{ padding: '0 60px 48px' }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 12 }}>HOW IT WORKS</p>
-        <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 'clamp(36px,4vw,52px)', fontWeight: 700, color: '#FFFFFF', margin: '0 0 4px', lineHeight: 1.1 }}>
-          Simple steps.<br /><em style={{ color: '#FFFFFF', fontStyle: 'italic' }}>Serious medicine.</em>
-        </h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 16, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.75 }}>From your first consultation to compounds at your door.</p>
-      </div>
-
-      <div ref={stageRef} style={{ position: 'relative', height: 150, margin: '0 60px 36px' }}>
-        <div style={{ display: 'flex', position: 'absolute', inset: 0, gap: 12 }}>
-          {cardData.map((card, i) => (
-            <div
-              key={i}
-              ref={el => cardRefs.current[i] = el}
-              onClick={() => { go(i); clearInterval(timerRef.current); }}
-              style={{ flex: 1, borderRadius: 14, background: 'rgba(232,220,200,0.08)', border: '1px solid rgba(232,220,200,0.12)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, cursor: 'pointer', padding: '0 10px', textAlign: 'center' }}
+        {/* Cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginBottom: 56 }}>
+          {steps.map((s) => (
+            <article
+              key={s.n}
+              style={{
+                position: "relative",
+                aspectRatio: "3 / 4.2",
+                borderRadius: 24,
+                overflow: "hidden",
+                background: "#1A2B35",
+              }}
             >
-              <span style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 700, fontSize: 30, color: 'rgba(255,255,255,0.9)', lineHeight: 1 }}>{card.num}</span>
-              <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', lineHeight: 1.4, whiteSpace: 'pre-line' }}>{card.label}</span>
+              <img
+                src={s.img}
+                alt=""
+                loading="lazy"
+                width={1024}
+                height={1280}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <div
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.75) 100%)",
+                }}
+              />
+              <div style={{ position: "absolute", inset: 0, padding: 28, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
+                <span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 18, fontWeight: 500, opacity: 0.85 }}>{s.n}</span>
+                <div>
+                  <h3 style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 28, fontWeight: 400, lineHeight: 1.15, margin: "0 0 10px", letterSpacing: "-0.01em" }}>
+                    {s.title}
+                  </h3>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.55, margin: 0, color: "rgba(255,255,255,0.85)", maxWidth: 260 }}>
+                    {s.desc}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Numbered timeline */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "0 auto 64px", maxWidth: 720 }}>
+          {steps.map((s, i) => (
+            <div key={s.n} style={{ display: "flex", alignItems: "center", gap: 14, flex: i === steps.length - 1 ? "0 0 auto" : 1 }}>
+              <div style={{
+                width: 26, height: 26, borderRadius: "50%", background: "#1A2B35", color: "#F7F4EF",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, flexShrink: 0,
+              }}>
+                {i + 1}
+              </div>
+              {i < steps.length - 1 && (
+                <div style={{ flex: 1, height: 1, background: "rgba(26,43,53,0.2)" }} />
+              )}
             </div>
           ))}
         </div>
-        <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', borderRadius: 14 }} />
-        <div ref={ringRef} style={{ position: 'absolute', top: 4, bottom: 4, borderRadius: 12, border: '2px solid rgba(232,87,26,0.8)', boxShadow: '0 0 20px rgba(232,87,26,0.15)', pointerEvents: 'none', zIndex: 3 }} />
-      </div>
 
-      <div key={infoKey} className="hiw-fade" style={{ textAlign: 'center', minHeight: 90, padding: '0 60px' }}>
-        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8571A', marginBottom: 6 }}>{steps[cur].label}</p>
-        <p style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 8px' }}>{steps[cur].title}</p>
-        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', maxWidth: 380, margin: '0 auto', lineHeight: 1.65 }}>{steps[cur].desc}</p>
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 24 }}>
-        {steps.map((_, i) => (
-          <button key={i} onClick={() => { go(i); clearInterval(timerRef.current); }} style={{ width: cur === i ? 20 : 6, height: 6, borderRadius: cur === i ? 3 : '50%', background: cur === i ? '#E8571A' : 'rgba(255,255,255,0.15)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s ease' }} />
-        ))}
-      </div>
-
-      <div style={{ display: 'flex', gap: 12, margin: '48px 60px 0', flexWrap: 'wrap' }}>
-        {steps.map((s, i) => {
-          const active = cur === i;
-          return (
-            <div key={i} onClick={() => { go(i); clearInterval(timerRef.current); }} style={{
-              flex: '1 1 200px', height: 320, borderRadius: 16,
-              background: active ? 'rgba(255,80,3,0.12)' : 'rgba(255,255,255,0.05)',
-              border: `1px solid ${active ? 'rgba(255,80,3,0.3)' : 'rgba(255,255,255,0.08)'}`,
-              position: 'relative', overflow: 'hidden', cursor: 'pointer',
-              display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-              padding: 24, transition: 'all 0.4s ease',
-            }}>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 8, textTransform: 'uppercase' }}>{s.label}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 16, color: '#FFFFFF', lineHeight: 1.3, marginBottom: 6 }}>{s.title}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{s.desc}</div>
+        {/* Trust strip */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32, marginBottom: 48, borderTop: "1px solid rgba(26,43,53,0.1)", borderBottom: "1px solid rgba(26,43,53,0.1)", padding: "32px 0" }}>
+          {trust.map((t) => (
+            <div key={t.label} style={{ textAlign: "center" }}>
+              <p style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 20, fontWeight: 400, margin: "0 0 4px", color: "#1A2B35" }}>{t.label}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(26,43,53,0.55)", margin: 0 }}>{t.sub}</p>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
 
-      <button style={{ display: 'block', margin: '24px auto 0', background: '#E8571A', color: '#fff', fontFamily: 'DM Sans, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.06em', border: 'none', borderRadius: 999, padding: '13px 32px', cursor: 'pointer' }}>
-        START YOUR ASSESSMENT →
-      </button>
+        {/* CTA */}
+        <div style={{ textAlign: "center" }}>
+          <button style={{
+            background: "#1A2B35", color: "#F7F4EF",
+            fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13,
+            letterSpacing: "0.08em", textTransform: "uppercase",
+            border: "none", borderRadius: 999, padding: "16px 36px", cursor: "pointer",
+          }}>
+            Start your assessment →
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
