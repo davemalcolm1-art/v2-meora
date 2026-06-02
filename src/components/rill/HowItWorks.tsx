@@ -41,8 +41,7 @@ export default function HowItWorks() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
-            borderTop: "1px solid rgba(26,43,53,0.15)",
-            borderBottom: "1px solid rgba(26,43,53,0.15)",
+            gap: 28,
             marginBottom: 72,
           }}
         >
@@ -51,8 +50,7 @@ export default function HowItWorks() {
               key={s.n}
               style={{
                 position: "relative",
-                padding: "44px 32px 48px",
-                borderLeft: i === 0 ? "none" : "1px solid rgba(26,43,53,0.15)",
+                padding: "8px 8px 32px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
