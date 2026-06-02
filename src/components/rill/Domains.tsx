@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-import { motion, LayoutGroup } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import energyImg from "@/assets/domains/energy.jpg.asset.json";
 import performanceImg from "@/assets/domains/performance.jpg.asset.json";
@@ -82,45 +81,31 @@ const Domains = () => {
           </div>
         </div>
 
-        <LayoutGroup>
-          <div className="domains-bento">
-            {domains.map((d, domainIdx) => {
-              const slotIdx = (domainIdx - offset + N) % N;
-              const slot = slots[slotIdx];
-              const isHero = slot.variant === "hero";
-              return (
-                <motion.button
-                  key={d.num}
-                  layout
-                  transition={{ type: "spring", stiffness: 260, damping: 32, mass: 0.9 }}
-                  onClick={() => focusDomain(domainIdx)}
-                  className={`domain-tile group ${slot.variant}`}
-                  data-variant={slot.variant}
-                  aria-label={`${d.name} protocol`}
-                  style={{
-                    gridColumn: slot.col,
-                    gridRow: slot.row,
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: 32,
-                    textAlign: "left",
-                    padding: 0,
-                    border: "none",
-                    cursor: isHero ? "default" : "pointer",
-                    minHeight: slot.minH,
-                    zIndex: isHero ? 2 : 1,
-                    background: "#000",
-                  }}
-                  whileHover={isHero ? undefined : { y: -4 }}
-                >
-                  <motion.div layout="position" style={{ position: "absolute", inset: 0 }}>
-                    <DomainSlot domain={d} isHero={isHero} />
-                  </motion.div>
-                </motion.button>
-              );
-            })}
-          </div>
-        </LayoutGroup>
+        <div className="domains-bento">
+          {domains.map((d, domainIdx) => {
+            const slotIdx = (domainIdx - offset + N) % N;
+            const slot = slots[slotIdx];
+            const isHero = slot.variant === "hero";
+            return (
+              <button
+                key={`${d.num}-${slot.variant}`}
+                onClick={() => focusDomain(domainIdx)}
+                className={`goal-tile ${slot.variant}`}
+                data-variant={slot.variant}
+                aria-label={`${d.name} protocol`}
+                style={{
+                  gridColumn: slot.col,
+                  gridRow: slot.row,
+                  cursor: isHero ? "default" : "pointer",
+                  minHeight: slot.minH,
+                  zIndex: isHero ? 2 : 1,
+                }}
+              >
+                <DomainSlot domain={d} isHero={isHero} />
+              </button>
+            );
+          })}
+        </div>
 
         <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(26,43,53,0.45)" }}>
           <span aria-hidden style={{ flex: 1, height: 1, background: "rgba(26,43,53,0.15)" }} />
