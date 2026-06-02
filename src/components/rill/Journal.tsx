@@ -200,8 +200,12 @@ const Journal = () => {
       style={{
         background: "radial-gradient(ellipse at 50% 100%, #F0EBE3 0%, #F7F4EF 55%, #FFFFFF 100%)",
         padding: "120px 0",
+        margin: isMobile ? "16px 12px" : "24px 24px",
+        borderRadius: isMobile ? 20 : 32,
+        overflow: "hidden",
       }}
     >
+
       <div
         style={{
           maxWidth: 1200,

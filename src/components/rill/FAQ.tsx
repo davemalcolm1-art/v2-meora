@@ -18,6 +18,9 @@ const FAQ = () => {
       style={{
         background: "radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #F7F4EF 60%, #EDE8E0 100%)",
         padding: "120px 80px",
+        margin: "24px",
+        borderRadius: 32,
+        overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: 880, margin: "0 auto" }}>

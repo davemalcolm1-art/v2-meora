@@ -6,9 +6,11 @@ const CtaBanner = () => {
     <section className="section-exit-blur" style={{
       position: "relative",
       overflow: "hidden",
-      width: "100%",
+      width: "auto",
       background: "radial-gradient(ellipse at 30% 50%, #2D5470 0%, #1A3347 30%, #1A2B35 65%, #0F1820 100%)",
       padding: "100px 0",
+      margin: "24px",
+      borderRadius: 32,
     }}>
       <div aria-hidden="true" style={{ position: "absolute", top: -80, right: -80, width: 400, height: 400, background: "radial-gradient(circle, rgba(255,80,3,0.1) 0%, transparent 65%)", pointerEvents: "none" }} />
       <div className="cta-inner" style={{

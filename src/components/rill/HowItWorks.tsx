@@ -118,7 +118,7 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section className="section-exit-blur" style={{ width: '100%', background: 'radial-gradient(ellipse at 50% 0%, #2D5470 0%, #1A3347 20%, #1A2B35 55%, #0F1E27 100%)', padding: '140px 0', overflow: 'hidden', position: 'relative', borderRadius: 32, WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)' }}>
+    <section className="section-exit-blur" style={{ width: 'auto', margin: '24px', background: 'radial-gradient(ellipse at 50% 0%, #2D5470 0%, #1A3347 20%, #1A2B35 55%, #0F1E27 100%)', padding: '140px 0', overflow: 'hidden', position: 'relative', borderRadius: 32, WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)' }}>
       <style>{`
         @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         .hiw-fade { animation: fadeUp 0.3s ease both; }
