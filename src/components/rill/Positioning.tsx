@@ -253,7 +253,7 @@ const Positioning = () => {
       <div className="positioning-header">
         <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
         <h2 className="scroll-animate delay-100 positioning-h2">
-          Personalised. <em>Evidence-informed.</em><br />Designed around you.
+          <span className="pos-hl">Personalised</span>. <em>Evidence-informed.</em><br />Designed around <span className="pos-hl-big">you</span>.
         </h2>
       </div>
 
