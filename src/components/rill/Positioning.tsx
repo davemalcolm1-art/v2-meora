@@ -16,16 +16,12 @@ const Positioning = () => {
       ref={sectionRef}
       className="scroll-animate positioning-section"
       style={{
-        background:
-          "radial-gradient(ellipse at 50% 110%, rgba(255,80,3,0.16) 0%, rgba(255,80,3,0) 55%), linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 35%, #E8DDD0 78%, #EDE8E0 100%)",
-        margin: "24px",
-        borderRadius: 32,
-        overflow: "hidden",
-        boxShadow: "0 20px 60px -20px rgba(26,43,53,0.08)",
-        border: "1px solid rgba(255,255,255,0.5)",
+        background: "transparent",
         position: "relative",
+        padding: "24px 0",
       }}
     >
+
       <style>{`
         .positioning-header {
           text-align: center;
