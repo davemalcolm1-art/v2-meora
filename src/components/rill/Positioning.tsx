@@ -237,21 +237,9 @@ const Positioning = () => {
         }
       `}</style>
 
-      {/* Hero: gradient + dotted arc + cutout person + headline */}
+      {/* Hero: gradient + cutout person + headline */}
       <div className="positioning-hero">
-        <svg className="positioning-arc" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
-          <path
-            d="M -50 480 Q 600 100 1250 380"
-            fill="none"
-            stroke="#FF5003"
-            strokeWidth="1.5"
-            strokeDasharray="2 8"
-            opacity="0.5"
-          />
-          <circle cx="220" cy="340" r="6" fill="#FF5003" opacity="0.35" />
-          <circle cx="600" cy="195" r="7" fill="#FF5003" opacity="0.4" />
-          <circle cx="980" cy="280" r="5" fill="#FF5003" opacity="0.35" />
-        </svg>
+
 
         <div className="positioning-hero-text">
           <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
