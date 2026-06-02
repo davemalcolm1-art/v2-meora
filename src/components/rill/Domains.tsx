@@ -14,15 +14,16 @@ type Domain = {
   desc: string;
   image: string;
   tagline: string;
+  textTone?: "light" | "dark";
 };
 
 const domains: Domain[] = [
-  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output" },
-  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition" },
-  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health" },
-  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience" },
-  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing" },
-  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen" },
+  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output",         textTone: "light" },
+  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition",    textTone: "light" },
+  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health",          textTone: "light" },
+  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience",      textTone: "light" },
+  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing",           textTone: "light" },
+  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen",          textTone: "light" },
 ];
 
 type Variant = "hero" | "a" | "b" | "c" | "d" | "e";
