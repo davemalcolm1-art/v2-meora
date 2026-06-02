@@ -75,18 +75,42 @@ const Positioning = () => {
           min-height: 460px;
           display: flex;
           flex-direction: column;
+          transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background 0.45s ease;
+          will-change: transform;
+        }
+        .pos-card:hover {
+          transform: translateY(-6px);
         }
         .pos-card-dark {
-          background: #1A2B35;
+          background: rgba(26,43,53,0.92);
+          backdrop-filter: blur(18px) saturate(140%);
+          -webkit-backdrop-filter: blur(18px) saturate(140%);
+          border: 1px solid rgba(255,255,255,0.08);
           color: #fff;
+          box-shadow: 0 18px 50px -22px rgba(26,43,53,0.45);
+        }
+        .pos-card-dark:hover {
+          box-shadow: 0 28px 70px -24px rgba(26,43,53,0.55);
         }
         .pos-card-light {
-          background: rgba(255,255,255,0.6);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          border: 1px solid rgba(255,255,255,0.7);
+          background: rgba(255,255,255,0.45);
+          backdrop-filter: blur(22px) saturate(160%);
+          -webkit-backdrop-filter: blur(22px) saturate(160%);
+          border: 1px solid rgba(255,255,255,0.6);
           color: #1A2B35;
+          box-shadow: 0 18px 50px -24px rgba(26,43,53,0.18);
         }
+        .pos-card-light:hover {
+          background: rgba(255,255,255,0.6);
+          box-shadow: 0 28px 70px -24px rgba(26,43,53,0.25);
+        }
+        .pos-card-image {
+          box-shadow: 0 18px 50px -20px rgba(26,43,53,0.35);
+        }
+        .pos-card-image:hover {
+          box-shadow: 0 30px 70px -22px rgba(26,43,53,0.45);
+        }
+
         .pos-card-image {
           padding: 0;
           background: #1A2B35;
