@@ -167,6 +167,27 @@ const Positioning = () => {
         .pos-card-dark .pos-card-body { color: rgba(255,255,255,0.78); }
         .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
 
+        .pos-card-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 22px;
+          align-self: flex-start;
+          padding: 13px 22px;
+          background: #FF5003;
+          color: #fff;
+          border-radius: 999px;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 600;
+          font-size: 14px;
+          letter-spacing: -0.01em;
+          text-decoration: none;
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .pos-card-cta:hover { transform: translateY(-2px); background: #ff6320; }
+
+        .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
+
         .pos-card-foot {
           margin-top: auto;
           padding-top: 18px;
