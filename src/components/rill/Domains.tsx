@@ -211,8 +211,8 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
             <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.65)", marginBottom: 14 }}>
               {domain.tagline}
             </div>
-            <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#fff", fontSize: "clamp(40px,4.4vw,64px)", lineHeight: 1.0, letterSpacing: "-0.02em", margin: 0 }}>
-              {titleCase(domain.name)}<span style={{ color: "#FF5003" }}>.</span>
+            <h2 className="domain-title" style={{ fontSize: "clamp(40px,4.4vw,64px)", letterSpacing: "-0.02em" }}>
+              {titleCase(domain.name)}<span className="domain-title-dot">.</span>
             </h2>
           </div>
           {/* BOTTOM: description + arrow */}
