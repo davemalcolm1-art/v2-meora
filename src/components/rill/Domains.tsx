@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect } from "react";
+import { motion, LayoutGroup } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 type Domain = {
   num: string;
   name: string;
   desc: string;
-  // visual flavor used when rendered in image-bearing slots
   gradient: string;
   tagline: string;
 };
@@ -19,20 +19,17 @@ const domains: Domain[] = [
   { num: "06", name: "BEAUTY",      desc: "Skin health, collagen and radiance from within — clinical, not cosmetic.",               gradient: "radial-gradient(ellipse at 45% 20%, #4A1F45 0%, #2A0F28 45%, #150810 100%)", tagline: "Dermal integrity" },
 ];
 
-// 6 fixed slots derived from the chosen "Editorial bento hierarchy" prototype.
-// Slot 0 is the hero. Clicking any other slot rotates that domain into slot 0.
-type Slot = {
-  className: string;
-  variant: "hero" | "dark-image" | "light-image" | "tall-image" | "orange" | "wide-image";
-};
+type Variant = "hero" | "dark-image" | "light-image" | "tall-image" | "orange" | "wide-image";
+type Slot = { col: string; row: string; variant: Variant; minH: number };
 
+// Explicit grid placement so each tile can move independently to a new cell.
 const slots: Slot[] = [
-  { className: "md:col-span-8 md:row-span-2",                          variant: "hero" },
-  { className: "md:col-span-4",                                         variant: "dark-image" },
-  { className: "md:col-span-4",                                         variant: "light-image" },
-  { className: "md:col-span-3",                                         variant: "tall-image" },
-  { className: "md:col-span-3",                                         variant: "orange" },
-  { className: "md:col-span-6",                                         variant: "wide-image" },
+  { col: "1 / span 8",  row: "1 / span 2", variant: "hero",        minH: 560 },
+  { col: "9 / span 4",  row: "1",          variant: "dark-image",  minH: 270 },
+  { col: "9 / span 4",  row: "2",          variant: "light-image", minH: 270 },
+  { col: "1 / span 3",  row: "3",          variant: "tall-image",  minH: 270 },
+  { col: "4 / span 3",  row: "3",          variant: "orange",      minH: 270 },
+  { col: "7 / span 6",  row: "3",          variant: "wide-image",  minH: 270 },
 ];
 
 const arrow = (
@@ -41,25 +38,24 @@ const arrow = (
   </svg>
 );
 
+const N = domains.length;
+
 const Domains = () => {
   const sectionRef = useScrollAnimation<HTMLElement>();
+  // offset = index of the domain currently in slot 0 (hero)
   const [offset, setOffset] = useState(0);
-  const [phase, setPhase] = useState<"in" | "out">("in");
 
-  const cycleTo = useCallback((slotIndex: number) => {
-    if (slotIndex === 0) return;
-    setPhase("out");
-    window.setTimeout(() => {
-      setOffset((o) => (o + slotIndex) % domains.length);
-      setPhase("in");
-    }, 320);
+  const focusDomain = useCallback((domainIdx: number) => {
+    setOffset(domainIdx);
   }, []);
 
-  // Gentle auto-advance so the section feels alive even without interaction
+  // Gentle auto-advance: rotate forward by one
   useEffect(() => {
-    const id = window.setInterval(() => cycleTo(1), 6500);
+    const id = window.setInterval(() => {
+      setOffset((o) => (o + 1) % N);
+    }, 5500);
     return () => window.clearInterval(id);
-  }, [cycleTo]);
+  }, []);
 
   return (
     <section
@@ -85,38 +81,53 @@ const Domains = () => {
             </h1>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(26,43,53,0.5)" }}>
-            <span>Tap a tile to focus</span>
+            <span>Tap a tile — the grid rearranges</span>
             <span aria-hidden style={{ width: 24, height: 1, background: "rgba(26,43,53,0.3)" }} />
-            <span>{String((offset % domains.length) + 1).padStart(2, "0")} / 06</span>
+            <span>{String(offset + 1).padStart(2, "0")} / 06</span>
           </div>
         </div>
 
         {/* Bento */}
-        <div className="domains-bento grid grid-cols-1 md:grid-cols-12 gap-4">
-          {slots.map((slot, i) => {
-            const d = domains[(i + offset) % domains.length];
-            return (
-              <button
-                key={i}
-                onClick={() => cycleTo(i)}
-                className={`domain-tile group ${slot.className} ${slot.variant}`}
-                aria-label={`${d.name} protocol — focus this tile`}
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: 32,
-                  textAlign: "left",
-                  padding: 0,
-                  border: "none",
-                  cursor: i === 0 ? "default" : "pointer",
-                  minHeight: slot.variant === "hero" ? 560 : 270,
-                }}
-              >
-                <DomainSlot domain={d} variant={slot.variant} phase={phase} />
-              </button>
-            );
-          })}
-        </div>
+        <LayoutGroup>
+          <div className="domains-bento">
+            {domains.map((d, domainIdx) => {
+              // Which slot does this domain currently occupy?
+              const slotIdx = (domainIdx - offset + N) % N;
+              const slot = slots[slotIdx];
+              const isHero = slot.variant === "hero";
+              return (
+                <motion.button
+                  key={d.num}
+                  layout
+                  transition={{ type: "spring", stiffness: 260, damping: 32, mass: 0.9 }}
+                  onClick={() => focusDomain(domainIdx)}
+                  className={`domain-tile group ${slot.variant}`}
+                  data-variant={slot.variant}
+                  aria-label={`${d.name} protocol — focus this tile`}
+                  style={{
+                    gridColumn: slot.col,
+                    gridRow: slot.row,
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: 32,
+                    textAlign: "left",
+                    padding: 0,
+                    border: "none",
+                    cursor: isHero ? "default" : "pointer",
+                    minHeight: slot.minH,
+                    zIndex: isHero ? 2 : 1,
+                  }}
+                  whileHover={isHero ? undefined : { y: -4 }}
+                >
+                  {/* inner content also gets a layout so children counter-scale gracefully */}
+                  <motion.div layout="position" style={{ position: "absolute", inset: 0 }}>
+                    <DomainSlot domain={d} variant={slot.variant} />
+                  </motion.div>
+                </motion.button>
+              );
+            })}
+          </div>
+        </LayoutGroup>
 
         <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(26,43,53,0.45)" }}>
           <span aria-hidden style={{ flex: 1, height: 1, background: "rgba(26,43,53,0.15)" }} />
@@ -126,22 +137,17 @@ const Domains = () => {
       </div>
 
       <style>{`
-        .domains-bento { grid-auto-rows: 270px; }
+        .domains-bento {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          grid-auto-rows: 270px;
+          gap: 16px;
+        }
         .domain-tile.hero .hero-title { color: #fff !important; }
         .domain-tile.hero .hero-title span { color: #FF5003 !important; }
-        @media (min-width: 768px) {
-          .domains-bento .domain-tile.md\\:row-span-2 { grid-row: span 2 / span 2; }
-        }
 
-        .domain-tile { transition: transform 0.5s cubic-bezier(.22,1,.36,1), box-shadow 0.5s ease; }
-        .domain-tile:hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(26,43,53,0.35); }
-
-        .domain-content {
-          position: absolute; inset: 0;
-          transition: opacity 320ms ease, transform 320ms ease;
-        }
-        .domain-content.phase-out { opacity: 0; transform: translateY(6px) scale(0.985); }
-        .domain-content.phase-in  { opacity: 1; transform: translateY(0)    scale(1); }
+        .domain-tile { box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35); }
+        .domain-tile:hover { box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
 
         .glass {
           background: rgba(255,255,255,0.10);
@@ -190,7 +196,11 @@ const Domains = () => {
         }
         @media (max-width: 768px) {
           .domains-bento { grid-template-columns: 1fr !important; grid-auto-rows: auto; }
-          .domain-tile { min-height: 240px !important; }
+          .domain-tile {
+            grid-column: 1 / -1 !important;
+            grid-row: auto !important;
+            min-height: 240px !important;
+          }
           .domains-wrap { padding: 0 24px !important; }
         }
       `}</style>
@@ -198,17 +208,15 @@ const Domains = () => {
   );
 };
 
-// ---------- Slot renderer ----------
-const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot["variant"]; phase: "in" | "out" }) => {
-  const phaseClass = phase === "out" ? "phase-out" : "phase-in";
-
+// ---------- Slot renderer (unchanged visuals) ----------
+const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) => {
   if (variant === "hero") {
     return (
       <>
         <div className="gradient-bg" style={{ background: domain.gradient }} />
         <img src="/meora-mark-white.svg" alt="" aria-hidden="true" style={{ position: "absolute", bottom: -40, right: -40, width: 240, opacity: 0.05 }} />
         <div className="hero-overlay" />
-        <div className={`domain-content ${phaseClass}`} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div style={{ position: "absolute", inset: 0, padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <span className="num-pill glass" style={{ color: "#fff" }}>{domain.num} · Protocol</span>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>{domain.tagline}</span>
@@ -231,7 +239,7 @@ const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot[
     return (
       <>
         <div className="gradient-bg" style={{ background: domain.gradient }} />
-        <div className={`domain-content ${phaseClass}`} style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <span className="num-pill glass" style={{ color: "rgba(255,255,255,0.85)", alignSelf: "flex-start" }}>{domain.num}</span>
           <div className="glass" style={{ borderRadius: 18, padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", color: "#fff" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -250,7 +258,7 @@ const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot[
       <>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(150deg, #F0EBE3 0%, #E8E1D4 100%)" }} />
         <div style={{ position: "absolute", inset: 0, background: domain.gradient, opacity: 0.18, mixBlendMode: "multiply" }} />
-        <div className={`domain-content ${phaseClass}`} style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <span className="num-pill" style={{ color: "#1A2B35", background: "rgba(26,43,53,0.06)", border: "1px solid rgba(26,43,53,0.12)", alignSelf: "flex-start" }}>{domain.num}</span>
           <div className="glass-dark" style={{ borderRadius: 18, padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", color: "#1A2B35" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -269,7 +277,7 @@ const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot[
       <>
         <div className="gradient-bg" style={{ background: domain.gradient }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%)" }} />
-        <div className={`domain-content ${phaseClass}`} style={{ padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
+        <div style={{ position: "absolute", inset: 0, padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
           <span className="num-pill glass" style={{ alignSelf: "flex-start" }}>{domain.num}</span>
           <div className="glass" style={{ borderRadius: 14, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>{titleCase(domain.name)}</span>
@@ -287,7 +295,7 @@ const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot[
         <svg aria-hidden style={{ position: "absolute", inset: 0, margin: "auto", width: 140, height: 140, opacity: 0.12, color: "#fff" }} fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
         </svg>
-        <div className={`domain-content ${phaseClass}`} style={{ padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
+        <div style={{ position: "absolute", inset: 0, padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
           <span className="num-pill" style={{ alignSelf: "flex-start", background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.3)" }}>{domain.num}</span>
           <div style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.25)", backdropFilter: "blur(10px)", borderRadius: 14, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>{titleCase(domain.name)}</span>
@@ -303,7 +311,7 @@ const DomainSlot = ({ domain, variant, phase }: { domain: Domain; variant: Slot[
     <>
       <div className="gradient-bg" style={{ background: domain.gradient }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(26,43,53,0) 40%, rgba(26,43,53,0.45) 100%)" }} />
-      <div className={`domain-content ${phaseClass}`} style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
+      <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
         <span className="num-pill glass" style={{ alignSelf: "flex-start" }}>{domain.num}</span>
         <div className="glass" style={{ borderRadius: 18, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
