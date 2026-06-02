@@ -350,10 +350,20 @@ const HeroSection = () => {
         .hero-section {
           position: relative;
           width: 100%;
-          height: 100vh;
-          min-height: 620px;
+          height: 78vh;
+          min-height: 560px;
+          max-height: 820px;
           overflow: hidden;
           background: #1A2B35;
+          border-bottom-left-radius: 32px;
+          border-bottom-right-radius: 32px;
+        }
+        @media (max-width: 768px) {
+          .hero-section {
+            height: 86vh;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+          }
         }
         .hero-slide {
           position: absolute;
