@@ -61,6 +61,8 @@ const Positioning = () => {
           max-width: 880px;
         }
         .positioning-h2 em { font-style: italic; font-weight: 400; }
+        .pos-hl { color: #FF5003; }
+        .pos-hl-big { color: #FF5003; font-size: 1.18em; }
 
         .positioning-grid {
           display: grid;
@@ -251,7 +253,7 @@ const Positioning = () => {
       <div className="positioning-header">
         <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
         <h2 className="scroll-animate delay-100 positioning-h2">
-          Personalised. <em>Evidence-informed.</em><br />Designed around you.
+          <span className="pos-hl">Personalised</span>. <em>Evidence-informed.</em><br />Designed around <span className="pos-hl-big">you</span>.
         </h2>
       </div>
 
