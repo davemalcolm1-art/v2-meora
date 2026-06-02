@@ -1,3 +1,5 @@
+import MaskSection from "./MaskSection";
+
 const domainLinks = ["Energy", "Performance", "Balance", "Recovery", "Longevity", "Beauty"];
 const companyLinks = ["About Meora", "Our Doctors", "Our Standards", "Journal", "Contact"];
 const supportLinks = ["Privacy Policy", "Terms & Conditions", "Telehealth Disclaimer", "Product Disclaimer"];
@@ -21,8 +23,10 @@ const LinkCol = ({ label, items }: { label: string; items: string[] }) => (
   </div>
 );
 
-const Footer = () => (
-  <footer style={{ background: "linear-gradient(180deg, #1A2B35 0%, #142028 60%, #0F1820 100%)", padding: "32px 80px 40px" }}>
+const Footer = ({ showMask = false }: { showMask?: boolean }) => (
+  <section className="meora-footer-shell">
+    {showMask && <MaskSection />}
+  <footer className="rill-footer" style={{ background: "transparent", padding: "32px 80px 40px" }}>
     <div style={{ maxWidth: 1200, margin: "0 auto" }}>
       <div className="footer-top-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div>
@@ -72,6 +76,7 @@ const Footer = () => (
       }
     `}</style>
   </footer>
+  </section>
 );
 
 export default Footer;
