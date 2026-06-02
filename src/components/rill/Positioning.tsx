@@ -167,6 +167,28 @@ const Positioning = () => {
         .pos-card-dark .pos-card-body { color: rgba(255,255,255,0.78); }
         .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
 
+        .pos-card-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 22px;
+          align-self: flex-start;
+          padding: 13px 22px;
+          background: #FF5003;
+          color: #fff;
+          border-radius: 999px;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 600;
+          font-size: 14px;
+          letter-spacing: -0.01em;
+          text-decoration: none;
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .pos-card-cta:hover { transform: translateY(-2px); background: #ff6320; }
+
+
+
+
         .pos-card-foot {
           margin-top: auto;
           padding-top: 18px;
@@ -275,6 +297,14 @@ const Positioning = () => {
           <p className="pos-card-body">
             Professional GP oversight paired with cutting-edge longevity science — protocols that are safe, measured, and genuinely effective for your biology.
           </p>
+          <a href="/book" className="pos-card-cta">
+            Meet your GP
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+
           <div className="pos-card-foot">
             <span className="pos-card-foot-label">Verified Protocol</span>
             <div className="pos-avatars"><span /><span /></div>
