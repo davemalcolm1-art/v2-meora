@@ -268,20 +268,18 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
         <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
         <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          {/* TOP: title + tagline */}
+          {/* TOP: title (label) */}
           <div className="goal-copy">
-            <div className="goal-eyebrow hero">
-              {domain.tagline}
-            </div>
             <h2 className="goal-title" style={{ fontSize: "clamp(40px,4.4vw,64px)", letterSpacing: "-0.02em" }}>
               {titleCase(domain.name)}<span className="goal-title-dot">.</span>
             </h2>
           </div>
-          {/* BOTTOM: description + arrow */}
+          {/* BOTTOM: eyebrow (subheading) above copy + arrow */}
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
-            <p className="goal-desc" style={{ maxWidth: 380 }}>
-              {domain.desc}
-            </p>
+            <div style={{ maxWidth: 420 }}>
+              <div className="goal-eyebrow hero">{domain.tagline}</div>
+              <p className="goal-desc">{domain.desc}</p>
+            </div>
             <div className="arrow-bubble">{arrow}</div>
           </div>
         </div>
@@ -289,19 +287,19 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     );
   }
 
-  // Smaller tiles: image + top-anchored title, arrow bottom-right
+  // Smaller tiles: title at top, eyebrow at bottom-left, arrow bottom-right
   return (
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
       <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div className="goal-copy">
-          <div className="goal-eyebrow">{domain.tagline}</div>
           <h3 className="goal-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
             {titleCase(domain.name)}<span className="goal-title-dot">.</span>
           </h3>
         </div>
-        <div className="goal-tile-footer">
+        <div className="goal-tile-footer" style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div className="goal-eyebrow" style={{ margin: 0 }}>{domain.tagline}</div>
           <div className="arrow-bubble sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
