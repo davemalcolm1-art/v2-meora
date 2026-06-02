@@ -206,35 +206,44 @@ const Positioning = () => {
 
         .positioning-pills {
           display: flex;
-          flex-wrap: nowrap;
-          gap: 8px;
-          margin-top: auto;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          margin-top: 28px;
         }
         .positioning-pill {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          background: rgba(255,255,255,0.85);
+          gap: 10px;
+          background: rgba(255,255,255,0.9);
           border: 1px solid rgba(26,43,53,0.08);
-          padding: 8px 12px;
+          padding: 14px 22px;
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
-          font-size: 11.5px;
+          font-size: 15px;
           color: #1A2B35;
           white-space: nowrap;
-          flex: 0 1 auto;
+          box-shadow: 0 4px 14px -6px rgba(26,43,53,0.08);
         }
+        .positioning-pill:nth-child(1) { margin-left: 0; }
+        .positioning-pill:nth-child(2) { margin-left: 44px; }
+        .positioning-pill:nth-child(3) { margin-left: 88px; }
         .positioning-pill svg { color: #FF5003; flex-shrink: 0; }
 
+
         @media (max-width: 1100px) {
-          .positioning-pills { flex-wrap: wrap; }
+          .positioning-pill:nth-child(2) { margin-left: 24px; }
+          .positioning-pill:nth-child(3) { margin-left: 48px; }
         }
         @media (max-width: 960px) {
           .positioning-cards { grid-template-columns: 1fr; padding: 8px 20px 20px; }
           .positioning-hero-text { padding-top: 40px; }
           .pos-card { padding: 26px; min-height: 0; }
+          .positioning-pill:nth-child(2),
+          .positioning-pill:nth-child(3) { margin-left: 0; }
         }
+
       `}</style>
 
       {/* Hero: gradient + cutout person + headline */}
