@@ -233,13 +233,17 @@ const Positioning = () => {
 
 
         @media (max-width: 1100px) {
-          .positioning-pills { flex-wrap: wrap; }
+          .positioning-pill:nth-child(2) { margin-left: 24px; }
+          .positioning-pill:nth-child(3) { margin-left: 48px; }
         }
         @media (max-width: 960px) {
           .positioning-cards { grid-template-columns: 1fr; padding: 8px 20px 20px; }
           .positioning-hero-text { padding-top: 40px; }
           .pos-card { padding: 26px; min-height: 0; }
+          .positioning-pill:nth-child(2),
+          .positioning-pill:nth-child(3) { margin-left: 0; }
         }
+
       `}</style>
 
       {/* Hero: gradient + cutout person + headline */}
