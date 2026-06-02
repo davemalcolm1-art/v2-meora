@@ -198,7 +198,7 @@ const Journal = () => {
     <section
       ref={ref}
       style={{
-        background: "#F7F4EF",
+        background: "radial-gradient(ellipse at 50% 100%, #F0EBE3 0%, #F7F4EF 55%, #FFFFFF 100%)",
         padding: "120px 0",
       }}
     >

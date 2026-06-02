@@ -2,12 +2,12 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useStaggerAnimation } from "@/hooks/useStaggerAnimation";
 
 const domains = [
-  { num: "01", name: "ENERGY", desc: "Designed for sustained drive, clarity and output.", gradient: "linear-gradient(145deg, #2C3E2D 0%, #1A2B1A 100%)" },
-  { num: "02", name: "PERFORMANCE", desc: "Designed for strength, body composition and endurance.", gradient: "linear-gradient(145deg, #2C2535 0%, #1A1525 100%)" },
-  { num: "03", name: "BALANCE", desc: "Designed for hormonal equilibrium and whole-body calm.", gradient: "linear-gradient(145deg, #1F3040 0%, #0F1E2A 100%)" },
-  { num: "04", name: "RECOVERY", desc: "Designed to support repair, resilience and tissue health.", gradient: "linear-gradient(145deg, #352520 0%, #251510 100%)" },
-  { num: "05", name: "LONGEVITY", desc: "Designed for healthy ageing and cellular optimisation.", gradient: "linear-gradient(145deg, #1A2B35 0%, #0F1A20 100%)" },
-  { num: "06", name: "BEAUTY", desc: "Designed for skin health, collagen and radiance from within.", gradient: "linear-gradient(145deg, #352535 0%, #200F20 100%)" },
+  { num: "01", name: "ENERGY", desc: "Designed for sustained drive, clarity and output.", gradient: "radial-gradient(ellipse at 40% 10%, #3A5C3D 0%, #1E3320 45%, #0D1A0E 100%)" },
+  { num: "02", name: "PERFORMANCE", desc: "Designed for strength, body composition and endurance.", gradient: "radial-gradient(ellipse at 60% 10%, #3A2855 0%, #221535 45%, #110820 100%)" },
+  { num: "03", name: "BALANCE", desc: "Designed for hormonal equilibrium and whole-body calm.", gradient: "radial-gradient(ellipse at 50% 5%, #1E4560 0%, #0F2535 45%, #071520 100%)" },
+  { num: "04", name: "RECOVERY", desc: "Designed to support repair, resilience and tissue health.", gradient: "radial-gradient(ellipse at 35% 15%, #5C3018 0%, #331A08 45%, #1A0A00 100%)" },
+  { num: "05", name: "LONGEVITY", desc: "Designed for healthy ageing and cellular optimisation.", gradient: "radial-gradient(ellipse at 55% 10%, #1E3850 0%, #0F2030 45%, #060E18 100%)" },
+  { num: "06", name: "BEAUTY", desc: "Designed for skin health, collagen and radiance from within.", gradient: "radial-gradient(ellipse at 45% 5%, #4A1F45 0%, #2A0F28 45%, #150810 100%)" },
 ];
 
 const noiseSvg = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")`;
@@ -17,7 +17,7 @@ const Domains = () => {
   const gridRef = useStaggerAnimation<HTMLDivElement>(domains.length, 80);
 
   return (
-    <section ref={sectionRef} className="scroll-animate" style={{ width: "100%", background: "#F7F4EF", padding: "120px 0" }}>
+    <section ref={sectionRef} className="scroll-animate" style={{ width: "100%", background: "radial-gradient(ellipse at 50% 0%, #F0EBE3 0%, #F7F4EF 55%, #EDE8E0 100%)", padding: "120px 0" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }} className="domains-wrap">
         <div style={{ marginBottom: 56 }}>
           <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>
