@@ -82,13 +82,17 @@ const Positioning = () => {
         }
         .positioning-card {
           position: absolute;
-          bottom: 96px;
-          left: -56px;
-          width: 320px;
-          background: #1A2B35;
+          bottom: 28px;
+          right: 28px;
+          left: 28px;
+          max-width: 320px;
+          margin-left: auto;
+          background: rgba(26,43,53,0.92);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
           color: #fff;
-          padding: 28px;
-          border-radius: 20px;
+          padding: 24px;
+          border-radius: 18px;
           border: 1px solid rgba(255,255,255,0.1);
           box-shadow: 0 30px 60px -20px rgba(0,0,0,0.45);
           z-index: 3;
