@@ -28,12 +28,13 @@ const Positioning = () => {
         .positioning-hero {
           position: relative;
           width: 100%;
-          height: clamp(420px, 56vw, 640px);
+          height: clamp(460px, 60vw, 680px);
           overflow: hidden;
           background:
-            radial-gradient(ellipse at 50% 110%, rgba(255,235,200,0.55) 0%, rgba(255,235,200,0) 55%),
-            linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 40%, #E8E6DC 80%, #EDE8E0 100%);
+            radial-gradient(ellipse at 50% 115%, rgba(255,80,3,0.18) 0%, rgba(255,80,3,0) 55%),
+            linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 40%, #E8DDD0 82%, #EDE8E0 100%);
         }
+
         .positioning-arc {
           position: absolute;
           inset: 0;
@@ -88,13 +89,14 @@ const Positioning = () => {
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
-          height: 78%;
+          height: 62%;
           width: auto;
           object-fit: contain;
           object-position: bottom center;
           z-index: 1;
           filter: drop-shadow(0 30px 40px rgba(26,43,53,0.18));
         }
+
         .positioning-hero::after {
           content: "";
           position: absolute;
@@ -235,21 +237,9 @@ const Positioning = () => {
         }
       `}</style>
 
-      {/* Hero: gradient + dotted arc + cutout person + headline */}
+      {/* Hero: gradient + cutout person + headline */}
       <div className="positioning-hero">
-        <svg className="positioning-arc" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
-          <path
-            d="M -50 480 Q 600 100 1250 380"
-            fill="none"
-            stroke="#FF5003"
-            strokeWidth="1.5"
-            strokeDasharray="2 8"
-            opacity="0.5"
-          />
-          <circle cx="220" cy="340" r="6" fill="#FF5003" opacity="0.35" />
-          <circle cx="600" cy="195" r="7" fill="#FF5003" opacity="0.4" />
-          <circle cx="980" cy="280" r="5" fill="#FF5003" opacity="0.35" />
-        </svg>
+
 
         <div className="positioning-hero-text">
           <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
