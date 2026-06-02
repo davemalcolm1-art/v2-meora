@@ -200,7 +200,7 @@ const Domains = () => {
           text-shadow: 0 2px 10px var(--tile-text-shadow), 0 1px 2px var(--tile-text-shadow);
           margin-bottom: 12px;
         }
-        .goal-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
+        .goal-eyebrow.hero { font-size: 22px; margin-bottom: 16px; }
         .goal-title {
           font-family: 'Fraunces', serif;
           font-weight: 400;
@@ -218,12 +218,13 @@ const Domains = () => {
         .goal-title-dot { color: hsl(18 100% 51%) !important; -webkit-text-fill-color: hsl(18 100% 51%) !important; text-shadow: none; }
         .goal-desc {
           font-family: 'DM Sans', sans-serif;
-          font-size: 16px;
-          line-height: 1.55;
+          font-size: 22px;
+          font-weight: 500;
+          line-height: 1.4;
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 12px var(--tile-text-shadow);
+          text-shadow: 0 2px 16px var(--tile-text-shadow);
           margin: 0;
         }
         .goal-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
@@ -276,7 +277,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
           </div>
           {/* BOTTOM: eyebrow (subheading) above copy + arrow */}
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
-            <div style={{ maxWidth: 420 }}>
+            <div style={{ maxWidth: 520 }}>
               <div className="goal-eyebrow hero">{domain.tagline}</div>
               <p className="goal-desc">{domain.desc}</p>
             </div>
