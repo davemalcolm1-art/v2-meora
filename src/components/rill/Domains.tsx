@@ -156,11 +156,11 @@ const Domains = () => {
           display: inline-block;
           align-self: flex-start;
           max-width: min(520px, 100%);
-          padding: 14px 16px 16px;
-          margin: -14px 0 0 -16px;
-          border-radius: 12px;
-          background: rgba(0,0,0,0.9);
-          box-shadow: 0 16px 36px rgba(0,0,0,0.42);
+          padding: 0;
+          margin: 0;
+          border-radius: 0;
+          background: transparent !important;
+          box-shadow: none !important;
         }
         .domain-eyebrow {
           font-family: 'DM Sans', sans-serif;
@@ -202,7 +202,7 @@ const Domains = () => {
           margin: 0;
         }
         .domain-desc.small { font-size: 15px; line-height: 1.35; max-width: 230px; }
-        .domain-tile-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+        .domain-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
 
         .arrow-bubble {
           width: 44px; height: 44px; border-radius: 999px;
@@ -278,7 +278,6 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
           </h3>
         </div>
         <div className="domain-tile-footer">
-          <p className="domain-desc small">{domain.desc}</p>
           <div className="arrow-bubble sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
