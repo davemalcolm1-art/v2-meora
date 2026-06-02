@@ -23,10 +23,9 @@ const Domains = () => {
           <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>
             YOUR GOALS
           </div>
-          <h2 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#1A2B35", fontSize: "clamp(36px,4vw,52px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0 }}>
-            Six domains.<br />
-            <span style={{ color: "#1A2B35" }}>One protocol, built for you.</span>
-          </h2>
+          <h1 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#1A2B35", fontSize: "clamp(36px,4vw,52px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0 }}>
+            One protocol, built for <span style={{ color: "#FF5003" }}>you</span>.
+          </h1>
           <p className="scroll-animate delay-200" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: 16, lineHeight: 1.75, color: "rgba(26,43,53,0.55)", marginTop: 16 }}>
             Choose the area of your life you want to optimise. Your doctor does the rest.
           </p>
