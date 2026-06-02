@@ -141,21 +141,14 @@ const Positioning = () => {
           letter-spacing: -0.01em;
           max-width: 80%;
         }
-        .pos-card-image-tag {
+        .pos-card-image-head {
           position: absolute;
-          top: 20px;
-          left: 20px;
+          top: 24px;
+          left: 32px;
           z-index: 2;
-          background: rgba(255,255,255,0.92);
-          color: #1A2B35;
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 700;
-          font-size: 10px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          padding: 7px 12px;
-          border-radius: 999px;
+          margin-bottom: 0;
         }
+        .pos-card-image-head .pos-card-title { color: #fff; }
 
         .pos-card-head {
           display: flex;
