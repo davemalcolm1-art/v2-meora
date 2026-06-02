@@ -141,21 +141,14 @@ const Positioning = () => {
           letter-spacing: -0.01em;
           max-width: 80%;
         }
-        .pos-card-image-tag {
+        .pos-card-image-head {
           position: absolute;
-          top: 20px;
-          left: 20px;
+          top: 24px;
+          left: 32px;
           z-index: 2;
-          background: rgba(255,255,255,0.92);
-          color: #1A2B35;
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 700;
-          font-size: 10px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          padding: 7px 12px;
-          border-radius: 999px;
+          margin-bottom: 0;
         }
+        .pos-card-image-head .pos-card-title { color: #fff; }
 
         .pos-card-head {
           display: flex;
@@ -308,7 +301,15 @@ const Positioning = () => {
         {/* Middle: image */}
         <div className="pos-card pos-card-image scroll-animate delay-150">
           <img src={heroImg} alt="Meora patient" loading="lazy" width={1024} height={1024} />
-          <span className="pos-card-image-tag">Built for you</span>
+          <div className="pos-card-head pos-card-image-head">
+            <div className="pos-card-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <div className="pos-card-title">Built for you</div>
+          </div>
           <div className="pos-card-image-label">
             Longevity, <em>made personal.</em>
           </div>
