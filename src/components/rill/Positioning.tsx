@@ -186,7 +186,8 @@ const Positioning = () => {
         }
         .pos-card-cta:hover { transform: translateY(-2px); background: #ff6320; }
 
-        .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
+
+
 
         .pos-card-foot {
           margin-top: auto;
