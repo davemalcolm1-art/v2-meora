@@ -15,7 +15,8 @@ const Positioning = () => {
       ref={sectionRef}
       className="scroll-animate positioning-section"
       style={{
-        background: "#EDE8E0",
+        background:
+          "radial-gradient(ellipse at 50% 110%, rgba(255,80,3,0.16) 0%, rgba(255,80,3,0) 55%), linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 35%, #E8DDD0 78%, #EDE8E0 100%)",
         margin: "24px",
         borderRadius: 32,
         overflow: "hidden",
