@@ -3332,14 +3332,14 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
 }
 .faq-icon { color: #E8571A !important; }
 
-/* Mask section — 80px padding, no hr lines, no duplicate watermark */
+/* Mask section — compact, blends into footer */
 .mask-section {
-  padding: 80px 0 !important;
+  padding: 24px 0 0 !important;
   border-top: none !important;
   border-bottom: none !important;
 }
-.mask-section .mask-bg { top: 80px !important; bottom: 80px !important; }
-.mask-section .mask-svg { top: 80px !important; bottom: 80px !important; height: calc(100% - 160px) !important; }
+.mask-section .mask-bg { top: 24px !important; bottom: 0 !important; }
+.mask-section .mask-svg { top: 24px !important; bottom: 0 !important; height: calc(100% - 24px) !important; }
 .mask-section .mask-label { display: none !important; }
 
 
