@@ -25,80 +25,36 @@ const Positioning = () => {
       }}
     >
       <style>{`
-        .positioning-grid {
-          display: grid;
-          grid-template-columns: 3fr 2fr;
-          min-height: 700px;
-        }
-        .positioning-content {
-          padding: 96px 96px 96px 96px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          z-index: 2;
-        }
-        .positioning-visual {
+        .positioning-hero {
           position: relative;
-          min-height: 100%;
+          width: 100%;
+          height: clamp(360px, 52vw, 620px);
           overflow: hidden;
         }
-        .positioning-visual::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(45deg, rgba(26,43,53,0.32) 0%, rgba(26,43,53,0) 60%);
-          z-index: 1;
-        }
-        .positioning-img {
-          position: absolute;
-          inset: 0;
+        .positioning-hero img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: 72% center;
-          transform: scale(1.45);
-          transform-origin: 72% 55%;
+          object-position: center 35%;
+          display: block;
         }
-        .positioning-glow-1 {
+        .positioning-hero::after {
+          content: "";
           position: absolute;
-          top: -48px;
-          right: -48px;
-          width: 280px;
-          height: 280px;
-          background: rgba(255,80,3,0.18);
-          filter: blur(100px);
-          border-radius: 50%;
-          z-index: 1;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(26,43,53,0) 55%, rgba(237,232,224,0.55) 100%);
           pointer-events: none;
         }
-        .positioning-glow-2 {
+        .positioning-hero-text {
           position: absolute;
-          top: 50%;
-          left: -48px;
-          width: 160px;
-          height: 160px;
-          background: rgba(26,43,53,0.4);
-          filter: blur(60px);
-          border-radius: 50%;
-          z-index: 1;
-          pointer-events: none;
-        }
-        .positioning-card {
-          position: absolute;
-          bottom: 28px;
-          right: 28px;
-          left: 28px;
-          max-width: 320px;
-          margin-left: auto;
-          background: rgba(26,43,53,0.92);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          color: #fff;
-          padding: 24px;
-          border-radius: 18px;
-          border: 1px solid rgba(255,255,255,0.1);
-          box-shadow: 0 30px 60px -20px rgba(0,0,0,0.45);
-          z-index: 3;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          text-align: center;
+          padding: 72px 32px 0;
+          z-index: 2;
         }
         .positioning-eyebrow {
           font-family: 'DM Sans', sans-serif;
@@ -107,12 +63,13 @@ const Positioning = () => {
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: #FF5003;
-          margin-bottom: 28px;
+          margin-bottom: 20px;
           display: inline-flex;
           align-items: center;
           gap: 12px;
         }
-        .positioning-eyebrow::before {
+        .positioning-eyebrow::before,
+        .positioning-eyebrow::after {
           content: "";
           width: 28px;
           height: 1px;
@@ -121,54 +78,50 @@ const Positioning = () => {
         .positioning-h2 {
           font-family: 'Fraunces', serif;
           font-weight: 400;
-          font-size: clamp(40px, 5.2vw, 76px);
+          font-size: clamp(36px, 4.8vw, 68px);
           line-height: 1.04;
           letter-spacing: -0.025em;
           color: #1A2B35;
-          margin: 0 0 28px;
+          margin: 0;
+          max-width: 900px;
         }
-        .positioning-h2 em {
-          font-style: italic;
-          font-weight: 400;
+        .positioning-h2 em { font-style: italic; font-weight: 400; }
+
+        .positioning-cards {
+          display: grid;
+          grid-template-columns: 1fr 1.4fr;
+          gap: 20px;
+          padding: 28px;
         }
-        .positioning-p {
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 400;
-          font-size: 19px;
-          line-height: 1.65;
-          color: rgba(26,43,53,0.7);
-          max-width: 540px;
-          margin: 0 0 40px;
-        }
-        .positioning-pills {
+
+        .pos-card {
+          border-radius: 22px;
+          padding: 36px;
+          position: relative;
+          overflow: hidden;
+          min-height: 320px;
           display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
+          flex-direction: column;
+          justify-content: space-between;
         }
-        .positioning-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(255,255,255,0.65);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255,255,255,0.5);
-          box-shadow: 0 2px 8px rgba(26,43,53,0.04);
-          padding: 11px 18px;
-          border-radius: 999px;
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 500;
-          font-size: 13px;
+        .pos-card-dark {
+          background: #1A2B35;
+          color: #fff;
+        }
+        .pos-card-light {
+          background: rgba(255,255,255,0.55);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1px solid rgba(255,255,255,0.6);
           color: #1A2B35;
         }
-        .positioning-pill svg { color: #FF5003; flex-shrink: 0; }
-        .positioning-card-head {
+        .pos-card-head {
           display: flex;
           align-items: center;
           gap: 14px;
           margin-bottom: 18px;
         }
-        .positioning-card-badge {
+        .pos-card-badge {
           width: 44px;
           height: 44px;
           border-radius: 50%;
@@ -178,29 +131,30 @@ const Positioning = () => {
           justify-content: center;
           flex-shrink: 0;
         }
-        .positioning-card-title {
+        .pos-card-title {
           font-family: 'Fraunces', serif;
           font-style: italic;
           font-weight: 400;
-          font-size: 20px;
-          color: #fff;
+          font-size: 22px;
         }
-        .positioning-card-body {
+        .pos-card-body {
           font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 1.65;
-          color: rgba(255,255,255,0.72);
           margin: 0;
         }
-        .positioning-card-foot {
-          margin-top: 20px;
+        .pos-card-dark .pos-card-body { color: rgba(255,255,255,0.72); }
+        .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
+
+        .pos-card-foot {
+          margin-top: 24px;
           padding-top: 18px;
           border-top: 1px solid rgba(255,255,255,0.12);
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-        .positioning-card-foot-label {
+        .pos-card-foot-label {
           font-family: 'DM Sans', sans-serif;
           font-weight: 700;
           font-size: 10px;
@@ -208,8 +162,8 @@ const Positioning = () => {
           text-transform: uppercase;
           color: rgba(255,255,255,0.42);
         }
-        .positioning-avatars { display: flex; }
-        .positioning-avatars span {
+        .pos-avatars { display: flex; }
+        .pos-avatars span {
           width: 22px;
           height: 22px;
           border-radius: 50%;
@@ -217,76 +171,95 @@ const Positioning = () => {
           background: #9CA3AF;
           margin-left: -6px;
         }
-        .positioning-avatars span:first-child { margin-left: 0; background: #6B7280; }
+        .pos-avatars span:first-child { margin-left: 0; background: #6B7280; }
+
+        .pos-card-lead {
+          font-family: 'Fraunces', serif;
+          font-weight: 400;
+          font-size: clamp(24px, 2.4vw, 32px);
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          margin: 0 0 12px;
+        }
+        .pos-card-lead em { font-style: italic; }
+
+        .positioning-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .positioning-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255,255,255,0.8);
+          border: 1px solid rgba(26,43,53,0.08);
+          padding: 11px 18px;
+          border-radius: 999px;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 500;
+          font-size: 13px;
+          color: #1A2B35;
+        }
+        .positioning-pill svg { color: #FF5003; flex-shrink: 0; }
 
         @media (max-width: 960px) {
-          .positioning-grid { grid-template-columns: 1fr; }
-          .positioning-content { padding: 56px 32px; }
-          .positioning-visual { min-height: 520px; }
-          .positioning-card {
-            left: 24px;
-            right: 24px;
-            width: auto;
-            bottom: 24px;
-          }
+          .positioning-cards { grid-template-columns: 1fr; padding: 20px; }
+          .positioning-hero-text { padding-top: 48px; }
+          .pos-card { padding: 28px; min-height: 0; }
         }
       `}</style>
 
-      <div className="positioning-grid">
-        {/* Content */}
-        <div className="positioning-content">
+      {/* Hero image with headline */}
+      <div className="positioning-hero">
+        <img src={clinicalImg} alt="Meora clinical pharmacy" loading="lazy" />
+        <div className="positioning-hero-text">
           <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
           <h2 className="scroll-animate delay-100 positioning-h2">
-            Personalised.<br />
-            <em>Evidence-informed.</em><br />
-            Designed around you.
+            Personalised. <em>Evidence-informed.</em><br />Designed around you.
           </h2>
-          <p className="scroll-animate delay-200 positioning-p">
-            Meora is a GP-supervised longevity clinic. Our compounding peptide protocols are built on peer-reviewed research and tailored to your biology, your goals, and your life.
-          </p>
-          <div className="scroll-animate delay-300 positioning-pills">
-            {pills.map((p) => (
-              <span key={p} className="positioning-pill">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                {p}
-              </span>
-            ))}
-          </div>
         </div>
+      </div>
 
-        {/* Visual */}
-        <div className="positioning-visual">
-          <img
-            src={clinicalImg}
-            alt="Meora clinical pharmacy"
-            loading="lazy"
-            width={896}
-            height={1280}
-            className="positioning-img"
-          />
-          <div className="positioning-glow-1" aria-hidden="true" />
-          <div className="positioning-glow-2" aria-hidden="true" />
-
-          <div className="positioning-card scroll-animate delay-200">
-            <div className="positioning-card-head">
-              <div className="positioning-card-badge">
+      {/* Two cards below */}
+      <div className="positioning-cards">
+        {/* Clinical integrity (dark) */}
+        <div className="pos-card pos-card-dark scroll-animate delay-100">
+          <div>
+            <div className="pos-card-head">
+              <div className="pos-card-badge">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <div className="positioning-card-title">Clinical integrity</div>
+              <div className="pos-card-title">Clinical integrity</div>
             </div>
-            <p className="positioning-card-body">
+            <p className="pos-card-body">
               Combining professional GP oversight with cutting-edge longevity science to deliver results that are both safe and effective.
             </p>
-            <div className="positioning-card-foot">
-              <span className="positioning-card-foot-label">Verified Protocol</span>
-              <div className="positioning-avatars">
-                <span />
-                <span />
-              </div>
+          </div>
+          <div className="pos-card-foot">
+            <span className="pos-card-foot-label">Verified Protocol</span>
+            <div className="pos-avatars"><span /><span /></div>
+          </div>
+        </div>
+
+        {/* GP-supervised clinic (light) with pills */}
+        <div className="pos-card pos-card-light scroll-animate delay-200">
+          <div>
+            <p className="pos-card-lead">
+              A <em>GP-supervised</em> longevity clinic built on peer-reviewed research — tailored to your biology, your goals, your life.
+            </p>
+            <div className="positioning-pills">
+              {pills.map((p) => (
+                <span key={p} className="positioning-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  {p}
+                </span>
+              ))}
             </div>
           </div>
         </div>
