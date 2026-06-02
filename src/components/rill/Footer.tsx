@@ -22,7 +22,7 @@ const LinkCol = ({ label, items }: { label: string; items: string[] }) => (
 );
 
 const Footer = () => (
-  <footer style={{ background: "radial-gradient(ellipse at 50% 0%, #2D5470 0%, #1A3347 25%, #1A2B35 60%, #0F1820 100%)", padding: "64px 80px 40px", borderRadius: "32px 32px 0 0" }}>
+  <footer style={{ background: "radial-gradient(ellipse at 50% 0%, #2D5470 0%, #1A3347 25%, #1A2B35 60%, #0F1820 100%)", padding: "32px 80px 40px" }}>
     <div style={{ maxWidth: 1200, margin: "0 auto" }}>
       <div className="footer-top-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div>
