@@ -210,8 +210,7 @@ const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) =
         <img src="/meora-mark-white.svg" alt="" aria-hidden="true" style={{ position: "absolute", bottom: -40, right: -40, width: 240, opacity: 0.05 }} />
         <div className="hero-overlay" />
         <div style={{ position: "absolute", inset: 0, padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <span className="num-pill glass" style={{ color: "#fff" }}>Protocol</span>
+          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>{domain.tagline}</span>
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
