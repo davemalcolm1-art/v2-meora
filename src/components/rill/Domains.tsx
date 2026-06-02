@@ -108,6 +108,7 @@ const Domains = () => {
                     cursor: isHero ? "default" : "pointer",
                     minHeight: slot.minH,
                     zIndex: isHero ? 2 : 1,
+                    background: "#000",
                   }}
                   whileHover={isHero ? undefined : { y: -4 }}
                 >
@@ -151,18 +152,7 @@ const Domains = () => {
           position: absolute; inset: 0; z-index: 1;
           background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
         }
-        .tile-image-mask { display: none; }
-        .domain-label-panel {
-          position: absolute;
-          left: 40px;
-          top: 40px;
-          width: min(430px, calc(100% - 80px));
-          height: 210px;
-          z-index: 2;
-          background: hsl(0 0% 0%);
-          border-radius: 0 0 8px 0;
-          pointer-events: none;
-        }
+        .tile-image-mask, .domain-label-panel { display: none !important; }
         .domain-content { position: absolute; inset: 0; z-index: 3; color: hsl(0 0% 100%) !important; }
         .domain-copy-block {
           display: inline-block;
