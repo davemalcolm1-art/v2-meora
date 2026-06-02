@@ -17,7 +17,7 @@ const Domains = () => {
   const gridRef = useStaggerAnimation<HTMLDivElement>(domains.length, 80);
 
   return (
-    <section ref={sectionRef} className="scroll-animate" style={{ width: "100%", background: "radial-gradient(ellipse at 50% 0%, #F0EBE3 0%, #F7F4EF 55%, #EDE8E0 100%)", padding: "120px 0" }}>
+    <section ref={sectionRef} className="scroll-animate" style={{ width: "auto", background: "radial-gradient(ellipse at 50% 0%, #F0EBE3 0%, #F7F4EF 55%, #EDE8E0 100%)", padding: "120px 0", margin: "24px", borderRadius: 32, overflow: "hidden" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }} className="domains-wrap">
         <div style={{ marginBottom: 56 }}>
           <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,43,53,0.4)", marginBottom: 20 }}>
