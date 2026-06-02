@@ -10,7 +10,7 @@ const Positioning = () => {
   const sectionRef = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={sectionRef} className="scroll-animate" style={{ background: "radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #F7F4EF 50%, #EDE8E0 100%)", padding: "100px 0 90px", width: "100%", textAlign: "center" }}>
+    <section ref={sectionRef} className="scroll-animate" style={{ background: "radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #F7F4EF 50%, #EDE8E0 100%)", padding: "100px 0 90px", width: "auto", textAlign: "center", margin: "24px", borderRadius: 32, overflow: "hidden" }}>
       <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 48px" }}>
         <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(26,43,53,0.38)", marginBottom: 20 }}>
           WHAT WE DO
