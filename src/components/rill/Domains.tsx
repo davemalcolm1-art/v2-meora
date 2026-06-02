@@ -233,8 +233,8 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
       <div style={{ position: "absolute", inset: 0, padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
-        <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 28, lineHeight: 1.05, letterSpacing: "-0.01em", margin: 0, color: "#fff" }}>
-          {titleCase(domain.name)}<span style={{ color: "#FF5003" }}>.</span>
+        <h3 className="domain-title" style={{ fontSize: 28, letterSpacing: "-0.01em" }}>
+          {titleCase(domain.name)}<span className="domain-title-dot">.</span>
         </h3>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <div className="arrow-bubble sm">
