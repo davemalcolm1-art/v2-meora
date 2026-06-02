@@ -522,7 +522,9 @@ const HeroSection = () => {
         /* ── MOBILE ── */
         @media (max-width: 768px) {
           .rill-nav {
-            width: calc(100vw - 32px);
+            left: 16px;
+            right: 16px;
+            width: auto;
             padding: 0 8px 0 16px;
             gap: 12px;
           }
