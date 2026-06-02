@@ -5,7 +5,7 @@ const heroImg = heroAsset.url;
 const pills = [
   "AHPRA-Registered GPs",
   "Compounding Pharmacies",
-  "Evidence-informed",
+  "Compliance first",
 ];
 
 const Positioning = () => {
@@ -266,7 +266,7 @@ const Positioning = () => {
       <div className="positioning-header">
         <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
         <h2 className="scroll-animate delay-100 positioning-h2">
-          <span className="pos-hl">Personalised</span>. <em>Evidence-informed.</em><br />Designed around <span className="pos-hl-big">you</span>.
+          <span className="pos-hl">Personalised</span>. <em>Compliance-first.</em><br />Designed around <span className="pos-hl-big">you</span>.
         </h2>
       </div>
 
@@ -324,7 +324,7 @@ const Positioning = () => {
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
               </svg>
             </div>
-            <div className="pos-card-title">Evidence-informed</div>
+            <div className="pos-card-title">Compliance First</div>
           </div>
           <p className="pos-card-body">
             Protocols grounded in peer-reviewed research and dispensed through registered Australian compounding pharmacies — measured, safe and genuinely effective.
