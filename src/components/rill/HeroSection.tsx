@@ -146,11 +146,11 @@ const HeroSection = () => {
           width: auto;
           max-width: calc(100vw - 80px);
           border-radius: 999px;
-          background: rgba(26, 43, 53, 0.24);
-          backdrop-filter: blur(18px) saturate(170%);
-          -webkit-backdrop-filter: blur(18px) saturate(170%);
-          border: 1px solid rgba(255,255,255,0.22);
-          box-shadow: 0 18px 48px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(26,43,53,0.18);
+          background: rgba(247, 244, 239, 0.16);
+          backdrop-filter: blur(22px) saturate(190%);
+          -webkit-backdrop-filter: blur(22px) saturate(190%);
+          border: 1px solid rgba(255,255,255,0.34);
+          box-shadow: 0 18px 48px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.42), inset 0 -1px 0 rgba(26,43,53,0.10);
           overflow: hidden;
           transition: background 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
         }
@@ -161,12 +161,12 @@ const HeroSection = () => {
           z-index: -1;
           pointer-events: none;
           border-radius: inherit;
-          background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 38%, rgba(26,43,53,0.08) 100%);
+          background: linear-gradient(135deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 42%, rgba(26,43,53,0.06) 100%);
         }
         .rill-nav.scrolled {
-          background: rgba(26, 43, 53, 0.28);
-          border-color: rgba(255,255,255,0.24);
-          box-shadow: 0 18px 52px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -1px 0 rgba(26,43,53,0.16);
+          background: rgba(247, 244, 239, 0.18);
+          border-color: rgba(255,255,255,0.36);
+          box-shadow: 0 18px 52px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.44), inset 0 -1px 0 rgba(26,43,53,0.10);
         }
         .rill-nav.menu-open {
           background: transparent !important;
