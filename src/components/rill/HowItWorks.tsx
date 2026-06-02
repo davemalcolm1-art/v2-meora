@@ -57,20 +57,6 @@ export default function HowItWorks() {
                 minHeight: 520,
               }}
             >
-              {/* Numeral */}
-              <span
-                style={{
-                  fontFamily: "Fraunces, Georgia, serif",
-                  fontSize: 20,
-                  fontWeight: 400,
-                  fontStyle: "italic",
-                  color: "rgba(26,43,53,0.55)",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {s.n}
-              </span>
-
               {/* Illustration */}
               <div
                 style={{
@@ -79,7 +65,7 @@ export default function HowItWorks() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  margin: "8px 0 28px",
+                  margin: "0 0 28px",
                   minHeight: 240,
                 }}
               >
