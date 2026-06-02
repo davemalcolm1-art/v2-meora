@@ -154,18 +154,20 @@ const Domains = () => {
         .domain-content { position: absolute; inset: 0; z-index: 3; color: hsl(0 0% 100%) !important; }
         .domain-copy-block {
           display: inline-block;
+          align-self: flex-start;
           max-width: min(520px, 100%);
-          padding: 12px 14px 14px;
-          margin: -12px 0 0 -14px;
-          border-radius: 18px;
-          background: linear-gradient(90deg, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.48) 64%, rgba(0,0,0,0) 100%);
+          padding: 14px 16px 16px;
+          margin: -14px 0 0 -16px;
+          border-radius: 12px;
+          background: rgba(0,0,0,0.9);
+          box-shadow: 0 16px 36px rgba(0,0,0,0.42);
         }
         .domain-eyebrow {
           font-family: 'DM Sans', sans-serif;
-          font-size: 12px;
+          font-size: 14px;
           font-weight: 800;
-          line-height: 1.1;
-          letter-spacing: 0.24em;
+          line-height: 1.2;
+          letter-spacing: 0.18em;
           text-transform: uppercase;
           color: hsl(0 0% 100%) !important;
           -webkit-text-fill-color: hsl(0 0% 100%) !important;
@@ -173,7 +175,7 @@ const Domains = () => {
           text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.85);
           margin-bottom: 12px;
         }
-        .domain-eyebrow.hero { font-size: 14px; margin-bottom: 14px; }
+        .domain-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
         .domain-title {
           font-family: 'Fraunces', serif;
           font-weight: 400;
@@ -199,7 +201,7 @@ const Domains = () => {
           text-shadow: 0 2px 12px rgba(0,0,0,0.9);
           margin: 0;
         }
-        .domain-desc.small { font-size: 14px; line-height: 1.35; max-width: 210px; }
+        .domain-desc.small { font-size: 15px; line-height: 1.35; max-width: 230px; }
         .domain-tile-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
 
         .arrow-bubble {
