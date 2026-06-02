@@ -17,12 +17,12 @@ type Domain = {
 };
 
 const domains: Domain[] = [
-  { num: "01", name: "ENERGY",      desc: "Doctor-prescribed peptide protocols for cognitive endurance and physical vitality.",     image: energyImg.url,      tagline: "Mitochondrial drive" },
-  { num: "02", name: "PERFORMANCE", desc: "Strength, body composition and endurance — measured, supervised, refined.",              image: performanceImg.url, tagline: "Neuro-muscular edge" },
-  { num: "03", name: "BALANCE",     desc: "Hormonal equilibrium and whole-body calm, guided by your AHPRA-registered doctor.",      image: balanceImg.url,     tagline: "Hormonal homeostasis" },
-  { num: "04", name: "RECOVERY",    desc: "Repair, resilience and tissue health, dispensed through Australian compounding pharmacy.", image: recoveryImg.url,    tagline: "Tissue & resilience" },
-  { num: "05", name: "LONGEVITY",   desc: "Healthy ageing and cellular optimisation — the long view, prescribed.",                  image: longevityImg.url,   tagline: "Cellular longevity" },
-  { num: "06", name: "BEAUTY",      desc: "Skin health, collagen and radiance from within — clinical, not cosmetic.",               image: beautyImg.url,      tagline: "Dermal integrity" },
+  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output" },
+  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition" },
+  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health" },
+  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience" },
+  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing" },
+  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen" },
 ];
 
 type Variant = "hero" | "a" | "b" | "c" | "d" | "e";
