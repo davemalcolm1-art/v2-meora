@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-import { motion, LayoutGroup } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import energyImg from "@/assets/domains/energy.jpg.asset.json";
 import performanceImg from "@/assets/domains/performance.jpg.asset.json";
@@ -82,45 +81,31 @@ const Domains = () => {
           </div>
         </div>
 
-        <LayoutGroup>
-          <div className="domains-bento">
-            {domains.map((d, domainIdx) => {
-              const slotIdx = (domainIdx - offset + N) % N;
-              const slot = slots[slotIdx];
-              const isHero = slot.variant === "hero";
-              return (
-                <motion.button
-                  key={d.num}
-                  layout
-                  transition={{ type: "spring", stiffness: 260, damping: 32, mass: 0.9 }}
-                  onClick={() => focusDomain(domainIdx)}
-                  className={`domain-tile group ${slot.variant}`}
-                  data-variant={slot.variant}
-                  aria-label={`${d.name} protocol`}
-                  style={{
-                    gridColumn: slot.col,
-                    gridRow: slot.row,
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: 32,
-                    textAlign: "left",
-                    padding: 0,
-                    border: "none",
-                    cursor: isHero ? "default" : "pointer",
-                    minHeight: slot.minH,
-                    zIndex: isHero ? 2 : 1,
-                    background: "#000",
-                  }}
-                  whileHover={isHero ? undefined : { y: -4 }}
-                >
-                  <motion.div layout="position" style={{ position: "absolute", inset: 0 }}>
-                    <DomainSlot domain={d} isHero={isHero} />
-                  </motion.div>
-                </motion.button>
-              );
-            })}
-          </div>
-        </LayoutGroup>
+        <div className="domains-bento">
+          {domains.map((d, domainIdx) => {
+            const slotIdx = (domainIdx - offset + N) % N;
+            const slot = slots[slotIdx];
+            const isHero = slot.variant === "hero";
+            return (
+              <button
+                key={`${d.num}-${slot.variant}`}
+                onClick={() => focusDomain(domainIdx)}
+                className={`goal-tile ${slot.variant}`}
+                data-variant={slot.variant}
+                aria-label={`${d.name} protocol`}
+                style={{
+                  gridColumn: slot.col,
+                  gridRow: slot.row,
+                  cursor: isHero ? "default" : "pointer",
+                  minHeight: slot.minH,
+                  zIndex: isHero ? 2 : 1,
+                }}
+              >
+                <DomainSlot domain={d} isHero={isHero} />
+              </button>
+            );
+          })}
+        </div>
 
         <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(26,43,53,0.45)" }}>
           <span aria-hidden style={{ flex: 1, height: 1, background: "rgba(26,43,53,0.15)" }} />
@@ -136,14 +121,42 @@ const Domains = () => {
           grid-auto-rows: 270px;
           gap: 16px;
         }
-        .domain-tile { box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35); isolation: isolate; }
-        .domain-tile:hover { box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
+        .goal-tile {
+          position: relative;
+          overflow: hidden;
+          border-radius: 32px;
+          text-align: left;
+          padding: 0;
+          border: 0;
+          background: hsl(0 0% 0%);
+          box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35);
+          isolation: isolate;
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .goal-tile::before,
+        .goal-tile::after,
+        .goal-content::before,
+        .goal-content::after,
+        .goal-copy::before,
+        .goal-copy::after {
+          content: none !important;
+          display: none !important;
+          background: transparent !important;
+        }
+        .goal-tile .goal-copy,
+        .goal-tile .goal-copy *,
+        .goal-tile .goal-content,
+        .goal-tile .goal-content * {
+          background: transparent !important;
+          box-shadow: none !important;
+        }
+        .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
 
         .tile-img {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
           object-fit: cover; transition: transform 1.2s ease; filter: brightness(0.72) contrast(1.08) saturate(0.98);
         }
-        .domain-tile:hover .tile-img { transform: scale(1.04); }
+        .goal-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
           position: absolute; inset: 0; z-index: 1;
@@ -153,18 +166,18 @@ const Domains = () => {
           position: absolute; inset: 0; z-index: 1;
           background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
         }
-        .domain-content {
+        .goal-content {
           --tile-text: hsl(0 0% 100%);
           --tile-text-shadow: rgba(0,0,0,0.9);
           --tile-title-stroke: rgba(255,255,255,0.75);
           position: absolute; inset: 0; z-index: 3; color: var(--tile-text);
         }
-        .domain-content[data-tone="dark"] {
+        .goal-content[data-tone="dark"] {
           --tile-text: hsl(202 34% 15%);
           --tile-text-shadow: rgba(255,255,255,0.65);
           --tile-title-stroke: rgba(26,43,53,0.28);
         }
-        .domain-copy-block {
+        .goal-copy {
           display: inline-block;
           align-self: flex-start;
           max-width: min(520px, 100%);
@@ -174,7 +187,7 @@ const Domains = () => {
           background: transparent !important;
           box-shadow: none !important;
         }
-        .domain-eyebrow {
+        .goal-eyebrow {
           font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           font-weight: 800;
@@ -187,8 +200,8 @@ const Domains = () => {
           text-shadow: 0 2px 10px var(--tile-text-shadow), 0 1px 2px var(--tile-text-shadow);
           margin-bottom: 12px;
         }
-        .domain-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
-        .domain-title {
+        .goal-eyebrow.hero { font-size: 16px; margin-bottom: 14px; }
+        .goal-title {
           font-family: 'Fraunces', serif;
           font-weight: 400;
           line-height: 1;
@@ -202,8 +215,8 @@ const Domains = () => {
           filter: none !important;
           mix-blend-mode: normal !important;
         }
-        .domain-title-dot { color: hsl(18 100% 51%) !important; -webkit-text-fill-color: hsl(18 100% 51%) !important; text-shadow: none; }
-        .domain-desc {
+        .goal-title-dot { color: hsl(18 100% 51%) !important; -webkit-text-fill-color: hsl(18 100% 51%) !important; text-shadow: none; }
+        .goal-desc {
           font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           line-height: 1.55;
@@ -213,8 +226,7 @@ const Domains = () => {
           text-shadow: 0 2px 12px var(--tile-text-shadow);
           margin: 0;
         }
-        .domain-desc.small { font-size: 15px; line-height: 1.35; max-width: 230px; }
-        .domain-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
+        .goal-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
 
         .arrow-bubble {
           width: 44px; height: 44px; border-radius: 999px;
@@ -226,7 +238,7 @@ const Domains = () => {
           color: #fff;
           transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
-        .domain-tile:hover .arrow-bubble {
+        .goal-tile:hover .arrow-bubble {
           transform: translate(2px,-2px);
           background: #FF5003; border-color: #FF5003;
         }
@@ -237,7 +249,7 @@ const Domains = () => {
         }
         @media (max-width: 768px) {
           .domains-bento { grid-template-columns: 1fr !important; grid-auto-rows: auto; }
-          .domain-tile {
+          .goal-tile {
             grid-column: 1 / -1 !important;
             grid-row: auto !important;
             min-height: 260px !important;
@@ -255,19 +267,19 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
       <>
         <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
-        <div className="domain-content" data-tone={domain.textTone ?? "light"} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title + tagline */}
-          <div className="domain-copy-block">
-            <div className="domain-eyebrow hero">
+          <div className="goal-copy">
+            <div className="goal-eyebrow hero">
               {domain.tagline}
             </div>
-            <h2 className="domain-title" style={{ fontSize: "clamp(40px,4.4vw,64px)", letterSpacing: "-0.02em" }}>
-              {titleCase(domain.name)}<span className="domain-title-dot">.</span>
+            <h2 className="goal-title" style={{ fontSize: "clamp(40px,4.4vw,64px)", letterSpacing: "-0.02em" }}>
+              {titleCase(domain.name)}<span className="goal-title-dot">.</span>
             </h2>
           </div>
           {/* BOTTOM: description + arrow */}
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
-            <p className="domain-desc" style={{ maxWidth: 380 }}>
+            <p className="goal-desc" style={{ maxWidth: 380 }}>
               {domain.desc}
             </p>
             <div className="arrow-bubble">{arrow}</div>
@@ -282,14 +294,14 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
-      <div className="domain-content" data-tone={domain.textTone ?? "light"} style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-        <div className="domain-copy-block">
-          <div className="domain-eyebrow">{domain.tagline}</div>
-          <h3 className="domain-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
-            {titleCase(domain.name)}<span className="domain-title-dot">.</span>
+      <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div className="goal-copy">
+          <div className="goal-eyebrow">{domain.tagline}</div>
+          <h3 className="goal-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
+            {titleCase(domain.name)}<span className="goal-title-dot">.</span>
           </h3>
         </div>
-        <div className="domain-tile-footer">
+        <div className="goal-tile-footer">
           <div className="arrow-bubble sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
