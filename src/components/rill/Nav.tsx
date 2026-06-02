@@ -51,7 +51,7 @@ const Nav = () => {
       <ul className="meora-nav-links" style={{ display: "flex", gap: 28, listStyle: "none", margin: 0, padding: 0 }}>
         {links.map((l) => (
           <li key={l.href}>
-            <a href={l.href} className="meora-nav-link" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: "rgba(255,255,255,0.7)", letterSpacing: "0.02em", textDecoration: "none", transition: "color 0.2s" }}>{l.label}</a>
+            <a href={l.href} className="meora-nav-link" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: "#fff", letterSpacing: "0.02em", textDecoration: "none", transition: "color 0.2s" }}>{l.label}</a>
           </li>
         ))}
       </ul>
