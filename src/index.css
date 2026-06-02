@@ -2702,11 +2702,24 @@ button.btn-ghost {
   min-height: 0;
   padding: 140px 0 !important;
   margin: 0 !important;
-  background:
-    linear-gradient(110deg, transparent 30%, rgba(255,228,180,0.14) 50%, transparent 70%),
-    linear-gradient(180deg, #2D5470 0%, #234357 45%, #1A2B35 100%) !important;
+  background: #1A2B35 !important;
   border-radius: 32px 32px 0 0 !important;
   overflow: hidden;
+}
+.mask-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg,
+      transparent 28%,
+      rgba(255,228,180,0.10) 44%,
+      rgba(255,238,200,0.18) 50%,
+      rgba(255,228,180,0.10) 56%,
+      transparent 72%);
+  mix-blend-mode: screen;
 }
 .mask-section .mask-bg {
   display: block !important;
