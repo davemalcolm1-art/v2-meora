@@ -1,9 +1,9 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import personImg from "@/assets/positioning-person.png";
+import heroImg from "@/assets/positioning-hero.jpg";
 
 const pills = [
   "AHPRA-Registered GPs",
-  "Registered Compounding Pharmacies",
+  "Compounding Pharmacies",
   "Evidence-informed",
 ];
 
@@ -25,33 +25,9 @@ const Positioning = () => {
       }}
     >
       <style>{`
-        .positioning-hero {
-          position: relative;
-          width: 100%;
-          height: clamp(460px, 60vw, 680px);
-          overflow: hidden;
-          background:
-            radial-gradient(ellipse at 50% 115%, rgba(255,80,3,0.18) 0%, rgba(255,80,3,0) 55%),
-            linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 40%, #E8DDD0 82%, #EDE8E0 100%);
-        }
-
-        .positioning-arc {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-          opacity: 0.75;
-        }
-        .positioning-hero-text {
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+        .positioning-header {
           text-align: center;
-          padding: 56px 32px 0;
-          z-index: 2;
+          padding: 64px 32px 36px;
         }
         .positioning-eyebrow {
           font-family: 'DM Sans', sans-serif;
@@ -79,49 +55,24 @@ const Positioning = () => {
           line-height: 1.05;
           letter-spacing: -0.025em;
           color: #1A2B35;
-          margin: 0;
+          margin: 0 auto;
           max-width: 880px;
         }
         .positioning-h2 em { font-style: italic; font-weight: 400; }
 
-        .positioning-person {
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          height: 62%;
-          width: auto;
-          object-fit: contain;
-          object-position: bottom center;
-          z-index: 1;
-          filter: drop-shadow(0 30px 40px rgba(26,43,53,0.18));
-        }
-
-        .positioning-hero::after {
-          content: "";
-          position: absolute;
-          inset: auto 0 0 0;
-          height: 80px;
-          background: linear-gradient(180deg, rgba(237,232,224,0) 0%, #EDE8E0 100%);
-          z-index: 2;
-          pointer-events: none;
-        }
-
-        .positioning-cards {
+        .positioning-grid {
           display: grid;
-          grid-template-columns: 1fr 1.4fr;
+          grid-template-columns: 1fr 1fr 1fr;
           gap: 20px;
           padding: 8px 28px 28px;
-          position: relative;
-          z-index: 3;
         }
 
         .pos-card {
-          border-radius: 22px;
+          border-radius: 24px;
           padding: 32px;
           position: relative;
           overflow: hidden;
-          min-height: 260px;
+          min-height: 460px;
           display: flex;
           flex-direction: column;
         }
@@ -130,17 +81,63 @@ const Positioning = () => {
           color: #fff;
         }
         .pos-card-light {
-          background: rgba(255,255,255,0.55);
+          background: rgba(255,255,255,0.6);
           backdrop-filter: blur(14px);
           -webkit-backdrop-filter: blur(14px);
-          border: 1px solid rgba(255,255,255,0.6);
+          border: 1px solid rgba(255,255,255,0.7);
           color: #1A2B35;
         }
+        .pos-card-image {
+          padding: 0;
+          background: #1A2B35;
+        }
+        .pos-card-image img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .pos-card-image::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(26,43,53,0) 55%, rgba(26,43,53,0.55) 100%);
+        }
+        .pos-card-image-label {
+          position: absolute;
+          left: 24px;
+          bottom: 24px;
+          z-index: 2;
+          color: #fff;
+          font-family: 'Fraunces', serif;
+          font-style: italic;
+          font-size: 22px;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+          max-width: 80%;
+        }
+        .pos-card-image-tag {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          z-index: 2;
+          background: rgba(255,255,255,0.92);
+          color: #1A2B35;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 700;
+          font-size: 10px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          padding: 7px 12px;
+          border-radius: 999px;
+        }
+
         .pos-card-head {
           display: flex;
           align-items: center;
           gap: 14px;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
         }
         .pos-card-badge {
           width: 40px;
@@ -213,22 +210,12 @@ const Positioning = () => {
         }
         .pos-avatars span:first-child { margin-left: 0; background: #6B7280; }
 
-        .pos-card-lead {
-          font-family: 'Fraunces', serif;
-          font-weight: 400;
-          font-size: clamp(22px, 2.2vw, 30px);
-          line-height: 1.2;
-          letter-spacing: -0.02em;
-          margin: 0 0 14px;
-        }
-        .pos-card-lead em { font-style: italic; }
-
         .positioning-pills {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          gap: 12px;
-          margin-top: 28px;
+          align-items: stretch;
+          gap: 10px;
+          margin-top: auto;
         }
         .positioning-pill {
           display: inline-flex;
@@ -236,52 +223,39 @@ const Positioning = () => {
           gap: 10px;
           background: rgba(255,255,255,0.9);
           border: 1px solid rgba(26,43,53,0.08);
-          padding: 14px 22px;
+          padding: 13px 18px;
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
-          font-size: 15px;
+          font-size: 14px;
           color: #1A2B35;
           white-space: nowrap;
           box-shadow: 0 4px 14px -6px rgba(26,43,53,0.08);
         }
-        .positioning-pill:nth-child(1) { margin-left: 0; }
-        .positioning-pill:nth-child(2) { margin-left: 44px; }
-        .positioning-pill:nth-child(3) { margin-left: 88px; }
         .positioning-pill svg { color: #FF5003; flex-shrink: 0; }
 
-
         @media (max-width: 1100px) {
-          .positioning-pill:nth-child(2) { margin-left: 24px; }
-          .positioning-pill:nth-child(3) { margin-left: 48px; }
+          .positioning-grid { grid-template-columns: 1fr 1fr; }
+          .pos-card-image { grid-column: 1 / -1; min-height: 320px; }
         }
-        @media (max-width: 960px) {
-          .positioning-cards { grid-template-columns: 1fr; padding: 8px 20px 20px; }
-          .positioning-hero-text { padding-top: 40px; }
+        @media (max-width: 760px) {
+          .positioning-grid { grid-template-columns: 1fr; padding: 8px 20px 20px; }
           .pos-card { padding: 26px; min-height: 0; }
-          .positioning-pill:nth-child(2),
-          .positioning-pill:nth-child(3) { margin-left: 0; }
+          .pos-card-image { min-height: 280px; }
         }
-
       `}</style>
 
-      {/* Hero: gradient + cutout person + headline */}
-      <div className="positioning-hero">
-
-
-        <div className="positioning-hero-text">
-          <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
-          <h2 className="scroll-animate delay-100 positioning-h2">
-            Personalised. <em>Evidence-informed.</em><br />Designed around you.
-          </h2>
-        </div>
-
-        <img className="positioning-person" src={personImg} alt="Meora patient" loading="lazy" />
+      {/* Header */}
+      <div className="positioning-header">
+        <div className="scroll-animate positioning-eyebrow">WHAT WE DO</div>
+        <h2 className="scroll-animate delay-100 positioning-h2">
+          Personalised. <em>Evidence-informed.</em><br />Designed around you.
+        </h2>
       </div>
 
-      {/* Two cards below */}
-      <div className="positioning-cards">
-        {/* Clinical integrity (dark) */}
+      {/* Three-column grid */}
+      <div className="positioning-grid">
+        {/* Left: Personalised (dark) */}
         <div className="pos-card pos-card-dark scroll-animate delay-100">
           <div className="pos-card-head">
             <div className="pos-card-badge">
@@ -289,10 +263,10 @@ const Positioning = () => {
                 <path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <div className="pos-card-title">Clinical integrity</div>
+            <div className="pos-card-title">Personalised</div>
           </div>
           <p className="pos-card-body">
-            Professional GP oversight paired with cutting-edge longevity science — protocols that are safe, measured, and genuinely effective for your biology.
+            A protocol shaped to your biomarkers, your goals and your life — not a one-size-fits-all template. Every recommendation is reviewed by your AHPRA-registered GP.
           </p>
           <a href="/book" className="pos-card-cta">
             Meet your GP
@@ -301,17 +275,34 @@ const Positioning = () => {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
-
           <div className="pos-card-foot">
-            <span className="pos-card-foot-label">Verified Protocol</span>
+            <span className="pos-card-foot-label">GP-Supervised</span>
             <div className="pos-avatars"><span /><span /></div>
           </div>
         </div>
 
-        {/* GP-supervised clinic (light) with inline pills */}
+        {/* Middle: image */}
+        <div className="pos-card pos-card-image scroll-animate delay-150">
+          <img src={heroImg} alt="Meora patient" loading="lazy" width={1024} height={1024} />
+          <span className="pos-card-image-tag">Built for you</span>
+          <div className="pos-card-image-label">
+            Longevity, <em>made personal.</em>
+          </div>
+        </div>
+
+        {/* Right: Evidence-informed (light) */}
         <div className="pos-card pos-card-light scroll-animate delay-200">
-          <p className="pos-card-lead">
-            A <em>GP-supervised</em> longevity clinic built on peer-reviewed research — tailored to your biology, your goals, your life.
+          <div className="pos-card-head">
+            <div className="pos-card-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+              </svg>
+            </div>
+            <div className="pos-card-title">Evidence-informed</div>
+          </div>
+          <p className="pos-card-body">
+            Protocols grounded in peer-reviewed research and dispensed through registered Australian compounding pharmacies — measured, safe and genuinely effective.
           </p>
           <div className="positioning-pills">
             {pills.map((p) => (
