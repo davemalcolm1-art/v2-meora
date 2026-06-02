@@ -2760,7 +2760,7 @@ button.btn-ghost {
   color: transparent;
   background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') !important;
   background-size: cover;
-  background-position: 0% 50%;
+  background-position: 15% 58%;
   -webkit-background-clip: text;
   background-clip: text;
 }
