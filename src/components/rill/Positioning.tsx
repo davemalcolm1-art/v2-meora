@@ -28,12 +28,13 @@ const Positioning = () => {
         .positioning-hero {
           position: relative;
           width: 100%;
-          height: clamp(420px, 56vw, 640px);
+          height: clamp(460px, 60vw, 680px);
           overflow: hidden;
           background:
-            radial-gradient(ellipse at 50% 110%, rgba(255,235,200,0.55) 0%, rgba(255,235,200,0) 55%),
-            linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 40%, #E8E6DC 80%, #EDE8E0 100%);
+            radial-gradient(ellipse at 50% 115%, rgba(255,80,3,0.18) 0%, rgba(255,80,3,0) 55%),
+            linear-gradient(180deg, #BFD4E2 0%, #D6E2EA 40%, #E8DDD0 82%, #EDE8E0 100%);
         }
+
         .positioning-arc {
           position: absolute;
           inset: 0;
