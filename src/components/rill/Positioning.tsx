@@ -292,10 +292,6 @@ const Positioning = () => {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
-          <div className="pos-card-foot">
-            <span className="pos-card-foot-label">GP-Supervised</span>
-            <div className="pos-avatars"><span /><span /></div>
-          </div>
         </div>
 
         {/* Middle: image */}
