@@ -133,6 +133,23 @@ const Domains = () => {
           isolation: isolate;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
+        .goal-tile::before,
+        .goal-tile::after,
+        .goal-content::before,
+        .goal-content::after,
+        .goal-copy::before,
+        .goal-copy::after {
+          content: none !important;
+          display: none !important;
+          background: transparent !important;
+        }
+        .goal-tile .goal-copy,
+        .goal-tile .goal-copy *,
+        .goal-tile .goal-content,
+        .goal-tile .goal-content * {
+          background: transparent !important;
+          box-shadow: none !important;
+        }
         .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
 
         .tile-img {
