@@ -16,7 +16,7 @@ const FAQ = () => {
     <section
       id="about"
       style={{
-        background: "#F7F4EF",
+        background: "radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #F7F4EF 60%, #EDE8E0 100%)",
         padding: "120px 80px",
       }}
     >
