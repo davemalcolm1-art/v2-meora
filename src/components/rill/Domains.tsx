@@ -151,6 +151,7 @@ const Domains = () => {
           position: absolute; inset: 0;
           background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.0) 80%);
         }
+        .domain-tile h2, .domain-tile h3 { color: #ffffff !important; }
 
         .arrow-bubble {
           width: 44px; height: 44px; border-radius: 999px;
