@@ -308,7 +308,15 @@ const Positioning = () => {
         {/* Middle: image */}
         <div className="pos-card pos-card-image scroll-animate delay-150">
           <img src={heroImg} alt="Meora patient" loading="lazy" width={1024} height={1024} />
-          <span className="pos-card-image-tag">Built for you</span>
+          <div className="pos-card-head pos-card-image-head">
+            <div className="pos-card-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <div className="pos-card-title">Built for you</div>
+          </div>
           <div className="pos-card-image-label">
             Longevity, <em>made personal.</em>
           </div>
