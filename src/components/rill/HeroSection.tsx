@@ -136,6 +136,7 @@ const HeroSection = () => {
           left: 50%;
           transform: translateX(-50%);
           z-index: 50;
+          isolation: isolate;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -145,16 +146,27 @@ const HeroSection = () => {
           width: auto;
           max-width: calc(100vw - 80px);
           border-radius: 999px;
-          background: rgba(26, 43, 53, 0.45);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255,255,255,0.12);
-          box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-          transition: background 400ms ease, border-color 400ms ease;
+          background: rgba(247, 244, 239, 0.16);
+          backdrop-filter: blur(22px) saturate(190%);
+          -webkit-backdrop-filter: blur(22px) saturate(190%);
+          border: 1px solid rgba(255,255,255,0.34);
+          box-shadow: 0 18px 48px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.42), inset 0 -1px 0 rgba(26,43,53,0.10);
+          overflow: hidden;
+          transition: background 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+        }
+        .rill-nav::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          border-radius: inherit;
+          background: linear-gradient(135deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 42%, rgba(26,43,53,0.06) 100%);
         }
         .rill-nav.scrolled {
-          background: rgba(26, 43, 53, 0.72);
-          border-color: rgba(255,255,255,0.16);
+          background: rgba(247, 244, 239, 0.18);
+          border-color: rgba(255,255,255,0.36);
+          box-shadow: 0 18px 52px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.44), inset 0 -1px 0 rgba(26,43,53,0.10);
         }
         .rill-nav.menu-open {
           background: transparent !important;
@@ -178,6 +190,8 @@ const HeroSection = () => {
           gap: 32px;
           list-style: none;
           margin: 0; padding: 0;
+          position: relative;
+          z-index: 101;
         }
         .nav-links a {
           font-family: 'DM Sans', sans-serif;
