@@ -40,7 +40,7 @@
   --shadow-soft: 0 2px 20px rgba(26,43,53,0.06), 0 1px 4px rgba(26,43,53,0.04);
 
   /* shadcn semantic tokens */
-  --background: 40 30% 95%;          /* #FAF7F2 */
+  --background: 202 35% 15%;         /* #1A2B35 — dark page canvas, sections sit as cards */
   --foreground: 202 35% 15%;         /* #1A2B35 */
   --primary: 199 64% 34%;            /* #1F6B8E */
   --primary-foreground: 40 30% 95%;
