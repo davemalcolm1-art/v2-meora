@@ -255,7 +255,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
       <>
         <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
-        <div className="tile-image-mask" />
+        <div className="domain-label-panel" />
         <div className="domain-content" style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title + tagline */}
           <div className="domain-copy-block">
@@ -283,7 +283,6 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
-      <div className="tile-image-mask" />
       <div className="domain-content" style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div className="domain-copy-block">
           <div className="domain-eyebrow">{domain.tagline}</div>
