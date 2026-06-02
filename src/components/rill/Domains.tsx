@@ -81,8 +81,6 @@ const Domains = () => {
             </h1>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(26,43,53,0.5)" }}>
-            <span>Tap a tile — the grid rearranges</span>
-            <span aria-hidden style={{ width: 24, height: 1, background: "rgba(26,43,53,0.3)" }} />
             <span>{String(offset + 1).padStart(2, "0")} / 06</span>
           </div>
         </div>
