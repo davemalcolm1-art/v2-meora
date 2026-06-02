@@ -77,7 +77,7 @@ const Domains = () => {
               YOUR GOALS
             </div>
             <h1 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#1A2B35", fontSize: "clamp(36px,4.4vw,60px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0 }}>
-              One protocol, built for <span style={{ color: "#FF5003", fontStyle: "italic" }}>you</span>.
+              <span style={{ color: "#FF5003", fontStyle: "italic" }}>Your</span> Protocol
             </h1>
           </div>
         </div>
