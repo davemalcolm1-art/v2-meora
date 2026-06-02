@@ -3528,3 +3528,6 @@ nav.scrolled:not(.rill-nav) {
   transition: filter 0.3s ease, opacity 0.3s ease;
   will-change: filter, opacity;
 }
+
+/* Scoped overrides for ScienceCards section */
+.sci-cards-section h2 { color: #fff !important; }
