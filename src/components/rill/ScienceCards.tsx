@@ -33,7 +33,7 @@ const ScienceCards = () => {
 
   return (
     <section ref={sectionRef} className="scroll-animate section-exit-blur" style={{ position: "relative", width: "calc(100% - 96px)", margin: "0 48px", borderRadius: 32, background: `url(${BG}) center/cover no-repeat`, padding: "140px 0", overflow: "hidden", WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)' }}>
-      <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(26,43,53,0.68) 0%, rgba(26,43,53,0.52) 100%)", zIndex: 0 }} />
+      <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(26,43,53,0.35) 0%, rgba(26,43,53,0.25) 100%)", zIndex: 0 }} />
       <div className="sci-wrap" style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
         <div style={{ marginBottom: 56 }}>
           <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 20 }}>THE SCIENCE</div>
