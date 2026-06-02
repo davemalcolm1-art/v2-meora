@@ -1,13 +1,16 @@
-import bloodImg from "@/assets/howitworks/step-blood.jpg";
-import gpImg from "@/assets/howitworks/step-gp.jpg";
-import deliveryImg from "@/assets/howitworks/step-delivery.jpg";
-import ongoingImg from "@/assets/howitworks/step-ongoing.jpg";
+import bloodImg from "@/assets/howitworks/step-blood.png";
+import gpImg from "@/assets/howitworks/step-gp.png";
+import deliveryImg from "@/assets/howitworks/step-delivery.png";
+import ongoingImg from "@/assets/howitworks/step-ongoing.png";
+
+const INK = "#1A2B35";
+const CREAM = "#F7F4EF";
 
 const steps = [
-  { n: "01", title: "Blood panel", desc: "Targeted diagnostics establish your baseline biomarkers.", img: bloodImg },
-  { n: "02", title: "Meet your GP", desc: "An AHPRA-registered doctor reviews your results via telehealth.", img: gpImg },
-  { n: "03", title: "Protocols delivered", desc: "Compounded by a registered pharmacy. Cold-chain to your door.", img: deliveryImg },
-  { n: "04", title: "Ongoing review", desc: "Continuous adjustment as your numbers and goals evolve.", img: ongoingImg },
+  { n: "01", title: "Blood panel", desc: "Targeted diagnostics establish your baseline biomarkers.", img: bloodImg, alt: "Line illustration of a glass blood collection vial" },
+  { n: "02", title: "Meet your GP", desc: "An AHPRA-registered doctor reviews your results via telehealth.", img: gpImg, alt: "Line illustration of a laptop with a doctor on a video call" },
+  { n: "03", title: "Protocols delivered", desc: "Compounded by a registered pharmacy. Cold-chain to your door.", img: deliveryImg, alt: "Line illustration of a wrapped apothecary parcel tied with twine" },
+  { n: "04", title: "Ongoing review", desc: "Continuous adjustment as your numbers and goals evolve.", img: ongoingImg, alt: "Line illustration of a circular cycle of arrows" },
 ];
 
 const trust = [
@@ -18,10 +21,10 @@ const trust = [
 
 export default function HowItWorks() {
   return (
-    <section style={{ background: "#F7F4EF", padding: "140px 0 120px", color: "#1A2B35" }}>
+    <section style={{ background: CREAM, padding: "140px 0 120px", color: INK }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
+        <div style={{ textAlign: "center", marginBottom: 80 }}>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(26,43,53,0.5)", margin: "0 0 18px" }}>
             How it works
           </p>
@@ -33,73 +36,114 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        {/* Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginBottom: 56 }}>
-          {steps.map((s) => (
+        {/* Editorial cream panels — hairline dividers between */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            borderTop: "1px solid rgba(26,43,53,0.15)",
+            borderBottom: "1px solid rgba(26,43,53,0.15)",
+            marginBottom: 72,
+          }}
+        >
+          {steps.map((s, i) => (
             <article
               key={s.n}
               style={{
                 position: "relative",
-                aspectRatio: "3 / 4.2",
-                borderRadius: 24,
-                overflow: "hidden",
-                background: "#1A2B35",
+                padding: "44px 32px 48px",
+                borderLeft: i === 0 ? "none" : "1px solid rgba(26,43,53,0.15)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                minHeight: 520,
               }}
             >
-              <img
-                src={s.img}
-                alt=""
-                loading="lazy"
-                width={1024}
-                height={1280}
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-              />
-              <div
-                aria-hidden
+              {/* Numeral */}
+              <span
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.75) 100%)",
+                  fontFamily: "Fraunces, Georgia, serif",
+                  fontSize: 20,
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  color: "rgba(26,43,53,0.55)",
+                  letterSpacing: "0.02em",
                 }}
-              />
-              <div style={{ position: "absolute", inset: 0, padding: 28, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
-                <span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 18, fontWeight: 500, opacity: 0.85 }}>{s.n}</span>
-                <div>
-                  <h3 style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 28, fontWeight: 400, lineHeight: 1.15, margin: "0 0 10px", letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.55, margin: 0, color: "rgba(255,255,255,0.85)", maxWidth: 260 }}>
-                    {s.desc}
-                  </p>
-                </div>
+              >
+                {s.n}
+              </span>
+
+              {/* Illustration */}
+              <div
+                style={{
+                  width: "100%",
+                  flex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "8px 0 28px",
+                  minHeight: 240,
+                }}
+              >
+                <img
+                  src={s.img}
+                  alt={s.alt}
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  style={{
+                    width: "85%",
+                    maxWidth: 280,
+                    height: "auto",
+                    display: "block",
+                    mixBlendMode: "multiply",
+                  }}
+                />
               </div>
+
+              {/* Title + copy */}
+              <h3
+                style={{
+                  fontFamily: "Fraunces, Georgia, serif",
+                  fontSize: 26,
+                  fontWeight: 400,
+                  lineHeight: 1.15,
+                  margin: "0 0 12px",
+                  letterSpacing: "-0.01em",
+                  color: INK,
+                }}
+              >
+                {s.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: 14.5,
+                  lineHeight: 1.6,
+                  margin: 0,
+                  color: "rgba(26,43,53,0.65)",
+                }}
+              >
+                {s.desc}
+              </p>
             </article>
           ))}
         </div>
 
-        {/* Numbered timeline */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "0 auto 64px", maxWidth: 720 }}>
-          {steps.map((s, i) => (
-            <div key={s.n} style={{ display: "flex", alignItems: "center", gap: 14, flex: i === steps.length - 1 ? "0 0 auto" : 1 }}>
-              <div style={{
-                width: 26, height: 26, borderRadius: "50%", background: "#1A2B35", color: "#F7F4EF",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, flexShrink: 0,
-              }}>
-                {i + 1}
-              </div>
-              {i < steps.length - 1 && (
-                <div style={{ flex: 1, height: 1, background: "rgba(26,43,53,0.2)" }} />
-              )}
-            </div>
-          ))}
-        </div>
-
         {/* Trust strip */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32, marginBottom: 48, borderTop: "1px solid rgba(26,43,53,0.1)", borderBottom: "1px solid rgba(26,43,53,0.1)", padding: "32px 0" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 32,
+            marginBottom: 56,
+            borderBottom: "1px solid rgba(26,43,53,0.1)",
+            padding: "0 0 36px",
+          }}
+        >
           {trust.map((t) => (
             <div key={t.label} style={{ textAlign: "center" }}>
-              <p style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 20, fontWeight: 400, margin: "0 0 4px", color: "#1A2B35" }}>{t.label}</p>
+              <p style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 20, fontWeight: 400, margin: "0 0 4px", color: INK }}>{t.label}</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(26,43,53,0.55)", margin: 0 }}>{t.sub}</p>
             </div>
           ))}
@@ -107,12 +151,21 @@ export default function HowItWorks() {
 
         {/* CTA */}
         <div style={{ textAlign: "center" }}>
-          <button style={{
-            background: "#1A2B35", color: "#F7F4EF",
-            fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13,
-            letterSpacing: "0.08em", textTransform: "uppercase",
-            border: "none", borderRadius: 999, padding: "16px 36px", cursor: "pointer",
-          }}>
+          <button
+            style={{
+              background: INK,
+              color: CREAM,
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 600,
+              fontSize: 13,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              border: "none",
+              borderRadius: 999,
+              padding: "16px 36px",
+              cursor: "pointer",
+            }}
+          >
             Start your assessment →
           </button>
         </div>
