@@ -231,8 +231,7 @@ const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) =
     return (
       <>
         <div className="gradient-bg" style={{ background: domain.gradient }} />
-        <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <span className="num-pill glass" style={{ color: "rgba(255,255,255,0.85)", alignSelf: "flex-start" }}>Protocol</span>
+        <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
           <div className="glass" style={{ borderRadius: 18, padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", color: "#fff" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", opacity: 0.55 }}>Protocol</span>
@@ -250,8 +249,7 @@ const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) =
       <>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(150deg, #F0EBE3 0%, #E8E1D4 100%)" }} />
         <div style={{ position: "absolute", inset: 0, background: domain.gradient, opacity: 0.18, mixBlendMode: "multiply" }} />
-        <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <span className="num-pill" style={{ color: "#1A2B35", background: "rgba(26,43,53,0.06)", border: "1px solid rgba(26,43,53,0.12)", alignSelf: "flex-start" }}>Protocol</span>
+        <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
           <div className="glass-dark" style={{ borderRadius: 18, padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", color: "#1A2B35" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", opacity: 0.5 }}>Protocol</span>
@@ -269,8 +267,7 @@ const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) =
       <>
         <div className="gradient-bg" style={{ background: domain.gradient }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%)" }} />
-        <div style={{ position: "absolute", inset: 0, padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
-          <span className="num-pill glass" style={{ alignSelf: "flex-start" }}>Protocol</span>
+        <div style={{ position: "absolute", inset: 0, padding: 20, display: "flex", flexDirection: "column", justifyContent: "flex-end", color: "#fff" }}>
           <div className="glass" style={{ borderRadius: 14, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>{titleCase(domain.name)}</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -288,7 +285,6 @@ const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) =
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
         </svg>
         <div style={{ position: "absolute", inset: 0, padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
-          <span className="num-pill" style={{ alignSelf: "flex-start", background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.3)" }}>Protocol</span>
           <div style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.25)", backdropFilter: "blur(10px)", borderRadius: 14, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>{titleCase(domain.name)}</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -303,8 +299,7 @@ const DomainSlot = ({ domain, variant }: { domain: Domain; variant: Variant }) =
     <>
       <div className="gradient-bg" style={{ background: domain.gradient }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(26,43,53,0) 40%, rgba(26,43,53,0.45) 100%)" }} />
-      <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between", color: "#fff" }}>
-        <span className="num-pill glass" style={{ alignSelf: "flex-start" }}>Protocol</span>
+      <div style={{ position: "absolute", inset: 0, padding: 24, display: "flex", flexDirection: "column", justifyContent: "flex-end", color: "#fff" }}>
         <div className="glass" style={{ borderRadius: 18, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
             <span style={{ fontFamily: "'Fraunces', serif", fontStyle: "italic", fontSize: 22, lineHeight: 1.1 }}>{titleCase(domain.name)}</span>
