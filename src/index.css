@@ -3249,16 +3249,16 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
 }
 
 /* =====================================================================
-   Page container on large screens
+   Page container — unified canvas, sections float as cards
    ===================================================================== */
 @media (min-width: 1401px) {
-  html, body { background: #E8E2D9 !important; }
+  html, body { background: hsl(var(--background)) !important; }
   #root {
-    max-width: 1320px;
-    margin: 0 auto;
-    background: #FAF7F2;
-    border-radius: 24px;
-    overflow: hidden;
+    max-width: none;
+    margin: 0;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
   }
 }
 
