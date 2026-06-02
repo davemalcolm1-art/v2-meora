@@ -114,26 +114,8 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* Trust strip */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 32,
-            marginBottom: 56,
-            borderBottom: "1px solid rgba(26,43,53,0.1)",
-            padding: "0 0 36px",
-          }}
-        >
-          {trust.map((t) => (
-            <div key={t.label} style={{ textAlign: "center" }}>
-              <p style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 20, fontWeight: 400, margin: "0 0 4px", color: INK }}>{t.label}</p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(26,43,53,0.55)", margin: 0 }}>{t.sub}</p>
-            </div>
-          ))}
-        </div>
-
         {/* CTA */}
+
         <div style={{ textAlign: "center" }}>
           <button
             style={{
