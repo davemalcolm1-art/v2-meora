@@ -10,7 +10,6 @@ import Journal from "@/components/rill/Journal";
 import CtaBanner from "@/components/rill/CtaBanner";
 import FAQ from "@/components/rill/FAQ";
 import Footer from "@/components/rill/Footer";
-import MaskSection from "@/components/rill/MaskSection";
 import QuizModal from "@/components/rill/QuizModal";
 import { QuizProvider } from "@/components/rill/quizContext";
 import useReveal from "@/components/rill/useReveal";
@@ -36,8 +35,7 @@ const Index = () => {
       <Journal />
       <CtaBanner />
       <FAQ />
-      <MaskSection />
-      <Footer />
+      <Footer showMask />
       <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
     </QuizProvider>
   );
