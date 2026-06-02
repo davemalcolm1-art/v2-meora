@@ -2702,7 +2702,7 @@ button.btn-ghost {
   min-height: 0;
   padding: 140px 0 !important;
   margin: 0 !important;
-  background: #FAF7F2 !important;
+  background: #1A2B35 !important;
   overflow: hidden;
 }
 .mask-section .mask-bg {
@@ -3119,19 +3119,19 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
    Mask section — tight padding, no border lines
    ===================================================================== */
 .mask-section {
-  padding: 60px 0 !important;
+  padding: 24px 0 0 !important;
 }
 .mask-section .mask-bg {
-  top: 60px !important;
-  bottom: 60px !important;
+  top: 24px !important;
+  bottom: 0 !important;
 }
 .mask-section .mask-svg {
-  top: 60px !important;
-  bottom: 60px !important;
-  height: calc(100% - 120px) !important;
+  top: 24px !important;
+  bottom: 0 !important;
+  height: calc(100% - 24px) !important;
 }
 .mask-section::after {
-  height: clamp(180px, 26vw, 360px) !important;
+  height: clamp(120px, 18vw, 240px) !important;
 }
 .mask-section .mask-fade-top,
 .mask-section .mask-fade-bottom { display: none !important; }
@@ -3332,14 +3332,14 @@ nav.rill-nav.scrolled .nav-links a:hover { color: #E8571A !important; }
 }
 .faq-icon { color: #E8571A !important; }
 
-/* Mask section — 80px padding, no hr lines, no duplicate watermark */
+/* Mask section — compact, blends into footer */
 .mask-section {
-  padding: 80px 0 !important;
+  padding: 24px 0 0 !important;
   border-top: none !important;
   border-bottom: none !important;
 }
-.mask-section .mask-bg { top: 80px !important; bottom: 80px !important; }
-.mask-section .mask-svg { top: 80px !important; bottom: 80px !important; height: calc(100% - 160px) !important; }
+.mask-section .mask-bg { top: 24px !important; bottom: 0 !important; }
+.mask-section .mask-svg { top: 24px !important; bottom: 0 !important; height: calc(100% - 24px) !important; }
 .mask-section .mask-label { display: none !important; }
 
 
