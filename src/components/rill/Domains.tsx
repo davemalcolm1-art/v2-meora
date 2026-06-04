@@ -99,14 +99,17 @@ const Domains = () => {
             return (
               <button
                 key={`${d.num}-${slot.variant}`}
-                onClick={() => focusDomain(domainIdx)}
+                onClick={() => {
+                  if (isHero && d.slug) navigate(`/protocols/${d.slug}`);
+                  else focusDomain(domainIdx);
+                }}
                 className={`goal-tile ${slot.variant}`}
                 data-variant={slot.variant}
                 aria-label={`${d.name} protocol`}
                 style={{
                   gridColumn: slot.col,
                   gridRow: slot.row,
-                  cursor: isHero ? "default" : "pointer",
+                  cursor: (isHero && d.slug) || !isHero ? "pointer" : "default",
                   minHeight: slot.minH,
                   zIndex: isHero ? 2 : 1,
                 }}
