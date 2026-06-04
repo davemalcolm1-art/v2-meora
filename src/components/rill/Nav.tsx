@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { useQuiz } from "./quizContext";
 
 const links = [
