@@ -163,6 +163,9 @@ const Domains = () => {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
           object-fit: cover; transition: transform 1.2s ease; filter: brightness(1.03) contrast(1.02) saturate(1.05);
         }
+        .goal-tile:not(.hero) .tile-img {
+          filter: brightness(0.86) contrast(1.04) saturate(0.98);
+        }
         .goal-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
@@ -171,7 +174,7 @@ const Domains = () => {
         }
         .tile-scrim {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(255,250,242,0.35) 0%, transparent 30%, transparent 55%, rgba(247,244,239,0.78) 100%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 35%, transparent 60%, rgba(0,0,0,0.22) 100%);
         }
         .goal-content {
           --tile-text: hsl(0 0% 100%);
