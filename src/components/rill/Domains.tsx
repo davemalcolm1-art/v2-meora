@@ -303,7 +303,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
-      <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div className="goal-content" data-tone="light" style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div className="goal-copy">
           <h3 className="goal-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
             {titleCase(domain.name)}<span className="goal-title-dot">.</span>
