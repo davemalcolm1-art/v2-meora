@@ -12,6 +12,8 @@ const links = [
 const Nav = () => {
   const { open } = useQuiz();
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handle = () => setScrolled(window.scrollY > 80);
