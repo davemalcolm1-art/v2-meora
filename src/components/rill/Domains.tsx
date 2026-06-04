@@ -207,7 +207,7 @@ const Domains = () => {
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 10px var(--tile-text-shadow), 0 1px 2px var(--tile-text-shadow);
+          text-shadow: none;
           margin-bottom: 12px;
         }
         .goal-eyebrow.hero { font-size: 22px; margin-bottom: 16px; }
@@ -219,9 +219,9 @@ const Domains = () => {
           margin: 0;
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
-          -webkit-text-stroke: 0.35px var(--tile-title-stroke);
+          -webkit-text-stroke: 0;
           opacity: 1 !important;
-          text-shadow: 0 4px 22px var(--tile-text-shadow), 0 2px 5px var(--tile-text-shadow);
+          text-shadow: none;
           filter: none !important;
           mix-blend-mode: normal !important;
         }
@@ -234,7 +234,7 @@ const Domains = () => {
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 16px var(--tile-text-shadow);
+          text-shadow: none;
           margin: 0;
         }
         .goal-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
