@@ -135,8 +135,8 @@ const Domains = () => {
           text-align: left;
           padding: 0;
           border: 0;
-          background: hsl(0 0% 0%);
-          box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35);
+          background: hsl(36 38% 94%);
+          box-shadow: 0 12px 30px -22px rgba(180,150,110,0.35);
           isolation: isolate;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
