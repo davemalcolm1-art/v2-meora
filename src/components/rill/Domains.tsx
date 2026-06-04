@@ -72,7 +72,7 @@ const Domains = () => {
       ref={sectionRef}
       className="scroll-animate"
       style={{
-        background: "radial-gradient(ellipse at 50% 0%, #F0EBE3 0%, #F7F4EF 55%, #EDE8E0 100%)",
+        background: "radial-gradient(ellipse at 15% 0%, #FFF8EC 0%, #FBF8F2 35%, #F7F4EF 65%, #EFEAE2 100%)",
         padding: "120px 0",
         margin: "24px",
         borderRadius: 32,
