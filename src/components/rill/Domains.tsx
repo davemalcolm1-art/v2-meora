@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import energyTex from "@/assets/domains/energy-texture.jpg.asset.json";
 import performanceTex from "@/assets/domains/performance-texture.jpg.asset.json";
