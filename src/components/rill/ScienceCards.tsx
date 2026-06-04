@@ -36,7 +36,7 @@ const ScienceCards = () => {
       <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(26,43,53,0.35) 0%, rgba(26,43,53,0.25) 100%)", zIndex: 0 }} />
       <div className="sci-wrap" style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
         <div style={{ marginBottom: 56 }}>
-          <div className="scroll-animate" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 20 }}>THE SCIENCE</div>
+          
           <h2 className="scroll-animate delay-100" style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, color: "#fff", fontSize: "clamp(36px,4vw,52px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0 }}>
             The science exists.<br />
             <em style={{ fontStyle: "italic", color: "#FF5003" }}>We didn't invent it.</em>
