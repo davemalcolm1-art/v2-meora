@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import Nav from "@/components/rill/Nav";
+import SiteNav from "@/components/rill/SiteNav";
 import Footer from "@/components/rill/Footer";
 import CtaBanner from "@/components/rill/CtaBanner";
 import FAQ from "@/components/rill/FAQ";
@@ -22,7 +22,7 @@ const Protocol = () => {
 
   return (
     <QuizProvider onOpen={() => setQuizOpen(true)}>
-      <Nav />
+      <SiteNav variant="dark" />
       <main style={{ background: CREAM, color: INK, paddingTop: 96 }}>
         <Hero p={protocol} />
         <Intro p={protocol} />

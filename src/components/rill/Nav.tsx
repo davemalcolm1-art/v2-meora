@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { useQuiz } from "./quizContext";
 
 const links = [
@@ -11,6 +12,8 @@ const links = [
 const Nav = () => {
   const { open } = useQuiz();
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handle = () => setScrolled(window.scrollY > 80);
@@ -44,14 +47,14 @@ const Nav = () => {
 
   return (
     <nav className="meora-nav" style={navStyle}>
-      <a href="#" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+      <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
         <img src="/meora-mark-white.svg" width={28} height={28} alt="Meora" />
         <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 15, letterSpacing: "0.1em", color: "#fff" }}>MEORA</span>
-      </a>
+      </Link>
       <ul className="meora-nav-links" style={{ display: "flex", gap: 28, listStyle: "none", margin: 0, padding: 0 }}>
         {links.map((l) => (
           <li key={l.href}>
-            <a href={l.href} className="meora-nav-link" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: "#fff", letterSpacing: "0.02em", textDecoration: "none", transition: "color 0.2s" }}>{l.label}</a>
+            <Link to={isHome ? l.href : `/${l.href}`} className="meora-nav-link" style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: "#fff", letterSpacing: "0.02em", textDecoration: "none", transition: "color 0.2s" }}>{l.label}</Link>
           </li>
         ))}
       </ul>
