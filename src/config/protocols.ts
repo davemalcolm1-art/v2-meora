@@ -1,4 +1,4 @@
-import recoveryHero from "@/assets/domains/recovery-hero.jpg.asset.json";
+import recoveryHero from "@/assets/protocols/recovery/hero.jpg.asset.json";
 import biomarker1 from "@/assets/protocols/recovery/biomarker-1.jpg.asset.json";
 import biomarker2 from "@/assets/protocols/recovery/biomarker-2.jpg.asset.json";
 import biomarker3 from "@/assets/protocols/recovery/biomarker-3.jpg.asset.json";
