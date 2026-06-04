@@ -74,7 +74,7 @@ const Hero = ({ p }: { p: ProtocolType }) => {
     >
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: 56, alignItems: "center" }} className="protocol-hero-grid">
         <div>
-          <Eyebrow color={ORANGE}>{p.eyebrow_safe ?? p.hero.eyebrow}</Eyebrow>
+          <Eyebrow color={ORANGE}>{p.hero.eyebrow}</Eyebrow>
           <h1 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: "clamp(44px,5.2vw,76px)", lineHeight: 1.02, letterSpacing: "-0.025em", margin: "0 0 24px", color: INK }}>
             {p.hero.title.replace(/\.$/, "")}<span style={{ color: ORANGE, fontStyle: "italic" }}>.</span>
           </h1>
