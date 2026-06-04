@@ -24,19 +24,6 @@ const FAQ = () => {
       }}
     >
       <div style={{ maxWidth: 880, margin: "0 auto" }}>
-        <div
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 700,
-            fontSize: 11,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "rgba(26,43,53,0.45)",
-            marginBottom: 16,
-          }}
-        >
-          COMMON QUESTIONS
-        </div>
         <h2
           style={{
             fontFamily: "'Fraunces', serif",

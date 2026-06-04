@@ -225,19 +225,6 @@ const Journal = () => {
           }}
         >
           <div>
-            <div
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 700,
-                fontSize: 10,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "rgba(26,43,53,0.4)",
-                marginBottom: 16,
-              }}
-            >
-              THE JOURNAL
-            </div>
             <h2
               style={{
                 fontFamily: "'Fraunces', Georgia, serif",
