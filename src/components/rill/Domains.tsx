@@ -161,28 +161,28 @@ const Domains = () => {
 
         .tile-img {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
-          object-fit: cover; transition: transform 1.2s ease; filter: brightness(0.72) contrast(1.08) saturate(0.98);
+          object-fit: cover; transition: transform 1.2s ease; filter: brightness(1.03) contrast(1.02) saturate(1.05);
         }
         .goal-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.26) 62%, rgba(0,0,0,0.84) 100%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.08) 28%, transparent 50%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0.62) 100%);
         }
         .tile-scrim {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
+          background: linear-gradient(180deg, rgba(255,250,242,0.35) 0%, transparent 30%, transparent 55%, rgba(247,244,239,0.78) 100%);
         }
         .goal-content {
           --tile-text: hsl(0 0% 100%);
-          --tile-text-shadow: rgba(0,0,0,0.9);
-          --tile-title-stroke: rgba(255,255,255,0.75);
+          --tile-text-shadow: rgba(0,0,0,0.55);
+          --tile-title-stroke: rgba(255,255,255,0.55);
           position: absolute; inset: 0; z-index: 3; color: var(--tile-text);
         }
         .goal-content[data-tone="dark"] {
           --tile-text: hsl(202 34% 15%);
-          --tile-text-shadow: rgba(255,255,255,0.65);
-          --tile-title-stroke: rgba(26,43,53,0.28);
+          --tile-text-shadow: rgba(255,250,242,0.85);
+          --tile-title-stroke: rgba(26,43,53,0.22);
         }
         .goal-copy {
           display: inline-block;
