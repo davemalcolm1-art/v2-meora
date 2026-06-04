@@ -273,7 +273,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
   if (isHero) {
     return (
       <>
-        <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
+        <img src={domain.heroImage} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
         <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title (label) */}
