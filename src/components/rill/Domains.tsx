@@ -157,7 +157,7 @@ const Domains = () => {
           background: transparent !important;
           box-shadow: none !important;
         }
-        .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
+        .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(180,150,110,0.5); }
 
         .tile-img {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
