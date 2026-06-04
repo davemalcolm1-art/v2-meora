@@ -1,46 +1,95 @@
-## Plan — Freshen "Your Goals · Your Protocol" (Domains section)
+# Domain Page Template — starting with Recovery
 
-The section currently runs `filter: brightness(0.72)` on every image plus near-black scrims (`rgba(0,0,0,0.94)` top). That's why it feels dark and dead. Fix it by replacing the imagery with bright editorial macros + a single human hero, and stripping the heavy darkening.
+Build one reusable, data-driven template now, fill it with Recovery copy, and wire one route. Other domains drop in later by adding a config entry.
 
-### Imagery direction (confirmed)
-- **5 small tiles** → bright botanical / texture macros in the style of the reference (soft cream backdrops, water droplets, sunlit leaves, silk, marble, skin macro). Brand-owned, premium, fresh.
-- **Hero tile (large left)** → a bright, sunlit human moment that rotates with the carousel. One person per domain, daylight, candid — not stock-photo gloss.
+## Route
 
-Per-domain art direction:
-| Domain | Small-tile texture | Hero person moment |
-|---|---|---|
-| Energy | Citrus macro with droplets, sunlit | Person stretching at sunrise window, golden light |
-| Performance | Chalk on hands / linen weave, bright | Runner mid-stride, daylight, clean sky |
-| Balance | Marble + soft botanical, cream tones | Person in warm meditation, soft window light |
-| Recovery | Warm water surface / steam in light | Person resting post-workout, warm tones |
-| Longevity | **Reference image** — leaf macro + droplets on cream | Older couple laughing outdoors, sunlit |
-| Beauty | Silk / soft skin macro / dewy petals | Close portrait, natural skin, bright daylight |
+- `/protocols/recovery` → `pages/Protocol.tsx` (dynamic via `:slug`)
+- Added above the catch-all in `src/App.tsx`
+- Link the Recovery tile in `Domains.tsx` to this route
 
-### Code changes
-1. **Generate 12 new images** with `imagegen` (standard quality, 1536×1024 / 3:2):
-   - `src/assets/domains/{name}-texture.jpg` × 6
-   - `src/assets/domains/{name}-hero.jpg` × 6
-   - Upload via `lovable-assets`, write `.asset.json` pointers, remove the originals.
-2. **`src/components/rill/Domains.tsx`**:
-   - Import both `texture` and `hero` URLs per domain; `DomainSlot` chooses based on `isHero`.
-   - Default `textTone` → `dark` (ink on light) for texture tiles; hero stays `light`.
-   - CSS:
-     - `.tile-img` filter → `brightness(1.02) contrast(1.02) saturate(1.05)` (was 0.72/1.08/0.98).
-     - Replace `.tile-scrim` with a soft bottom-only gradient: `linear-gradient(180deg, transparent 0% 60%, rgba(247,244,239,0.7) 100%)` so dark ink on bright tiles stays legible without darkening the photo.
-     - Keep `.tile-scrim-hero` but lighten: `linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 35%, transparent 60%, rgba(0,0,0,0.55) 100%)` — just enough to anchor white copy top + bottom.
-     - Text shadow tightened to subtle 1px lift (no heavy halos).
-   - Section background nudged brighter: `radial-gradient(ellipse at 50% 0%, #FBF8F2 0%, #F7F4EF 55%, #EFEAE2 100%)`.
-   - Hover shadow → soft warm cream tint instead of dark.
-3. **Delete the 6 old `domains/*.jpg.asset.json`** once new pointers are in.
+## File structure
 
-### Files touched
-- `src/components/rill/Domains.tsx`
-- `src/assets/domains/*.jpg.asset.json` (replace 6, add 6 hero pointers)
+```text
+src/
+  pages/
+    Protocol.tsx                  // route handler, looks up slug → config
+  components/rill/protocol/
+    ProtocolHero.tsx              // hero card (image right, copy left, CTAs)
+    ProtocolIntro.tsx             // centered intro band ("Strength & recovery built for your life")
+    ProtocolWhy.tsx               // 2-col stat / "why it matters" block
+    ProtocolHowItWorks.tsx        // 4-step timeline (reuses HowItWorks visual language)
+    ProtocolWhatWeTest.tsx        // 4 biomarker tiles w/ portrait imagery
+    ProtocolSymptoms.tsx          // "Signs you may notice" floating-pill collage
+    ProtocolRecognise.tsx         // soft pink "Do you recognise…" + quiz CTA
+    ProtocolBenefits.tsx          // dark band — "What to expect" 4 columns
+    ProtocolWhyMeora.tsx          // 4 reason cards grid
+  config/
+    protocols.ts                  // typed config per domain (copy, images, biomarkers, symptoms, benefits)
+```
 
-### Out of scope
-- No grid/layout change — same bento, same rotation.
-- No copy changes.
-- Protocols carousel and rest of site untouched (separate question if you want to lighten more sections).
+Reuse existing site chrome (`Nav` if present, `CtaBanner`, `FAQ`, `Footer`) wrapped around the protocol sections in `Protocol.tsx`.
 
-### Result
-Section reads bright, fresh, alive: 5 premium texture tiles in the reference's visual language + one warm human hero that rotates. Borrows Limitless's daylight energy without becoming a stock-photo grid.
+## Section order (mirrors reference, Meora styling)
+
+1. Hero — short headline, supporting line, two CTAs (Take quiz / Learn more), hero image right
+2. Intro band — one-line promise + sub + button
+3. Why it matters — editorial 2-col: bold claim + supporting research-style callout card
+4. How it works — 4 steps (Comprehensive intake → Test → View results → Action plan), portrait + chips
+5. What we test — 4 biomarker tiles with face/portrait imagery + label overlay
+6. Signs you may notice — hero portrait with floating pill-labels (symptoms)
+7. Recognise these signs — soft band + "Check eligibility" CTA
+8. What to expect — dark ink panel, 4-column benefits
+9. Why Meora — 4 cards (comprehensive labs, clinically guided, AU-wide, ongoing care)
+10. Reuse `CtaBanner` + `FAQ` + `Footer`
+
+## Data model (`config/protocols.ts`)
+
+```ts
+type Protocol = {
+  slug: "recovery" | "performance" | "balance" | "beauty" | "energy" | "longevity";
+  name: string;          // "Recovery"
+  tagline: string;       // "Repair & Resilience"
+  hero: { eyebrow; title; sub; image; ctas: {label,href}[] };
+  intro: { title; sub; cta };
+  why:  { headline; claim; supportingCard: { title; body; stat? } };
+  howItWorks: { step; title; desc; chips: string[]; image }[];
+  biomarkers: { name; desc; image }[];          // 4
+  symptoms: { label; position: {x,y} }[];       // pills over heroPortrait
+  symptomsHero: string;
+  benefits: { title; body }[];                  // 4
+  whyMeora: { title; body; image? }[];          // 4
+};
+```
+
+## Recovery copy (drafted, on-brand placeholder)
+
+- Hero: "Built for the comeback." / "Repair faster. Train smarter. Stay in the game longer." CTAs: Take the quiz · How it works
+- Why: "Stronger recovery supports a longer, more resilient life."
+- Biomarkers: Inflammation (hs-CRP), Recovery hormones (Cortisol, DHEA), Muscle repair (Creatine kinase), Sleep & stress (HRV proxy panel)
+- Symptoms: Slow recovery · Persistent soreness · Disrupted sleep · Low energy · Frequent niggles · Mood dips
+- Benefits: Support faster recovery · Reduce inflammation · Improve sleep quality · Sustain energy
+- WhyMeora: Reuses the 4 cards already on the homepage pattern
+
+## Imagery
+
+For Recovery, reuse existing `recovery-hero.jpg` for hero. Generate (in build phase) ~4 new portrait/biomarker images via `imagegen` + `lovable-assets` under `src/assets/protocols/recovery/`. Keep brightness/grading consistent with `Domains.tsx` rules.
+
+## Styling rules
+
+- Use existing tokens (`#1A2B35` INK, `#F7F4EF` CREAM, `#FF5003` orange, Fraunces + DM Sans)
+- Match the cream radial background + 32px rounded section cards used in `Domains.tsx`
+- No text drop-shadows (per prior preference)
+- `useScrollAnimation` for section reveals
+
+## Out of scope for this pass
+
+- Other 5 domains (template will be ready; we'll add their config + route entries next)
+- Copy revisions — initial copy is placeholder
+- Quiz logic changes — CTAs open existing `QuizModal`
+
+## Technical notes
+
+- `Protocol.tsx` uses `useParams<{slug}>()` → lookup in `protocols` map → 404 if missing
+- All sections accept their slice of the Protocol object as props (no global state)
+- Lazy-load route to keep `Index` bundle lean

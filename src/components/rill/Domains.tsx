@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import energyTex from "@/assets/domains/energy-texture.jpg.asset.json";
 import performanceTex from "@/assets/domains/performance-texture.jpg.asset.json";
@@ -21,13 +22,14 @@ type Domain = {
   heroImage: string;   // person moment (hero tile)
   tagline: string;
   textTone?: "light" | "dark";
+  slug?: string;       // route slug if a protocol page exists
 };
 
 const domains: Domain[] = [
   { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                  image: energyTex.url,      heroImage: energyHero.url,      tagline: "Sustained Output",       textTone: "dark" },
   { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",    image: performanceTex.url, heroImage: performanceHero.url, tagline: "Strength & Composition", textTone: "dark" },
   { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.", image: balanceTex.url,     heroImage: balanceHero.url,     tagline: "Hormonal Health",        textTone: "dark" },
-  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                            image: recoveryTex.url,    heroImage: recoveryHero.url,    tagline: "Repair & Resilience",    textTone: "dark" },
+  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                            image: recoveryTex.url,    heroImage: recoveryHero.url,    tagline: "Repair & Resilience",    textTone: "dark", slug: "recovery" },
   { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                 image: longevityTex.url,   heroImage: longevityHero.url,   tagline: "Healthy Ageing",         textTone: "dark" },
   { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",         image: beautyTex.url,      heroImage: beautyHero.url,      tagline: "Skin & Collagen",        textTone: "dark" },
 ];
@@ -54,6 +56,7 @@ const N = domains.length;
 
 const Domains = () => {
   const sectionRef = useScrollAnimation<HTMLElement>();
+  const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
 
   const focusDomain = useCallback((domainIdx: number) => {
@@ -96,14 +99,17 @@ const Domains = () => {
             return (
               <button
                 key={`${d.num}-${slot.variant}`}
-                onClick={() => focusDomain(domainIdx)}
+                onClick={() => {
+                  if (isHero && d.slug) navigate(`/protocols/${d.slug}`);
+                  else focusDomain(domainIdx);
+                }}
                 className={`goal-tile ${slot.variant}`}
                 data-variant={slot.variant}
                 aria-label={`${d.name} protocol`}
                 style={{
                   gridColumn: slot.col,
                   gridRow: slot.row,
-                  cursor: isHero ? "default" : "pointer",
+                  cursor: (isHero && d.slug) || !isHero ? "pointer" : "default",
                   minHeight: slot.minH,
                   zIndex: isHero ? 2 : 1,
                 }}
