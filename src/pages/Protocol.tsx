@@ -22,7 +22,7 @@ const Protocol = () => {
 
   return (
     <QuizProvider onOpen={() => setQuizOpen(true)}>
-      <Nav />
+      <SiteNav variant="dark" />
       <main style={{ background: CREAM, color: INK, paddingTop: 96 }}>
         <Hero p={protocol} />
         <Intro p={protocol} />
