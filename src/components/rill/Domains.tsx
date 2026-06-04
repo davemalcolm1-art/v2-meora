@@ -163,6 +163,9 @@ const Domains = () => {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
           object-fit: cover; transition: transform 1.2s ease; filter: brightness(1.03) contrast(1.02) saturate(1.05);
         }
+        .goal-tile:not(.hero) .tile-img {
+          filter: brightness(0.86) contrast(1.04) saturate(0.98);
+        }
         .goal-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
@@ -171,7 +174,7 @@ const Domains = () => {
         }
         .tile-scrim {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(255,250,242,0.35) 0%, transparent 30%, transparent 55%, rgba(247,244,239,0.78) 100%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 35%, transparent 60%, rgba(0,0,0,0.22) 100%);
         }
         .goal-content {
           --tile-text: hsl(0 0% 100%);
@@ -204,7 +207,7 @@ const Domains = () => {
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 10px var(--tile-text-shadow), 0 1px 2px var(--tile-text-shadow);
+          text-shadow: none;
           margin-bottom: 12px;
         }
         .goal-eyebrow.hero { font-size: 22px; margin-bottom: 16px; }
@@ -216,9 +219,9 @@ const Domains = () => {
           margin: 0;
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
-          -webkit-text-stroke: 0.35px var(--tile-title-stroke);
+          -webkit-text-stroke: 0;
           opacity: 1 !important;
-          text-shadow: 0 4px 22px var(--tile-text-shadow), 0 2px 5px var(--tile-text-shadow);
+          text-shadow: none;
           filter: none !important;
           mix-blend-mode: normal !important;
         }
@@ -231,7 +234,7 @@ const Domains = () => {
           color: var(--tile-text);
           -webkit-text-fill-color: var(--tile-text);
           opacity: 1 !important;
-          text-shadow: 0 2px 16px var(--tile-text-shadow);
+          text-shadow: none;
           margin: 0;
         }
         .goal-tile-footer { display: flex; align-items: flex-end; justify-content: flex-end; gap: 14px; }
@@ -300,7 +303,7 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
     <>
       <img src={domain.image} alt="" className="tile-img" loading="lazy" width={1024} height={1024} />
       <div className="tile-scrim" />
-      <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div className="goal-content" data-tone="light" style={{ padding: 22, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div className="goal-copy">
           <h3 className="goal-title" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
             {titleCase(domain.name)}<span className="goal-title-dot">.</span>
