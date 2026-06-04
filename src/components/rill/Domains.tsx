@@ -1,28 +1,35 @@
 import { useState, useCallback, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import energyImg from "@/assets/domains/energy.jpg.asset.json";
-import performanceImg from "@/assets/domains/performance.jpg.asset.json";
-import balanceImg from "@/assets/domains/balance.jpg.asset.json";
-import recoveryImg from "@/assets/domains/recovery.jpg.asset.json";
-import longevityImg from "@/assets/domains/longevity.jpg.asset.json";
-import beautyImg from "@/assets/domains/beauty.jpg.asset.json";
+import energyTex from "@/assets/domains/energy-texture.jpg.asset.json";
+import performanceTex from "@/assets/domains/performance-texture.jpg.asset.json";
+import balanceTex from "@/assets/domains/balance-texture.jpg.asset.json";
+import recoveryTex from "@/assets/domains/recovery-texture.jpg.asset.json";
+import longevityTex from "@/assets/domains/longevity-texture.jpg.asset.json";
+import beautyTex from "@/assets/domains/beauty-texture.jpg.asset.json";
+import energyHero from "@/assets/domains/energy-hero.jpg.asset.json";
+import performanceHero from "@/assets/domains/performance-hero.jpg.asset.json";
+import balanceHero from "@/assets/domains/balance-hero.jpg.asset.json";
+import recoveryHero from "@/assets/domains/recovery-hero.jpg.asset.json";
+import longevityHero from "@/assets/domains/longevity-hero.jpg.asset.json";
+import beautyHero from "@/assets/domains/beauty-hero.jpg.asset.json";
 
 type Domain = {
   num: string;
   name: string;
   desc: string;
-  image: string;
+  image: string;       // texture (small tiles)
+  heroImage: string;   // person moment (hero tile)
   tagline: string;
   textTone?: "light" | "dark";
 };
 
 const domains: Domain[] = [
-  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output",         textTone: "light" },
-  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition",    textTone: "light" },
-  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health",          textTone: "light" },
-  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience",      textTone: "light" },
-  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing",           textTone: "light" },
-  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen",          textTone: "light" },
+  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                  image: energyTex.url,      heroImage: energyHero.url,      tagline: "Sustained Output",       textTone: "dark" },
+  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",    image: performanceTex.url, heroImage: performanceHero.url, tagline: "Strength & Composition", textTone: "dark" },
+  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.", image: balanceTex.url,     heroImage: balanceHero.url,     tagline: "Hormonal Health",        textTone: "dark" },
+  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                            image: recoveryTex.url,    heroImage: recoveryHero.url,    tagline: "Repair & Resilience",    textTone: "dark" },
+  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                 image: longevityTex.url,   heroImage: longevityHero.url,   tagline: "Healthy Ageing",         textTone: "dark" },
+  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",         image: beautyTex.url,      heroImage: beautyHero.url,      tagline: "Skin & Collagen",        textTone: "dark" },
 ];
 
 type Variant = "hero" | "a" | "b" | "c" | "d" | "e";
@@ -65,7 +72,7 @@ const Domains = () => {
       ref={sectionRef}
       className="scroll-animate"
       style={{
-        background: "radial-gradient(ellipse at 50% 0%, #F0EBE3 0%, #F7F4EF 55%, #EDE8E0 100%)",
+        background: "radial-gradient(ellipse at 15% 0%, #FFF8EC 0%, #FBF8F2 35%, #F7F4EF 65%, #EFEAE2 100%)",
         padding: "120px 0",
         margin: "24px",
         borderRadius: 32,
@@ -128,8 +135,8 @@ const Domains = () => {
           text-align: left;
           padding: 0;
           border: 0;
-          background: hsl(0 0% 0%);
-          box-shadow: 0 12px 30px -22px rgba(26,43,53,0.35);
+          background: hsl(36 38% 94%);
+          box-shadow: 0 12px 30px -22px rgba(180,150,110,0.35);
           isolation: isolate;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
@@ -150,32 +157,32 @@ const Domains = () => {
           background: transparent !important;
           box-shadow: none !important;
         }
-        .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(26,43,53,0.45); }
+        .goal-tile:not(.hero):hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(180,150,110,0.5); }
 
         .tile-img {
           position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
-          object-fit: cover; transition: transform 1.2s ease; filter: brightness(0.72) contrast(1.08) saturate(0.98);
+          object-fit: cover; transition: transform 1.2s ease; filter: brightness(1.03) contrast(1.02) saturate(1.05);
         }
         .goal-tile:hover .tile-img { transform: scale(1.04); }
 
         .tile-scrim-hero {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.26) 62%, rgba(0,0,0,0.84) 100%);
+          background: linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.08) 28%, transparent 50%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0.62) 100%);
         }
         .tile-scrim {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.64) 42%, rgba(0,0,0,0.2) 72%, rgba(0,0,0,0.62) 100%);
+          background: linear-gradient(180deg, rgba(255,250,242,0.35) 0%, transparent 30%, transparent 55%, rgba(247,244,239,0.78) 100%);
         }
         .goal-content {
           --tile-text: hsl(0 0% 100%);
-          --tile-text-shadow: rgba(0,0,0,0.9);
-          --tile-title-stroke: rgba(255,255,255,0.75);
+          --tile-text-shadow: rgba(0,0,0,0.55);
+          --tile-title-stroke: rgba(255,255,255,0.55);
           position: absolute; inset: 0; z-index: 3; color: var(--tile-text);
         }
         .goal-content[data-tone="dark"] {
           --tile-text: hsl(202 34% 15%);
-          --tile-text-shadow: rgba(255,255,255,0.65);
-          --tile-title-stroke: rgba(26,43,53,0.28);
+          --tile-text-shadow: rgba(255,250,242,0.85);
+          --tile-title-stroke: rgba(26,43,53,0.22);
         }
         .goal-copy {
           display: inline-block;
@@ -266,9 +273,9 @@ const DomainSlot = ({ domain, isHero }: { domain: Domain; isHero: boolean }) => 
   if (isHero) {
     return (
       <>
-        <img src={domain.image} alt="" className="tile-img" width={1024} height={1024} />
+        <img src={domain.heroImage} alt="" className="tile-img" width={1024} height={1024} />
         <div className="tile-scrim-hero" />
-        <div className="goal-content" data-tone={domain.textTone ?? "light"} style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div className="goal-content" data-tone="light" style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           {/* TOP: title (label) */}
           <div className="goal-copy">
             <h2 className="goal-title" style={{ fontSize: "clamp(40px,4.4vw,64px)", letterSpacing: "-0.02em" }}>
