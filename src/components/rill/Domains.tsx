@@ -1,28 +1,35 @@
 import { useState, useCallback, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import energyImg from "@/assets/domains/energy.jpg.asset.json";
-import performanceImg from "@/assets/domains/performance.jpg.asset.json";
-import balanceImg from "@/assets/domains/balance.jpg.asset.json";
-import recoveryImg from "@/assets/domains/recovery.jpg.asset.json";
-import longevityImg from "@/assets/domains/longevity.jpg.asset.json";
-import beautyImg from "@/assets/domains/beauty.jpg.asset.json";
+import energyTex from "@/assets/domains/energy-texture.jpg.asset.json";
+import performanceTex from "@/assets/domains/performance-texture.jpg.asset.json";
+import balanceTex from "@/assets/domains/balance-texture.jpg.asset.json";
+import recoveryTex from "@/assets/domains/recovery-texture.jpg.asset.json";
+import longevityTex from "@/assets/domains/longevity-texture.jpg.asset.json";
+import beautyTex from "@/assets/domains/beauty-texture.jpg.asset.json";
+import energyHero from "@/assets/domains/energy-hero.jpg.asset.json";
+import performanceHero from "@/assets/domains/performance-hero.jpg.asset.json";
+import balanceHero from "@/assets/domains/balance-hero.jpg.asset.json";
+import recoveryHero from "@/assets/domains/recovery-hero.jpg.asset.json";
+import longevityHero from "@/assets/domains/longevity-hero.jpg.asset.json";
+import beautyHero from "@/assets/domains/beauty-hero.jpg.asset.json";
 
 type Domain = {
   num: string;
   name: string;
   desc: string;
-  image: string;
+  image: string;       // texture (small tiles)
+  heroImage: string;   // person moment (hero tile)
   tagline: string;
   textTone?: "light" | "dark";
 };
 
 const domains: Domain[] = [
-  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                           image: energyImg.url,      tagline: "Sustained Output",         textTone: "light" },
-  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",            image: performanceImg.url, tagline: "Strength & Composition",    textTone: "light" },
-  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.",         image: balanceImg.url,     tagline: "Hormonal Health",          textTone: "light" },
-  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                                    image: recoveryImg.url,    tagline: "Repair & Resilience",      textTone: "light" },
-  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                         image: longevityImg.url,   tagline: "Healthy Ageing",           textTone: "light" },
-  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",                   image: beautyImg.url,      tagline: "Skin & Collagen",          textTone: "light" },
+  { num: "01", name: "ENERGY",      desc: "Show up fully. Every single day.",                  image: energyTex.url,      heroImage: energyHero.url,      tagline: "Sustained Output",       textTone: "dark" },
+  { num: "02", name: "PERFORMANCE", desc: "Built to go further than you thought possible.",    image: performanceTex.url, heroImage: performanceHero.url, tagline: "Strength & Composition", textTone: "dark" },
+  { num: "03", name: "BALANCE",     desc: "When everything feels in sync, everything changes.", image: balanceTex.url,     heroImage: balanceHero.url,     tagline: "Hormonal Health",        textTone: "dark" },
+  { num: "04", name: "RECOVERY",    desc: "Built for the comeback.",                            image: recoveryTex.url,    heroImage: recoveryHero.url,    tagline: "Repair & Resilience",    textTone: "dark" },
+  { num: "05", name: "LONGEVITY",   desc: "Play the long game. On your terms.",                 image: longevityTex.url,   heroImage: longevityHero.url,   tagline: "Healthy Ageing",         textTone: "dark" },
+  { num: "06", name: "BEAUTY",      desc: "Radiant from within. Supported by science.",         image: beautyTex.url,      heroImage: beautyHero.url,      tagline: "Skin & Collagen",        textTone: "dark" },
 ];
 
 type Variant = "hero" | "a" | "b" | "c" | "d" | "e";
