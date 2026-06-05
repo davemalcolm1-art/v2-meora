@@ -20,6 +20,7 @@ const TrustStrip = () => {
         gap: 48,
         height: 64,
       }}
+      className="trust-strip-root"
     >
       <style>{`
         .ts-item {
