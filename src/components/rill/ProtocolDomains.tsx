@@ -120,6 +120,7 @@ const ProtocolDomains = () => {
         }
         .pd-left { width: 45%; }
         .pd-right { width: 55%; display: flex; flex-direction: column; gap: 48px; }
+        .pd-inner--flipped { flex-direction: row-reverse; }
         .pd-featured {
           background: rgba(10,10,10,0.45);
           backdrop-filter: blur(24px);
