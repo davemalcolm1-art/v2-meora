@@ -14,7 +14,7 @@ const TrustStrip = () => {
     <div
       style={{
         width: "100%",
-        background: "rgba(255,255,255,0.04)",
+        background: "#111111",
         borderTop: "1px solid rgba(255,255,255,0.08)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         height: 64,
@@ -49,7 +49,7 @@ const TrustStrip = () => {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 12px;
-          color: rgba(245,240,232,0.92);
+          color: rgba(245,240,232,0.75);
           letter-spacing: 0.08em;
           text-transform: uppercase;
           white-space: nowrap;
