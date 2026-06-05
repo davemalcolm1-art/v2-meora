@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { useQuiz } from "./quizContext";
 
-type Protocol = { name: string; desc: string; mark: string };
+type Protocol = { name: string; desc?: string; mark: string };
 type Domain = {
   id: string;
   name: string;
   tagline: string;
-  protocols: Protocol[];
+  featured: Protocol;
+  pills: Protocol[];
 };
 
-const MARKS = {
+const MARK = {
   gold: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-gold.png",
   steel: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-steel.png",
   marble: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-marble.png",
@@ -23,263 +23,190 @@ const domains: Domain[] = [
     id: "energy",
     name: "Energy",
     tagline: "Show up fully. Every single day.",
-    protocols: [
-      { name: "Foundation.ME", desc: "Daily baseline support for energy and clarity.", mark: MARKS.gold },
-      { name: "Foundation Pro.ME", desc: "Advanced foundational stack for demanding lives.", mark: MARKS.gold },
-      { name: "Vitality.ME", desc: "Restore drive and steady output across the week.", mark: MARKS.gold },
+    featured: { name: "Foundation.ME", desc: "Daily baseline support for energy and clarity.", mark: MARK.gold },
+    pills: [
+      { name: "Foundation Pro.ME", mark: MARK.gold },
+      { name: "Vitality.ME", mark: MARK.gold },
     ],
   },
   {
     id: "performance",
     name: "Performance",
     tagline: "Built to go further than you thought possible.",
-    protocols: [
-      { name: "Performance.ME", desc: "Build strength, speed and training resilience.", mark: MARKS.steel },
-      { name: "Recomposition.ME", desc: "Shift body composition while preserving lean mass.", mark: MARKS.steel },
-      { name: "Cognitive Performance.ME", desc: "Focus, processing speed and mental endurance.", mark: MARKS.steel },
+    featured: { name: "Performance.ME", desc: "Engineered for output. Built to last.", mark: MARK.steel },
+    pills: [
+      { name: "Recomposition.ME", mark: MARK.steel },
+      { name: "Cognitive Performance.ME", mark: MARK.steel },
     ],
   },
   {
     id: "balance",
     name: "Balance",
     tagline: "When everything feels in sync, everything changes.",
-    protocols: [
-      { name: "Weight Loss GLP-1 Alternatives.ME", desc: "Non-GLP-1 protocols for sustainable weight loss.", mark: MARKS.marble },
-      { name: "Weight Loss Pro.ME", desc: "Advanced, doctor-led weight management protocol.", mark: MARKS.marble },
-      { name: "Weight Loss GLP-1s.ME", desc: "Clinically guided GLP-1 therapy with full support.", mark: MARKS.marble },
+    featured: { name: "Weight Loss GLP-1 Alternatives.ME", desc: "A smarter path to body composition.", mark: MARK.jungle },
+    pills: [
+      { name: "Weight Loss Pro.ME", mark: MARK.jungle },
+      { name: "Weight Loss GLP-1s.ME", mark: MARK.jungle },
     ],
   },
   {
     id: "recovery",
     name: "Recovery",
     tagline: "Built for the comeback.",
-    protocols: [
-      { name: "Recovery.ME", desc: "Repair faster. Train smarter. Stay in the game.", mark: MARKS.water },
-    ],
+    featured: { name: "Recovery.ME", desc: "Repair faster. Come back stronger.", mark: MARK.marble },
+    pills: [],
   },
   {
     id: "longevity",
     name: "Longevity",
     tagline: "Play the long game. On your terms.",
-    protocols: [
-      { name: "Longevity.ME", desc: "Targeted protocols for healthy ageing.", mark: MARKS.jungle },
-      { name: "Comprehensive Stack.ME", desc: "Full-spectrum longevity programme.", mark: MARKS.jungle },
-    ],
+    featured: { name: "Longevity.ME", desc: "Long-term support for the long game.", mark: MARK.water },
+    pills: [{ name: "Comprehensive Stack.ME", mark: MARK.water }],
   },
   {
     id: "beauty",
     name: "Beauty",
     tagline: "Radiant from within. Supported by science.",
-    protocols: [
-      { name: "Skin & Collagen.ME", desc: "Skin health and collagen support from within.", mark: MARKS.rosegold },
-    ],
+    featured: { name: "Skin & Collagen.ME", desc: "Radiant from within. Supported by science.", mark: MARK.rosegold },
+    pills: [],
   },
 ];
 
-const Chevron = ({ open }: { open: boolean }) => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    style={{
-      transition: "transform 250ms ease",
-      transform: open ? "rotate(180deg)" : "rotate(0deg)",
-      color: "rgba(245,240,232,0.5)",
-    }}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
-  </svg>
-);
-
 const ProtocolDomains = () => {
-  const [openId, setOpenId] = useState<string | null>(null);
-  const [hoverId, setHoverId] = useState<string | null>(null);
   const { open: openQuiz } = useQuiz();
 
   return (
-    <section id="protocols" style={{ background: "transparent", padding: "96px 0 64px" }}>
+    <section id="protocols" style={{ background: "#0a0a0a" }}>
       <style>{`
+        .pd-section {
+          position: relative;
+          width: 100vw;
+          min-height: 70vh;
+          background: linear-gradient(160deg, #0f1a1a 0%, #0a0a0a 100%);
+          overflow: hidden;
+        }
+        .pd-overlay {
+          position: absolute; inset: 0;
+          background: rgba(0,0,0,0.55);
+        }
+        .pd-inner {
+          position: relative;
+          z-index: 1;
+          max-width: 1200px;
+          margin: 0 auto;
+          min-height: 70vh;
+          display: flex;
+          align-items: center;
+          gap: 48px;
+          padding: 80px 48px;
+        }
+        .pd-left { width: 45%; }
+        .pd-right { width: 55%; display: flex; flex-direction: column; gap: 32px; }
+        .pd-featured {
+          background: rgba(255,255,255,0.07);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 20px;
+          padding: 40px;
+          display: flex; flex-direction: column; gap: 16px;
+        }
+        .pd-fmark { width: 48px; height: 48px; object-fit: contain; }
+        .pd-fname {
+          font-family: 'Fraunces', serif; font-weight: 700; font-style: normal;
+          font-size: 32px; color: #F5F0E8; line-height: 1.15;
+        }
+        .pd-fdesc {
+          font-family: 'DM Sans', sans-serif; font-weight: 400;
+          font-size: 15px; color: rgba(245,240,232,0.6); line-height: 1.5;
+        }
+        .pd-flearn {
+          font-family: 'DM Sans', sans-serif; font-weight: 400;
+          font-size: 13px; color: #E8572A; margin-top: 4px;
+        }
+        .pd-dname {
+          font-family: 'Fraunces', serif; font-weight: 700; font-style: normal;
+          font-size: 52px; color: #F5F0E8; line-height: 1.05;
+        }
+        .pd-dtag {
+          font-family: 'DM Sans', sans-serif; font-weight: 400;
+          font-size: 15px; color: rgba(245,240,232,0.5); margin-top: 8px;
+        }
+        .pd-pills { display: flex; flex-direction: column; gap: 12px; }
+        .pd-pill {
+          display: flex; align-items: center; justify-content: space-between;
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.10);
+          border-radius: 12px;
+          padding: 18px 24px;
+        }
+        .pd-pill-name {
+          font-family: 'DM Sans', sans-serif; font-weight: 800;
+          font-size: 16px; color: #F5F0E8;
+        }
+        .pd-pill-arrow { color: #E8572A; font-size: 16px; }
+
         @media (max-width: 768px) {
-          .pd-row { padding-left: 24px !important; padding-right: 24px !important; height: 64px !important; }
-          .pd-name { font-size: 22px !important; }
-          .pd-expand-inner { padding-left: 24px !important; padding-right: 24px !important; flex-direction: column !important; gap: 12px !important; }
-          .pd-card { width: 100% !important; }
-          .pd-label { padding-left: 24px !important; }
+          .pd-section { min-height: 80vh; }
+          .pd-inner {
+            flex-direction: column;
+            align-items: stretch;
+            text-align: center;
+            padding: 64px 24px;
+            gap: 32px;
+          }
+          .pd-left, .pd-right { width: 100%; }
+          .pd-dname { font-size: 38px; }
+          .pd-featured { padding: 28px; }
+          .pd-fname { font-size: 26px; }
+          .pd-pill { text-align: left; }
         }
       `}</style>
 
-      <div
-        className="pd-label"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: 11,
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          color: "rgba(245,240,232,0.4)",
-          paddingLeft: 48,
-          marginBottom: 48,
-        }}
-      >
-        Our Protocols
-      </div>
-
-      <div role="list">
-        {domains.map((d) => {
-          const isOpen = openId === d.id;
-          const isHover = hoverId === d.id;
-          const count = d.protocols.length;
-          return (
-            <div key={d.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              <button
-                onClick={() => setOpenId(isOpen ? null : d.id)}
-                onMouseEnter={() => setHoverId(d.id)}
-                onMouseLeave={() => setHoverId(null)}
-                className="pd-row"
-                aria-expanded={isOpen}
-                style={{
-                  width: "100%",
-                  height: 80,
-                  background: isHover || isOpen ? "rgba(255,255,255,0.03)" : "#0a0a0a",
-                  border: "none",
-                  paddingLeft: 48,
-                  paddingRight: 48,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  cursor: "pointer",
-                  transition: "background 200ms ease",
-                  textAlign: "left",
-                }}
-              >
-                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <span
-                    className="pd-name"
-                    style={{
-                      fontFamily: "'Fraunces', serif",
-                      fontWeight: 700,
-                      fontStyle: "normal",
-                      fontSize: 28,
-                      color: "#F5F0E8",
-                      lineHeight: 1.1,
-                    }}
-                  >
-                    {d.name}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 400,
-                      fontSize: 13,
-                      color: "rgba(245,240,232,0.5)",
-                    }}
-                  >
-                    {d.tagline}
-                  </span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <span
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 400,
-                      fontSize: 12,
-                      color: "rgba(245,240,232,0.4)",
-                      padding: "4px 10px",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      borderRadius: 999,
-                    }}
-                  >
-                    {count} {count === 1 ? "protocol" : "protocols"}
-                  </span>
-                  <Chevron open={isOpen} />
-                </div>
-              </button>
-
-              <div
-                style={{
-                  background: "#111111",
-                  maxHeight: isOpen ? 600 : 0,
-                  overflow: "hidden",
-                  transition: "max-height 350ms ease",
-                }}
-              >
-                <div
-                  className="pd-expand-inner"
-                  style={{
-                    display: "flex",
-                    gap: 16,
-                    padding: "32px 48px",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {d.protocols.map((p) => (
-                    <div
-                      key={p.name}
-                      className="pd-card"
-                      style={{
-                        width: 260,
-                        background: "rgba(255,255,255,0.04)",
-                        border: "1px solid rgba(255,255,255,0.08)",
-                        borderRadius: 12,
-                        padding: 24,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 12,
-                      }}
-                    >
-                      <img
-                        src={p.mark}
-                        alt=""
-                        style={{ width: 40, height: 40, objectFit: "contain" }}
-                      />
-                      <div
-                        style={{
-                          fontFamily: "'Fraunces', serif",
-                          fontWeight: 700,
-                          fontStyle: "normal",
-                          fontSize: 18,
-                          color: "#F5F0E8",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {p.name}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 400,
-                          fontSize: 13,
-                          color: "rgba(245,240,232,0.55)",
-                          lineHeight: 1.5,
-                          flex: 1,
-                        }}
-                      >
-                        {p.desc}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 400,
-                          fontSize: 13,
-                          color: "#E8572A",
-                          marginTop: 8,
-                        }}
-                      >
-                        Learn more →
-                      </div>
+      {domains.map((d) => (
+        <div key={d.id} className="pd-section">
+          <div className="pd-overlay" />
+          <div className="pd-inner">
+            <div className="pd-left">
+              <div className="pd-featured">
+                <img src={d.featured.mark} alt="" className="pd-fmark" />
+                <div className="pd-fname">{d.featured.name}</div>
+                <div className="pd-fdesc">{d.featured.desc}</div>
+                <div className="pd-flearn">Learn more →</div>
+              </div>
+            </div>
+            <div className="pd-right">
+              <div>
+                <div className="pd-dname">{d.name}</div>
+                <div className="pd-dtag">{d.tagline}</div>
+              </div>
+              {d.pills.length > 0 && (
+                <div className="pd-pills">
+                  {d.pills.map((p) => (
+                    <div key={p.name} className="pd-pill">
+                      <span className="pd-pill-name">{p.name}</span>
+                      <span className="pd-pill-arrow">→</span>
                     </div>
                   ))}
                 </div>
-              </div>
+              )}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        </div>
+      ))}
 
-      <div style={{ display: "flex", justifyContent: "center", paddingTop: 64 }}>
+      <div
+        style={{
+          width: "100vw",
+          height: 120,
+          background: "#0a0a0a",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <button
           onClick={openQuiz}
           style={{
