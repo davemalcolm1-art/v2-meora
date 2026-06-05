@@ -16,7 +16,7 @@ const Positioning = () => {
       ref={sectionRef}
       className="scroll-animate positioning-section"
       style={{
-        background: "#0f0f0f",
+        background: "#F5F0E8",
         position: "relative",
         padding: "24px 0",
       }}
@@ -52,13 +52,13 @@ const Positioning = () => {
           font-size: clamp(34px, 4.4vw, 60px);
           line-height: 1.05;
           letter-spacing: -0.025em;
-          color: #F5F0E8;
+          color: #1a1a1a;
           margin: 0 auto;
           max-width: 880px;
         }
         .positioning-h2 em { font-style: italic; font-weight: 400; }
-        .pos-hl { color: #F5F0E8; }
-        .pos-hl-big { color: #F5F0E8; font-size: 1.18em; }
+        .pos-hl { color: #1a1a1a; }
+        .pos-hl-big { color: #1a1a1a; font-size: 1.18em; }
 
         .positioning-grid {
           display: grid;
@@ -77,10 +77,10 @@ const Positioning = () => {
           flex-direction: column;
           transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background 0.45s ease;
           will-change: transform;
-          background: rgba(255,255,255,0.04);
+          background: rgba(255,255,255,0.65);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid rgba(0,0,0,0.06);
         }
         .pos-card:hover {
           transform: translateY(-6px);
@@ -106,7 +106,7 @@ const Positioning = () => {
 
         .pos-card-image {
           padding: 0;
-          background: rgba(255,255,255,0.04);
+          background: rgba(255,255,255,0.65);
         }
         .pos-card-image img {
           position: absolute;
@@ -164,14 +164,14 @@ const Positioning = () => {
           font-style: italic;
           font-weight: 400;
           font-size: 22px;
-          color: #F5F0E8;
+          color: #1a1a1a;
         }
         .pos-card-body {
           font-family: 'DM Sans', sans-serif;
           font-size: 15px;
           line-height: 1.6;
           margin: 0;
-          color: rgba(245,240,232,0.6);
+          color: rgba(10,10,10,0.6);
         }
 
         .pos-card-cta {
@@ -231,14 +231,14 @@ const Positioning = () => {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: rgba(255,255,255,0.9);
-          border: 1px solid rgba(26,43,53,0.08);
+          background: rgba(255,255,255,0.8);
+          border: 1px solid rgba(0,0,0,0.08);
           padding: 13px 18px;
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 14px;
-          color: #0f0f0f;
+          color: #1a1a1a;
           white-space: nowrap;
           box-shadow: 0 4px 14px -6px rgba(26,43,53,0.08);
         }
