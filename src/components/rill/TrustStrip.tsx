@@ -49,7 +49,7 @@ const TrustStrip = () => {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 12px;
-          color: rgba(245,240,232,0.92);
+          color: rgba(245,240,232,0.75);
           letter-spacing: 0.08em;
           text-transform: uppercase;
           white-space: nowrap;
