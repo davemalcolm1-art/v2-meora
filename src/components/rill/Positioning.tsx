@@ -16,7 +16,7 @@ const Positioning = () => {
       ref={sectionRef}
       className="scroll-animate positioning-section"
       style={{
-        background: "transparent",
+        background: "#0f0f0f",
         position: "relative",
         padding: "24px 0",
       }}
@@ -52,13 +52,13 @@ const Positioning = () => {
           font-size: clamp(34px, 4.4vw, 60px);
           line-height: 1.05;
           letter-spacing: -0.025em;
-          color: #0f0f0f;
+          color: #F5F0E8;
           margin: 0 auto;
           max-width: 880px;
         }
         .positioning-h2 em { font-style: italic; font-weight: 400; }
-        .pos-hl { color: #FF5003; }
-        .pos-hl-big { color: #FF5003; font-size: 1.18em; }
+        .pos-hl { color: #F5F0E8; }
+        .pos-hl-big { color: #F5F0E8; font-size: 1.18em; }
 
         .positioning-grid {
           display: grid;
@@ -68,7 +68,7 @@ const Positioning = () => {
         }
 
         .pos-card {
-          border-radius: 24px;
+          border-radius: 16px;
           padding: 32px;
           position: relative;
           overflow: hidden;
@@ -77,31 +77,24 @@ const Positioning = () => {
           flex-direction: column;
           transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background 0.45s ease;
           will-change: transform;
+          background: rgba(255,255,255,0.04);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,0.08);
         }
         .pos-card:hover {
           transform: translateY(-6px);
         }
         .pos-card-dark {
-          background: rgba(26,43,53,0.92);
-          backdrop-filter: blur(18px) saturate(140%);
-          -webkit-backdrop-filter: blur(18px) saturate(140%);
-          border: 1px solid rgba(255,255,255,0.08);
-          color: #fff;
           box-shadow: 0 18px 50px -22px rgba(26,43,53,0.45);
         }
         .pos-card-dark:hover {
           box-shadow: 0 28px 70px -24px rgba(26,43,53,0.55);
         }
         .pos-card-light {
-          background: rgba(255,255,255,0.45);
-          backdrop-filter: blur(22px) saturate(160%);
-          -webkit-backdrop-filter: blur(22px) saturate(160%);
-          border: 1px solid rgba(255,255,255,0.6);
-          color: #0f0f0f;
           box-shadow: 0 18px 50px -24px rgba(26,43,53,0.18);
         }
         .pos-card-light:hover {
-          background: rgba(255,255,255,0.6);
           box-shadow: 0 28px 70px -24px rgba(26,43,53,0.25);
         }
         .pos-card-image {
@@ -113,7 +106,7 @@ const Positioning = () => {
 
         .pos-card-image {
           padding: 0;
-          background: #0f0f0f;
+          background: rgba(255,255,255,0.04);
         }
         .pos-card-image img {
           position: absolute;
@@ -171,15 +164,15 @@ const Positioning = () => {
           font-style: italic;
           font-weight: 400;
           font-size: 22px;
+          color: #F5F0E8;
         }
         .pos-card-body {
           font-family: 'DM Sans', sans-serif;
           font-size: 15px;
           line-height: 1.6;
           margin: 0;
+          color: rgba(245,240,232,0.6);
         }
-        .pos-card-dark .pos-card-body { color: rgba(255,255,255,0.78); }
-        .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
 
         .pos-card-cta {
           display: inline-flex;
