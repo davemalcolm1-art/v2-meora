@@ -147,10 +147,10 @@ const Positioning = () => {
           z-index: 2;
           margin-bottom: 0;
         }
-        .pos-card-image-head .pos-card-title { color: #fff; }
+        .pos-card-image-head .pos-card-title { color: #1a1a1a; }
         .pos-card-image-cta {
           position: absolute;
-          bottom: 24px;
+          bottom: 32px;
           left: 32px;
           z-index: 2;
           margin-top: 0;
@@ -262,13 +262,15 @@ const Positioning = () => {
           flex-direction: column;
           align-items: stretch;
           gap: 10px;
-          margin-top: 24px;
+          margin-top: auto;
         }
         .pos-card-gradient {
           position: absolute;
           inset: 0;
           z-index: 1;
-          background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+          background: rgba(255,255,255,0.65);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -278,7 +280,7 @@ const Positioning = () => {
           font-weight: 700;
           font-style: italic;
           font-size: 28px;
-          color: #F5F0E8;
+          color: #1a1a1a;
           text-align: center;
           padding: 0 24px;
         }
