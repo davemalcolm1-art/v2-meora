@@ -361,12 +361,13 @@ const ProtocolDomains = () => {
               ref={(el) => (innerRefs.current[i] = el)}
             >
               <div className="pd-left">
-                <div className="pd-featured pd-reveal pd-r-card">
+                <a href={`/protocols/${d.id}`} className="pd-featured pd-reveal pd-r-card" style={{ textDecoration: "none" }}>
                   <img src={d.featured.mark} alt="" className="pd-fmark" />
-                  <div className="pd-fname">{d.featured.name}</div>
+                  <div className="pd-fname">{d.featured.heading}</div>
+                  <div className="pd-fsublabel">{d.featured.secondaryLabel}</div>
                   <div className="pd-fdesc">{d.featured.desc}</div>
                   <div className="pd-flearn">Learn more →</div>
-                </div>
+                </a>
               </div>
               <div className="pd-right">
                 <div>
@@ -376,10 +377,10 @@ const ProtocolDomains = () => {
                 {d.pills.length > 0 && (
                   <div className="pd-pills">
                     {d.pills.map((p, pi) => (
-                      <div key={p.name} className={`pd-pill pd-reveal pd-r-pill-${pi}`}>
+                      <a key={p.name} href={`/protocols/${p.slug}`} className={`pd-pill pd-reveal pd-r-pill-${pi}`} style={{ textDecoration: "none" }}>
                         <span className="pd-pill-name">{p.name}</span>
                         <span className="pd-pill-arrow">→</span>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 )}
