@@ -256,7 +256,7 @@ const Protocols = () => {
                     fontFamily: "'Fraunces', serif",
                     fontWeight: 600,
                     fontSize: 16,
-                    color: "#1A2B35",
+                    color: "#0f0f0f",
                     lineHeight: 1.3,
                     margin: 0,
                   }}>

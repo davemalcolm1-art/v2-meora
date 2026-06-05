@@ -263,7 +263,7 @@ const HeroSection = () => {
           position: fixed;
           inset: 0;
           z-index: 99;
-          background: #1A2B35;
+          background: #0f0f0f;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -354,7 +354,7 @@ const HeroSection = () => {
           min-height: 560px;
           max-height: 820px;
           overflow: hidden;
-          background: #1A2B35;
+          background: #0f0f0f;
           border-bottom-left-radius: 32px;
           border-bottom-right-radius: 32px;
         }

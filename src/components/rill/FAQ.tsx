@@ -28,7 +28,7 @@ const FAQ = () => {
           style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
-            color: "#1A2B35",
+            color: "#0f0f0f",
             fontSize: "clamp(32px, 4vw, 48px)",
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
@@ -36,7 +36,7 @@ const FAQ = () => {
           }}
         >
           Common questions.<br />
-          <span style={{ color: "#1A2B35" }}>Clear answers.</span>
+          <span style={{ color: "#0f0f0f" }}>Clear answers.</span>
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {faqs.map((f, i) => {
@@ -67,7 +67,7 @@ const FAQ = () => {
                     fontFamily: "'Fraunces', serif",
                     fontWeight: 600,
                     fontSize: 18,
-                    color: "#1A2B35",
+                    color: "#0f0f0f",
                     lineHeight: 1.4,
                   }}
                 >

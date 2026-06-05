@@ -7,7 +7,7 @@ const InterstitialBreak = ({ label }: { label: string }) => {
       <div
         className="protocol-banner"
         style={{
-          background: "#1A2B35",
+          background: "#0f0f0f",
           padding: "100px 80px",
           textAlign: "center",
           margin: "0 40px",

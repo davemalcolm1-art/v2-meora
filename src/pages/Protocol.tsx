@@ -9,7 +9,7 @@ import { QuizProvider, useQuiz } from "@/components/rill/quizContext";
 import { protocols, Protocol as ProtocolType } from "@/config/protocols";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const INK = "#1A2B35";
+const INK = "#0f0f0f";
 const CREAM = "#F7F4EF";
 const ORANGE = "#FF5003";
 
@@ -291,7 +291,7 @@ const Recognise = ({ p }: { p: ProtocolType }) => {
 const Benefits = ({ p }: { p: ProtocolType }) => (
   <Section
     style={{
-      background: "radial-gradient(ellipse at 30% 50%, #2D5470 0%, #1A3347 30%, #1A2B35 65%, #0F1820 100%)",
+      background: "radial-gradient(ellipse at 30% 50%, #2D5470 0%, #1A3347 30%, #0f0f0f 65%, #0F1820 100%)",
       padding: "100px 48px",
       margin: "24px",
       borderRadius: 32,

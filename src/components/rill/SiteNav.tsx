@@ -51,7 +51,7 @@ const SiteNav = ({ variant = "light" }: SiteNavProps) => {
   const textColor = isDark ? "#fff" : "#fff";
   const linkColor = isDark ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.85)";
   const ctaBg = "#FF5003";
-  const overlayBg = "#1A2B35";
+  const overlayBg = "#0f0f0f";
 
   return (
     <>

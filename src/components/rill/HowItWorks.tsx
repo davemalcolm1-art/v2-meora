@@ -3,7 +3,7 @@ import gpImg from "@/assets/howitworks/step-gp.png";
 import deliveryImg from "@/assets/howitworks/step-delivery.png";
 import ongoingImg from "@/assets/howitworks/step-ongoing.png";
 
-const INK = "#1A2B35";
+const INK = "#0f0f0f";
 const CREAM = "#F7F4EF";
 
 const steps = [
