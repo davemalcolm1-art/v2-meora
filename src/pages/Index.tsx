@@ -30,7 +30,7 @@ const Index = () => {
       <Cursor />
       <HeroSection />
       <TrustStrip />
-      <Positioning />
+      <HowItWorksIntro />
       <ProtocolDomains />
       <HowItWorks />
       <ScienceCards />
