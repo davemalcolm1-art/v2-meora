@@ -182,6 +182,12 @@ const ProtocolDomains = () => {
 
       {domains.map((d) => (
         <div key={d.id} className="pd-section">
+          {BG[d.id] && (
+            <div
+              className="pd-bg"
+              style={{ backgroundImage: `url(${BG[d.id]})` }}
+            />
+          )}
           <div className="pd-overlay" />
           <div className="pd-inner">
             <div className="pd-left">
