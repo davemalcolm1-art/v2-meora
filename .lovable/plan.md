@@ -1,95 +1,70 @@
-# Domain Page Template — starting with Recovery
+## Scope
 
-Build one reusable, data-driven template now, fill it with Recovery copy, and wire one route. Other domains drop in later by adding a config entry.
+Single file: `src/components/rill/ProtocolDomains.tsx`. No other components, no colour/layout/content changes beyond what's listed.
 
-## Route
+## 1. Background image reframing
 
-- `/protocols/recovery` → `pages/Protocol.tsx` (dynamic via `:slug`)
-- Added above the catch-all in `src/App.tsx`
-- Link the Recovery tile in `Domains.tsx` to this route
+Performance and Recovery are even sections — glass card sits on the **right**, so move the subject to the **left** of the frame.
 
-## File structure
+- Performance: `background-position: 20% center` (was `center center`)
+- Recovery: `background-position: 25% center` (was `center center`)
+- Energy: unchanged (`center 40%`) — card on left, subject already right
+- Balance, Longevity: unchanged (`center center`)
+- Beauty: unchanged (`center 25%`) — card on right, subject already left-of-centre and face visible
 
-```text
-src/
-  pages/
-    Protocol.tsx                  // route handler, looks up slug → config
-  components/rill/protocol/
-    ProtocolHero.tsx              // hero card (image right, copy left, CTAs)
-    ProtocolIntro.tsx             // centered intro band ("Strength & recovery built for your life")
-    ProtocolWhy.tsx               // 2-col stat / "why it matters" block
-    ProtocolHowItWorks.tsx        // 4-step timeline (reuses HowItWorks visual language)
-    ProtocolWhatWeTest.tsx        // 4 biomarker tiles w/ portrait imagery
-    ProtocolSymptoms.tsx          // "Signs you may notice" floating-pill collage
-    ProtocolRecognise.tsx         // soft pink "Do you recognise…" + quiz CTA
-    ProtocolBenefits.tsx          // dark band — "What to expect" 4 columns
-    ProtocolWhyMeora.tsx          // 4 reason cards grid
-  config/
-    protocols.ts                  // typed config per domain (copy, images, biomarkers, symptoms, benefits)
+If after build the framing still clips a subject, nudge the percentage by ±10% and re-check.
+
+## 2. Parallax on background images
+
+Each `.pd-bg` div translates vertically at 0.7x scroll speed while its parent section is in viewport.
+
+- Implementation: single `useEffect` on the component that attaches one `scroll` listener (passive) and updates each `.pd-bg`'s `transform: translate3d(0, Ypx, 0) scale(1.08)` via `requestAnimationFrame`.
+- Range: when section top hits viewport bottom → `+60px`; when section bottom hits viewport top → `-60px`. Linear interpolation between.
+- The existing `.pd-bg` already covers the section; bump `height: 120%` and `top: -10%` so the parallax translate never reveals an edge.
+- Add `will-change: transform` to `.pd-bg`.
+
+## 3. Ken Burns drift
+
+Inside each `.pd-bg`, apply a very slow scale animation:
+
+```css
+@keyframes pd-kenburns {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}
+.pd-bg { animation: pd-kenburns 20s ease-in-out infinite alternate; }
 ```
 
-Reuse existing site chrome (`Nav` if present, `CtaBanner`, `FAQ`, `Footer`) wrapped around the protocol sections in `Protocol.tsx`.
+Since parallax also writes `transform`, nest it: outer wrapper `.pd-bg-parallax` handles `translate3d` (JS), inner `.pd-bg` handles the Ken Burns scale (CSS). Background-image moves to the inner element.
 
-## Section order (mirrors reference, Meora styling)
+## 4. Scroll-triggered reveal
 
-1. Hero — short headline, supporting line, two CTAs (Take quiz / Learn more), hero image right
-2. Intro band — one-line promise + sub + button
-3. Why it matters — editorial 2-col: bold claim + supporting research-style callout card
-4. How it works — 4 steps (Comprehensive intake → Test → View results → Action plan), portrait + chips
-5. What we test — 4 biomarker tiles with face/portrait imagery + label overlay
-6. Signs you may notice — hero portrait with floating pill-labels (symptoms)
-7. Recognise these signs — soft band + "Check eligibility" CTA
-8. What to expect — dark ink panel, 4-column benefits
-9. Why Meora — 4 cards (comprehensive labs, clinically guided, AU-wide, ongoing care)
-10. Reuse `CtaBanner` + `FAQ` + `Footer`
+Domain name, tagline, featured card, and protocol pills fade + slide in once when section enters viewport.
 
-## Data model (`config/protocols.ts`)
+- `IntersectionObserver` (threshold 0.25) toggles an `is-visible` class on each `.pd-inner`.
+- CSS: children start at `opacity: 0; transform: translateY(24px)`; on `.pd-inner.is-visible` they transition to `opacity: 1; transform: none` over 600ms with staggered delays:
+  - domain name: 0ms
+  - tagline: 100ms
+  - featured card: 200ms
+  - pill 1: 300ms
+  - pill 2: 400ms
+- Transition uses `cubic-bezier(0.22, 1, 0.36, 1)`. Runs once — observer unobserves after first trigger.
+- Respect `prefers-reduced-motion: reduce` — skip both parallax and reveal (elements render in final state, Ken Burns disabled).
 
-```ts
-type Protocol = {
-  slug: "recovery" | "performance" | "balance" | "beauty" | "energy" | "longevity";
-  name: string;          // "Recovery"
-  tagline: string;       // "Repair & Resilience"
-  hero: { eyebrow; title; sub; image; ctas: {label,href}[] };
-  intro: { title; sub; cta };
-  why:  { headline; claim; supportingCard: { title; body; stat? } };
-  howItWorks: { step; title; desc; chips: string[]; image }[];
-  biomarkers: { name; desc; image }[];          // 4
-  symptoms: { label; position: {x,y} }[];       // pills over heroPortrait
-  symptomsHero: string;
-  benefits: { title; body }[];                  // 4
-  whyMeora: { title; body; image? }[];          // 4
-};
-```
+## 5. What is NOT changing
 
-## Recovery copy (drafted, on-brand placeholder)
-
-- Hero: "Built for the comeback." / "Repair faster. Train smarter. Stay in the game longer." CTAs: Take the quiz · How it works
-- Why: "Stronger recovery supports a longer, more resilient life."
-- Biomarkers: Inflammation (hs-CRP), Recovery hormones (Cortisol, DHEA), Muscle repair (Creatine kinase), Sleep & stress (HRV proxy panel)
-- Symptoms: Slow recovery · Persistent soreness · Disrupted sleep · Low energy · Frequent niggles · Mood dips
-- Benefits: Support faster recovery · Reduce inflammation · Improve sleep quality · Sustain energy
-- WhyMeora: Reuses the 4 cards already on the homepage pattern
-
-## Imagery
-
-For Recovery, reuse existing `recovery-hero.jpg` for hero. Generate (in build phase) ~4 new portrait/biomarker images via `imagegen` + `lovable-assets` under `src/assets/protocols/recovery/`. Keep brightness/grading consistent with `Domains.tsx` rules.
-
-## Styling rules
-
-- Use existing tokens (`#1A2B35` INK, `#F7F4EF` CREAM, `#FF5003` orange, Fraunces + DM Sans)
-- Match the cream radial background + 32px rounded section cards used in `Domains.tsx`
-- No text drop-shadows (per prior preference)
-- `useScrollAnimation` for section reveals
-
-## Out of scope for this pass
-
-- Other 5 domains (template will be ready; we'll add their config + route entries next)
-- Copy revisions — initial copy is placeholder
-- Quiz logic changes — CTAs open existing `QuizModal`
+- Section heights, layout flip (odd/even), colours, glass card styling, pill styling, hover states, divider lines, CTA bar below the six sections.
+- Every other component on the page.
 
 ## Technical notes
 
-- `Protocol.tsx` uses `useParams<{slug}>()` → lookup in `protocols` map → 404 if missing
-- All sections accept their slice of the Protocol object as props (no global state)
-- Lazy-load route to keep `Index` bundle lean
+- One scroll handler total (not one per section) for performance.
+- One IntersectionObserver instance, observe all six `.pd-inner` nodes.
+- All refs gathered via a single `useRef<HTMLElement[]>([])` populated in the `.map`.
+- No new dependencies.
+
+## Verification
+
+1. Build clean.
+2. Open preview, scroll through the six sections — confirm: images drift slowly, sections reveal on entry once, Performance and Recovery subjects no longer sit behind the glass card.
+3. Toggle OS reduced-motion and reload — animations disabled, layout intact.

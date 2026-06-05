@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useQuiz } from "./quizContext";
 
 type Protocol = { name: string; desc?: string; mark: string };
@@ -25,6 +26,15 @@ const BG: Record<string, string | undefined> = {
   recovery: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-recovery.jpg",
   beauty: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-beauty.jpg",
   longevity: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-longevity.jpg",
+};
+
+const BG_POS: Record<string, string> = {
+  energy: "center 40%",
+  performance: "20% center",
+  recovery: "25% center",
+  beauty: "center 25%",
+  balance: "center center",
+  longevity: "center center",
 };
 
 const domains: Domain[] = [
@@ -83,6 +93,59 @@ const domains: Domain[] = [
 
 const ProtocolDomains = () => {
   const { open: openQuiz } = useQuiz();
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const parallaxRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const innerRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Reveal observer
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    innerRefs.current.forEach((el) => el && io.observe(el));
+
+    if (reduce) return () => io.disconnect();
+
+    // Parallax
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      sectionRefs.current.forEach((sec, i) => {
+        const p = parallaxRefs.current[i];
+        if (!sec || !p) return;
+        const r = sec.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        // progress: -1 (section bottom at top of viewport) to 1 (section top at bottom of viewport)
+        const center = r.top + r.height / 2;
+        const progress = (center - vh / 2) / (vh / 2 + r.height / 2);
+        const y = Math.max(-60, Math.min(60, progress * -60));
+        p.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`;
+      });
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <section id="protocols" style={{ background: "#0a0a0a" }}>
@@ -97,11 +160,24 @@ const ProtocolDomains = () => {
         }
         .pd-section:hover { filter: brightness(1.08); }
         .pd-section:last-of-type { border-bottom: none; }
+        .pd-bg-parallax {
+          position: absolute;
+          left: 0; right: 0;
+          top: -10%;
+          height: 120%;
+          z-index: 0;
+          will-change: transform;
+        }
         .pd-bg {
           position: absolute; inset: 0;
           background-size: cover;
           background-position: center;
-          z-index: 0;
+          animation: pd-kenburns 20s ease-in-out infinite alternate;
+          will-change: transform;
+        }
+        @keyframes pd-kenburns {
+          from { transform: scale(1.05); }
+          to   { transform: scale(1.12); }
         }
         .pd-overlay {
           position: absolute; inset: 0;
@@ -121,6 +197,20 @@ const ProtocolDomains = () => {
         .pd-left { width: 45%; }
         .pd-right { width: 55%; display: flex; flex-direction: column; gap: 48px; }
         .pd-inner--flipped { flex-direction: row-reverse; }
+
+        /* Reveal */
+        .pd-reveal {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1);
+        }
+        .pd-inner.is-visible .pd-reveal { opacity: 1; transform: none; }
+        .pd-inner.is-visible .pd-r-name { transition-delay: 0ms; }
+        .pd-inner.is-visible .pd-r-tag { transition-delay: 100ms; }
+        .pd-inner.is-visible .pd-r-card { transition-delay: 200ms; }
+        .pd-inner.is-visible .pd-r-pill-0 { transition-delay: 300ms; }
+        .pd-inner.is-visible .pd-r-pill-1 { transition-delay: 400ms; }
+
         .pd-featured {
           background: rgba(10,10,10,0.45);
           backdrop-filter: blur(24px);
@@ -129,7 +219,7 @@ const ProtocolDomains = () => {
           border-radius: 16px;
           padding: 40px;
           display: flex; flex-direction: column; gap: 16px;
-          transition: all 300ms ease;
+          transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease, opacity 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1);
           cursor: pointer;
         }
         .pd-featured:hover {
@@ -168,7 +258,7 @@ const ProtocolDomains = () => {
           border: 1px solid rgba(255,255,255,0.12);
           border-radius: 12px;
           padding: 18px 24px;
-          transition: all 250ms ease;
+          transition: background 250ms ease, border-color 250ms ease, transform 250ms ease, opacity 600ms cubic-bezier(0.22,1,0.36,1);
           cursor: pointer;
         }
         .pd-pill:hover {
@@ -197,30 +287,43 @@ const ProtocolDomains = () => {
           .pd-fname { font-size: 26px; }
           .pd-pill { text-align: left; }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .pd-bg { animation: none; }
+          .pd-bg-parallax { transform: none !important; }
+          .pd-reveal { opacity: 1; transform: none; transition: none; }
+        }
       `}</style>
 
       {domains.map((d, i) => {
         const isEven = i % 2 === 1;
         return (
-          <div key={d.id} className="pd-section">
+          <div
+            key={d.id}
+            className="pd-section"
+            ref={(el) => (sectionRefs.current[i] = el)}
+          >
             {BG[d.id] && (
               <div
-                className="pd-bg"
-                style={{
-                  backgroundImage: `url(${BG[d.id]})`,
-                  backgroundPosition:
-                    d.id === "energy"
-                      ? "center 40%"
-                      : d.id === "beauty"
-                        ? "center 25%"
-                        : "center center",
-                }}
-              />
+                className="pd-bg-parallax"
+                ref={(el) => (parallaxRefs.current[i] = el)}
+              >
+                <div
+                  className="pd-bg"
+                  style={{
+                    backgroundImage: `url(${BG[d.id]})`,
+                    backgroundPosition: BG_POS[d.id] || "center center",
+                  }}
+                />
+              </div>
             )}
             <div className="pd-overlay" />
-            <div className={isEven ? "pd-inner pd-inner--flipped" : "pd-inner"}>
+            <div
+              className={isEven ? "pd-inner pd-inner--flipped" : "pd-inner"}
+              ref={(el) => (innerRefs.current[i] = el)}
+            >
               <div className="pd-left">
-                <div className="pd-featured">
+                <div className="pd-featured pd-reveal pd-r-card">
                   <img src={d.featured.mark} alt="" className="pd-fmark" />
                   <div className="pd-fname">{d.featured.name}</div>
                   <div className="pd-fdesc">{d.featured.desc}</div>
@@ -229,13 +332,13 @@ const ProtocolDomains = () => {
               </div>
               <div className="pd-right">
                 <div>
-                  <div className="pd-dname">{d.name}</div>
-                  <div className="pd-dtag">{d.tagline}</div>
+                  <div className="pd-dname pd-reveal pd-r-name">{d.name}</div>
+                  <div className="pd-dtag pd-reveal pd-r-tag">{d.tagline}</div>
                 </div>
                 {d.pills.length > 0 && (
                   <div className="pd-pills">
-                    {d.pills.map((p) => (
-                      <div key={p.name} className="pd-pill">
+                    {d.pills.map((p, pi) => (
+                      <div key={p.name} className={`pd-pill pd-reveal pd-r-pill-${pi}`}>
                         <span className="pd-pill-name">{p.name}</span>
                         <span className="pd-pill-arrow">→</span>
                       </div>
