@@ -16,7 +16,7 @@ const Positioning = () => {
       ref={sectionRef}
       className="scroll-animate positioning-section"
       style={{
-        background: "#0f0f0f",
+        background: "#F5F0E8",
         position: "relative",
         padding: "24px 0",
       }}
