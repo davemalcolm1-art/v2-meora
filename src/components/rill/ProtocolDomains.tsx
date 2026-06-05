@@ -95,9 +95,16 @@ const ProtocolDomains = () => {
           border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .pd-section:last-of-type { border-bottom: none; }
+        .pd-bg {
+          position: absolute; inset: 0;
+          background-size: cover;
+          background-position: center;
+          z-index: 0;
+        }
         .pd-overlay {
           position: absolute; inset: 0;
-          background: rgba(0,0,0,0.55);
+          background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);
+          z-index: 1;
         }
         .pd-inner {
           position: relative;
