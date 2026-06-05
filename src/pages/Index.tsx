@@ -2,7 +2,7 @@ import { useState } from "react";
 import Cursor from "@/components/rill/Cursor";
 import HeroSection from "@/components/rill/HeroSection";
 import Positioning from "@/components/rill/Positioning";
-import Domains from "@/components/rill/Domains";
+import ProtocolDomains from "@/components/rill/ProtocolDomains";
 import HowItWorks from "@/components/rill/HowItWorks";
 import ScienceCards from "@/components/rill/ScienceCards";
 import Stats from "@/components/rill/Stats";
