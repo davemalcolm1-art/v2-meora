@@ -120,6 +120,7 @@ const ProtocolDomains = () => {
         }
         .pd-left { width: 45%; }
         .pd-right { width: 55%; display: flex; flex-direction: column; gap: 48px; }
+        .pd-inner--flipped { flex-direction: row-reverse; }
         .pd-featured {
           background: rgba(10,10,10,0.45);
           backdrop-filter: blur(24px);
@@ -189,6 +190,7 @@ const ProtocolDomains = () => {
             padding: 64px 24px;
             gap: 32px;
           }
+          .pd-inner--flipped { flex-direction: column-reverse; }
           .pd-left, .pd-right { width: 100%; }
           .pd-dname { font-size: 42px; }
           .pd-featured { padding: 28px; }
@@ -197,51 +199,54 @@ const ProtocolDomains = () => {
         }
       `}</style>
 
-      {domains.map((d) => (
-        <div key={d.id} className="pd-section">
-          {BG[d.id] && (
-            <div
-              className="pd-bg"
-              style={{
-                backgroundImage: `url(${BG[d.id]})`,
-                backgroundPosition:
-                  d.id === "energy"
-                    ? "center 40%"
-                    : d.id === "beauty"
-                      ? "center 30%"
-                      : "center center",
-              }}
-            />
-          )}
-          <div className="pd-overlay" />
-          <div className="pd-inner">
-            <div className="pd-left">
-              <div className="pd-featured">
-                <img src={d.featured.mark} alt="" className="pd-fmark" />
-                <div className="pd-fname">{d.featured.name}</div>
-                <div className="pd-fdesc">{d.featured.desc}</div>
-                <div className="pd-flearn">Learn more →</div>
-              </div>
-            </div>
-            <div className="pd-right">
-              <div>
-                <div className="pd-dname">{d.name}</div>
-                <div className="pd-dtag">{d.tagline}</div>
-              </div>
-              {d.pills.length > 0 && (
-                <div className="pd-pills">
-                  {d.pills.map((p) => (
-                    <div key={p.name} className="pd-pill">
-                      <span className="pd-pill-name">{p.name}</span>
-                      <span className="pd-pill-arrow">→</span>
-                    </div>
-                  ))}
+      {domains.map((d, i) => {
+        const isEven = i % 2 === 1;
+        return (
+          <div key={d.id} className="pd-section">
+            {BG[d.id] && (
+              <div
+                className="pd-bg"
+                style={{
+                  backgroundImage: `url(${BG[d.id]})`,
+                  backgroundPosition:
+                    d.id === "energy"
+                      ? "center 40%"
+                      : d.id === "beauty"
+                        ? "center 25%"
+                        : "center center",
+                }}
+              />
+            )}
+            <div className="pd-overlay" />
+            <div className={isEven ? "pd-inner pd-inner--flipped" : "pd-inner"}>
+              <div className="pd-left">
+                <div className="pd-featured">
+                  <img src={d.featured.mark} alt="" className="pd-fmark" />
+                  <div className="pd-fname">{d.featured.name}</div>
+                  <div className="pd-fdesc">{d.featured.desc}</div>
+                  <div className="pd-flearn">Learn more →</div>
                 </div>
-              )}
+              </div>
+              <div className="pd-right">
+                <div>
+                  <div className="pd-dname">{d.name}</div>
+                  <div className="pd-dtag">{d.tagline}</div>
+                </div>
+                {d.pills.length > 0 && (
+                  <div className="pd-pills">
+                    {d.pills.map((p) => (
+                      <div key={p.name} className="pd-pill">
+                        <span className="pd-pill-name">{p.name}</span>
+                        <span className="pd-pill-arrow">→</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <div
         style={{
