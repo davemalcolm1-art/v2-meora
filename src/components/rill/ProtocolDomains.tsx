@@ -93,7 +93,9 @@ const ProtocolDomains = () => {
           background: linear-gradient(160deg, #0f1a1a 0%, #0a0a0a 100%);
           overflow: hidden;
           border-bottom: 1px solid rgba(255,255,255,0.06);
+          transition: filter 400ms ease;
         }
+        .pd-section:hover { filter: brightness(1.08); }
         .pd-section:last-of-type { border-bottom: none; }
         .pd-bg {
           position: absolute; inset: 0;
@@ -103,7 +105,7 @@ const ProtocolDomains = () => {
         }
         .pd-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);
+          background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.35) 100%);
           z-index: 1;
         }
         .pd-inner {
@@ -119,13 +121,21 @@ const ProtocolDomains = () => {
         .pd-left { width: 45%; }
         .pd-right { width: 55%; display: flex; flex-direction: column; gap: 48px; }
         .pd-featured {
-          background: rgba(15,15,15,0.75);
+          background: rgba(10,10,10,0.45);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(255,255,255,0.12);
-          border-radius: 20px;
+          border: 1px solid rgba(255,255,255,0.15);
+          border-radius: 16px;
           padding: 40px;
           display: flex; flex-direction: column; gap: 16px;
+          transition: all 300ms ease;
+          cursor: pointer;
+        }
+        .pd-featured:hover {
+          background: rgba(10,10,10,0.60);
+          border-color: rgba(255,255,255,0.25);
+          transform: translateY(-4px);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.35);
         }
         .pd-fmark { width: 48px; height: 48px; object-fit: contain; }
         .pd-fname {
@@ -151,12 +161,19 @@ const ProtocolDomains = () => {
         .pd-pills { display: flex; flex-direction: column; gap: 12px; }
         .pd-pill {
           display: flex; align-items: center; justify-content: space-between;
-          background: rgba(255,255,255,0.05);
+          background: rgba(10,10,10,0.40);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255,255,255,0.10);
+          border: 1px solid rgba(255,255,255,0.12);
           border-radius: 12px;
           padding: 18px 24px;
+          transition: all 250ms ease;
+          cursor: pointer;
+        }
+        .pd-pill:hover {
+          background: rgba(10,10,10,0.60);
+          border-color: rgba(255,255,255,0.22);
+          transform: translateX(4px);
         }
         .pd-pill-name {
           font-family: 'DM Sans', sans-serif; font-weight: 800;
@@ -185,7 +202,15 @@ const ProtocolDomains = () => {
           {BG[d.id] && (
             <div
               className="pd-bg"
-              style={{ backgroundImage: `url(${BG[d.id]})` }}
+              style={{
+                backgroundImage: `url(${BG[d.id]})`,
+                backgroundPosition:
+                  d.id === "energy"
+                    ? "center 40%"
+                    : d.id === "beauty"
+                      ? "center 30%"
+                      : "center center",
+              }}
             />
           )}
           <div className="pd-overlay" />
