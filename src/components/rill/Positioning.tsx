@@ -231,14 +231,14 @@ const Positioning = () => {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: rgba(255,255,255,0.9);
-          border: 1px solid rgba(26,43,53,0.08);
+          background: rgba(255,255,255,0.8);
+          border: 1px solid rgba(0,0,0,0.08);
           padding: 13px 18px;
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 14px;
-          color: #0f0f0f;
+          color: #1a1a1a;
           white-space: nowrap;
           box-shadow: 0 4px 14px -6px rgba(26,43,53,0.08);
         }
