@@ -7,7 +7,7 @@ const CtaBanner = () => {
       position: "relative",
       overflow: "hidden",
       width: "auto",
-      background: "radial-gradient(ellipse at 30% 50%, #2D5470 0%, #1A3347 30%, #1A2B35 65%, #0F1820 100%)",
+      background: "radial-gradient(ellipse at 30% 50%, #2D5470 0%, #1A3347 30%, #0f0f0f 65%, #0F1820 100%)",
       padding: "100px 0",
       margin: "24px",
       borderRadius: 32,

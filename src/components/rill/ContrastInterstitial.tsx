@@ -34,7 +34,7 @@ const ContrastInterstitial = () => {
           style={{
             fontFamily: "'Fraunces', serif",
             fontWeight: 700,
-            color: "#1A2B35",
+            color: "#0f0f0f",
             fontSize: "clamp(36px, 4vw, 52px)",
             lineHeight: 1.1,
             letterSpacing: "-0.02em",

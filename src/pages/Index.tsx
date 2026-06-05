@@ -15,7 +15,7 @@ import { QuizProvider } from "@/components/rill/quizContext";
 import useReveal from "@/components/rill/useReveal";
 
 const CREAM = "#F7F4EF";
-const DARK = "#1A2B35";
+const DARK = "#0f0f0f";
 
 const Fade = ({ from, to }: { from: string; to: string }) => (
   <div aria-hidden="true" style={{ height: 80, background: `linear-gradient(to bottom, ${from} 0%, ${to} 100%)`, width: "100%" }} />

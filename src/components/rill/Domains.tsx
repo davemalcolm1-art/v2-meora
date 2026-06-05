@@ -85,7 +85,7 @@ const Domains = () => {
       <div className="domains-wrap" style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
         <div style={{ marginBottom: 40, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 32, flexWrap: "wrap" }}>
           <div>
-            <h1 className="scroll-animate" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#1A2B35", fontSize: "clamp(36px,4.4vw,60px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, whiteSpace: "nowrap" }}>
+            <h1 className="scroll-animate" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, color: "#0f0f0f", fontSize: "clamp(36px,4.4vw,60px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, whiteSpace: "nowrap" }}>
               <span style={{ color: "#FF5003", fontStyle: "italic" }}>Your</span> Goals. <span style={{ color: "#FF5003", fontStyle: "italic" }}>Your</span> Protocol.
             </h1>
           </div>

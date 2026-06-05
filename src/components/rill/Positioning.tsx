@@ -52,7 +52,7 @@ const Positioning = () => {
           font-size: clamp(34px, 4.4vw, 60px);
           line-height: 1.05;
           letter-spacing: -0.025em;
-          color: #1A2B35;
+          color: #0f0f0f;
           margin: 0 auto;
           max-width: 880px;
         }
@@ -97,7 +97,7 @@ const Positioning = () => {
           backdrop-filter: blur(22px) saturate(160%);
           -webkit-backdrop-filter: blur(22px) saturate(160%);
           border: 1px solid rgba(255,255,255,0.6);
-          color: #1A2B35;
+          color: #0f0f0f;
           box-shadow: 0 18px 50px -24px rgba(26,43,53,0.18);
         }
         .pos-card-light:hover {
@@ -113,7 +113,7 @@ const Positioning = () => {
 
         .pos-card-image {
           padding: 0;
-          background: #1A2B35;
+          background: #0f0f0f;
         }
         .pos-card-image img {
           position: absolute;
@@ -221,7 +221,7 @@ const Positioning = () => {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          border: 2px solid #1A2B35;
+          border: 2px solid #0f0f0f;
           background: #9CA3AF;
           margin-left: -6px;
         }
@@ -245,7 +245,7 @@ const Positioning = () => {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 14px;
-          color: #1A2B35;
+          color: #0f0f0f;
           white-space: nowrap;
           box-shadow: 0 4px 14px -6px rgba(26,43,53,0.08);
         }

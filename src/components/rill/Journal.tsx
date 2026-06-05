@@ -45,7 +45,7 @@ const placeholderPosts: Post[] = [
 ];
 
 const CARD_GRADIENTS = [
-  "linear-gradient(135deg, #1A2B35 0%, #243B47 100%)",
+  "linear-gradient(135deg, #0f0f0f 0%, #243B47 100%)",
   "linear-gradient(135deg, #2D3B2D 0%, #1A2B1A 100%)",
   "linear-gradient(135deg, #2D2435 0%, #1A1A2B 100%)",
 ];
@@ -230,14 +230,14 @@ const Journal = () => {
                 fontFamily: "'Fraunces', Georgia, serif",
                 fontWeight: 700,
                 fontSize: "clamp(36px,4vw,52px)",
-                color: "#1A2B35",
+                color: "#0f0f0f",
                 lineHeight: 1.05,
                 margin: 0,
               }}
             >
               Longevity research.
               <br />
-              <span style={{ color: "#1A2B35" }}>
+              <span style={{ color: "#0f0f0f" }}>
                 &amp; resources.
               </span>
             </h2>
@@ -255,13 +255,13 @@ const Journal = () => {
               fontWeight: 700,
               fontSize: 11,
               letterSpacing: "0.08em",
-              color: "#1A2B35",
+              color: "#0f0f0f",
               textDecoration: "none",
               transition: "all 0.2s ease",
               display: "inline-block",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "#1A2B35";
+              e.currentTarget.style.borderColor = "#0f0f0f";
               e.currentTarget.style.background = "rgba(26,43,53,0.04)";
             }}
             onMouseLeave={(e) => {

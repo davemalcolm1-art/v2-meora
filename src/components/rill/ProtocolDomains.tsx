@@ -81,10 +81,11 @@ const ProtocolDomains = () => {
         .pd-section {
           position: relative;
           width: 100vw;
-          min-height: 70vh;
           background: linear-gradient(160deg, #0f1a1a 0%, #0a0a0a 100%);
           overflow: hidden;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
         }
+        .pd-section:last-of-type { border-bottom: none; }
         .pd-overlay {
           position: absolute; inset: 0;
           background: rgba(0,0,0,0.55);
@@ -94,16 +95,15 @@ const ProtocolDomains = () => {
           z-index: 1;
           max-width: 1200px;
           margin: 0 auto;
-          min-height: 70vh;
           display: flex;
           align-items: center;
           gap: 48px;
           padding: 80px 48px;
         }
         .pd-left { width: 45%; }
-        .pd-right { width: 55%; display: flex; flex-direction: column; gap: 32px; }
+        .pd-right { width: 55%; display: flex; flex-direction: column; gap: 48px; }
         .pd-featured {
-          background: rgba(255,255,255,0.07);
+          background: rgba(15,15,15,0.75);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
           border: 1px solid rgba(255,255,255,0.12);
@@ -118,7 +118,7 @@ const ProtocolDomains = () => {
         }
         .pd-fdesc {
           font-family: 'DM Sans', sans-serif; font-weight: 400;
-          font-size: 15px; color: rgba(245,240,232,0.6); line-height: 1.5;
+          font-size: 15px; color: rgba(245,240,232,0.55); line-height: 1.5;
         }
         .pd-flearn {
           font-family: 'DM Sans', sans-serif; font-weight: 400;
@@ -126,16 +126,16 @@ const ProtocolDomains = () => {
         }
         .pd-dname {
           font-family: 'Fraunces', serif; font-weight: 700; font-style: normal;
-          font-size: 52px; color: #F5F0E8; line-height: 1.05;
+          font-size: 64px; color: #F5F0E8; line-height: 1.05;
         }
         .pd-dtag {
           font-family: 'DM Sans', sans-serif; font-weight: 400;
-          font-size: 15px; color: rgba(245,240,232,0.5); margin-top: 8px;
+          font-size: 15px; color: rgba(245,240,232,0.55); margin-top: 8px;
         }
         .pd-pills { display: flex; flex-direction: column; gap: 12px; }
         .pd-pill {
           display: flex; align-items: center; justify-content: space-between;
-          background: rgba(255,255,255,0.06);
+          background: rgba(255,255,255,0.05);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           border: 1px solid rgba(255,255,255,0.10);
@@ -149,7 +149,6 @@ const ProtocolDomains = () => {
         .pd-pill-arrow { color: #E8572A; font-size: 16px; }
 
         @media (max-width: 768px) {
-          .pd-section { min-height: 80vh; }
           .pd-inner {
             flex-direction: column;
             align-items: stretch;
@@ -158,7 +157,7 @@ const ProtocolDomains = () => {
             gap: 32px;
           }
           .pd-left, .pd-right { width: 100%; }
-          .pd-dname { font-size: 38px; }
+          .pd-dname { font-size: 42px; }
           .pd-featured { padding: 28px; }
           .pd-fname { font-size: 26px; }
           .pd-pill { text-align: left; }
