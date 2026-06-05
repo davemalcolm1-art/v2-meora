@@ -77,10 +77,10 @@ const Positioning = () => {
           flex-direction: column;
           transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background 0.45s ease;
           will-change: transform;
-          background: rgba(255,255,255,0.04);
+          background: rgba(255,255,255,0.65);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid rgba(0,0,0,0.06);
         }
         .pos-card:hover {
           transform: translateY(-6px);
