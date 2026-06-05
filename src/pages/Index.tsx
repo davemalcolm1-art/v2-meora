@@ -29,7 +29,7 @@ const Index = () => {
       <Cursor />
       <HeroSection />
       <Positioning />
-      <Domains />
+      <ProtocolDomains />
       <HowItWorks />
       <ScienceCards />
       <Journal />
