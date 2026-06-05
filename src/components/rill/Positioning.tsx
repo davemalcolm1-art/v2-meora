@@ -250,6 +250,36 @@ const Positioning = () => {
         }
         .positioning-pill svg { color: #FF5003; flex-shrink: 0; }
 
+        .pos-left-pills {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .pos-card-gradient {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .pos-card-gradient span {
+          font-family: 'Fraunces', serif;
+          font-weight: 700;
+          font-style: italic;
+          font-size: 28px;
+          color: #F5F0E8;
+          text-align: center;
+          padding: 0 24px;
+        }
+        .no-after::after {
+          display: none !important;
+        }
+
+
         @media (max-width: 1100px) {
           .positioning-grid { grid-template-columns: 1fr 1fr; }
           .pos-card-image { grid-column: 1 / -1; min-height: 320px; }
