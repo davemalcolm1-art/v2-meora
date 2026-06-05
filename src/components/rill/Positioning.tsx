@@ -148,6 +148,13 @@ const Positioning = () => {
           margin-bottom: 0;
         }
         .pos-card-image-head .pos-card-title { color: #fff; }
+        .pos-card-image-cta {
+          position: absolute;
+          bottom: 24px;
+          left: 32px;
+          z-index: 2;
+          margin-top: 0;
+        }
 
         .pos-card-head {
           display: flex;
@@ -324,13 +331,6 @@ const Positioning = () => {
               </span>
             ))}
           </div>
-          <a href="/book" className="pos-card-cta">
-            Meet your GP
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
         </div>
 
         {/* Middle: gradient placeholder */}
@@ -347,6 +347,13 @@ const Positioning = () => {
             </div>
             <div className="pos-card-title">Built for you</div>
           </div>
+          <a href="/book" className="pos-card-cta pos-card-image-cta">
+            Meet your GP
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
         </div>
 
         {/* Right: Evidence-informed (light) */}
