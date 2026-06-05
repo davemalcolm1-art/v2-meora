@@ -174,6 +174,7 @@ const ProtocolDomains = () => {
           background-position: center;
           animation: pd-kenburns 20s ease-in-out infinite alternate;
           will-change: transform;
+          filter: saturate(1.15) brightness(1.05);
         }
         @keyframes pd-kenburns {
           from { transform: scale(1.05); }
@@ -181,7 +182,7 @@ const ProtocolDomains = () => {
         }
         .pd-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.35) 100%);
+          background: linear-gradient(to right, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.20) 100%);
           z-index: 1;
         }
         .pd-inner {
@@ -212,10 +213,10 @@ const ProtocolDomains = () => {
         .pd-inner.is-visible .pd-r-pill-1 { transition-delay: 400ms; }
 
         .pd-featured {
-          background: rgba(10,10,10,0.45);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(255,255,255,0.15);
+          background: rgba(0,0,0,0.30);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border: 1px solid rgba(255,255,255,0.18);
           border-radius: 16px;
           padding: 40px;
           display: flex; flex-direction: column; gap: 16px;
@@ -223,8 +224,8 @@ const ProtocolDomains = () => {
           cursor: pointer;
         }
         .pd-featured:hover {
-          background: rgba(10,10,10,0.60);
-          border-color: rgba(255,255,255,0.25);
+          background: rgba(0,0,0,0.45);
+          border-color: rgba(255,255,255,0.30);
           transform: translateY(-4px);
           box-shadow: 0 20px 60px rgba(0,0,0,0.35);
         }
@@ -243,7 +244,8 @@ const ProtocolDomains = () => {
         }
         .pd-dname {
           font-family: 'Fraunces', serif; font-weight: 700; font-style: normal;
-          font-size: 64px; color: #F5F0E8; line-height: 1.05;
+          font-size: 64px; color: #FFFFFF; line-height: 1.05;
+          text-shadow: 0 2px 20px rgba(0,0,0,0.5);
         }
         .pd-dtag {
           font-family: 'DM Sans', sans-serif; font-weight: 400;
@@ -252,18 +254,18 @@ const ProtocolDomains = () => {
         .pd-pills { display: flex; flex-direction: column; gap: 12px; }
         .pd-pill {
           display: flex; align-items: center; justify-content: space-between;
-          background: rgba(10,10,10,0.40);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(0,0,0,0.25);
+          backdrop-filter: blur(16px) saturate(160%);
+          -webkit-backdrop-filter: blur(16px) saturate(160%);
+          border: 1px solid rgba(255,255,255,0.18);
           border-radius: 12px;
           padding: 18px 24px;
           transition: background 250ms ease, border-color 250ms ease, transform 250ms ease, opacity 600ms cubic-bezier(0.22,1,0.36,1);
           cursor: pointer;
         }
         .pd-pill:hover {
-          background: rgba(10,10,10,0.60);
-          border-color: rgba(255,255,255,0.22);
+          background: rgba(0,0,0,0.40);
+          border-color: rgba(255,255,255,0.28);
           transform: translateX(4px);
         }
         .pd-pill-name {
