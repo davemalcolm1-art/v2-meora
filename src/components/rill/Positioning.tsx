@@ -92,15 +92,9 @@ const Positioning = () => {
           box-shadow: 0 28px 70px -24px rgba(26,43,53,0.55);
         }
         .pos-card-light {
-          background: rgba(255,255,255,0.45);
-          backdrop-filter: blur(22px) saturate(160%);
-          -webkit-backdrop-filter: blur(22px) saturate(160%);
-          border: 1px solid rgba(255,255,255,0.6);
-          color: #0f0f0f;
           box-shadow: 0 18px 50px -24px rgba(26,43,53,0.18);
         }
         .pos-card-light:hover {
-          background: rgba(255,255,255,0.6);
           box-shadow: 0 28px 70px -24px rgba(26,43,53,0.25);
         }
         .pos-card-image {
