@@ -108,7 +108,7 @@ const ProtocolDomains = () => {
         }
         .pd-inner {
           position: relative;
-          z-index: 1;
+          z-index: 2;
           max-width: 1200px;
           margin: 0 auto;
           display: flex;
