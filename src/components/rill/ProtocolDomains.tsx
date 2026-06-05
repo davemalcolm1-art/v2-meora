@@ -202,7 +202,15 @@ const ProtocolDomains = () => {
           {BG[d.id] && (
             <div
               className="pd-bg"
-              style={{ backgroundImage: `url(${BG[d.id]})` }}
+              style={{
+                backgroundImage: `url(${BG[d.id]})`,
+                backgroundPosition:
+                  d.id === "energy"
+                    ? "center 40%"
+                    : d.id === "beauty"
+                      ? "center 30%"
+                      : "center center",
+              }}
             />
           )}
           <div className="pd-overlay" />
