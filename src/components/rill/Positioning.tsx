@@ -57,8 +57,8 @@ const Positioning = () => {
           max-width: 880px;
         }
         .positioning-h2 em { font-style: italic; font-weight: 400; }
-        .pos-hl { color: #FF5003; }
-        .pos-hl-big { color: #FF5003; font-size: 1.18em; }
+        .pos-hl { color: #F5F0E8; }
+        .pos-hl-big { color: #F5F0E8; font-size: 1.18em; }
 
         .positioning-grid {
           display: grid;
