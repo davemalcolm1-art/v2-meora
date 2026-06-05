@@ -270,6 +270,11 @@ const ProtocolDomains = () => {
           font-family: 'Fraunces', serif; font-weight: 700; font-style: normal;
           font-size: 32px; color: #F5F0E8; line-height: 1.15;
         }
+        .pd-fsublabel {
+          font-family: 'DM Sans', sans-serif; font-weight: 400;
+          font-size: 11px; color: rgba(245,240,232,0.4);
+          margin-top: -8px;
+        }
         .pd-fdesc {
           font-family: 'DM Sans', sans-serif; font-weight: 400;
           font-size: 15px; color: rgba(245,240,232,0.55); line-height: 1.5;
