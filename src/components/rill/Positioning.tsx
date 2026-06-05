@@ -147,10 +147,10 @@ const Positioning = () => {
           z-index: 2;
           margin-bottom: 0;
         }
-        .pos-card-image-head .pos-card-title { color: #fff; }
+        .pos-card-image-head .pos-card-title { color: #1a1a1a; }
         .pos-card-image-cta {
           position: absolute;
-          bottom: 24px;
+          bottom: 32px;
           left: 32px;
           z-index: 2;
           margin-top: 0;
