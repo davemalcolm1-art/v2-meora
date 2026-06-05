@@ -164,15 +164,15 @@ const Positioning = () => {
           font-style: italic;
           font-weight: 400;
           font-size: 22px;
+          color: #F5F0E8;
         }
         .pos-card-body {
           font-family: 'DM Sans', sans-serif;
           font-size: 15px;
           line-height: 1.6;
           margin: 0;
+          color: rgba(245,240,232,0.6);
         }
-        .pos-card-dark .pos-card-body { color: rgba(255,255,255,0.78); }
-        .pos-card-light .pos-card-body { color: rgba(26,43,53,0.72); }
 
         .pos-card-cta {
           display: inline-flex;
