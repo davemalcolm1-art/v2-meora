@@ -103,7 +103,7 @@ const ProtocolDomains = () => {
         }
         .pd-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);
+          background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.35) 100%);
           z-index: 1;
         }
         .pd-inner {
