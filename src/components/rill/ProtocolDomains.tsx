@@ -18,6 +18,15 @@ const MARK = {
   rosegold: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/protocol-rosegold.png",
 };
 
+const BG: Record<string, string | undefined> = {
+  energy: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-energy.jpg",
+  performance: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-performance.jpg",
+  balance: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-balance.jpg",
+  recovery: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-recovery.jpg",
+  beauty: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-beauty.jpg",
+  longevity: undefined,
+};
+
 const domains: Domain[] = [
   {
     id: "energy",
@@ -86,13 +95,20 @@ const ProtocolDomains = () => {
           border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .pd-section:last-of-type { border-bottom: none; }
+        .pd-bg {
+          position: absolute; inset: 0;
+          background-size: cover;
+          background-position: center;
+          z-index: 0;
+        }
         .pd-overlay {
           position: absolute; inset: 0;
-          background: rgba(0,0,0,0.55);
+          background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);
+          z-index: 1;
         }
         .pd-inner {
           position: relative;
-          z-index: 1;
+          z-index: 2;
           max-width: 1200px;
           margin: 0 auto;
           display: flex;
@@ -166,6 +182,12 @@ const ProtocolDomains = () => {
 
       {domains.map((d) => (
         <div key={d.id} className="pd-section">
+          {BG[d.id] && (
+            <div
+              className="pd-bg"
+              style={{ backgroundImage: `url(${BG[d.id]})` }}
+            />
+          )}
           <div className="pd-overlay" />
           <div className="pd-inner">
             <div className="pd-left">
