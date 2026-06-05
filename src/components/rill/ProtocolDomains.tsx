@@ -24,7 +24,7 @@ const BG: Record<string, string | undefined> = {
   balance: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-balance.jpg",
   recovery: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-recovery.jpg",
   beauty: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-beauty.jpg",
-  longevity: undefined,
+  longevity: "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/domain-longevity.jpg",
 };
 
 const domains: Domain[] = [
