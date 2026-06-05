@@ -29,6 +29,7 @@ const Index = () => {
     <QuizProvider onOpen={() => setQuizOpen(true)}>
       <Cursor />
       <HeroSection />
+      <TrustStrip />
       <Positioning />
       <ProtocolDomains />
       <HowItWorks />
