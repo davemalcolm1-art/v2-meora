@@ -7,31 +7,50 @@ const items = [
 ];
 
 const TrustStrip = () => {
+  // Duplicate the list so the marquee loops seamlessly
+  const loop = [...items, ...items];
+
   return (
     <div
       style={{
         width: "100%",
-        background: "rgba(255,255,255,0.03)",
+        background: "rgba(255,255,255,0.04)",
         borderTop: "1px solid rgba(255,255,255,0.08)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
+        height: 64,
+        overflow: "hidden",
+        position: "relative",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        gap: 48,
-        height: 64,
       }}
       className="trust-strip-root"
     >
       <style>{`
+        @keyframes ts-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .ts-track {
+          display: flex;
+          align-items: center;
+          gap: 48px;
+          padding-left: 48px;
+          width: max-content;
+          animation: ts-marquee 45s linear infinite;
+          will-change: transform;
+        }
+        .trust-strip-root:hover .ts-track {
+          animation-play-state: paused;
+        }
         .ts-item {
           display: inline-flex;
           align-items: center;
           gap: 8px;
           font-family: 'DM Sans', sans-serif;
-          font-weight: 400;
+          font-weight: 500;
           font-size: 12px;
-          color: rgba(245,240,232,0.55);
-          letter-spacing: 0.05em;
+          color: rgba(245,240,232,0.92);
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           white-space: nowrap;
         }
@@ -43,22 +62,27 @@ const TrustStrip = () => {
         @media (max-width: 768px) {
           .trust-strip-root {
             height: auto !important;
-            padding: 16px 24px;
-            flex-wrap: wrap;
-            gap: 16px !important;
+            padding: 14px 0;
+          }
+          .ts-track {
+            gap: 28px;
+            padding-left: 28px;
+            animation-duration: 30s;
           }
           .ts-item--hide-mobile { display: none !important; }
         }
       `}</style>
-      {items.map((item) => (
-        <span
-          key={item.label}
-          className={`ts-item ${item.mobile ? "" : "ts-item--hide-mobile"}`}
-        >
-          <span className="ts-icon">&#10022;</span>
-          <span>{item.label}</span>
-        </span>
-      ))}
+      <div className="ts-track">
+        {loop.map((item, i) => (
+          <span
+            key={`${item.label}-${i}`}
+            className={`ts-item ${item.mobile ? "" : "ts-item--hide-mobile"}`}
+          >
+            <span className="ts-icon">&#10022;</span>
+            <span>{item.label}</span>
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
