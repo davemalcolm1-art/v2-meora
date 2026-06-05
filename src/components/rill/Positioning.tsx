@@ -164,14 +164,14 @@ const Positioning = () => {
           font-style: italic;
           font-weight: 400;
           font-size: 22px;
-          color: #F5F0E8;
+          color: #1a1a1a;
         }
         .pos-card-body {
           font-family: 'DM Sans', sans-serif;
           font-size: 15px;
           line-height: 1.6;
           margin: 0;
-          color: rgba(245,240,232,0.6);
+          color: rgba(10,10,10,0.6);
         }
 
         .pos-card-cta {
