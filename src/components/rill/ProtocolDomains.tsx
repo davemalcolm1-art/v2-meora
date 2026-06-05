@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useQuiz } from "./quizContext";
 
-type Protocol = { name: string; desc?: string; mark: string };
+type Protocol = { name: string; slug: string; mark: string };
+type Featured = { heading: string; secondaryLabel: string; desc: string; mark: string };
 type Domain = {
   id: string;
   name: string;
   tagline: string;
-  featured: Protocol;
+  featured: Featured;
   pills: Protocol[];
 };
 
@@ -37,56 +38,91 @@ const BG_POS: Record<string, string> = {
   longevity: "center center",
 };
 
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 const domains: Domain[] = [
   {
     id: "energy",
     name: "Energy",
     tagline: "Show up fully. Every single day.",
-    featured: { name: "Foundation.ME", desc: "Daily baseline support for energy and clarity.", mark: MARK.gold },
+    featured: {
+      heading: "Daily Energy & Clarity",
+      secondaryLabel: "Foundation.ME",
+      desc: "Sustained energy, sharper focus and consistent output — every single day.",
+      mark: MARK.gold,
+    },
     pills: [
-      { name: "Foundation Pro.ME", mark: MARK.gold },
-      { name: "Vitality.ME", mark: MARK.gold },
+      { name: "Advanced Energy Support", slug: "advanced-energy-support", mark: MARK.gold },
+      { name: "Drive & Vitality", slug: "drive-and-vitality", mark: MARK.gold },
     ],
   },
   {
     id: "performance",
     name: "Performance",
     tagline: "Built to go further than you thought possible.",
-    featured: { name: "Performance.ME", desc: "Engineered for output. Built to last.", mark: MARK.steel },
+    featured: {
+      heading: "Strength & Body Recomposition",
+      secondaryLabel: "Performance.ME",
+      desc: "Build lean muscle, reduce body fat and perform at your peak.",
+      mark: MARK.steel,
+    },
     pills: [
-      { name: "Recomposition.ME", mark: MARK.steel },
-      { name: "Cognitive Performance.ME", mark: MARK.steel },
+      { name: "Peak Athletic Performance", slug: "peak-athletic-performance", mark: MARK.steel },
+      { name: "Cognitive Edge", slug: "cognitive-edge", mark: MARK.steel },
     ],
   },
   {
     id: "balance",
     name: "Balance",
     tagline: "When everything feels in sync, everything changes.",
-    featured: { name: "Weight Loss GLP-1 Alternatives.ME", desc: "A smarter path to body composition.", mark: MARK.jungle },
+    featured: {
+      heading: "Weight Management",
+      secondaryLabel: "Weight Loss.ME",
+      desc: "A smarter, medically supervised path to sustainable body composition.",
+      mark: MARK.jungle,
+    },
     pills: [
-      { name: "Weight Loss Pro.ME", mark: MARK.jungle },
-      { name: "Weight Loss GLP-1s.ME", mark: MARK.jungle },
+      { name: "Advanced Weight Loss", slug: "advanced-weight-loss", mark: MARK.jungle },
+      { name: "GLP-1 Program", slug: "glp-1-program", mark: MARK.jungle },
     ],
   },
   {
     id: "recovery",
     name: "Recovery",
     tagline: "Built for the comeback.",
-    featured: { name: "Recovery.ME", desc: "Repair faster. Come back stronger.", mark: MARK.marble },
+    featured: {
+      heading: "Injury & Muscle Recovery",
+      secondaryLabel: "Recovery.ME",
+      desc: "Repair faster, reduce inflammation and come back stronger.",
+      mark: MARK.marble,
+    },
     pills: [],
   },
   {
     id: "longevity",
     name: "Longevity",
     tagline: "Play the long game. On your terms.",
-    featured: { name: "Longevity.ME", desc: "Long-term support for the long game.", mark: MARK.water },
-    pills: [{ name: "Comprehensive Stack.ME", mark: MARK.water }],
+    featured: {
+      heading: "Long-Term Health Optimisation",
+      secondaryLabel: "Longevity.ME",
+      desc: "Protect what you've built and invest in the decades ahead.",
+      mark: MARK.water,
+    },
+    pills: [
+      { name: "Comprehensive Longevity Protocol", slug: "comprehensive-longevity-protocol", mark: MARK.water },
+    ],
   },
   {
     id: "beauty",
     name: "Beauty",
     tagline: "Radiant from within. Supported by science.",
-    featured: { name: "Skin & Collagen.ME", desc: "Radiant from within. Supported by science.", mark: MARK.rosegold },
+    featured: {
+      heading: "Skin & Collagen Support",
+      secondaryLabel: "Skin & Collagen.ME",
+      desc: "Radiant, resilient skin supported by peptide science from within.",
+      mark: MARK.rosegold,
+    },
     pills: [],
   },
 ];
