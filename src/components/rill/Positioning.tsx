@@ -106,7 +106,7 @@ const Positioning = () => {
 
         .pos-card-image {
           padding: 0;
-          background: rgba(255,255,255,0.04);
+          background: rgba(255,255,255,0.65);
         }
         .pos-card-image img {
           position: absolute;
