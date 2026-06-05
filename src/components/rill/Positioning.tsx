@@ -52,7 +52,7 @@ const Positioning = () => {
           font-size: clamp(34px, 4.4vw, 60px);
           line-height: 1.05;
           letter-spacing: -0.025em;
-          color: #0f0f0f;
+          color: #F5F0E8;
           margin: 0 auto;
           max-width: 880px;
         }
