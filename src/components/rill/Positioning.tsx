@@ -5,7 +5,13 @@ const heroImg = heroAsset.url;
 const pills = [
   "AHPRA-Registered GPs",
   "Compounding Pharmacies",
-  "Compliance first",
+  "Clinically safe and effective",
+];
+
+const personalisedPills = [
+  "Tailored to your biomarkers",
+  "Reviewed by your GP",
+  "Adjusted as you progress",
 ];
 
 const Positioning = () => {
@@ -244,6 +250,36 @@ const Positioning = () => {
         }
         .positioning-pill svg { color: #FF5003; flex-shrink: 0; }
 
+        .pos-left-pills {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .pos-card-gradient {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .pos-card-gradient span {
+          font-family: 'Fraunces', serif;
+          font-weight: 700;
+          font-style: italic;
+          font-size: 28px;
+          color: #F5F0E8;
+          text-align: center;
+          padding: 0 24px;
+        }
+        .no-after::after {
+          display: none !important;
+        }
+
+
         @media (max-width: 1100px) {
           .positioning-grid { grid-template-columns: 1fr 1fr; }
           .pos-card-image { grid-column: 1 / -1; min-height: 320px; }
@@ -278,6 +314,16 @@ const Positioning = () => {
           <p className="pos-card-body">
             A protocol shaped to your biomarkers, your goals and your life — not a one-size-fits-all template. Every recommendation is reviewed by your AHPRA-registered GP.
           </p>
+          <div className="pos-left-pills">
+            {personalisedPills.map((p) => (
+              <span key={p} className="positioning-pill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {p}
+              </span>
+            ))}
+          </div>
           <a href="/book" className="pos-card-cta">
             Meet your GP
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -287,9 +333,11 @@ const Positioning = () => {
           </a>
         </div>
 
-        {/* Middle: image */}
-        <div className="pos-card pos-card-image scroll-animate delay-150">
-          <img src={heroImg} alt="Meora patient" loading="lazy" width={1024} height={1024} />
+        {/* Middle: gradient placeholder */}
+        <div className="pos-card pos-card-image no-after scroll-animate delay-150">
+          <div className="pos-card-gradient">
+            <span>Longevity, made personal.</span>
+          </div>
           <div className="pos-card-head pos-card-image-head">
             <div className="pos-card-badge">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -298,9 +346,6 @@ const Positioning = () => {
               </svg>
             </div>
             <div className="pos-card-title">Built for you</div>
-          </div>
-          <div className="pos-card-image-label">
-            Longevity, <em>made personal.</em>
           </div>
         </div>
 
