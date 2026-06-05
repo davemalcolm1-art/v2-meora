@@ -52,13 +52,13 @@ const Positioning = () => {
           font-size: clamp(34px, 4.4vw, 60px);
           line-height: 1.05;
           letter-spacing: -0.025em;
-          color: #F5F0E8;
+          color: #1a1a1a;
           margin: 0 auto;
           max-width: 880px;
         }
         .positioning-h2 em { font-style: italic; font-weight: 400; }
-        .pos-hl { color: #F5F0E8; }
-        .pos-hl-big { color: #F5F0E8; font-size: 1.18em; }
+        .pos-hl { color: #1a1a1a; }
+        .pos-hl-big { color: #1a1a1a; font-size: 1.18em; }
 
         .positioning-grid {
           display: grid;
