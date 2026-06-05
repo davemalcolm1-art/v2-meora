@@ -126,7 +126,7 @@ nav.rill-nav {
   max-width: 1280px;
   height: 56px;
   border-radius: 14px;
-  background: rgba(10, 10, 10, 0.38);
+  background: rgba(10, 10, 10, 0.80);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.1);
