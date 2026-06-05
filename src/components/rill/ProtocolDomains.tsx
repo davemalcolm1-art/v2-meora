@@ -190,6 +190,7 @@ const ProtocolDomains = () => {
             padding: 64px 24px;
             gap: 32px;
           }
+          .pd-inner--flipped { flex-direction: column-reverse; }
           .pd-left, .pd-right { width: 100%; }
           .pd-dname { font-size: 42px; }
           .pd-featured { padding: 28px; }
