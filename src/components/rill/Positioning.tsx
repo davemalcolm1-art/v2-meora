@@ -148,6 +148,13 @@ const Positioning = () => {
           margin-bottom: 0;
         }
         .pos-card-image-head .pos-card-title { color: #fff; }
+        .pos-card-image-cta {
+          position: absolute;
+          bottom: 24px;
+          left: 32px;
+          z-index: 2;
+          margin-top: 0;
+        }
 
         .pos-card-head {
           display: flex;
