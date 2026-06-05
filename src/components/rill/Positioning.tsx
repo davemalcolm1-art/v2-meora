@@ -86,11 +86,6 @@ const Positioning = () => {
           transform: translateY(-6px);
         }
         .pos-card-dark {
-          background: rgba(26,43,53,0.92);
-          backdrop-filter: blur(18px) saturate(140%);
-          -webkit-backdrop-filter: blur(18px) saturate(140%);
-          border: 1px solid rgba(255,255,255,0.08);
-          color: #fff;
           box-shadow: 0 18px 50px -22px rgba(26,43,53,0.45);
         }
         .pos-card-dark:hover {
