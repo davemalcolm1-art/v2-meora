@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Cursor from "@/components/rill/Cursor";
 import HeroSection from "@/components/rill/HeroSection";
+import TrustStrip from "@/components/rill/TrustStrip";
 import Positioning from "@/components/rill/Positioning";
 import ProtocolDomains from "@/components/rill/ProtocolDomains";
 import HowItWorks from "@/components/rill/HowItWorks";
