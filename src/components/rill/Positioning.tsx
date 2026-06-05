@@ -68,7 +68,7 @@ const Positioning = () => {
         }
 
         .pos-card {
-          border-radius: 24px;
+          border-radius: 16px;
           padding: 32px;
           position: relative;
           overflow: hidden;
@@ -77,6 +77,10 @@ const Positioning = () => {
           flex-direction: column;
           transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background 0.45s ease;
           will-change: transform;
+          background: rgba(255,255,255,0.04);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,0.08);
         }
         .pos-card:hover {
           transform: translateY(-6px);
