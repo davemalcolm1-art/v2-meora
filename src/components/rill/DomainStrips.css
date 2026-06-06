@@ -58,7 +58,6 @@
 
 .ds-row {
   position: relative; z-index: 3;
-  grid-row: 1;
   height: 96px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 48px;
