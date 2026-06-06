@@ -38,6 +38,7 @@ const steps: { n: string; title: string; desc: string; cards: Card[]; bg: string
       { icon: "flask", title: "Compounded at an\nAustralian pharmacy" },
       { icon: "box", title: "Cold-chain shipping\nto your door" },
     ],
+    bg: bgStep3.url,
   },
 ];
 
