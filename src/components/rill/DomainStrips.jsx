@@ -177,23 +177,28 @@ function Strip({ index, domain, isOpen, onToggle }) {
   }, []);
 
   return (
-    <div ref={rootRef} className={`ds-strip ${isOpen ? "is-open" : ""} ${visible ? "is-visible" : ""}`} style={{ transitionDelay: visible ? `${index * 90}ms` : "0ms" }}>
+    <div
+      ref={rootRef}
+      className={`ds-strip ${isOpen ? "is-open" : ""} ${visible ? "is-visible" : ""}`}
+      style={{ transitionDelay: visible ? `${index * 90}ms` : "0ms" }}
+      onMouseEnter={() => onToggle(true)}
+      onMouseLeave={() => onToggle(false)}
+    >
       <img src={domain.image} alt="" className="ds-img" loading="lazy" />
       <canvas ref={canvasRef} className="ds-canvas" />
       <div className="ds-tint" aria-hidden />
       <span className="ds-bar" aria-hidden />
 
-      <button className="ds-row" onClick={onToggle} aria-expanded={isOpen}>
+      <div className="ds-row">
         <div className="ds-left">
           <span className="ds-name">{domain.name}</span>
-
         </div>
         <div className="ds-right">
           <span className="ds-desc">{domain.tagline}</span>
-
           <span className="ds-arrow" aria-hidden>{isOpen ? "−" : "→"}</span>
         </div>
-      </button>
+      </div>
+
 
       <div className="ds-panel">
         <div className="ds-panel-inner">
