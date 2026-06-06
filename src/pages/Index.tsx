@@ -3,7 +3,7 @@ import Cursor from "@/components/rill/Cursor";
 import HeroSection from "@/components/rill/HeroSection";
 import TrustStrip from "@/components/rill/TrustStrip";
 import HowItWorksIntro from "@/components/rill/HowItWorksIntro";
-import ProtocolDomains from "@/components/rill/ProtocolDomains";
+import DomainStrips from "@/components/rill/DomainStrips";
 import HowItWorks from "@/components/rill/HowItWorks";
 import ScienceCards from "@/components/rill/ScienceCards";
 import Stats from "@/components/rill/Stats";
@@ -31,7 +31,7 @@ const Index = () => {
       <HeroSection />
       <TrustStrip />
       <HowItWorksIntro />
-      <ProtocolDomains />
+      <DomainStrips />
       <HowItWorks />
       <ScienceCards />
       <Journal />
