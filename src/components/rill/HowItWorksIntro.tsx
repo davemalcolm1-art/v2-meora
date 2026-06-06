@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuiz } from "./quizContext";
+import bgStep1 from "@/assets/domains/balance-hero.jpg.asset.json";
+import bgStep2 from "@/assets/domains/longevity-hero.jpg.asset.json";
+import bgStep3 from "@/assets/domains/performance-hero.jpg.asset.json";
 
 const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
 type Card = { icon: string; title: string };
-const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
+const steps: { n: string; title: string; desc: string; cards: Card[]; bg: string }[] = [
   {
     n: "01",
     title: "Complete your assessment & book your consultation",
