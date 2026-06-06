@@ -204,7 +204,7 @@ export default function HowItWorksIntro() {
         .glass-title-lg {
           font-family: 'Fraunces', Georgia, serif;
           font-weight: 400;
-          font-size: 36px;
+          font-size: 26px;
           line-height: 1.1;
           letter-spacing: -0.01em;
         }
