@@ -716,7 +716,7 @@ const HeroSection = () => {
           </div>
 
           <p className="hero-subline">
-            Doctor-prescribed peptide protocols for energy, recovery, and
+            Personalised longevity protocols for energy, recovery, and
             long-term health. Available anywhere in Australia.
           </p>
 
