@@ -105,7 +105,7 @@ void main() {
   col += vec3(1.0) * hi * 0.55;
 
   // Overall coverage = u_amp (1 = fully fluted, 0 = clear)
-  float alpha = u_amp * 0.88;
+  float alpha = u_amp * 0.62;
   gl_FragColor = vec4(col, alpha);
 }`;
 
