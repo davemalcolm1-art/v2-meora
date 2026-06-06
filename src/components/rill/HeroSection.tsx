@@ -703,12 +703,6 @@ const HeroSection = () => {
         {/* Content */}
         <div className="hero-content">
 
-          <div className="hero-credential">
-            <div className="hero-credential-rule" />
-            <span className="hero-credential-text">
-              AHPRA-Registered Doctors · Doctor-Prescribed · Australia-Wide
-            </span>
-          </div>
 
           <div className="hero-h1">
             It starts with{" "}
