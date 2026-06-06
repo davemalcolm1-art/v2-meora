@@ -303,10 +303,9 @@ export default function HowItWorksIntro() {
                 data-index={i}
                 className="hiwi-panel"
               >
-                <p className="hiwi-watermark">{s.n}</p>
-                <div className="hiwi-icon" aria-hidden="true">
-                  {i === 0 ? "✓" : i === 1 ? "◐" : "✦"}
-                </div>
+                {s.visual === "calendar" && <CalendarGlass />}
+                {s.visual === "consult" && <ConsultGlass />}
+                {s.visual === "protocol" && <ProtocolGlass />}
               </div>
             ))}
           </div>
