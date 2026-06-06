@@ -303,9 +303,11 @@ export default function HowItWorksIntro() {
                 data-index={i}
                 className="hiwi-panel"
               >
-                {s.visual === "calendar" && <CalendarGlass />}
-                {s.visual === "consult" && <ConsultGlass />}
-                {s.visual === "protocol" && <ProtocolGlass />}
+                <div className="hiwi-cards">
+                  {s.cards.map((c, j) => (
+                    <GlassCard key={j} icon={c.icon} title={c.title} />
+                  ))}
+                </div>
               </div>
             ))}
           </div>
