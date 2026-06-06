@@ -37,7 +37,7 @@ const CtaBanner = () => {
         <h2
           style={{
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(44px, 5vw, 72px)",
+            fontSize: "clamp(32px, 3.4vw, 48px)",
             fontWeight: 300,
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
