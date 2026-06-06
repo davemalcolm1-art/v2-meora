@@ -5,23 +5,64 @@ const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
-const steps = [
+type Visual = "calendar" | "consult" | "protocol";
+const steps: { n: string; title: string; desc: string; visual: Visual }[] = [
   {
     n: "01",
     title: "Complete your assessment & book your consultation",
     desc: "Tell us about your health history, goals, and lifestyle in a quick five-minute assessment, then choose a time that suits you to meet your doctor.",
+    visual: "calendar",
   },
   {
     n: "02",
     title: "Meet your Meora doctor, review assessment and test results",
     desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
+    visual: "consult",
   },
   {
     n: "03",
     title: "Your protocol, delivered",
     desc: "Compounded at a registered Australian pharmacy and shipped cold-chain directly to your door. Ongoing quarterly monitoring included.",
+    visual: "protocol",
   },
 ];
+
+function CalendarGlass() {
+  const days = Array.from({ length: 30 }, (_, i) => i + 1);
+  const offset = 3; // month starts Thu
+  return (
+    <div className="glass-card">
+      <div className="glass-cal-title">September 2026</div>
+      <div className="glass-cal-grid glass-cal-head">
+        {["MON","TUE","WED","THU","FRI","SAT","SUN"].map((d) => <span key={d}>{d}</span>)}
+      </div>
+      <div className="glass-cal-grid glass-cal-days">
+        {Array.from({ length: offset }).map((_, i) => <span key={`e${i}`} />)}
+        {days.map((d) => (
+          <span key={d} className={d === 23 ? "glass-cal-active" : ""}>{d}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+function ConsultGlass() {
+  return (
+    <div className="glass-card glass-center">
+      <div className="glass-pill">Telehealth consult</div>
+      <div className="glass-title-lg">Meet your<br/>Meora doctor</div>
+      <div className="glass-sub">AHPRA-registered • Australia-wide</div>
+    </div>
+  );
+}
+function ProtocolGlass() {
+  return (
+    <div className="glass-card glass-center">
+      <div className="glass-pill">Compounded & shipped</div>
+      <div className="glass-title-lg">Your protocol,<br/>delivered cold-chain</div>
+      <div className="glass-sub">Quarterly monitoring included</div>
+    </div>
+  );
+}
 
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
@@ -122,39 +163,89 @@ export default function HowItWorksIntro() {
         .hiwi-panels { display: flex; flex-direction: column; gap: 32px; }
         .hiwi-panel {
           min-height: 80vh;
-          background: rgba(255,255,255,0.55);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(26,43,53,0.08);
           border-radius: 24px;
-          padding: 48px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          position: relative;
-          overflow: hidden;
-        }
-        .hiwi-watermark {
-          font-family: 'Fraunces', Georgia, serif;
-          font-weight: 400;
-          font-size: clamp(140px, 18vw, 240px);
-          line-height: 0.9;
-          color: rgba(232,87,26,0.10);
-          margin: 0;
-          letter-spacing: -0.04em;
-        }
-        .hiwi-icon {
-          align-self: flex-end;
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          background: ${ORANGE};
-          color: ${CREAM};
           display: flex;
           align-items: center;
           justify-content: center;
+          position: relative;
+          overflow: hidden;
+          background:
+            radial-gradient(120% 80% at 20% 10%, rgba(232,87,26,0.10), transparent 60%),
+            linear-gradient(135deg, rgba(26,43,53,0.06), rgba(26,43,53,0.02));
+        }
+        .glass-card {
+          width: min(440px, 90%);
+          aspect-ratio: 1 / 1;
+          padding: 36px;
+          border-radius: 28px;
+          background: rgba(26,43,53,0.42);
+          backdrop-filter: blur(24px) saturate(140%);
+          -webkit-backdrop-filter: blur(24px) saturate(140%);
+          border: 1px solid rgba(255,255,255,0.18);
+          box-shadow: 0 30px 80px -20px rgba(26,43,53,0.35);
+          color: ${CREAM};
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+        .glass-center { align-items: flex-start; justify-content: center; }
+        .glass-pill {
+          align-self: flex-start;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: rgba(250,247,242,0.85);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.2);
+          padding: 6px 12px;
+          border-radius: 999px;
+        }
+        .glass-title-lg {
           font-family: 'Fraunces', Georgia, serif;
-          font-size: 48px;
+          font-weight: 400;
+          font-size: 36px;
+          line-height: 1.1;
+          letter-spacing: -0.01em;
+        }
+        .glass-sub {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          color: rgba(250,247,242,0.7);
+        }
+        .glass-cal-title {
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 500;
+          font-size: 22px;
+        }
+        .glass-cal-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 6px 4px;
+          font-family: 'DM Sans', sans-serif;
+          text-align: center;
+        }
+        .glass-cal-head span {
+          font-size: 10px;
+          letter-spacing: 0.14em;
+          color: rgba(250,247,242,0.55);
+        }
+        .glass-cal-days span {
+          font-size: 15px;
+          padding: 6px 0;
+          color: ${CREAM};
+        }
+        .glass-cal-active {
+          background: ${ORANGE};
+          color: ${CREAM};
+          border-radius: 999px;
+          width: 28px;
+          height: 28px;
+          line-height: 16px;
+          margin: 0 auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
         .hiwi-cta-wrap {
           display: flex;
@@ -212,10 +303,9 @@ export default function HowItWorksIntro() {
                 data-index={i}
                 className="hiwi-panel"
               >
-                <p className="hiwi-watermark">{s.n}</p>
-                <div className="hiwi-icon" aria-hidden="true">
-                  {i === 0 ? "✓" : i === 1 ? "◐" : "✦"}
-                </div>
+                {s.visual === "calendar" && <CalendarGlass />}
+                {s.visual === "consult" && <ConsultGlass />}
+                {s.visual === "protocol" && <ProtocolGlass />}
               </div>
             ))}
           </div>
