@@ -78,30 +78,38 @@ void main() {
   gl_Position = vec4(a_pos, 0.0, 1.0);
 }`;
 
+// Procedural fluted-glass overlay: transparent ribbed pattern that sits
+// over a real <img> below. No texture sampling -> no CORS dependency.
 const FRAG = `
 precision mediump float;
 varying vec2 v_uv;
-uniform sampler2D u_tex;
 uniform float u_amp;
 void main() {
   vec2 uv = v_uv;
   float ribCoord = uv.x + uv.y * 0.18;
   float ribs  = sin(ribCoord * 90.0);
   float ribs2 = sin(ribCoord * 30.0 + 0.6);
-  vec2 disp = vec2(ribs * 0.022 + ribs2 * 0.010, ribs * 0.004) * u_amp;
-  vec2 suv = uv + disp;
-  vec3 col = texture2D(u_tex, suv).rgb;
-  float ca = 0.004 * u_amp;
-  col.r = texture2D(u_tex, suv + vec2(ca, 0.0)).r;
-  col.b = texture2D(u_tex, suv - vec2(ca, 0.0)).b;
+
+  // Light/dark banding from the rib normals
   float shade = 0.5 + 0.5 * ribs;
-  col *= mix(1.0, 0.78 + 0.34 * shade, u_amp);
-  float hi = pow(max(0.0, ribs), 12.0);
-  col += vec3(1.0) * hi * 0.35 * u_amp;
-  gl_FragColor = vec4(col, 1.0);
+  // Combine slow + fast ribs for a richer fluted look
+  float band = mix(shade, 0.5 + 0.5 * ribs2, 0.35);
+
+  // Tint toward dark blue-grey in valleys, light highlights at peaks
+  vec3 valley = vec3(0.04, 0.07, 0.09);
+  vec3 peak   = vec3(0.85, 0.90, 0.95);
+  vec3 col    = mix(valley, peak, band);
+
+  // Sharp specular streaks at rib peaks
+  float hi = pow(max(0.0, ribs), 14.0);
+  col += vec3(1.0) * hi * 0.55;
+
+  // Overall coverage = u_amp (1 = fully fluted, 0 = clear)
+  float alpha = u_amp * 0.88;
+  gl_FragColor = vec4(col, alpha);
 }`;
 
-function useGlassShader(canvasRef, imageUrl, cleared) {
+function useGlassShader(canvasRef, cleared) {
   const ampRef = useRef(1.0);
   const targetRef = useRef(1.0);
   useEffect(() => { targetRef.current = cleared ? 0.0 : 1.0; }, [cleared]);
@@ -109,7 +117,7 @@ function useGlassShader(canvasRef, imageUrl, cleared) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const gl = canvas.getContext("webgl", { premultipliedAlpha: false, alpha: false });
+    const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true });
     if (!gl) return;
     const compile = (t, s) => { const sh = gl.createShader(t); gl.shaderSource(sh, s); gl.compileShader(sh); return sh; };
     const prog = gl.createProgram();
@@ -123,22 +131,10 @@ function useGlassShader(canvasRef, imageUrl, cleared) {
     gl.enableVertexAttribArray(loc);
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     const uAmp = gl.getUniformLocation(prog, "u_amp");
-    const uTex = gl.getUniformLocation(prog, "u_tex");
-    const tex = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([26,43,53,255]));
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.uniform1i(uTex, 0);
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      gl.bindTexture(gl.TEXTURE_2D, tex);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-    };
-    img.src = imageUrl;
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
     let raf;
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -153,20 +149,23 @@ function useGlassShader(canvasRef, imageUrl, cleared) {
     const render = () => {
       ampRef.current += (targetRef.current - ampRef.current) * 0.07;
       gl.uniform1f(uAmp, ampRef.current);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       raf = requestAnimationFrame(render);
     };
     render();
     return () => { cancelAnimationFrame(raf); ro.disconnect(); };
-  }, [canvasRef, imageUrl]);
+  }, [canvasRef]);
 }
 
 function Strip({ index, domain, isOpen, onToggle }) {
   const canvasRef = useRef(null);
-  useGlassShader(canvasRef, domain.image, isOpen);
+  useGlassShader(canvasRef, isOpen);
 
   return (
     <div className={`ds-strip ${isOpen ? "is-open" : ""}`}>
+      <img src={domain.image} alt="" className="ds-img" loading="lazy" />
       <canvas ref={canvasRef} className="ds-canvas" />
       <div className="ds-tint" aria-hidden />
       <span className="ds-bar" aria-hidden />
@@ -178,6 +177,7 @@ function Strip({ index, domain, isOpen, onToggle }) {
         </div>
         <div className="ds-right">
           <span className="ds-desc">{domain.tagline}</span>
+
           <span className="ds-arrow" aria-hidden>{isOpen ? "−" : "→"}</span>
         </div>
       </button>
