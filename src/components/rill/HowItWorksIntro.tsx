@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuiz } from "./quizContext";
+import bgStep1 from "@/assets/domains/balance-hero.jpg.asset.json";
+import bgStep2 from "@/assets/domains/longevity-hero.jpg.asset.json";
+import bgStep3 from "@/assets/domains/performance-hero.jpg.asset.json";
 
 const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
 type Card = { icon: string; title: string };
-const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
+const steps: { n: string; title: string; desc: string; cards: Card[]; bg: string }[] = [
   {
     n: "01",
     title: "Complete your assessment & book your consultation",
@@ -15,6 +18,7 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
       { icon: "clipboard", title: "Five-minute\nhealth assessment" },
       { icon: "calendar", title: "Pick a time\nthat suits you" },
     ],
+    bg: bgStep1.url,
   },
   {
     n: "02",
@@ -24,6 +28,7 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
       { icon: "video", title: "Telehealth\nwith your doctor" },
       { icon: "map", title: "Personalised\nlongevity roadmap" },
     ],
+    bg: bgStep2.url,
   },
   {
     n: "03",
@@ -33,6 +38,7 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
       { icon: "flask", title: "Compounded at an\nAustralian pharmacy" },
       { icon: "box", title: "Cold-chain shipping\nto your door" },
     ],
+    bg: bgStep3.url,
   },
 ];
 
@@ -65,39 +71,21 @@ export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const trackRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    let raf = 0;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const vh = window.innerHeight;
-        let newActive = 0;
-        stepRefs.current.forEach((el, i) => {
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
-          const total = rect.height - vh;
-          const scrolled = Math.min(Math.max(-rect.top, 0), total);
-          const progress = total > 0 ? scrolled / total : 0;
-          const track = trackRefs.current[i];
-          if (track) {
-            const maxShift = track.scrollWidth - track.parentElement!.clientWidth;
-            track.style.transform = `translate3d(${-Math.max(0, maxShift) * progress}px,0,0)`;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.index);
+            setActive(idx);
           }
-          if (rect.top < vh * 0.5 && rect.bottom > vh * 0.5) newActive = i;
         });
-        setActive(newActive);
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    stepRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   const progress = ((active + 1) / steps.length) * 100;
@@ -175,33 +163,53 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+        .hiwi-panels { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
         .hiwi-step {
-          height: 180vh;
-          position: relative;
+          min-height: 90vh;
+          display: flex;
+          align-items: center;
           min-width: 0;
         }
-        .hiwi-stage {
-          position: sticky;
-          top: 0;
-          height: 100vh;
+        .hiwi-frame {
+          position: relative;
           width: 100%;
+          aspect-ratio: 4 / 5;
+          max-height: 80vh;
+          border-radius: 28px;
+          overflow: hidden;
+          background-size: cover;
+          background-position: center;
+          box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
+        }
+        .hiwi-frame-tint {
+          position: absolute; inset: 0;
+          background: linear-gradient(180deg, rgba(26,43,53,0.10), rgba(26,43,53,0.35));
+        }
+        .hiwi-marquee {
+          position: absolute;
+          inset: 0;
           display: flex;
           align-items: center;
           overflow: hidden;
-          border-radius: 24px;
+          mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
         }
         .hiwi-track {
           display: flex;
-          gap: 32px;
-          padding: 0 8px;
+          gap: 24px;
+          padding: 0 24px;
+          animation: hiwi-marquee 22s linear infinite;
           will-change: transform;
+        }
+        @keyframes hiwi-marquee {
+          from { transform: translate3d(0,0,0); }
+          to { transform: translate3d(calc(-100% / 3), 0, 0); }
         }
         .glass-card {
           flex: 0 0 auto;
-          width: clamp(300px, 44vw, 520px);
+          width: clamp(200px, 60%, 320px);
           aspect-ratio: 1 / 1;
-          padding: 24px;
+          padding: 22px;
           border-radius: 24px;
           background: rgba(26,43,53,0.55);
           backdrop-filter: blur(24px) saturate(140%);
@@ -278,16 +286,20 @@ export default function HowItWorksIntro() {
               <div
                 key={s.n}
                 ref={(el) => (stepRefs.current[i] = el)}
+                data-index={i}
                 className="hiwi-step"
               >
-                <div className="hiwi-stage">
-                  <div
-                    className="hiwi-track"
-                    ref={(el) => (trackRefs.current[i] = el)}
-                  >
-                    {s.cards.map((c, j) => (
-                      <GlassCard key={j} icon={c.icon} title={c.title} />
-                    ))}
+                <div
+                  className="hiwi-frame"
+                  style={{ backgroundImage: `url(${s.bg})` }}
+                >
+                  <div className="hiwi-frame-tint" />
+                  <div className="hiwi-marquee">
+                    <div className="hiwi-track">
+                      {[...s.cards, ...s.cards, ...s.cards].map((c, j) => (
+                        <GlassCard key={j} icon={c.icon} title={c.title} />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
