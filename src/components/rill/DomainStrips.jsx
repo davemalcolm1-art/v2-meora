@@ -156,7 +156,7 @@ function Strip({ index, domain, isOpen, onToggle }) {
   const canvasRef = useRef(null);
   const rootRef = useRef(null);
   const [visible, setVisible] = useState(false);
-  useGlassShader(canvasRef, isOpen);
+  useGlassShader(canvasRef);
 
   useEffect(() => {
     const el = rootRef.current;
