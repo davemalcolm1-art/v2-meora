@@ -52,7 +52,7 @@ const Hero = () => {
           </span>
         </h1>
         <p className="hero-sub">
-          Doctor-prescribed peptide protocols for energy, recovery, and long-term health. Available anywhere in Australia.
+          Personalised longevity protocols for energy, recovery, and long-term health. Available anywhere in Australia.
         </p>
         <div className="hero-actions">
           <button className="btn-primary" onClick={open}>
