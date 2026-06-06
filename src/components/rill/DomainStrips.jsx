@@ -147,16 +147,6 @@ export default function DomainStrips() {
   const [openId, setOpenId] = useState(null);
   return (
     <section className="ds-section">
-      <video
-        className="ds-video"
-        src="https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/heroV3.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden
-      />
       <div className="ds-list" onMouseLeave={() => setOpenId(null)}>
         {DOMAINS.map((d, i) => (
           <Strip
