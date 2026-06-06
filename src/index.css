@@ -3565,32 +3565,42 @@ body:not(.dark) section.sci-cards-section:not(.hero):not(.how-section):not(.scie
    - No other weights or italic styles permitted
    ============================================================ */
 
-/* --- Fraunces: normalize all usage to 700 roman --- */
+/* --- Fraunces: replace with DM Sans everywhere except hero --- */
 [style*="Fraunces"],
 [style*="fraunces"] {
-  font-weight: 700 !important;
+  font-family: 'DM Sans', sans-serif !important;
   font-style: normal !important;
+  font-weight: 600 !important;
 }
 h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
+/* H2 / H3 site-wide → DM Sans 600 */
+h2, h3 {
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+}
 
-/* --- DM Sans: kill italics & re-map weights to 400 or 800 --- */
+/* --- DM Sans: kill italics & re-map weights --- */
 [style*="DM Sans"],
 [style*="DM Mono"] {
   font-family: 'DM Sans', sans-serif !important;
   font-style: normal !important;
 }
-/* Inline weights 300/400/500 → 400 (body) */
+/* Inline weights 300/400 → 400 (body) */
 [style*="DM Sans"][style*="font-weight: 3"],
 [style*="DM Sans"][style*="font-weight: 4"],
-[style*="DM Sans"][style*="font-weight: 5"],
 [style*="DM Mono"][style*="font-weight: 3"],
-[style*="DM Mono"][style*="font-weight: 4"],
-[style*="DM Mono"][style*="font-weight: 5"] {
+[style*="DM Mono"][style*="font-weight: 4"] {
   font-weight: 400 !important;
 }
-/* Inline weights 600/700/800/900 → 800 (subheadings / buttons / labels) */
+/* Inline weight 500 → 500 (eyebrows / buttons) */
+[style*="DM Sans"][style*="font-weight: 5"],
+[style*="DM Mono"][style*="font-weight: 5"] {
+  font-weight: 500 !important;
+}
+/* Inline weights 600/700/800/900 → 600 (headings / card titles) */
 [style*="DM Sans"][style*="font-weight: 6"],
 [style*="DM Sans"][style*="font-weight: 7"],
 [style*="DM Sans"][style*="font-weight: 8"],
@@ -3599,20 +3609,20 @@ h1, h2, h3, h4, h5, h6 {
 [style*="DM Mono"][style*="font-weight: 7"],
 [style*="DM Mono"][style*="font-weight: 8"],
 [style*="DM Mono"][style*="font-weight: 9"] {
-  font-weight: 800 !important;
+  font-weight: 600 !important;
 }
 
 /* --- Class-based DM Sans rules in component <style> blocks: normalize --- */
 .nav-cta, .menu-cta-btn, .hero-btn-primary, .hero-btn-secondary,
 .hero-credential-text, .menu-footer-text {
-  font-weight: 800 !important;
+  font-weight: 500 !important;
   font-style: normal !important;
 }
 .hero-subline, .nav-links a, .menu-footer-text {
   font-style: normal !important;
 }
 
-/* --- Hero exception: the only italic Fraunces on the site --- */
+/* --- Hero exception: the ONLY Fraunces usage on the site --- */
 .hero-h1,
 .hero-h1 *,
 .hero-sub-word {
@@ -3620,4 +3630,5 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 900 !important;
   font-style: italic !important;
 }
+
 
