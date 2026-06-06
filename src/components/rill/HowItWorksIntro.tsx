@@ -14,7 +14,6 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
     cards: [
       { icon: "clipboard", title: "Five-minute\nhealth assessment" },
       { icon: "calendar", title: "Pick a time\nthat suits you" },
-      { icon: "shield", title: "Private &\nsecure intake" },
     ],
   },
   {
@@ -23,7 +22,6 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
     desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
     cards: [
       { icon: "video", title: "Telehealth\nwith your doctor" },
-      { icon: "lab", title: "Advanced\nblood panel review" },
       { icon: "map", title: "Personalised\nlongevity roadmap" },
     ],
   },
@@ -34,7 +32,6 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
     cards: [
       { icon: "flask", title: "Compounded at an\nAustralian pharmacy" },
       { icon: "box", title: "Cold-chain shipping\nto your door" },
-      { icon: "pulse", title: "Quarterly\nmonitoring included" },
     ],
   },
 ];
@@ -67,26 +64,40 @@ function GlassCard({ icon, title }: Card) {
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
   const [active, setActive] = useState(0);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const flatCards = steps.flatMap((s, si) =>
-    s.cards.map((c) => ({ ...c, stepIndex: si }))
-  );
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const trackRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number((entry.target as HTMLElement).dataset.step);
-            setActive(idx);
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const vh = window.innerHeight;
+        let newActive = 0;
+        stepRefs.current.forEach((el, i) => {
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          const total = rect.height - vh;
+          const scrolled = Math.min(Math.max(-rect.top, 0), total);
+          const progress = total > 0 ? scrolled / total : 0;
+          const track = trackRefs.current[i];
+          if (track) {
+            const maxShift = track.scrollWidth - track.parentElement!.clientWidth;
+            track.style.transform = `translate3d(${-Math.max(0, maxShift) * progress}px,0,0)`;
           }
+          if (rect.top < vh * 0.5 && rect.bottom > vh * 0.5) newActive = i;
         });
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-    );
-    cardRefs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
+        setActive(newActive);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const progress = ((active + 1) / steps.length) * 100;
@@ -164,19 +175,29 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 16px; }
-        .hiwi-panel {
-          min-height: 75vh;
-          border-radius: 24px;
+        .hiwi-panels { display: flex; flex-direction: column; gap: 0; }
+        .hiwi-step {
+          height: 180vh;
+          position: relative;
+        }
+        .hiwi-stage {
+          position: sticky;
+          top: 0;
+          height: 100vh;
           display: flex;
           align-items: center;
-          justify-content: center;
-          position: relative;
-          padding: 32px 0;
+          overflow: hidden;
+          border-radius: 24px;
         }
-        .hiwi-cards { display: contents; }
+        .hiwi-track {
+          display: flex;
+          gap: 32px;
+          padding: 0 8px;
+          will-change: transform;
+        }
         .glass-card {
-          width: min(360px, 82%);
+          flex: 0 0 auto;
+          width: min(360px, 70vw);
           aspect-ratio: 1 / 1;
           padding: 24px;
           border-radius: 24px;
@@ -251,14 +272,22 @@ export default function HowItWorksIntro() {
 
           {/* Scrollable right column */}
           <div className="hiwi-panels">
-            {flatCards.map((c, i) => (
+            {steps.map((s, i) => (
               <div
-                key={i}
-                ref={(el) => (cardRefs.current[i] = el)}
-                data-step={c.stepIndex}
-                className="hiwi-panel"
+                key={s.n}
+                ref={(el) => (stepRefs.current[i] = el)}
+                className="hiwi-step"
               >
-                <GlassCard icon={c.icon} title={c.title} />
+                <div className="hiwi-stage">
+                  <div
+                    className="hiwi-track"
+                    ref={(el) => (trackRefs.current[i] = el)}
+                  >
+                    {s.cards.map((c, j) => (
+                      <GlassCard key={j} icon={c.icon} title={c.title} />
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
