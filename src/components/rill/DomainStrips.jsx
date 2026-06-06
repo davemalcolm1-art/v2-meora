@@ -237,14 +237,14 @@ export default function DomainStrips() {
   const [openId, setOpenId] = useState(null);
   return (
     <section className="ds-section">
-      <div className="ds-list">
+      <div className="ds-list" onMouseLeave={() => setOpenId(null)}>
         {DOMAINS.map((d, i) => (
           <Strip
             key={d.id}
             index={i}
             domain={d}
             isOpen={openId === d.id}
-            onToggle={() => setOpenId(openId === d.id ? null : d.id)}
+            onToggle={(open) => setOpenId(open ? d.id : (openId === d.id ? null : openId))}
           />
         ))}
       </div>
