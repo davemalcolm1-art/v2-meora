@@ -175,15 +175,17 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 0; }
+        .hiwi-panels { display: flex; flex-direction: column; gap: 0; min-width: 0; }
         .hiwi-step {
           height: 180vh;
           position: relative;
+          min-width: 0;
         }
         .hiwi-stage {
           position: sticky;
           top: 0;
           height: 100vh;
+          width: 100%;
           display: flex;
           align-items: center;
           overflow: hidden;
