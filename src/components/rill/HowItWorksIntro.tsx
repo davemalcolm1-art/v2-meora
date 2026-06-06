@@ -247,19 +247,6 @@ export default function HowItWorksIntro() {
           align-items: center;
           justify-content: center;
         }
-        .hiwi-icon {
-          align-self: flex-end;
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          background: ${ORANGE};
-          color: ${CREAM};
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Fraunces', Georgia, serif;
-          font-size: 48px;
-        }
         .hiwi-cta-wrap {
           display: flex;
           justify-content: center;
