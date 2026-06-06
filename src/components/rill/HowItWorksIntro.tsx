@@ -14,7 +14,6 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
     cards: [
       { icon: "clipboard", title: "Five-minute\nhealth assessment" },
       { icon: "calendar", title: "Pick a time\nthat suits you" },
-      { icon: "shield", title: "Private &\nsecure intake" },
     ],
   },
   {
