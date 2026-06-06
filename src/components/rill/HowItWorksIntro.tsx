@@ -258,18 +258,14 @@ export default function HowItWorksIntro() {
 
           {/* Scrollable right column */}
           <div className="hiwi-panels">
-            {steps.map((s, i) => (
+            {flatCards.map((c, i) => (
               <div
-                key={s.n}
-                ref={(el) => (panelRefs.current[i] = el)}
-                data-index={i}
+                key={i}
+                ref={(el) => (cardRefs.current[i] = el)}
+                data-step={c.stepIndex}
                 className="hiwi-panel"
               >
-                <div className="hiwi-cards">
-                  {s.cards.map((c, j) => (
-                    <GlassCard key={j} icon={c.icon} title={c.title} />
-                  ))}
-                </div>
+                <GlassCard icon={c.icon} title={c.title} />
               </div>
             ))}
           </div>
