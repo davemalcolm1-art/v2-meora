@@ -67,21 +67,25 @@ function GlassCard({ icon, title }: Card) {
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
   const [active, setActive] = useState(0);
-  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const flatCards = steps.flatMap((s, si) =>
+    s.cards.map((c) => ({ ...c, stepIndex: si }))
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const idx = Number((entry.target as HTMLElement).dataset.index);
+            const idx = Number((entry.target as HTMLElement).dataset.step);
             setActive(idx);
           }
         });
       },
       { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
     );
-    panelRefs.current.forEach((el) => el && observer.observe(el));
+    cardRefs.current.forEach((el) => el && observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
