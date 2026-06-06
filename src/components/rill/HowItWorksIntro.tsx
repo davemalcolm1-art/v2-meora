@@ -28,6 +28,7 @@ const steps: { n: string; title: string; desc: string; cards: Card[]; bg: string
       { icon: "video", title: "Telehealth\nwith your doctor" },
       { icon: "map", title: "Personalised\nlongevity roadmap" },
     ],
+    bg: bgStep2.url,
   },
   {
     n: "03",
