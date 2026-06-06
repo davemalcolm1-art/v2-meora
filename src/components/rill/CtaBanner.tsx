@@ -1,5 +1,4 @@
 import { useState } from "react";
-import bgImage from "@/assets/newsletter-bg.jpg";
 
 const CtaBanner = () => {
   const [email, setEmail] = useState("");
@@ -9,89 +8,141 @@ const CtaBanner = () => {
   };
 
   return (
-    <section className="section-exit-blur" style={{
-      position: "relative",
-      overflow: "hidden",
-      width: "auto",
-      backgroundImage: `url(${bgImage})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center right",
-      margin: "24px",
-      borderRadius: 32,
-      minHeight: 520,
-      display: "flex",
-      alignItems: "center",
-    }}>
-      <div aria-hidden="true" style={{
-        position: "absolute", inset: 0,
-        background: "linear-gradient(90deg, rgba(8,18,28,0.75) 0%, rgba(8,18,28,0.45) 45%, rgba(8,18,28,0.1) 75%, rgba(8,18,28,0) 100%)",
-        pointerEvents: "none",
-      }} />
-      <div className="cta-inner" style={{
-        position: "relative",
-        maxWidth: 1280,
+    <section
+      className="cta-banner-section section-exit-blur"
+      style={{
         width: "100%",
-        margin: "0 auto",
-        padding: "80px",
-      }}>
-        <div style={{ maxWidth: 720 }}>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, color: "#FFFFFF", fontSize: "clamp(34px,4.2vw,58px)", lineHeight: 1.1, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
-            <span style={{ display: "block" }}>Your health sets the limits.</span>
-            <span style={{ display: "block" }}>It's time to move beyond them.</span>
-          </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.9)", fontSize: 17, lineHeight: 1.5, margin: "0 0 36px" }}>
-            Join for clinically guided perspectives on optimising health.
-          </p>
-          <form onSubmit={handleSubmit} className="cta-form" style={{
+        background: `
+          radial-gradient(ellipse 70% 70% at 95% 5%, hsl(18 100% 51% / 0.2) 0%, transparent 55%),
+          hsl(0 0% 6%)
+        `,
+        padding: "112px 60px",
+      }}
+    >
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: 11,
+            fontWeight: 800,
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            color: "var(--text-dim)",
+            marginBottom: 24,
+          }}
+        >
+          STAY INFORMED
+        </p>
+
+        <h2
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "clamp(44px, 5vw, 72px)",
+            fontWeight: 300,
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
+            color: "var(--cream)",
+            marginBottom: 24,
+            maxWidth: 960,
+          }}
+        >
+          <span style={{ display: "block" }}>
+            Take control of what comes next.
+          </span>
+          <span style={{ display: "block" }}>
+            Personalised longevity designed around your goals, your biology, your{" "}
+            <span style={{ color: "var(--orange)" }}>ME.</span>
+          </span>
+        </h2>
+
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: 16,
+            fontWeight: 400,
+            lineHeight: 1.6,
+            color: "var(--text-dim)",
+            maxWidth: 520,
+            marginBottom: 36,
+          }}
+        >
+          Join for clinically guided perspectives on what optimal health actually
+          looks like — at every stage of life.
+        </p>
+
+        <form
+          onSubmit={handleSubmit}
+          className="newsletter-form"
+          style={{
             display: "flex",
             gap: 12,
             maxWidth: 560,
-          }}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              maxLength={255}
-              className="cta-input"
-              style={{
-                flex: 1,
-                background: "rgba(20,30,40,0.55)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                border: "1px solid rgba(255,255,255,0.25)",
-                borderRadius: 999,
-                padding: "16px 24px",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 14,
-                color: "#FFFFFF",
-                outline: "none",
-                transition: "border-color 0.2s ease",
-              }}
-            />
-            <button type="submit" className="cta-btn" style={{
-              background: "#FFFFFF", color: "#0F1820", border: "none", borderRadius: 999,
-              padding: "16px 36px", fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-              fontSize: 15, cursor: "pointer",
-              flexShrink: 0, transition: "all 0.2s ease", whiteSpace: "nowrap",
-            }}>
-              Subscribe
-            </button>
-          </form>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.75)", marginTop: 20, marginBottom: 0 }}>
-            By clicking subscribe you're confirming that you agree with our Terms and Conditions.
-          </p>
-        </div>
+            marginBottom: 20,
+          }}
+        >
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            maxLength={255}
+            className="newsletter-input"
+            style={{
+              flex: 1,
+              background: "hsl(0 0% 10% / 0.6)",
+              border: "1px solid hsl(40 30% 95% / 0.15)",
+              borderRadius: 999,
+              padding: "16px 24px",
+              fontFamily: "var(--font-body)",
+              fontSize: 14,
+              color: "var(--cream)",
+              outline: "none",
+              transition: "border-color 0.2s ease",
+            }}
+          />
+          <button
+            type="submit"
+            className="newsletter-btn"
+            style={{
+              background: "var(--orange)",
+              color: "var(--cream)",
+              border: "none",
+              borderRadius: 999,
+              padding: "16px 36px",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 15,
+              cursor: "pointer",
+              flexShrink: 0,
+              transition: "all 0.2s ease",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Subscribe →
+          </button>
+        </form>
+
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: 13,
+            color: "var(--text-dim)",
+            margin: 0,
+          }}
+        >
+          By subscribing you agree to our Terms and Conditions.
+        </p>
       </div>
+
       <style>{`
-        .cta-input::placeholder { color: rgba(255,255,255,0.7); }
-        .cta-input:focus { border-color: rgba(255,255,255,0.6); }
-        .cta-btn:hover { background: #F5ECDB !important; transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,0,0,0.3); }
+        .newsletter-input::placeholder { color: hsl(40 30% 95% / 0.6); }
+        .newsletter-input:focus { border-color: hsl(40 30% 95% / 0.35); }
+        .newsletter-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px hsl(18 100% 51% / 0.25); }
         @media (max-width: 720px) {
-          .cta-inner { padding: 48px 28px !important; }
-          .cta-form { flex-direction: column !important; }
-          .cta-btn { width: 100%; }
+          .cta-banner-section { padding: 80px 28px !important; }
+          .newsletter-form { flex-direction: column !important; }
+          .newsletter-btn { width: 100%; }
         }
       `}</style>
     </section>
