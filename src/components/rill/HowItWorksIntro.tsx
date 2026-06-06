@@ -32,7 +32,6 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
     cards: [
       { icon: "flask", title: "Compounded at an\nAustralian pharmacy" },
       { icon: "box", title: "Cold-chain shipping\nto your door" },
-      { icon: "pulse", title: "Quarterly\nmonitoring included" },
     ],
   },
 ];
