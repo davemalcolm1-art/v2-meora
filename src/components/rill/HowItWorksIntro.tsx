@@ -162,7 +162,7 @@ export default function HowItWorksIntro() {
         }
         .hiwi-panels { display: flex; flex-direction: column; gap: 32px; }
         .hiwi-panel {
-          min-height: 80vh;
+          min-height: 70vh;
           border-radius: 24px;
           display: flex;
           align-items: center;
@@ -174,9 +174,9 @@ export default function HowItWorksIntro() {
             linear-gradient(135deg, rgba(26,43,53,0.06), rgba(26,43,53,0.02));
         }
         .glass-card {
-          width: min(440px, 90%);
+          width: min(320px, 78%);
           aspect-ratio: 1 / 1;
-          padding: 36px;
+          padding: 24px;
           border-radius: 28px;
           background: rgba(26,43,53,0.42);
           backdrop-filter: blur(24px) saturate(140%);
