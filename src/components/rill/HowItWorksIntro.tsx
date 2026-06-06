@@ -67,21 +67,25 @@ function GlassCard({ icon, title }: Card) {
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
   const [active, setActive] = useState(0);
-  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const flatCards = steps.flatMap((s, si) =>
+    s.cards.map((c) => ({ ...c, stepIndex: si }))
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const idx = Number((entry.target as HTMLElement).dataset.index);
+            const idx = Number((entry.target as HTMLElement).dataset.step);
             setActive(idx);
           }
         });
       },
       { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
     );
-    panelRefs.current.forEach((el) => el && observer.observe(el));
+    cardRefs.current.forEach((el) => el && observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
@@ -160,26 +164,19 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 24px; }
+        .hiwi-panels { display: flex; flex-direction: column; gap: 16px; }
         .hiwi-panel {
-          min-height: 60vh;
+          min-height: 75vh;
           border-radius: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
           padding: 32px 0;
-          background:
-            radial-gradient(120% 80% at 20% 10%, rgba(232,87,26,0.10), transparent 60%),
-            linear-gradient(135deg, rgba(26,43,53,0.06), rgba(26,43,53,0.02));
         }
-        .hiwi-cards {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          width: min(340px, 80%);
-        }
+        .hiwi-cards { display: contents; }
         .glass-card {
+          width: min(360px, 82%);
           aspect-ratio: 1 / 1;
           padding: 24px;
           border-radius: 24px;
@@ -254,18 +251,14 @@ export default function HowItWorksIntro() {
 
           {/* Scrollable right column */}
           <div className="hiwi-panels">
-            {steps.map((s, i) => (
+            {flatCards.map((c, i) => (
               <div
-                key={s.n}
-                ref={(el) => (panelRefs.current[i] = el)}
-                data-index={i}
+                key={i}
+                ref={(el) => (cardRefs.current[i] = el)}
+                data-step={c.stepIndex}
                 className="hiwi-panel"
               >
-                <div className="hiwi-cards">
-                  {s.cards.map((c, j) => (
-                    <GlassCard key={j} icon={c.icon} title={c.title} />
-                  ))}
-                </div>
+                <GlassCard icon={c.icon} title={c.title} />
               </div>
             ))}
           </div>
