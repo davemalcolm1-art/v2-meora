@@ -112,7 +112,7 @@ export default function HowItWorksIntro() {
         }
       `}</style>
 
-      <p className="hiwi-label">HOW IT WORKS</p>
+      
       <h2 className="hiwi-h2">From first question to first protocol.</h2>
 
       <div className="hiwi-grid">
