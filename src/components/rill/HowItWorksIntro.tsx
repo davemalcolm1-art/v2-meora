@@ -163,33 +163,53 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+        .hiwi-panels { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
         .hiwi-step {
-          height: 180vh;
-          position: relative;
+          min-height: 90vh;
+          display: flex;
+          align-items: center;
           min-width: 0;
         }
-        .hiwi-stage {
-          position: sticky;
-          top: 0;
-          height: 100vh;
+        .hiwi-frame {
+          position: relative;
           width: 100%;
+          aspect-ratio: 4 / 5;
+          max-height: 80vh;
+          border-radius: 28px;
+          overflow: hidden;
+          background-size: cover;
+          background-position: center;
+          box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
+        }
+        .hiwi-frame-tint {
+          position: absolute; inset: 0;
+          background: linear-gradient(180deg, rgba(26,43,53,0.10), rgba(26,43,53,0.35));
+        }
+        .hiwi-marquee {
+          position: absolute;
+          inset: 0;
           display: flex;
           align-items: center;
           overflow: hidden;
-          border-radius: 24px;
+          mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
         }
         .hiwi-track {
           display: flex;
-          gap: 32px;
-          padding: 0 8px;
+          gap: 24px;
+          padding: 0 24px;
+          animation: hiwi-marquee 22s linear infinite;
           will-change: transform;
+        }
+        @keyframes hiwi-marquee {
+          from { transform: translate3d(0,0,0); }
+          to { transform: translate3d(calc(-100% / 3), 0, 0); }
         }
         .glass-card {
           flex: 0 0 auto;
-          width: clamp(300px, 44vw, 520px);
+          width: clamp(200px, 60%, 320px);
           aspect-ratio: 1 / 1;
-          padding: 24px;
+          padding: 22px;
           border-radius: 24px;
           background: rgba(26,43,53,0.55);
           backdrop-filter: blur(24px) saturate(140%);
