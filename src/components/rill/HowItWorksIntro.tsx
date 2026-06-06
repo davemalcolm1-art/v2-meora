@@ -8,8 +8,8 @@ const ORANGE = "#E8571A";
 const steps = [
   {
     n: "01",
-    title: "Complete your health assessment",
-    desc: "Tell us about your health history, goals, and lifestyle. Takes around five minutes and helps your doctor prepare for your consultation.",
+    title: "Complete your assessment & book your consultation",
+    desc: "Tell us about your health history, goals, and lifestyle in a quick five-minute assessment, then choose a time that suits you to meet your doctor.",
   },
   {
     n: "02",
