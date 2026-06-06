@@ -207,10 +207,10 @@ export default function HowItWorksIntro() {
           100% { transform: translate(calc(-50% + 120%), -50%); opacity: 0; }
         }
         .glass-card {
-          width: clamp(180px, 52%, 260px);
+          width: clamp(260px, 72%, 380px);
           aspect-ratio: 1 / 1;
-          padding: 20px;
-          border-radius: 22px;
+          padding: 28px;
+          border-radius: 28px;
           background: rgba(26,43,53,0.5);
           backdrop-filter: blur(24px) saturate(140%);
           -webkit-backdrop-filter: blur(24px) saturate(140%);
@@ -225,10 +225,14 @@ export default function HowItWorksIntro() {
           color: ${CREAM};
           opacity: 0.95;
         }
+        .glass-icon svg {
+          width: 44px;
+          height: 44px;
+        }
         .glass-title-lg {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
-          font-size: 18px;
+          font-size: 22px;
           line-height: 1.25;
           letter-spacing: -0.005em;
           color: ${CREAM};
