@@ -151,10 +151,8 @@ function useGlassShader(canvasRef) {
 }
 
 function Strip({ index, domain, isOpen, onToggle }) {
-  const canvasRef = useRef(null);
   const rootRef = useRef(null);
   const [visible, setVisible] = useState(false);
-  useGlassShader(canvasRef);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -175,9 +173,11 @@ function Strip({ index, domain, isOpen, onToggle }) {
       onMouseEnter={() => onToggle(true)}
       onMouseLeave={() => onToggle(false)}
     >
-      <canvas ref={canvasRef} className="ds-canvas" />
+      <img src={domain.image} alt="" className="ds-img" loading="lazy" />
+      <div className="ds-frost" aria-hidden />
       <div className="ds-tint" aria-hidden />
       <span className="ds-bar" aria-hidden />
+
 
       <div className="ds-row">
         <div className="ds-left">
