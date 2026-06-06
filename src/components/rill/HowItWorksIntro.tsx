@@ -296,11 +296,15 @@ export default function HowItWorksIntro() {
                 >
                   <div className="hiwi-frame-tint" />
                   <div className="hiwi-marquee">
-                    <div className="hiwi-track">
-                      {[...s.cards, ...s.cards, ...s.cards].map((c, j) => (
-                        <GlassCard key={j} icon={c.icon} title={c.title} />
-                      ))}
-                    </div>
+                    {s.cards.map((c, j) => (
+                      <div
+                        key={j}
+                        className="hiwi-slot"
+                        style={{ animationDelay: `${j * 3.5}s` }}
+                      >
+                        <GlassCard icon={c.icon} title={c.title} />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
