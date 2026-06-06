@@ -197,7 +197,7 @@ export default function HowItWorksIntro() {
         }
         .glass-card {
           flex: 0 0 auto;
-          width: min(360px, 70vw);
+          width: clamp(300px, 44vw, 520px);
           aspect-ratio: 1 / 1;
           padding: 24px;
           border-radius: 24px;
