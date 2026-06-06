@@ -5,23 +5,64 @@ const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
-const steps = [
+type Visual = "calendar" | "consult" | "protocol";
+const steps: { n: string; title: string; desc: string; visual: Visual }[] = [
   {
     n: "01",
     title: "Complete your assessment & book your consultation",
     desc: "Tell us about your health history, goals, and lifestyle in a quick five-minute assessment, then choose a time that suits you to meet your doctor.",
+    visual: "calendar",
   },
   {
     n: "02",
     title: "Meet your Meora doctor, review assessment and test results",
     desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
+    visual: "consult",
   },
   {
     n: "03",
     title: "Your protocol, delivered",
     desc: "Compounded at a registered Australian pharmacy and shipped cold-chain directly to your door. Ongoing quarterly monitoring included.",
+    visual: "protocol",
   },
 ];
+
+function CalendarGlass() {
+  const days = Array.from({ length: 30 }, (_, i) => i + 1);
+  const offset = 3; // month starts Thu
+  return (
+    <div className="glass-card">
+      <div className="glass-cal-title">September 2026</div>
+      <div className="glass-cal-grid glass-cal-head">
+        {["MON","TUE","WED","THU","FRI","SAT","SUN"].map((d) => <span key={d}>{d}</span>)}
+      </div>
+      <div className="glass-cal-grid glass-cal-days">
+        {Array.from({ length: offset }).map((_, i) => <span key={`e${i}`} />)}
+        {days.map((d) => (
+          <span key={d} className={d === 23 ? "glass-cal-active" : ""}>{d}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+function ConsultGlass() {
+  return (
+    <div className="glass-card glass-center">
+      <div className="glass-pill">Telehealth consult</div>
+      <div className="glass-title-lg">Meet your<br/>Meora doctor</div>
+      <div className="glass-sub">AHPRA-registered • Australia-wide</div>
+    </div>
+  );
+}
+function ProtocolGlass() {
+  return (
+    <div className="glass-card glass-center">
+      <div className="glass-pill">Compounded & shipped</div>
+      <div className="glass-title-lg">Your protocol,<br/>delivered cold-chain</div>
+      <div className="glass-sub">Quarterly monitoring included</div>
+    </div>
+  );
+}
 
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
