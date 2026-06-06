@@ -188,22 +188,23 @@ export default function HowItWorksIntro() {
         .hiwi-marquee {
           position: absolute;
           inset: 0;
-          display: flex;
-          align-items: center;
           overflow: hidden;
-          mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-          -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
         }
-        .hiwi-track {
-          display: flex;
-          gap: 24px;
-          padding: 0 24px;
-          animation: hiwi-marquee 22s linear infinite;
-          will-change: transform;
+        .hiwi-slot {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          will-change: transform, opacity;
+          animation: hiwi-fly 7s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+          opacity: 0;
         }
-        @keyframes hiwi-marquee {
-          from { transform: translate3d(0,0,0); }
-          to { transform: translate3d(calc(-100% / 3), 0, 0); }
+        @keyframes hiwi-fly {
+          0%   { transform: translate(calc(-50% + 60vw), -50%); opacity: 0; }
+          12%  { transform: translate(-50%, -50%); opacity: 1; }
+          45%  { transform: translate(-50%, -50%); opacity: 1; }
+          57%  { transform: translate(calc(-50% - 60vw), -50%); opacity: 0; }
+          100% { transform: translate(calc(-50% + 60vw), -50%); opacity: 0; }
         }
         .glass-card {
           flex: 0 0 auto;
@@ -295,11 +296,15 @@ export default function HowItWorksIntro() {
                 >
                   <div className="hiwi-frame-tint" />
                   <div className="hiwi-marquee">
-                    <div className="hiwi-track">
-                      {[...s.cards, ...s.cards, ...s.cards].map((c, j) => (
-                        <GlassCard key={j} icon={c.icon} title={c.title} />
-                      ))}
-                    </div>
+                    {s.cards.map((c, j) => (
+                      <div
+                        key={j}
+                        className="hiwi-slot"
+                        style={{ animationDelay: `${j * 3.5}s` }}
+                      >
+                        <GlassCard icon={c.icon} title={c.title} />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
