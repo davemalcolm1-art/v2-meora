@@ -176,6 +176,7 @@ export default function HowItWorksIntro() {
         }
         .hiwi-cards { display: contents; }
         .glass-card {
+          width: min(360px, 82%);
           aspect-ratio: 1 / 1;
           padding: 24px;
           border-radius: 24px;
