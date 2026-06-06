@@ -22,7 +22,6 @@ const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
     desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
     cards: [
       { icon: "video", title: "Telehealth\nwith your doctor" },
-      { icon: "lab", title: "Advanced\nblood panel review" },
       { icon: "map", title: "Personalised\nlongevity roadmap" },
     ],
   },
