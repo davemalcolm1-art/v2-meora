@@ -266,16 +266,20 @@ export default function HowItWorksIntro() {
               <div
                 key={s.n}
                 ref={(el) => (stepRefs.current[i] = el)}
+                data-index={i}
                 className="hiwi-step"
               >
-                <div className="hiwi-stage">
-                  <div
-                    className="hiwi-track"
-                    ref={(el) => (trackRefs.current[i] = el)}
-                  >
-                    {s.cards.map((c, j) => (
-                      <GlassCard key={j} icon={c.icon} title={c.title} />
-                    ))}
+                <div
+                  className="hiwi-frame"
+                  style={{ backgroundImage: `url(${s.bg})` }}
+                >
+                  <div className="hiwi-frame-tint" />
+                  <div className="hiwi-marquee">
+                    <div className="hiwi-track">
+                      {[...s.cards, ...s.cards, ...s.cards].map((c, j) => (
+                        <GlassCard key={j} icon={c.icon} title={c.title} />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
