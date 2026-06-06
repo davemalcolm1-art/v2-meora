@@ -13,8 +13,8 @@ const CtaBanner = () => {
       style={{
         width: "100%",
         background: `
-          radial-gradient(ellipse 70% 70% at 95% 5%, hsl(18 100% 51% / 0.2) 0%, transparent 55%),
-          hsl(0 0% 6%)
+          radial-gradient(ellipse 70% 70% at 100% 0%, rgba(232,87,26,0.2) 0%, transparent 55%),
+          #1A2B35
         `,
         padding: "112px 60px",
       }}
