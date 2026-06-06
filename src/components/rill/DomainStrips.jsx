@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import "./DomainStrips.css";
-
-const HERO_VIDEO = "https://pub-a7ea34d361d14881b5fd02774fc834d8.r2.dev/hero-bg.mp4";
+import energyHero from "@/assets/domains/energy-hero.jpg.asset.json";
+import performanceHero from "@/assets/domains/performance-hero.jpg.asset.json";
+import balanceHero from "@/assets/domains/balance-hero.jpg.asset.json";
+import recoveryHero from "@/assets/domains/recovery-hero.jpg.asset.json";
+import longevityHero from "@/assets/domains/longevity-hero.jpg.asset.json";
+import beautyHero from "@/assets/domains/beauty-hero.jpg.asset.json";
 
 const DOMAINS = [
-  { name: "Energy",      desc: "Show up fully. Every single day." },
-  { name: "Performance", desc: "Built to go further than you thought possible." },
-  { name: "Balance",     desc: "When everything feels in sync, everything changes." },
-  { name: "Recovery",    desc: "Built for the comeback." },
-  { name: "Longevity",   desc: "Play the long game. On your terms." },
-  { name: "Beauty",      desc: "Radiant from within. Supported by science." },
+  { name: "Energy",      desc: "Show up fully. Every single day.",                   image: energyHero.url },
+  { name: "Performance", desc: "Built to go further than you thought possible.",     image: performanceHero.url },
+  { name: "Balance",     desc: "When everything feels in sync, everything changes.", image: balanceHero.url },
+  { name: "Recovery",    desc: "Built for the comeback.",                            image: recoveryHero.url },
+  { name: "Longevity",   desc: "Play the long game. On your terms.",                 image: longevityHero.url },
+  { name: "Beauty",      desc: "Radiant from within. Supported by science.",         image: beautyHero.url },
 ];
 
 const VERT = `
@@ -17,55 +21,66 @@ attribute vec2 a_pos;
 varying vec2 v_uv;
 void main() {
   v_uv = a_pos * 0.5 + 0.5;
+  // flip Y for image textures
+  v_uv.y = 1.0 - v_uv.y;
   gl_Position = vec4(a_pos, 0.0, 1.0);
 }`;
 
+// Fluted glass: sample image with strong horizontal displacement that varies
+// along a near-vertical axis -> creates vertical "ribs" of refraction.
 const FRAG = `
 precision mediump float;
 varying vec2 v_uv;
-uniform float u_time;
-uniform float u_amp;
+uniform sampler2D u_tex;
+uniform float u_amp;       // 0 = clear, 1 = fully fluted
 uniform vec2 u_res;
+uniform float u_aspect;    // texW/texH
 
 void main() {
   vec2 uv = v_uv;
-  // diagonal coordinate
-  float d = (uv.x + uv.y) * 0.5;
-  // ribbed pattern (vertical-ish ribs rotated diagonally)
-  float ribs = sin(d * 140.0 + u_time * 0.4);
-  float ribs2 = sin(d * 60.0 - u_time * 0.2);
 
-  // displacement along diagonal
-  vec2 dir = normalize(vec2(1.0, -0.6));
-  vec2 offset = dir * ribs * u_amp + dir * ribs2 * u_amp * 0.4;
+  // Rib coordinate: slight diagonal so it reads like fluted glass at angle
+  float ribCoord = uv.x * 1.0 + uv.y * 0.18;
 
-  vec2 suv = uv + offset;
+  // ~28 ribs across the strip
+  float ribs = sin(ribCoord * 90.0);
+  float ribs2 = sin(ribCoord * 30.0 + 0.6);
 
-  // base dark moody color with rib shading
+  // displacement primarily horizontal (perpendicular to rib direction)
+  vec2 disp = vec2(ribs * 0.022 + ribs2 * 0.010,
+                   ribs * 0.004) * u_amp;
+
+  vec2 suv = uv + disp;
+  vec3 col = texture2D(u_tex, suv).rgb;
+
+  // subtle chromatic offset along ribs
+  float ca = 0.004 * u_amp;
+  col.r = texture2D(u_tex, suv + vec2(ca, 0.0)).r;
+  col.b = texture2D(u_tex, suv - vec2(ca, 0.0)).b;
+
+  // rib shading: darker valleys + bright highlights at rib peaks
   float shade = 0.5 + 0.5 * ribs;
-  vec3 base = mix(vec3(0.04, 0.08, 0.10), vec3(0.10, 0.17, 0.20), shade);
+  col *= mix(1.0, 0.78 + 0.34 * shade, u_amp);
 
-  // streak highlights
-  float hi = smoothstep(0.85, 1.0, abs(ribs)) * (u_amp / 0.04);
-  base += vec3(0.18, 0.22, 0.24) * hi;
+  // specular highlight streaks where |ribs| ~ 1
+  float hi = pow(max(0.0, ribs), 12.0);
+  col += vec3(1.0) * hi * 0.35 * u_amp;
 
-  // fade ribs as amp drops -> reveal transparency
-  float alpha = clamp(u_amp / 0.04, 0.0, 1.0);
-  gl_FragColor = vec4(base, alpha * 0.92);
+  gl_FragColor = vec4(col, 1.0);
 }`;
 
-function useGlassShader(canvasRef, hovered) {
-  const ampRef = useRef(0.04);
-  const targetRef = useRef(0.04);
+function useGlassShader(canvasRef, imageUrl, hovered) {
+  const ampRef = useRef(1.0);
+  const targetRef = useRef(1.0);
 
   useEffect(() => {
-    targetRef.current = hovered ? 0.0 : 0.04;
+    targetRef.current = hovered ? 0.0 : 1.0;
   }, [hovered]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true });
+    const gl = canvas.getContext("webgl", { premultipliedAlpha: false, alpha: false });
     if (!gl) return;
 
     const compile = (type, src) => {
@@ -87,19 +102,38 @@ function useGlassShader(canvasRef, hovered) {
     gl.enableVertexAttribArray(loc);
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 
-    const uTime = gl.getUniformLocation(prog, "u_time");
     const uAmp = gl.getUniformLocation(prog, "u_amp");
     const uRes = gl.getUniformLocation(prog, "u_res");
+    const uTex = gl.getUniformLocation(prog, "u_tex");
+    const uAspect = gl.getUniformLocation(prog, "u_aspect");
 
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    // Texture
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    // 1x1 placeholder
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([26,43,53,255]));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.uniform1i(uTex, 0);
+
+    let aspect = 1;
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      aspect = img.width / img.height;
+    };
+    img.src = imageUrl;
 
     let raf;
-    const start = performance.now();
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = canvas.clientWidth * dpr;
-      const h = canvas.clientHeight * dpr;
+      const w = Math.max(1, canvas.clientWidth * dpr);
+      const h = Math.max(1, canvas.clientHeight * dpr);
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w; canvas.height = h;
         gl.viewport(0, 0, w, h);
@@ -110,26 +144,22 @@ function useGlassShader(canvasRef, hovered) {
     resize();
 
     const render = () => {
-      // lerp amp toward target (600ms-ish feel)
-      ampRef.current += (targetRef.current - ampRef.current) * 0.06;
-      const t = (performance.now() - start) / 1000;
-      gl.uniform1f(uTime, t);
+      ampRef.current += (targetRef.current - ampRef.current) * 0.07;
       gl.uniform1f(uAmp, ampRef.current);
       gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform1f(uAspect, aspect);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       raf = requestAnimationFrame(render);
     };
     render();
     return () => { cancelAnimationFrame(raf); ro.disconnect(); };
-  }, [canvasRef]);
+  }, [canvasRef, imageUrl]);
 }
 
-function Strip({ index, name, desc }) {
+function Strip({ index, name, desc, image }) {
   const canvasRef = useRef(null);
   const [hovered, setHovered] = useState(false);
-  useGlassShader(canvasRef, hovered);
+  useGlassShader(canvasRef, image, hovered);
 
   return (
     <div
@@ -138,6 +168,7 @@ function Strip({ index, name, desc }) {
       onMouseLeave={() => setHovered(false)}
     >
       <canvas ref={canvasRef} className="ds-canvas" />
+      <div className="ds-tint" aria-hidden />
       <span className="ds-bar" aria-hidden />
       <div className="ds-row">
         <div className="ds-left">
@@ -156,18 +187,9 @@ function Strip({ index, name, desc }) {
 export default function DomainStrips() {
   return (
     <section className="ds-section">
-      <video
-        className="ds-bgvideo"
-        src={HERO_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
-      <div className="ds-bg-tint" aria-hidden />
       <div className="ds-list">
         {DOMAINS.map((d, i) => (
-          <Strip key={d.name} index={i} name={d.name} desc={d.desc} />
+          <Strip key={d.name} index={i} name={d.name} desc={d.desc} image={d.image} />
         ))}
       </div>
     </section>
