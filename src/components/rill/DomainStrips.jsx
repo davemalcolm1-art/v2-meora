@@ -109,11 +109,7 @@ void main() {
   gl_FragColor = vec4(col, alpha);
 }`;
 
-function useGlassShader(canvasRef, cleared) {
-  const ampRef = useRef(1.0);
-  const targetRef = useRef(1.0);
-  useEffect(() => { targetRef.current = cleared ? 0.0 : 1.0; }, [cleared]);
-
+function useGlassShader(canvasRef) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -135,27 +131,24 @@ function useGlassShader(canvasRef, cleared) {
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    let raf;
+    const draw = () => {
+      gl.uniform1f(uAmp, 1.0);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    };
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.max(1, canvas.clientWidth * dpr);
-      const h = Math.max(1, canvas.clientHeight * dpr);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
+      const h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w; canvas.height = h;
         gl.viewport(0, 0, w, h);
       }
+      draw();
     };
     const ro = new ResizeObserver(resize); ro.observe(canvas); resize();
-    const render = () => {
-      ampRef.current += (targetRef.current - ampRef.current) * 0.07;
-      gl.uniform1f(uAmp, ampRef.current);
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      raf = requestAnimationFrame(render);
-    };
-    render();
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+    return () => { ro.disconnect(); };
   }, [canvasRef]);
 }
 
