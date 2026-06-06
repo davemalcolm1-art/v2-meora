@@ -161,10 +161,23 @@ function useGlassShader(canvasRef, cleared) {
 
 function Strip({ index, domain, isOpen, onToggle }) {
   const canvasRef = useRef(null);
+  const rootRef = useRef(null);
+  const [visible, setVisible] = useState(false);
   useGlassShader(canvasRef, isOpen);
 
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } },
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className={`ds-strip ${isOpen ? "is-open" : ""}`}>
+    <div ref={rootRef} className={`ds-strip ${isOpen ? "is-open" : ""} ${visible ? "is-visible" : ""}`} style={{ transitionDelay: visible ? `${index * 90}ms` : "0ms" }}>
       <img src={domain.image} alt="" className="ds-img" loading="lazy" />
       <canvas ref={canvasRef} className="ds-canvas" />
       <div className="ds-tint" aria-hidden />
@@ -172,8 +185,8 @@ function Strip({ index, domain, isOpen, onToggle }) {
 
       <button className="ds-row" onClick={onToggle} aria-expanded={isOpen}>
         <div className="ds-left">
-          <span className="ds-index">{String(index + 1).padStart(2, "0")}</span>
           <span className="ds-name">{domain.name}</span>
+
         </div>
         <div className="ds-right">
           <span className="ds-desc">{domain.tagline}</span>
