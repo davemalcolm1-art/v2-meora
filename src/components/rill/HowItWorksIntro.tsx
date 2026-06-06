@@ -163,26 +163,89 @@ export default function HowItWorksIntro() {
         .hiwi-panels { display: flex; flex-direction: column; gap: 32px; }
         .hiwi-panel {
           min-height: 80vh;
-          background: rgba(255,255,255,0.55);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(26,43,53,0.08);
           border-radius: 24px;
-          padding: 48px;
           display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+          align-items: center;
+          justify-content: center;
           position: relative;
           overflow: hidden;
+          background:
+            radial-gradient(120% 80% at 20% 10%, rgba(232,87,26,0.10), transparent 60%),
+            linear-gradient(135deg, rgba(26,43,53,0.06), rgba(26,43,53,0.02));
         }
-        .hiwi-watermark {
+        .glass-card {
+          width: min(440px, 90%);
+          aspect-ratio: 1 / 1;
+          padding: 36px;
+          border-radius: 28px;
+          background: rgba(26,43,53,0.42);
+          backdrop-filter: blur(24px) saturate(140%);
+          -webkit-backdrop-filter: blur(24px) saturate(140%);
+          border: 1px solid rgba(255,255,255,0.18);
+          box-shadow: 0 30px 80px -20px rgba(26,43,53,0.35);
+          color: ${CREAM};
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+        .glass-center { align-items: flex-start; justify-content: center; }
+        .glass-pill {
+          align-self: flex-start;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: rgba(250,247,242,0.85);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.2);
+          padding: 6px 12px;
+          border-radius: 999px;
+        }
+        .glass-title-lg {
           font-family: 'Fraunces', Georgia, serif;
           font-weight: 400;
-          font-size: clamp(140px, 18vw, 240px);
-          line-height: 0.9;
-          color: rgba(232,87,26,0.10);
-          margin: 0;
-          letter-spacing: -0.04em;
+          font-size: 36px;
+          line-height: 1.1;
+          letter-spacing: -0.01em;
+        }
+        .glass-sub {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          color: rgba(250,247,242,0.7);
+        }
+        .glass-cal-title {
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 500;
+          font-size: 22px;
+        }
+        .glass-cal-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 6px 4px;
+          font-family: 'DM Sans', sans-serif;
+          text-align: center;
+        }
+        .glass-cal-head span {
+          font-size: 10px;
+          letter-spacing: 0.14em;
+          color: rgba(250,247,242,0.55);
+        }
+        .glass-cal-days span {
+          font-size: 15px;
+          padding: 6px 0;
+          color: ${CREAM};
+        }
+        .glass-cal-active {
+          background: ${ORANGE};
+          color: ${CREAM};
+          border-radius: 999px;
+          width: 28px;
+          height: 28px;
+          line-height: 16px;
+          margin: 0 auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
         .hiwi-icon {
           align-self: flex-end;
