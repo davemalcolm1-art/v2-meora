@@ -13,8 +13,8 @@ const steps = [
   },
   {
     n: "02",
-    title: "Meet your Meora doctor",
-    desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your blood results, understands your goals, and recommends a personalised protocol.",
+    title: "Meet your Meora doctor, review assessment and test results",
+    desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
   },
   {
     n: "03",
