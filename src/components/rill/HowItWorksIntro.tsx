@@ -5,61 +5,61 @@ const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
-type Visual = "calendar" | "consult" | "protocol";
-const steps: { n: string; title: string; desc: string; visual: Visual }[] = [
+type Card = { icon: string; title: string };
+const steps: { n: string; title: string; desc: string; cards: Card[] }[] = [
   {
     n: "01",
     title: "Complete your assessment & book your consultation",
     desc: "Tell us about your health history, goals, and lifestyle in a quick five-minute assessment, then choose a time that suits you to meet your doctor.",
-    visual: "calendar",
+    cards: [
+      { icon: "clipboard", title: "Five-minute\nhealth assessment" },
+      { icon: "calendar", title: "Pick a time\nthat suits you" },
+      { icon: "shield", title: "Private &\nsecure intake" },
+    ],
   },
   {
     n: "02",
     title: "Meet your Meora doctor, review assessment and test results",
     desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
-    visual: "consult",
+    cards: [
+      { icon: "video", title: "Telehealth\nwith your doctor" },
+      { icon: "lab", title: "Advanced\nblood panel review" },
+      { icon: "map", title: "Personalised\nlongevity roadmap" },
+    ],
   },
   {
     n: "03",
     title: "Your protocol, delivered",
     desc: "Compounded at a registered Australian pharmacy and shipped cold-chain directly to your door. Ongoing quarterly monitoring included.",
-    visual: "protocol",
+    cards: [
+      { icon: "flask", title: "Compounded at an\nAustralian pharmacy" },
+      { icon: "box", title: "Cold-chain shipping\nto your door" },
+      { icon: "pulse", title: "Quarterly\nmonitoring included" },
+    ],
   },
 ];
 
-function CalendarGlass() {
-  const days = Array.from({ length: 30 }, (_, i) => i + 1);
-  const offset = 3; // month starts Thu
+function Icon({ name }: { name: string }) {
+  const common = { width: 36, height: 36, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (name) {
+    case "clipboard": return (<svg {...common}><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 11 1.5 1.5L13 10"/><path d="m9 16 1.5 1.5L13 15"/></svg>);
+    case "calendar": return (<svg {...common}><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>);
+    case "shield": return (<svg {...common}><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6l-7-3Z"/></svg>);
+    case "video": return (<svg {...common}><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>);
+    case "lab": return (<svg {...common}><path d="M9 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L15 9V3"/><path d="M9 3h6"/></svg>);
+    case "map": return (<svg {...common}><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v16M15 6v16"/></svg>);
+    case "flask": return (<svg {...common}><path d="M10 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-10V3"/><path d="M8 14h8"/></svg>);
+    case "box": return (<svg {...common}><path d="m12 3 9 4v10l-9 4-9-4V7l9-4Z"/><path d="m3 7 9 4 9-4M12 11v10"/></svg>);
+    case "pulse": return (<svg {...common}><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>);
+    default: return null;
+  }
+}
+
+function GlassCard({ icon, title }: Card) {
   return (
     <div className="glass-card">
-      <div className="glass-cal-title">September 2026</div>
-      <div className="glass-cal-grid glass-cal-head">
-        {["MON","TUE","WED","THU","FRI","SAT","SUN"].map((d) => <span key={d}>{d}</span>)}
-      </div>
-      <div className="glass-cal-grid glass-cal-days">
-        {Array.from({ length: offset }).map((_, i) => <span key={`e${i}`} />)}
-        {days.map((d) => (
-          <span key={d} className={d === 23 ? "glass-cal-active" : ""}>{d}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
-function ConsultGlass() {
-  return (
-    <div className="glass-card glass-center">
-      <div className="glass-pill">Telehealth consult</div>
-      <div className="glass-title-lg">Meet your<br/>Meora doctor</div>
-      <div className="glass-sub">AHPRA-registered • Australia-wide</div>
-    </div>
-  );
-}
-function ProtocolGlass() {
-  return (
-    <div className="glass-card glass-center">
-      <div className="glass-pill">Compounded & shipped</div>
-      <div className="glass-title-lg">Your protocol,<br/>delivered cold-chain</div>
-      <div className="glass-sub">Quarterly monitoring included</div>
+      <div className="glass-icon"><Icon name={icon} /></div>
+      <div className="glass-title-lg">{title.split("\n").map((l, i) => <span key={i}>{l}<br/></span>)}</div>
     </div>
   );
 }
@@ -160,92 +160,50 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 32px; }
+        .hiwi-panels { display: flex; flex-direction: column; gap: 24px; }
         .hiwi-panel {
-          min-height: 70vh;
+          min-height: 60vh;
           border-radius: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
-          overflow: hidden;
+          padding: 32px 0;
           background:
             radial-gradient(120% 80% at 20% 10%, rgba(232,87,26,0.10), transparent 60%),
             linear-gradient(135deg, rgba(26,43,53,0.06), rgba(26,43,53,0.02));
         }
+        .hiwi-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          width: min(340px, 80%);
+        }
         .glass-card {
-          width: min(320px, 78%);
           aspect-ratio: 1 / 1;
           padding: 24px;
-          border-radius: 28px;
-          background: rgba(26,43,53,0.42);
+          border-radius: 24px;
+          background: rgba(26,43,53,0.55);
           backdrop-filter: blur(24px) saturate(140%);
           -webkit-backdrop-filter: blur(24px) saturate(140%);
-          border: 1px solid rgba(255,255,255,0.18);
-          box-shadow: 0 30px 80px -20px rgba(26,43,53,0.35);
+          border: 1px solid rgba(255,255,255,0.16);
+          box-shadow: 0 30px 80px -20px rgba(26,43,53,0.4);
           color: ${CREAM};
           display: flex;
           flex-direction: column;
-          gap: 18px;
+          justify-content: space-between;
         }
-        .glass-center { align-items: flex-start; justify-content: center; }
-        .glass-pill {
-          align-self: flex-start;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(250,247,242,0.85);
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.2);
-          padding: 6px 12px;
-          border-radius: 999px;
+        .glass-icon {
+          color: ${CREAM};
+          opacity: 0.95;
         }
         .glass-title-lg {
-          font-family: 'Fraunces', Georgia, serif;
-          font-weight: 400;
-          font-size: 26px;
-          line-height: 1.1;
-          letter-spacing: -0.01em;
-        }
-        .glass-sub {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          color: rgba(250,247,242,0.7);
-        }
-        .glass-cal-title {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
           font-size: 22px;
-        }
-        .glass-cal-grid {
-          display: grid;
-          grid-template-columns: repeat(7, 1fr);
-          gap: 6px 4px;
-          font-family: 'DM Sans', sans-serif;
-          text-align: center;
-        }
-        .glass-cal-head span {
-          font-size: 10px;
-          letter-spacing: 0.14em;
-          color: rgba(250,247,242,0.55);
-        }
-        .glass-cal-days span {
-          font-size: 15px;
-          padding: 6px 0;
+          line-height: 1.2;
+          letter-spacing: -0.005em;
           color: ${CREAM};
-        }
-        .glass-cal-active {
-          background: ${ORANGE};
-          color: ${CREAM};
-          border-radius: 999px;
-          width: 28px;
-          height: 28px;
-          line-height: 16px;
-          margin: 0 auto;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
         }
         .hiwi-cta-wrap {
           display: flex;
@@ -303,9 +261,11 @@ export default function HowItWorksIntro() {
                 data-index={i}
                 className="hiwi-panel"
               >
-                {s.visual === "calendar" && <CalendarGlass />}
-                {s.visual === "consult" && <ConsultGlass />}
-                {s.visual === "protocol" && <ProtocolGlass />}
+                <div className="hiwi-cards">
+                  {s.cards.map((c, j) => (
+                    <GlassCard key={j} icon={c.icon} title={c.title} />
+                  ))}
+                </div>
               </div>
             ))}
           </div>
