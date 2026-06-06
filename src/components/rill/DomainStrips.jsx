@@ -80,32 +80,30 @@ void main() {
 
 // Procedural fluted-glass overlay: transparent ribbed pattern that sits
 // over a real <img> below. No texture sampling -> no CORS dependency.
+// Very subtle frosted ribbing — reads as faint heat-haze, not corrugated metal.
 const FRAG = `
 precision mediump float;
 varying vec2 v_uv;
 uniform float u_amp;
 void main() {
   vec2 uv = v_uv;
-  float ribCoord = uv.x + uv.y * 0.18;
-  float ribs  = sin(ribCoord * 90.0);
-  float ribs2 = sin(ribCoord * 30.0 + 0.6);
+  float ribCoord = uv.x + uv.y * 0.08;
+  float ribs  = sin(ribCoord * 320.0);
+  float ribs2 = sin(ribCoord * 140.0 + 0.6);
 
-  // Light/dark banding from the rib normals
   float shade = 0.5 + 0.5 * ribs;
-  // Combine slow + fast ribs for a richer fluted look
-  float band = mix(shade, 0.5 + 0.5 * ribs2, 0.35);
+  float band = mix(shade, 0.5 + 0.5 * ribs2, 0.3);
 
-  // Tint toward dark blue-grey in valleys, light highlights at peaks
-  vec3 valley = vec3(0.04, 0.07, 0.09);
-  vec3 peak   = vec3(0.85, 0.90, 0.95);
+  vec3 valley = vec3(0.05, 0.09, 0.12);
+  vec3 peak   = vec3(0.78, 0.84, 0.90);
   vec3 col    = mix(valley, peak, band);
 
-  // Sharp specular streaks at rib peaks
-  float hi = pow(max(0.0, ribs), 14.0);
-  col += vec3(1.0) * hi * 0.55;
+  // very thin specular highlights only at sharp peaks
+  float hi = pow(max(0.0, ribs), 28.0);
+  col += vec3(1.0) * hi * 0.18;
 
-  // Overall coverage = u_amp (1 = fully fluted, 0 = clear)
-  float alpha = u_amp * 0.62;
+  // amplitude controls coverage — kept very low for subtlety
+  float alpha = u_amp * 0.18;
   gl_FragColor = vec4(col, alpha);
 }`;
 
