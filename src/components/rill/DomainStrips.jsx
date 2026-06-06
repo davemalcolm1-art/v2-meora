@@ -175,7 +175,6 @@ function Strip({ index, domain, isOpen, onToggle }) {
       onMouseEnter={() => onToggle(true)}
       onMouseLeave={() => onToggle(false)}
     >
-      <img src={domain.image} alt="" className="ds-img" loading="lazy" />
       <canvas ref={canvasRef} className="ds-canvas" />
       <div className="ds-tint" aria-hidden />
       <span className="ds-bar" aria-hidden />
