@@ -71,39 +71,21 @@ export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const trackRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    let raf = 0;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const vh = window.innerHeight;
-        let newActive = 0;
-        stepRefs.current.forEach((el, i) => {
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
-          const total = rect.height - vh;
-          const scrolled = Math.min(Math.max(-rect.top, 0), total);
-          const progress = total > 0 ? scrolled / total : 0;
-          const track = trackRefs.current[i];
-          if (track) {
-            const maxShift = track.scrollWidth - track.parentElement!.clientWidth;
-            track.style.transform = `translate3d(${-Math.max(0, maxShift) * progress}px,0,0)`;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.index);
+            setActive(idx);
           }
-          if (rect.top < vh * 0.5 && rect.bottom > vh * 0.5) newActive = i;
         });
-        setActive(newActive);
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    stepRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   const progress = ((active + 1) / steps.length) * 100;
