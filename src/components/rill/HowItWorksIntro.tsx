@@ -175,19 +175,29 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 16px; }
-        .hiwi-panel {
-          min-height: 75vh;
-          border-radius: 24px;
+        .hiwi-panels { display: flex; flex-direction: column; gap: 0; }
+        .hiwi-step {
+          height: 180vh;
+          position: relative;
+        }
+        .hiwi-stage {
+          position: sticky;
+          top: 0;
+          height: 100vh;
           display: flex;
           align-items: center;
-          justify-content: center;
-          position: relative;
-          padding: 32px 0;
+          overflow: hidden;
+          border-radius: 24px;
         }
-        .hiwi-cards { display: contents; }
+        .hiwi-track {
+          display: flex;
+          gap: 32px;
+          padding: 0 8px;
+          will-change: transform;
+        }
         .glass-card {
-          width: min(360px, 82%);
+          flex: 0 0 auto;
+          width: min(360px, 70vw);
           aspect-ratio: 1 / 1;
           padding: 24px;
           border-radius: 24px;
