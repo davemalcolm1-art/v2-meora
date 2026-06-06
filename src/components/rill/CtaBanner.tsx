@@ -20,19 +20,6 @@ const CtaBanner = () => {
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <p
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: 11,
-            fontWeight: 800,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: "var(--text-dim)",
-            marginBottom: 24,
-          }}
-        >
-          STAY INFORMED
-        </p>
 
         <h2
           style={{
