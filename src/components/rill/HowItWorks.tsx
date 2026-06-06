@@ -25,9 +25,6 @@ export default function HowItWorks() {
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 80 }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(26,43,53,0.5)", margin: "0 0 18px" }}>
-            How it works
-          </p>
           <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: "clamp(40px,4.4vw,64px)", fontWeight: 400, lineHeight: 1.05, letterSpacing: "-0.02em", margin: "0 0 18px" }}>
             Designed to be <em style={{ fontStyle: "italic" }}>simple.</em>
           </h2>
