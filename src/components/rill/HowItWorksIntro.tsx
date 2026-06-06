@@ -18,6 +18,7 @@ const steps: { n: string; title: string; desc: string; cards: Card[]; bg: string
       { icon: "clipboard", title: "Five-minute\nhealth assessment" },
       { icon: "calendar", title: "Pick a time\nthat suits you" },
     ],
+    bg: bgStep1.url,
   },
   {
     n: "02",
