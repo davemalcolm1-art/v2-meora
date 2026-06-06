@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  --font-heading: 'Fraunces', serif;
+  --font-heading: 'DM Sans', sans-serif;
   --font-body: 'DM Sans', sans-serif;
 
   /* Brand palette — Meora 2026 refined */
