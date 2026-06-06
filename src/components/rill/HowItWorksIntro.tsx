@@ -173,8 +173,8 @@ export default function HowItWorksIntro() {
         .hiwi-frame {
           position: relative;
           width: 100%;
-          aspect-ratio: 4 / 5;
-          max-height: 80vh;
+          aspect-ratio: 5 / 6;
+          max-height: 620px;
           border-radius: 28px;
           overflow: hidden;
           background-size: cover;
@@ -200,22 +200,21 @@ export default function HowItWorksIntro() {
           opacity: 0;
         }
         @keyframes hiwi-fly {
-          0%   { transform: translate(calc(-50% + 60vw), -50%); opacity: 0; }
+          0%   { transform: translate(calc(-50% + 120%), -50%); opacity: 0; }
           12%  { transform: translate(-50%, -50%); opacity: 1; }
           45%  { transform: translate(-50%, -50%); opacity: 1; }
-          57%  { transform: translate(calc(-50% - 60vw), -50%); opacity: 0; }
-          100% { transform: translate(calc(-50% + 60vw), -50%); opacity: 0; }
+          57%  { transform: translate(calc(-50% - 120%), -50%); opacity: 0; }
+          100% { transform: translate(calc(-50% + 120%), -50%); opacity: 0; }
         }
         .glass-card {
-          flex: 0 0 auto;
-          width: clamp(200px, 60%, 320px);
+          width: clamp(180px, 52%, 260px);
           aspect-ratio: 1 / 1;
-          padding: 22px;
-          border-radius: 24px;
-          background: rgba(26,43,53,0.55);
+          padding: 20px;
+          border-radius: 22px;
+          background: rgba(26,43,53,0.5);
           backdrop-filter: blur(24px) saturate(140%);
           -webkit-backdrop-filter: blur(24px) saturate(140%);
-          border: 1px solid rgba(255,255,255,0.16);
+          border: 1px solid rgba(255,255,255,0.18);
           box-shadow: 0 30px 80px -20px rgba(26,43,53,0.4);
           color: ${CREAM};
           display: flex;
@@ -229,8 +228,8 @@ export default function HowItWorksIntro() {
         .glass-title-lg {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
-          font-size: 22px;
-          line-height: 1.2;
+          font-size: 18px;
+          line-height: 1.25;
           letter-spacing: -0.005em;
           color: ${CREAM};
         }
