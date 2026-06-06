@@ -177,7 +177,7 @@
 @media (max-width: 768px) {
   .ds-row { padding: 0 24px; height: 90px; }
   .ds-strip { max-height: 90px; }
-  .ds-strip.is-open { max-height: 320px; }
+  .ds-strip.is-open { max-height: 900px; }
   .ds-name { font-size: 32px; }
   .ds-strip.is-open .ds-name { font-size: 38px; }
   .ds-desc { display: none; }
