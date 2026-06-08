@@ -5,61 +5,86 @@ const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
-type StepKind = "assessment" | "telehealth" | "shipping" | "vitality";
-const steps: { n: string; title: string; desc: string; kind: StepKind }[] = [
+type CardKind =
+  | "assessChecklist"
+  | "assessGoals"
+  | "telehealth"
+  | "labs"
+  | "shipping"
+  | "whatsInside"
+  | "vitality"
+  | "biomarker";
+
+const steps: { n: string; title: string; desc: string; cards: [CardKind, CardKind] }[] = [
   {
     n: "01",
     title: "Complete your assessment",
     desc: "A quick, five-minute health assessment about your goals, history, and lifestyle.",
-    kind: "assessment",
+    cards: ["assessChecklist", "assessGoals"],
   },
   {
     n: "02",
     title: "Your personalised plan",
     desc: "Meet your AHPRA-registered doctor in a real-time telehealth consult. They review everything and design a longevity protocol built around you.",
-    kind: "telehealth",
+    cards: ["telehealth", "labs"],
   },
   {
     n: "03",
     title: "Delivered to your door",
     desc: "Compounded at a registered Australian pharmacy and shipped cold-chain, straight to you.",
-    kind: "shipping",
+    cards: ["shipping", "whatsInside"],
   },
   {
     n: "04",
     title: "Ongoing review",
     desc: "Quarterly check-ins and continuous adjustment as your goals and biology evolve.",
-    kind: "vitality",
+    cards: ["vitality", "biomarker"],
   },
 ];
 
-function AssessmentCard() {
-  const items = [
-    { t: "Sleep quality", done: true },
-    { t: "Energy levels", done: true },
-    { t: "Training load", done: true },
-    { t: "Recovery & stress", done: false },
-    { t: "Goals & priorities", done: false },
-  ];
+/* ---------------- Card components ---------------- */
+
+function AssessChecklist() {
+  const items = ["Goals", "History", "Lifestyle"];
   return (
     <div className="mock-card">
       <div className="mock-head">
         <span className="mock-eyebrow">Health assessment</span>
-        <span className="mock-pill">3 of 5</span>
+        <span className="mock-pill">5 MIN</span>
       </div>
       <ul className="mock-list">
-        {items.map((it, i) => (
-          <li key={i} className={`mock-row ${it.done ? "is-done" : ""}`}>
+        {items.map((t) => (
+          <li key={t} className="mock-row is-done">
             <span className="mock-check" aria-hidden="true">
-              {it.done ? (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 5 5L20 7"/></svg>
-              ) : null}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 5 5L20 7"/></svg>
             </span>
-            <span className="mock-row-text">{it.t}</span>
+            <span className="mock-row-text">{t}</span>
           </li>
         ))}
       </ul>
-      <div className="mock-progress"><div style={{ width: "60%" }} /></div>
+      <div className="mock-progress"><div style={{ width: "100%" }} /></div>
+    </div>
+  );
+}
+
+function AssessGoals() {
+  const chips = [
+    { t: "Energy", on: false },
+    { t: "Recovery", on: true },
+    { t: "Longevity", on: false },
+  ];
+  return (
+    <div className="mock-card">
+      <div className="mock-head">
+        <span className="mock-eyebrow">Your goals</span>
+        <span className="mock-pill">Step 2</span>
+      </div>
+      <div className="mock-chips">
+        {chips.map((c) => (
+          <span key={c.t} className={`mock-chip ${c.on ? "is-on" : ""}`}>{c.t}</span>
+        ))}
+      </div>
+      <p className="mock-note">Choose what matters most to you.</p>
     </div>
   );
 }
@@ -84,6 +109,42 @@ function TelehealthCard() {
   );
 }
 
+function LabsCard() {
+  return (
+    <div className="mock-card">
+      <div className="mock-head">
+        <span className="mock-eyebrow">Testosterone</span>
+        <span className="mock-pill">Optimal</span>
+      </div>
+      <div className="mock-bignum">
+        642 <span className="mock-bignum-u">ng/dL</span>
+      </div>
+      <svg viewBox="0 0 200 60" className="mock-graph" preserveAspectRatio="none">
+        <polyline
+          fill="none"
+          stroke={ORANGE}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          points="0,48 28,42 56,44 84,34 112,28 140,22 168,14 200,8"
+        />
+        <polyline
+          fill="none"
+          stroke="rgba(232,87,26,0.18)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          points="0,48 28,42 56,44 84,34 112,28 140,22 168,14 200,8"
+        />
+      </svg>
+      <div className="mock-foot">
+        <div><div className="mock-foot-k">Range</div><div className="mock-foot-v">300–900</div></div>
+        <div><div className="mock-foot-k">Trend</div><div className="mock-foot-v">↑ Rising</div></div>
+      </div>
+    </div>
+  );
+}
+
 function ShippingCard() {
   const stages = ["Compounded", "Dispatched", "Delivered"];
   const active = 1;
@@ -103,15 +164,29 @@ function ShippingCard() {
         <div className="mock-track-line"><div style={{ width: `${(active / (stages.length - 1)) * 100}%` }} /></div>
       </div>
       <div className="mock-foot">
-        <div>
-          <div className="mock-foot-k">ETA</div>
-          <div className="mock-foot-v">Tue, 2:30pm</div>
-        </div>
-        <div>
-          <div className="mock-foot-k">Cold-chain</div>
-          <div className="mock-foot-v">2–8°C</div>
-        </div>
+        <div><div className="mock-foot-k">ETA</div><div className="mock-foot-v">Tue, 2:30pm</div></div>
+        <div><div className="mock-foot-k">Cold-chain</div><div className="mock-foot-v">2–8°C</div></div>
       </div>
+    </div>
+  );
+}
+
+function WhatsInsideCard() {
+  return (
+    <div className="mock-card">
+      <div className="mock-head">
+        <span className="mock-eyebrow">What's inside</span>
+        <span className="mock-pill">Rx</span>
+      </div>
+      <div className="mock-kv">
+        <div className="mock-kv-k">Protocol</div>
+        <div className="mock-kv-v">Longevity · Recovery</div>
+      </div>
+      <div className="mock-kv">
+        <div className="mock-kv-k">Dosage</div>
+        <div className="mock-kv-v">0.25mg · weekly</div>
+      </div>
+      <div className="mock-tag">Compounded in Australia</div>
     </div>
   );
 }
@@ -125,7 +200,7 @@ function VitalityCard() {
     <div className="mock-card mock-vitality">
       <div className="mock-head">
         <span className="mock-eyebrow">Vitality score</span>
-        <span className="mock-pill">Q2 review</span>
+        <span className="mock-pill">+4 this month</span>
       </div>
       <div className="mock-ring-wrap">
         <svg width="160" height="160" viewBox="0 0 130 130">
@@ -143,21 +218,54 @@ function VitalityCard() {
         </svg>
         <div className="mock-ring-num">{score}</div>
       </div>
+    </div>
+  );
+}
+
+function BiomarkerCard() {
+  return (
+    <div className="mock-card">
+      <div className="mock-head">
+        <span className="mock-eyebrow">Biomarker trend</span>
+        <span className="mock-pill">Reviewed quarterly</span>
+      </div>
+      <svg viewBox="0 0 200 80" className="mock-graph" preserveAspectRatio="none">
+        <polyline
+          fill="none"
+          stroke={ORANGE}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          points="0,64 25,58 50,52 75,46 100,36 125,30 150,22 175,16 200,10"
+        />
+        <g fill={ORANGE}>
+          {[[0,64],[50,52],[100,36],[150,22],[200,10]].map(([x,y],i)=>(
+            <circle key={i} cx={x} cy={y} r="2.5" />
+          ))}
+        </g>
+      </svg>
       <div className="mock-foot">
-        <div><div className="mock-foot-k">Energy</div><div className="mock-foot-v">+18%</div></div>
-        <div><div className="mock-foot-k">Sleep</div><div className="mock-foot-v">+24%</div></div>
-        <div><div className="mock-foot-k">Recovery</div><div className="mock-foot-v">+12%</div></div>
+        <div><div className="mock-foot-k">Q1</div><div className="mock-foot-v">Baseline</div></div>
+        <div><div className="mock-foot-k">Q2</div><div className="mock-foot-v">↑ Improved</div></div>
       </div>
     </div>
   );
 }
 
-function MockCard({ kind }: { kind: StepKind }) {
-  if (kind === "assessment") return <AssessmentCard />;
-  if (kind === "telehealth") return <TelehealthCard />;
-  if (kind === "shipping") return <ShippingCard />;
-  return <VitalityCard />;
+function MockCard({ kind }: { kind: CardKind }) {
+  switch (kind) {
+    case "assessChecklist": return <AssessChecklist />;
+    case "assessGoals": return <AssessGoals />;
+    case "telehealth": return <TelehealthCard />;
+    case "labs": return <LabsCard />;
+    case "shipping": return <ShippingCard />;
+    case "whatsInside": return <WhatsInsideCard />;
+    case "vitality": return <VitalityCard />;
+    case "biomarker": return <BiomarkerCard />;
+  }
 }
+
+/* ---------------- Section ---------------- */
 
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
@@ -229,13 +337,8 @@ export default function HowItWorksIntro() {
           transition: width 0.5s ease;
         }
 
-        /* Right column uses a sticky stage with explicit total height */
         .hiwi-right { position: relative; min-width: 0; }
-        .hiwi-stage {
-          position: relative;
-          /* Total scroll: one viewport per step */
-          height: calc(100vh * 4);
-        }
+        .hiwi-stage { position: relative; height: calc(100vh * 4); }
         .hiwi-sticky-frame {
           position: sticky;
           top: 120px;
@@ -255,30 +358,27 @@ export default function HowItWorksIntro() {
           pointer-events: none;
         }
 
+        /* Conveyor card layer */
         .hiwi-card-layer {
           position: absolute; inset: 0;
-          display: flex; align-items: center; justify-content: center;
-          padding: 40px;
+          overflow: hidden;
         }
         .hiwi-card-slot {
           position: absolute;
+          top: 50%; left: 50%;
+          width: min(calc(100% - 64px), 360px);
+          transform: translate(-50%, -50%);
           opacity: 0;
-          transform: translateX(60px);
-          transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-          width: min(100%, 360px);
+          will-change: transform, opacity;
+          animation: hiwi-conveyor 5.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
         }
-        .hiwi-card-slot.is-active {
-          opacity: 1;
-          transform: translateX(0);
+        @keyframes hiwi-conveyor {
+          0%   { transform: translate(calc(-50% + 140%), -50%); opacity: 0; }
+          12%  { transform: translate(-50%, -50%); opacity: 1; }
+          50%  { transform: translate(-50%, -50%); opacity: 1; }
+          62%  { transform: translate(calc(-50% - 140%), -50%); opacity: 0; }
+          100% { transform: translate(calc(-50% - 140%), -50%); opacity: 0; }
         }
-
-        /* Invisible spacers drive IntersectionObserver — 4 × 100vh in the stage */
-        .hiwi-driver {
-          position: absolute; inset: 0;
-          display: flex; flex-direction: column;
-          pointer-events: none;
-        }
-        .hiwi-step-spacer { flex: 1 1 0; min-height: 0; }
 
         /* ---------- Mock cards ---------- */
         .mock-card {
@@ -293,7 +393,7 @@ export default function HowItWorksIntro() {
         }
         .mock-head {
           display: flex; align-items: center; justify-content: space-between;
-          margin-bottom: 16px;
+          margin-bottom: 16px; gap: 12px;
         }
         .mock-eyebrow {
           font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -302,7 +402,7 @@ export default function HowItWorksIntro() {
         .mock-pill {
           font-size: 11px; padding: 4px 10px; border-radius: 999px;
           background: rgba(232,87,26,0.15); color: ${ORANGE};
-          letter-spacing: 0.04em;
+          letter-spacing: 0.04em; white-space: nowrap;
         }
         .mock-list { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px; }
         .mock-row {
@@ -325,6 +425,21 @@ export default function HowItWorksIntro() {
           border-radius: 4px; overflow: hidden;
         }
         .mock-progress > div { height: 100%; background: ${ORANGE}; }
+
+        .mock-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+        .mock-chip {
+          padding: 8px 14px; border-radius: 999px;
+          background: rgba(250,247,242,0.06);
+          color: rgba(250,247,242,0.7);
+          font-size: 13px; font-weight: 500;
+          border: 1px solid rgba(250,247,242,0.08);
+        }
+        .mock-chip.is-on {
+          background: ${ORANGE}; color: ${INK}; border-color: ${ORANGE};
+        }
+        .mock-note {
+          font-size: 12px; color: rgba(250,247,242,0.45); margin: 0;
+        }
 
         .mock-video-stage {
           position: relative; aspect-ratio: 4/3;
@@ -369,6 +484,20 @@ export default function HowItWorksIntro() {
         .mock-vm-title { font-weight: 600; font-size: 15px; }
         .mock-vm-sub { font-size: 12px; color: rgba(250,247,242,0.55); margin-top: 2px; }
 
+        .mock-bignum {
+          font-family: 'Fraunces', Georgia, serif;
+          font-size: 44px; font-weight: 400; line-height: 1;
+          margin: 6px 0 12px;
+        }
+        .mock-bignum-u {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px; color: rgba(250,247,242,0.55);
+          font-weight: 500; margin-left: 6px;
+        }
+        .mock-graph {
+          width: 100%; height: 60px; display: block; margin-bottom: 14px;
+        }
+
         .mock-track {
           position: relative; display: flex; justify-content: space-between;
           margin: 8px 4px 20px; padding-bottom: 24px;
@@ -401,10 +530,26 @@ export default function HowItWorksIntro() {
         .mock-foot-k { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,247,242,0.45); }
         .mock-foot-v { font-size: 14px; font-weight: 600; margin-top: 4px; }
 
+        .mock-kv {
+          display: flex; justify-content: space-between; align-items: baseline;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(250,247,242,0.06);
+        }
+        .mock-kv:last-of-type { border-bottom: none; margin-bottom: 12px; }
+        .mock-kv-k { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,247,242,0.5); }
+        .mock-kv-v { font-size: 14px; font-weight: 600; color: ${CREAM}; }
+        .mock-tag {
+          display: inline-block; margin-top: 4px;
+          font-size: 11px; letter-spacing: 0.08em;
+          padding: 6px 12px; border-radius: 999px;
+          background: rgba(232,87,26,0.12); color: ${ORANGE};
+          border: 1px solid rgba(232,87,26,0.25);
+        }
+
         .mock-ring-wrap {
           position: relative;
           display: flex; align-items: center; justify-content: center;
-          margin: 8px 0 16px;
+          margin: 8px 0 8px;
         }
         .mock-ring-num {
           position: absolute;
@@ -454,31 +599,31 @@ export default function HowItWorksIntro() {
             </div>
           </div>
 
-          {/* Right column: stage with sticky frame + driver spacers */}
+          {/* Right column */}
           <div className="hiwi-right">
             <div className="hiwi-stage">
               <div className="hiwi-sticky-frame">
                 <div className="hiwi-frame-grain" />
-                <div className="hiwi-card-layer">
-                  {steps.map((s, i) => (
+                <div className="hiwi-card-layer" key={`cards-${active}`}>
+                  {steps[active].cards.map((kind, i) => (
                     <div
-                      key={s.n}
-                      className={`hiwi-card-slot ${i === active ? "is-active" : ""}`}
-                      aria-hidden={i !== active}
+                      key={`${active}-${i}`}
+                      className="hiwi-card-slot"
+                      style={{ animationDelay: `${i * 2.7}s` }}
                     >
-                      <MockCard kind={s.kind} />
+                      <MockCard kind={kind} />
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="hiwi-driver" aria-hidden="true">
+              <div className="hiwi-driver" aria-hidden="true" style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", pointerEvents: "none" }}>
                 {steps.map((s, i) => (
                   <div
                     key={s.n}
                     ref={(el) => (stepRefs.current[i] = el)}
                     data-index={i}
-                    className="hiwi-step-spacer"
+                    style={{ flex: "1 1 0", minHeight: 0 }}
                   />
                 ))}
               </div>
