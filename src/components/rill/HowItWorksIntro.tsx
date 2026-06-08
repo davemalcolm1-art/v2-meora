@@ -163,54 +163,79 @@ export default function HowItWorksIntro() {
           background: ${ORANGE};
           transition: width 0.5s ease;
         }
-        .hiwi-panels { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
-        .hiwi-step {
-          min-height: 90vh;
-          display: flex;
-          align-items: center;
-          min-width: 0;
-        }
-        .hiwi-frame {
-          position: relative;
+
+        /* Right column: contains sticky frame + invisible scroll spacers */
+        .hiwi-right { position: relative; min-width: 0; }
+        .hiwi-sticky-frame {
+          position: sticky;
+          top: 120px;
           width: 100%;
           aspect-ratio: 5 / 6;
           max-height: 620px;
           border-radius: 28px;
           overflow: hidden;
+          box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
+          background: ${INK};
+        }
+        .hiwi-bg-layer {
+          position: absolute;
+          inset: 0;
           background-size: cover;
           background-position: center;
-          box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
+          opacity: 0;
+          transition: opacity 0.5s ease;
         }
+        .hiwi-bg-layer.is-active { opacity: 1; }
         .hiwi-frame-tint {
           position: absolute; inset: 0;
           background: linear-gradient(180deg, rgba(26,43,53,0.10), rgba(26,43,53,0.35));
+          pointer-events: none;
         }
-        .hiwi-marquee {
+
+        .hiwi-cards-layer {
           position: absolute;
           inset: 0;
-          overflow: hidden;
+          pointer-events: none;
         }
-        .hiwi-slot {
+        .hiwi-card-pos {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          will-change: transform, opacity;
-          animation: hiwi-fly 7s cubic-bezier(0.65, 0, 0.35, 1) infinite;
           opacity: 0;
+          transform: translate(var(--fx, 0), 24px);
+          animation: hiwi-flyin 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
-        @keyframes hiwi-fly {
-          0%   { transform: translate(calc(-50% + 120%), -50%); opacity: 0; }
-          12%  { transform: translate(-50%, -50%); opacity: 1; }
-          45%  { transform: translate(-50%, -50%); opacity: 1; }
-          57%  { transform: translate(calc(-50% - 120%), -50%); opacity: 0; }
-          100% { transform: translate(calc(-50% + 120%), -50%); opacity: 0; }
+        .hiwi-card-pos.pos-tl { top: 8%; left: 6%; --fx: -16px; }
+        .hiwi-card-pos.pos-br { bottom: 8%; right: 6%; --fx: 16px; }
+        .hiwi-card-pos.delay-1 { animation-delay: 0.15s; }
+        @keyframes hiwi-flyin {
+          to { opacity: 1; transform: translate(0, 0); }
         }
+        .hiwi-card-float {
+          animation: hiwi-float 4s ease-in-out infinite;
+        }
+        @keyframes hiwi-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+
+        .hiwi-driver {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          /* Sits behind the sticky frame in the same column */
+          margin-top: calc(-1 * min(620px, 60vw * 6 / 5));
+          position: relative;
+          z-index: 1;
+          pointer-events: none;
+        }
+        .hiwi-step-spacer {
+          min-height: 90vh;
+        }
+
         .glass-card {
-          width: clamp(260px, 72%, 380px);
+          width: clamp(220px, 38%, 300px);
           aspect-ratio: 1 / 1;
-          padding: 28px;
-          border-radius: 28px;
+          padding: 24px;
+          border-radius: 24px;
           background: rgba(26,43,53,0.5);
           backdrop-filter: blur(24px) saturate(140%);
           -webkit-backdrop-filter: blur(24px) saturate(140%);
@@ -221,22 +246,17 @@ export default function HowItWorksIntro() {
           flex-direction: column;
           justify-content: space-between;
         }
-        .glass-icon {
-          color: ${CREAM};
-          opacity: 0.95;
-        }
-        .glass-icon svg {
-          width: 44px;
-          height: 44px;
-        }
+        .glass-icon { color: ${CREAM}; opacity: 0.95; }
+        .glass-icon svg { width: 40px; height: 40px; }
         .glass-title-lg {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
-          font-size: 22px;
+          font-size: 18px;
           line-height: 1.25;
           letter-spacing: -0.005em;
           color: ${CREAM};
         }
+
         .hiwi-cta-wrap {
           display: flex;
           justify-content: center;
@@ -261,7 +281,8 @@ export default function HowItWorksIntro() {
           .hiwi-wrap { padding: 80px 20px 40px; }
           .hiwi-grid { grid-template-columns: 1fr; gap: 32px; }
           .hiwi-sticky { position: static; }
-          .hiwi-panel { min-height: 60vh; padding: 32px; }
+          .hiwi-sticky-frame { position: relative; top: auto; }
+          .hiwi-driver { margin-top: 0; }
           .hiwi-h2 { font-size: 32px; }
         }
       `}</style>
@@ -284,34 +305,42 @@ export default function HowItWorksIntro() {
             </div>
           </div>
 
-          {/* Scrollable right column */}
-          <div className="hiwi-panels">
-            {steps.map((s, i) => (
-              <div
-                key={s.n}
-                ref={(el) => (stepRefs.current[i] = el)}
-                data-index={i}
-                className="hiwi-step"
-              >
+          {/* Right column: pinned frame + invisible scroll-driver spacers */}
+          <div className="hiwi-right">
+            <div className="hiwi-sticky-frame">
+              {steps.map((s, i) => (
                 <div
-                  className="hiwi-frame"
+                  key={s.n}
+                  className={`hiwi-bg-layer ${i === active ? "is-active" : ""}`}
                   style={{ backgroundImage: `url(${s.bg})` }}
-                >
-                  <div className="hiwi-frame-tint" />
-                  <div className="hiwi-marquee">
-                    {s.cards.map((c, j) => (
-                      <div
-                        key={j}
-                        className="hiwi-slot"
-                        style={{ animationDelay: `${j * 3.5}s` }}
-                      >
-                        <GlassCard icon={c.icon} title={c.title} />
-                      </div>
-                    ))}
+                />
+              ))}
+              <div className="hiwi-frame-tint" />
+
+              <div className="hiwi-cards-layer" key={`cards-${active}`}>
+                <div className="hiwi-card-pos pos-tl">
+                  <div className="hiwi-card-float">
+                    <GlassCard icon={steps[active].cards[0].icon} title={steps[active].cards[0].title} />
+                  </div>
+                </div>
+                <div className="hiwi-card-pos pos-br delay-1">
+                  <div className="hiwi-card-float" style={{ animationDelay: "1.2s" }}>
+                    <GlassCard icon={steps[active].cards[1].icon} title={steps[active].cards[1].title} />
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="hiwi-driver" aria-hidden="true">
+              {steps.map((s, i) => (
+                <div
+                  key={s.n}
+                  ref={(el) => (stepRefs.current[i] = el)}
+                  data-index={i}
+                  className="hiwi-step-spacer"
+                />
+              ))}
+            </div>
           </div>
         </div>
 
