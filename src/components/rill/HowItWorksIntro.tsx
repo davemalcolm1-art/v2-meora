@@ -357,6 +357,13 @@ export default function HowItWorksIntro() {
             radial-gradient(ellipse at bottom left, rgba(255,255,255,0.05), transparent 60%);
           pointer-events: none;
         }
+        .hiwi-watermark {
+          position: absolute; inset: 0;
+          background: url('/meora-mark-white.svg') center no-repeat;
+          background-size: 80%;
+          opacity: 0.05;
+          pointer-events: none;
+        }
 
         /* Conveyor card layer */
         .hiwi-card-layer {
@@ -610,6 +617,7 @@ export default function HowItWorksIntro() {
           <div className="hiwi-right">
             <div className="hiwi-stage">
               <div className="hiwi-sticky-frame">
+                <div className="hiwi-watermark" aria-hidden="true" />
                 <div className="hiwi-frame-grain" />
                 <div className="hiwi-card-layer" key={`cards-${active}`}>
                   {steps[active].cards.map((kind, i) => (
