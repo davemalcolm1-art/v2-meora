@@ -347,7 +347,7 @@ export default function HowItWorksIntro() {
           max-height: 620px;
           border-radius: 28px;
           overflow: hidden;
-          background: ${INK};
+          background: radial-gradient(ellipse 100% 90% at 50% 30%, #243845 0%, #16252E 100%);
           box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
         }
         .hiwi-frame-grain {
@@ -355,6 +355,13 @@ export default function HowItWorksIntro() {
           background:
             radial-gradient(ellipse at top right, rgba(232,87,26,0.12), transparent 55%),
             radial-gradient(ellipse at bottom left, rgba(255,255,255,0.05), transparent 60%);
+          pointer-events: none;
+        }
+        .hiwi-watermark {
+          position: absolute; inset: 0;
+          background: url('/meora-mark-white.svg') center no-repeat;
+          background-size: 80%;
+          opacity: 0.05;
           pointer-events: none;
         }
 
@@ -610,6 +617,7 @@ export default function HowItWorksIntro() {
           <div className="hiwi-right">
             <div className="hiwi-stage">
               <div className="hiwi-sticky-frame">
+                <div className="hiwi-watermark" aria-hidden="true" />
                 <div className="hiwi-frame-grain" />
                 <div className="hiwi-card-layer" key={`cards-${active}`}>
                   {steps[active].cards.map((kind, i) => (
