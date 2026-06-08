@@ -620,7 +620,13 @@ export default function HowItWorksIntro() {
           <div className="hiwi-right">
             <div className="hiwi-stage">
               <div className="hiwi-sticky-frame">
-                <div className="hiwi-watermark" aria-hidden="true" />
+                <div className="hiwi-watermark" aria-hidden="true">
+                  <svg viewBox="460 100 280 240" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="600" cy="220" fill="none" r="120" stroke="white" strokeWidth="6" />
+                    <path d="M 530 300 L 530 170 L 600 250 L 670 170 L 670 300" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="7" />
+                    <path d="M 600 310 C 560 260, 580 215, 600 195 C 620 215, 640 260, 600 310 Z" fill="none" stroke="white" strokeWidth="6" />
+                  </svg>
+                </div>
                 <div className="hiwi-frame-grain" />
                 <div className="hiwi-card-layer" key={`cards-${active}`}>
                   {steps[active].cards.map((kind, i) => (
