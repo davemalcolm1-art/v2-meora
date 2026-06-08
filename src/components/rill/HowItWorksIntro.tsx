@@ -347,16 +347,21 @@ export default function HowItWorksIntro() {
           max-height: 620px;
           border-radius: 28px;
           overflow: hidden;
-          background: radial-gradient(ellipse 100% 90% at 50% 30%, #243845 0%, #16252E 100%);
+          background:
+            radial-gradient(ellipse 85% 70% at 100% 0%, #2A4150 0%, rgba(42,65,80,0) 55%),
+            radial-gradient(ellipse 90% 80% at 0% 100%, #14222B 0%, rgba(20,34,43,0) 60%),
+            linear-gradient(135deg, #1F3340 0%, #1A2B35 55%, #14222B 100%);
           box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
         }
         .hiwi-frame-grain {
           position: absolute; inset: 0;
           background:
-            radial-gradient(ellipse at top right, rgba(232,87,26,0.12), transparent 55%),
-            radial-gradient(ellipse at bottom left, rgba(255,255,255,0.05), transparent 60%);
+            radial-gradient(ellipse 55% 45% at 88% 12%, rgba(232,87,26,0.13), transparent 65%),
+            radial-gradient(ellipse 40% 30% at 95% 5%, rgba(255,210,170,0.08), transparent 70%),
+            radial-gradient(ellipse 70% 60% at 10% 100%, rgba(0,0,0,0.35), transparent 65%);
           pointer-events: none;
         }
+
         .hiwi-watermark {
           position: absolute; inset: 0;
           display: flex; align-items: center; justify-content: center;
