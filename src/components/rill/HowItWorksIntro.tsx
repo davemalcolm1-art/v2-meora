@@ -326,15 +326,14 @@ export default function HowItWorksIntro() {
               ))}
               <div className="hiwi-frame-tint" />
 
-              <div className="hiwi-cards-layer">
+              <div className="hiwi-cards-layer" key={`cards-${active}-${cardIdx}`}>
                 {steps[active].cards.map((c, i) => (
                   <div
-                    key={`${active}-${i}`}
-                    className={`hiwi-card-slot ${i === cardIdx ? "is-in" : ""}`}
+                    key={i}
+                    className="hiwi-card-slot"
+                    style={{ animationDelay: `${i * 3.4}s` }}
                   >
-                    <div className="hiwi-card-float">
-                      <GlassCard icon={c.icon} title={c.title} />
-                    </div>
+                    <GlassCard icon={c.icon} title={c.title} />
                   </div>
                 ))}
               </div>
