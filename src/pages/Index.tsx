@@ -9,7 +9,6 @@ import ScienceCards from "@/components/rill/ScienceCards";
 import Stats from "@/components/rill/Stats";
 import Journal from "@/components/rill/Journal";
 import CtaBanner from "@/components/rill/CtaBanner";
-import FAQ from "@/components/rill/FAQ";
 import Footer from "@/components/rill/Footer";
 import QuizModal from "@/components/rill/QuizModal";
 import { QuizProvider } from "@/components/rill/quizContext";
@@ -36,7 +35,6 @@ const Index = () => {
       <ScienceCards />
       <Journal />
       <CtaBanner />
-      <FAQ />
       <Footer showMask />
       <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
     </QuizProvider>
