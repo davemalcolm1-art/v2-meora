@@ -206,19 +206,26 @@ export default function HowItWorksIntro() {
         .hiwi-cards-layer {
           position: absolute;
           inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 32px;
           pointer-events: none;
         }
-        .hiwi-card-pos {
+        .hiwi-card-slot {
           position: absolute;
           opacity: 0;
-          transform: translate(var(--fx, 0), 24px);
-          animation: hiwi-flyin 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+          max-width: calc(100% - 64px);
+          max-height: calc(100% - 64px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .hiwi-card-pos.pos-tl { top: 8%; left: 6%; --fx: -16px; }
-        .hiwi-card-pos.pos-br { bottom: 8%; right: 6%; --fx: 16px; }
-        .hiwi-card-pos.delay-1 { animation-delay: 0.15s; }
-        @keyframes hiwi-flyin {
-          to { opacity: 1; transform: translate(0, 0); }
+        .hiwi-card-slot.is-in {
+          opacity: 1;
+          transform: translateY(0);
         }
         .hiwi-card-float {
           animation: hiwi-float 4s ease-in-out infinite;
