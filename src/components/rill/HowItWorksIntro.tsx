@@ -364,12 +364,12 @@ export default function HowItWorksIntro() {
 
         .hiwi-watermark {
           position: absolute; inset: 0;
-          display: flex; align-items: center; justify-content: center;
+          display: flex; align-items: flex-start; justify-content: flex-end;
           pointer-events: none;
         }
         .hiwi-watermark svg {
-          max-width: 95%;
-          max-height: 95%;
+          width: 80%;
+          height: 80%;
           opacity: 0.05;
         }
 
