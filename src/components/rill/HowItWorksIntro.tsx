@@ -366,7 +366,8 @@ export default function HowItWorksIntro() {
         .hiwi-card-slot {
           position: absolute;
           top: 50%; left: 50%;
-          width: min(calc(100% - 64px), 360px);
+          width: min(calc(100% - 64px), 320px);
+          aspect-ratio: 5 / 6;
           transform: translate(-50%, -50%);
           opacity: 0;
           will-change: transform, opacity;
@@ -383,6 +384,8 @@ export default function HowItWorksIntro() {
         /* ---------- Mock cards ---------- */
         .mock-card {
           width: 100%;
+          height: 100%;
+          aspect-ratio: 5 / 6;
           background: #102028;
           border: 1px solid rgba(250,247,242,0.08);
           border-radius: 20px;
@@ -390,7 +393,11 @@ export default function HowItWorksIntro() {
           color: ${CREAM};
           font-family: 'DM Sans', sans-serif;
           box-shadow: 0 24px 60px -20px rgba(0,0,0,0.5);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
         }
+        .mock-card > :last-child { margin-bottom: 0; }
         .mock-head {
           display: flex; align-items: center; justify-content: space-between;
           margin-bottom: 16px; gap: 12px;
