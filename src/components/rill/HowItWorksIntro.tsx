@@ -347,7 +347,7 @@ export default function HowItWorksIntro() {
           max-height: 620px;
           border-radius: 28px;
           overflow: hidden;
-          background: ${INK};
+          background: radial-gradient(ellipse 100% 90% at 50% 30%, #243845 0%, #16252E 100%);
           box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
         }
         .hiwi-frame-grain {
