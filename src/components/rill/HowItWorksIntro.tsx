@@ -366,7 +366,8 @@ export default function HowItWorksIntro() {
         .hiwi-card-slot {
           position: absolute;
           top: 50%; left: 50%;
-          width: min(calc(100% - 64px), 360px);
+          width: min(calc(100% - 64px), 320px);
+          aspect-ratio: 5 / 6;
           transform: translate(-50%, -50%);
           opacity: 0;
           will-change: transform, opacity;
