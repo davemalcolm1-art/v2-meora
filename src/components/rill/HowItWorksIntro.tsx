@@ -90,13 +90,9 @@ export default function HowItWorksIntro() {
     return () => observer.disconnect();
   }, []);
 
-  // Restart card sequence whenever the active step changes, and loop between the two cards.
+  // Restart card conveyor whenever the active step changes (CSS-driven loop).
   useEffect(() => {
-    setCardIdx(0);
-    const interval = setInterval(() => {
-      setCardIdx((i) => (i + 1) % 2);
-    }, 2600);
-    return () => clearInterval(interval);
+    setCardIdx((n) => n + 1);
   }, [active]);
 
   const progress = ((active + 1) / steps.length) * 100;
@@ -206,34 +202,29 @@ export default function HowItWorksIntro() {
         .hiwi-cards-layer {
           position: absolute;
           inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 32px;
           pointer-events: none;
+          overflow: hidden;
         }
         .hiwi-card-slot {
           position: absolute;
+          top: 50%;
+          left: 50%;
           opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-          max-width: calc(100% - 64px);
-          max-height: calc(100% - 64px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          transform: translate(-50%, -50%);
+          will-change: transform, opacity;
+          /* 6.8s total cycle: 0.7s enter + 2s hold + 0.7s exit + 3.4s offscreen wait */
+          animation: hiwi-conveyor 6.8s ease-in-out infinite;
         }
-        .hiwi-card-slot.is-in {
-          opacity: 1;
-          transform: translateY(0);
+        @keyframes hiwi-conveyor {
+          0%   { transform: translate(calc(-50% + 110%), -50%); opacity: 0; }
+          3%   { opacity: 0; }
+          10%  { transform: translate(-50%, -50%); opacity: 1; }
+          40%  { transform: translate(-50%, -50%); opacity: 1; }
+          47%  { opacity: 0; }
+          50%  { transform: translate(calc(-50% - 110%), -50%); opacity: 0; }
+          100% { transform: translate(calc(-50% - 110%), -50%); opacity: 0; }
         }
-        .hiwi-card-float {
-          animation: hiwi-float 4s ease-in-out infinite;
-        }
-        @keyframes hiwi-float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
+
 
         .hiwi-driver {
           display: flex;
@@ -250,10 +241,10 @@ export default function HowItWorksIntro() {
         }
 
         .glass-card {
-          width: clamp(220px, 38%, 300px);
+          width: clamp(300px, 80%, 440px);
           aspect-ratio: 1 / 1;
-          padding: 24px;
-          border-radius: 24px;
+          padding: 32px;
+          border-radius: 28px;
           background: rgba(26,43,53,0.5);
           backdrop-filter: blur(24px) saturate(140%);
           -webkit-backdrop-filter: blur(24px) saturate(140%);
@@ -265,7 +256,7 @@ export default function HowItWorksIntro() {
           justify-content: space-between;
         }
         .glass-icon { color: ${CREAM}; opacity: 0.95; }
-        .glass-icon svg { width: 40px; height: 40px; }
+        .glass-icon svg { width: 48px; height: 48px; }
         .glass-title-lg {
           font-family: 'DM Sans', sans-serif;
           font-weight: 500;
@@ -335,15 +326,14 @@ export default function HowItWorksIntro() {
               ))}
               <div className="hiwi-frame-tint" />
 
-              <div className="hiwi-cards-layer">
+              <div className="hiwi-cards-layer" key={`cards-${active}-${cardIdx}`}>
                 {steps[active].cards.map((c, i) => (
                   <div
-                    key={`${active}-${i}`}
-                    className={`hiwi-card-slot ${i === cardIdx ? "is-in" : ""}`}
+                    key={i}
+                    className="hiwi-card-slot"
+                    style={{ animationDelay: `${i * 3.4}s` }}
                   >
-                    <div className="hiwi-card-float">
-                      <GlassCard icon={c.icon} title={c.title} />
-                    </div>
+                    <GlassCard icon={c.icon} title={c.title} />
                   </div>
                 ))}
               </div>
