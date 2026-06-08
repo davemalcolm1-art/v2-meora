@@ -1,7 +1,9 @@
 import MaskSection from "./MaskSection";
 
 const domainLinks = ["Energy", "Performance", "Balance", "Recovery", "Longevity", "Beauty"];
-const companyLinks = ["About Meora", "Our Doctors", "Our Standards", "Journal", "Contact"];
+const companyLinks: (string | { label: string; href: string })[] = [
+  "About Meora", "Our Doctors", "Our Standards", "Journal", "Contact", { label: "FAQ", href: "/faq" }
+];
 const supportLinks = ["Privacy Policy", "Terms & Conditions", "Telehealth Disclaimer", "Product Disclaimer"];
 
 const colLabel: React.CSSProperties = {
@@ -14,12 +16,16 @@ const linkStyle: React.CSSProperties = {
   textDecoration: "none", transition: "color 0.2s ease",
 };
 
-const LinkCol = ({ label, items }: { label: string; items: string[] }) => (
+const LinkCol = ({ label, items }: { label: string; items: (string | { label: string; href: string })[] }) => (
   <div>
     <div style={colLabel}>{label}</div>
-    {items.map((l) => (
-      <a key={l} href="#" className="footer-link" style={linkStyle}>{l}</a>
-    ))}
+    {items.map((item) => {
+      const text = typeof item === "string" ? item : item.label;
+      const href = typeof item === "string" ? "#" : item.href;
+      return (
+        <a key={text} href={href} className="footer-link" style={linkStyle}>{text}</a>
+      );
+    })}
   </div>
 );
 

@@ -9,6 +9,7 @@ import Privacy from "./pages/Privacy.tsx";
 import Book from "./pages/Book.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Protocol from "./pages/Protocol.tsx";
+import FAQPage from "./pages/FAQ.tsx";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/book" element={<Book />} />
+              <Route path="/faq" element={<FAQPage />} />
               <Route path="/protocols/:slug" element={<Protocol />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

@@ -33,6 +33,7 @@ const NAV_LINKS = [
   { label: "How It Works", href: "#how" },
   { label: "About",        href: "#about" },
   { label: "Journal",      href: "#journal" },
+  { label: "FAQ",          href: "/faq" },
 ];
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
