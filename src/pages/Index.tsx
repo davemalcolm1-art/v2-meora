@@ -4,7 +4,7 @@ import HeroSection from "@/components/rill/HeroSection";
 import TrustStrip from "@/components/rill/TrustStrip";
 import HowItWorksIntro from "@/components/rill/HowItWorksIntro";
 import DomainStrips from "@/components/rill/DomainStrips";
-import HowItWorks from "@/components/rill/HowItWorks";
+
 import ScienceCards from "@/components/rill/ScienceCards";
 import Stats from "@/components/rill/Stats";
 import Journal from "@/components/rill/Journal";
@@ -31,7 +31,7 @@ const Index = () => {
       <TrustStrip />
       <HowItWorksIntro />
       <DomainStrips />
-      <HowItWorks />
+      
       <ScienceCards />
       <Journal />
       <CtaBanner />

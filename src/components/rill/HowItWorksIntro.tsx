@@ -1,78 +1,168 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuiz } from "./quizContext";
-import bgStep1 from "@/assets/domains/balance-hero.jpg.asset.json";
-import bgStep2 from "@/assets/domains/longevity-hero.jpg.asset.json";
-import bgStep3 from "@/assets/domains/performance-hero.jpg.asset.json";
 
 const CREAM = "#FAF7F2";
 const INK = "#1A2B35";
 const ORANGE = "#E8571A";
 
-type Card = { icon: string; title: string };
-const steps: { n: string; title: string; desc: string; cards: Card[]; bg: string }[] = [
+type StepKind = "assessment" | "telehealth" | "shipping" | "vitality";
+const steps: { n: string; title: string; desc: string; kind: StepKind }[] = [
   {
     n: "01",
-    title: "Complete your assessment & book your consultation",
-    desc: "Tell us about your health history, goals, and lifestyle in a quick five-minute assessment, then choose a time that suits you to meet your doctor.",
-    cards: [
-      { icon: "clipboard", title: "Five-minute\nhealth assessment" },
-      { icon: "calendar", title: "Pick a time\nthat suits you" },
-    ],
-    bg: bgStep1.url,
+    title: "Complete your assessment",
+    desc: "A quick, five-minute health assessment about your goals, history, and lifestyle.",
+    kind: "assessment",
   },
   {
     n: "02",
-    title: "Meet your Meora doctor, review assessment and test results",
-    desc: "A real telehealth consultation with an AHPRA-registered Australian GP who reviews your assessment and test results, understands your goals, and designs a personalised longevity protocol just for you.",
-    cards: [
-      { icon: "video", title: "Telehealth\nwith your doctor" },
-      { icon: "map", title: "Personalised\nlongevity roadmap" },
-    ],
-    bg: bgStep2.url,
+    title: "Your personalised plan",
+    desc: "Meet your AHPRA-registered doctor in a real-time telehealth consult. They review everything and design a longevity protocol built around you.",
+    kind: "telehealth",
   },
   {
     n: "03",
-    title: "Your protocol, delivered",
-    desc: "Compounded at a registered Australian pharmacy and shipped cold-chain directly to your door. Ongoing quarterly monitoring included.",
-    cards: [
-      { icon: "flask", title: "Compounded at an\nAustralian pharmacy" },
-      { icon: "box", title: "Cold-chain shipping\nto your door" },
-    ],
-    bg: bgStep3.url,
+    title: "Delivered to your door",
+    desc: "Compounded at a registered Australian pharmacy and shipped cold-chain, straight to you.",
+    kind: "shipping",
+  },
+  {
+    n: "04",
+    title: "Ongoing review",
+    desc: "Quarterly check-ins and continuous adjustment as your goals and biology evolve.",
+    kind: "vitality",
   },
 ];
 
-function Icon({ name }: { name: string }) {
-  const common = { width: 36, height: 36, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  switch (name) {
-    case "clipboard": return (<svg {...common}><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 11 1.5 1.5L13 10"/><path d="m9 16 1.5 1.5L13 15"/></svg>);
-    case "calendar": return (<svg {...common}><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>);
-    case "shield": return (<svg {...common}><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6l-7-3Z"/></svg>);
-    case "video": return (<svg {...common}><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>);
-    case "lab": return (<svg {...common}><path d="M9 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L15 9V3"/><path d="M9 3h6"/></svg>);
-    case "map": return (<svg {...common}><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v16M15 6v16"/></svg>);
-    case "flask": return (<svg {...common}><path d="M10 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-10V3"/><path d="M8 14h8"/></svg>);
-    case "box": return (<svg {...common}><path d="m12 3 9 4v10l-9 4-9-4V7l9-4Z"/><path d="m3 7 9 4 9-4M12 11v10"/></svg>);
-    case "pulse": return (<svg {...common}><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>);
-    default: return null;
-  }
-}
-
-function GlassCard({ icon, title }: Card) {
+function AssessmentCard() {
+  const items = [
+    { t: "Sleep quality", done: true },
+    { t: "Energy levels", done: true },
+    { t: "Training load", done: true },
+    { t: "Recovery & stress", done: false },
+    { t: "Goals & priorities", done: false },
+  ];
   return (
-    <div className="glass-card">
-      <div className="glass-icon"><Icon name={icon} /></div>
-      <div className="glass-title-lg">{title.split("\n").map((l, i) => <span key={i}>{l}<br/></span>)}</div>
+    <div className="mock-card">
+      <div className="mock-head">
+        <span className="mock-eyebrow">Health assessment</span>
+        <span className="mock-pill">3 of 5</span>
+      </div>
+      <ul className="mock-list">
+        {items.map((it, i) => (
+          <li key={i} className={`mock-row ${it.done ? "is-done" : ""}`}>
+            <span className="mock-check" aria-hidden="true">
+              {it.done ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+              ) : null}
+            </span>
+            <span className="mock-row-text">{it.t}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mock-progress"><div style={{ width: "60%" }} /></div>
     </div>
   );
+}
+
+function TelehealthCard() {
+  return (
+    <div className="mock-card mock-video">
+      <div className="mock-video-stage">
+        <div className="mock-live">
+          <span className="mock-live-dot" /> LIVE
+        </div>
+        <div className="mock-avatar">DC</div>
+        <div className="mock-video-controls">
+          <span /><span /><span className="mock-ctl-end" />
+        </div>
+      </div>
+      <div className="mock-video-meta">
+        <div className="mock-vm-title">Dr Chen</div>
+        <div className="mock-vm-sub">GP · Telehealth consult</div>
+      </div>
+    </div>
+  );
+}
+
+function ShippingCard() {
+  const stages = ["Compounded", "Dispatched", "Delivered"];
+  const active = 1;
+  return (
+    <div className="mock-card">
+      <div className="mock-head">
+        <span className="mock-eyebrow">Order #M-2841</span>
+        <span className="mock-pill">In transit</span>
+      </div>
+      <div className="mock-track">
+        {stages.map((s, i) => (
+          <div key={s} className={`mock-track-step ${i <= active ? "is-on" : ""}`}>
+            <div className="mock-track-dot" />
+            <div className="mock-track-label">{s}</div>
+          </div>
+        ))}
+        <div className="mock-track-line"><div style={{ width: `${(active / (stages.length - 1)) * 100}%` }} /></div>
+      </div>
+      <div className="mock-foot">
+        <div>
+          <div className="mock-foot-k">ETA</div>
+          <div className="mock-foot-v">Tue, 2:30pm</div>
+        </div>
+        <div>
+          <div className="mock-foot-k">Cold-chain</div>
+          <div className="mock-foot-v">2–8°C</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VitalityCard() {
+  const score = 92;
+  const R = 52;
+  const C = 2 * Math.PI * R;
+  const offset = C - (score / 100) * C;
+  return (
+    <div className="mock-card mock-vitality">
+      <div className="mock-head">
+        <span className="mock-eyebrow">Vitality score</span>
+        <span className="mock-pill">Q2 review</span>
+      </div>
+      <div className="mock-ring-wrap">
+        <svg width="160" height="160" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r={R} stroke="rgba(250,247,242,0.12)" strokeWidth="10" fill="none" />
+          <circle
+            cx="65" cy="65" r={R}
+            stroke={ORANGE}
+            strokeWidth="10"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={C}
+            strokeDashoffset={offset}
+            transform="rotate(-90 65 65)"
+          />
+        </svg>
+        <div className="mock-ring-num">{score}</div>
+      </div>
+      <div className="mock-foot">
+        <div><div className="mock-foot-k">Energy</div><div className="mock-foot-v">+18%</div></div>
+        <div><div className="mock-foot-k">Sleep</div><div className="mock-foot-v">+24%</div></div>
+        <div><div className="mock-foot-k">Recovery</div><div className="mock-foot-v">+12%</div></div>
+      </div>
+    </div>
+  );
+}
+
+function MockCard({ kind }: { kind: StepKind }) {
+  if (kind === "assessment") return <AssessmentCard />;
+  if (kind === "telehealth") return <TelehealthCard />;
+  if (kind === "shipping") return <ShippingCard />;
+  return <VitalityCard />;
 }
 
 export default function HowItWorksIntro() {
   const { open: openQuiz } = useQuiz();
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const [cardIdx, setCardIdx] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -90,11 +180,6 @@ export default function HowItWorksIntro() {
     return () => observer.disconnect();
   }, []);
 
-  // Restart card conveyor whenever the active step changes (CSS-driven loop).
-  useEffect(() => {
-    setCardIdx((n) => n + 1);
-  }, [active]);
-
   const progress = ((active + 1) / steps.length) * 100;
 
   return (
@@ -107,72 +192,50 @@ export default function HowItWorksIntro() {
           gap: 80px;
           align-items: flex-start;
         }
-        .hiwi-sticky {
-          position: sticky;
-          top: 120px;
-          align-self: flex-start;
-        }
+        .hiwi-sticky { position: sticky; top: 120px; align-self: flex-start; }
         .hiwi-eyebrow {
           font-family: 'DM Sans', sans-serif;
-          font-weight: 500;
-          font-size: 12px;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: ${ORANGE};
-          margin: 0 0 20px;
+          font-weight: 500; font-size: 12px;
+          letter-spacing: 0.22em; text-transform: uppercase;
+          color: ${ORANGE}; margin: 0 0 20px;
         }
         .hiwi-h2 {
           font-family: 'Fraunces', Georgia, serif;
-          font-weight: 400;
-          font-size: clamp(36px, 4vw, 56px);
-          line-height: 1.05;
-          letter-spacing: -0.02em;
-          color: ${INK};
-          margin: 0 0 48px;
+          font-weight: 400; font-size: clamp(36px, 4vw, 56px);
+          line-height: 1.05; letter-spacing: -0.02em;
+          color: ${INK}; margin: 0 0 48px;
         }
         .hiwi-active-num {
           font-family: 'DM Sans', sans-serif;
-          font-weight: 600;
-          font-size: 14px;
-          letter-spacing: 0.16em;
-          color: ${ORANGE};
-          margin: 0 0 16px;
+          font-weight: 600; font-size: 14px;
+          letter-spacing: 0.16em; color: ${ORANGE}; margin: 0 0 16px;
         }
         .hiwi-active-title {
           font-family: 'Fraunces', Georgia, serif;
-          font-weight: 400;
-          font-size: 32px;
-          line-height: 1.15;
-          letter-spacing: -0.01em;
-          color: ${INK};
-          margin: 0 0 16px;
-          transition: opacity 0.4s ease;
+          font-weight: 400; font-size: 32px; line-height: 1.15;
+          letter-spacing: -0.01em; color: ${INK}; margin: 0 0 16px;
         }
         .hiwi-active-desc {
           font-family: 'DM Sans', sans-serif;
-          font-size: 16px;
-          line-height: 1.65;
-          color: rgba(26,43,53,0.65);
-          margin: 0;
-          max-width: 460px;
-          transition: opacity 0.4s ease;
+          font-size: 16px; line-height: 1.65;
+          color: rgba(26,43,53,0.65); margin: 0; max-width: 460px;
         }
         .hiwi-progress {
-          margin-top: 48px;
-          width: 180px;
-          height: 2px;
-          background: rgba(26,43,53,0.12);
-          border-radius: 2px;
-          overflow: hidden;
+          margin-top: 48px; width: 220px; height: 2px;
+          background: rgba(26,43,53,0.12); border-radius: 2px; overflow: hidden;
         }
         .hiwi-progress-fill {
-          height: 100%;
-          background: ${ORANGE};
+          height: 100%; background: ${ORANGE};
           transition: width 0.5s ease;
         }
 
-        /* Right column: contains sticky frame + invisible scroll spacers */
+        /* Right column uses a sticky stage with explicit total height */
         .hiwi-right { position: relative; min-width: 0; }
+        .hiwi-stage {
+          position: relative;
+          /* Total scroll: one viewport per step */
+          height: calc(100vh * 4);
+        }
         .hiwi-sticky-frame {
           position: sticky;
           top: 120px;
@@ -181,108 +244,185 @@ export default function HowItWorksIntro() {
           max-height: 620px;
           border-radius: 28px;
           overflow: hidden;
-          box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
           background: ${INK};
+          box-shadow: 0 40px 100px -30px rgba(26,43,53,0.45);
         }
-        .hiwi-bg-layer {
-          position: absolute;
-          inset: 0;
-          background-size: cover;
-          background-position: center;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-        }
-        .hiwi-bg-layer.is-active { opacity: 1; }
-        .hiwi-frame-tint {
+        .hiwi-frame-grain {
           position: absolute; inset: 0;
-          background: linear-gradient(180deg, rgba(26,43,53,0.10), rgba(26,43,53,0.35));
+          background:
+            radial-gradient(ellipse at top right, rgba(232,87,26,0.12), transparent 55%),
+            radial-gradient(ellipse at bottom left, rgba(255,255,255,0.05), transparent 60%);
           pointer-events: none;
         }
 
-        .hiwi-cards-layer {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          overflow: hidden;
+        .hiwi-card-layer {
+          position: absolute; inset: 0;
+          display: flex; align-items: center; justify-content: center;
+          padding: 40px;
         }
         .hiwi-card-slot {
           position: absolute;
-          top: 50%;
-          left: 50%;
           opacity: 0;
-          transform: translate(-50%, -50%);
-          will-change: transform, opacity;
-          /* 6.8s total cycle: 0.7s enter + 2s hold + 0.7s exit + 3.4s offscreen wait */
-          animation: hiwi-conveyor 6.8s ease-in-out infinite;
+          transform: translateX(60px);
+          transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+          width: min(100%, 360px);
         }
-        @keyframes hiwi-conveyor {
-          0%   { transform: translate(calc(-50% + 110%), -50%); opacity: 0; }
-          3%   { opacity: 0; }
-          10%  { transform: translate(-50%, -50%); opacity: 1; }
-          40%  { transform: translate(-50%, -50%); opacity: 1; }
-          47%  { opacity: 0; }
-          50%  { transform: translate(calc(-50% - 110%), -50%); opacity: 0; }
-          100% { transform: translate(calc(-50% - 110%), -50%); opacity: 0; }
+        .hiwi-card-slot.is-active {
+          opacity: 1;
+          transform: translateX(0);
         }
 
-
+        /* Invisible spacers drive IntersectionObserver — 4 × 100vh in the stage */
         .hiwi-driver {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-          /* Sits behind the sticky frame in the same column */
-          margin-top: calc(-1 * min(620px, 60vw * 6 / 5));
-          position: relative;
-          z-index: 1;
+          position: absolute; inset: 0;
+          display: flex; flex-direction: column;
           pointer-events: none;
         }
-        .hiwi-step-spacer {
-          min-height: 90vh;
-        }
+        .hiwi-step-spacer { flex: 1 1 0; min-height: 0; }
 
-        .glass-card {
-          width: clamp(300px, 80%, 440px);
-          aspect-ratio: 1 / 1;
-          padding: 32px;
-          border-radius: 28px;
-          background: rgba(26,43,53,0.5);
-          backdrop-filter: blur(24px) saturate(140%);
-          -webkit-backdrop-filter: blur(24px) saturate(140%);
-          border: 1px solid rgba(255,255,255,0.18);
-          box-shadow: 0 30px 80px -20px rgba(26,43,53,0.4);
+        /* ---------- Mock cards ---------- */
+        .mock-card {
+          width: 100%;
+          background: #102028;
+          border: 1px solid rgba(250,247,242,0.08);
+          border-radius: 20px;
+          padding: 22px;
           color: ${CREAM};
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-        .glass-icon { color: ${CREAM}; opacity: 0.95; }
-        .glass-icon svg { width: 48px; height: 48px; }
-        .glass-title-lg {
           font-family: 'DM Sans', sans-serif;
-          font-weight: 500;
-          font-size: 18px;
-          line-height: 1.25;
-          letter-spacing: -0.005em;
-          color: ${CREAM};
+          box-shadow: 0 24px 60px -20px rgba(0,0,0,0.5);
+        }
+        .mock-head {
+          display: flex; align-items: center; justify-content: space-between;
+          margin-bottom: 16px;
+        }
+        .mock-eyebrow {
+          font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+          color: rgba(250,247,242,0.55); font-weight: 500;
+        }
+        .mock-pill {
+          font-size: 11px; padding: 4px 10px; border-radius: 999px;
+          background: rgba(232,87,26,0.15); color: ${ORANGE};
+          letter-spacing: 0.04em;
+        }
+        .mock-list { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px; }
+        .mock-row {
+          display: flex; align-items: center; gap: 12px;
+          padding: 10px 12px; border-radius: 10px;
+          background: rgba(250,247,242,0.04);
+          font-size: 14px;
+        }
+        .mock-row.is-done { color: ${CREAM}; }
+        .mock-row:not(.is-done) { color: rgba(250,247,242,0.5); }
+        .mock-check {
+          width: 18px; height: 18px; border-radius: 50%;
+          display: inline-flex; align-items: center; justify-content: center;
+          background: rgba(250,247,242,0.08); color: ${ORANGE};
+          flex-shrink: 0;
+        }
+        .mock-row.is-done .mock-check { background: ${ORANGE}; color: ${INK}; }
+        .mock-progress {
+          height: 4px; background: rgba(250,247,242,0.08);
+          border-radius: 4px; overflow: hidden;
+        }
+        .mock-progress > div { height: 100%; background: ${ORANGE}; }
+
+        .mock-video-stage {
+          position: relative; aspect-ratio: 4/3;
+          background: linear-gradient(135deg, #1f3a48, #0c1a22);
+          border-radius: 14px; overflow: hidden;
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 14px;
+        }
+        .mock-live {
+          position: absolute; top: 12px; left: 12px;
+          font-size: 10px; letter-spacing: 0.18em; font-weight: 600;
+          color: ${CREAM}; display: flex; align-items: center; gap: 6px;
+          background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 999px;
+        }
+        .mock-live-dot {
+          width: 6px; height: 6px; border-radius: 50%;
+          background: #ff3b3b;
+          box-shadow: 0 0 0 0 rgba(255,59,59,0.6);
+          animation: mockPulse 1.6s ease-out infinite;
+        }
+        @keyframes mockPulse {
+          0% { box-shadow: 0 0 0 0 rgba(255,59,59,0.6); }
+          100% { box-shadow: 0 0 0 8px rgba(255,59,59,0); }
+        }
+        .mock-avatar {
+          width: 72px; height: 72px; border-radius: 50%;
+          background: linear-gradient(135deg, ${ORANGE}, #b53d0f);
+          color: ${CREAM}; font-weight: 600; font-size: 22px;
+          display: flex; align-items: center; justify-content: center;
+          letter-spacing: 0.04em;
+        }
+        .mock-video-controls {
+          position: absolute; bottom: 12px; left: 50%;
+          transform: translateX(-50%);
+          display: flex; gap: 8px;
+        }
+        .mock-video-controls span {
+          width: 26px; height: 26px; border-radius: 50%;
+          background: rgba(250,247,242,0.15);
+        }
+        .mock-video-controls .mock-ctl-end { background: #ff3b3b; }
+        .mock-vm-title { font-weight: 600; font-size: 15px; }
+        .mock-vm-sub { font-size: 12px; color: rgba(250,247,242,0.55); margin-top: 2px; }
+
+        .mock-track {
+          position: relative; display: flex; justify-content: space-between;
+          margin: 8px 4px 20px; padding-bottom: 24px;
+        }
+        .mock-track-line {
+          position: absolute; left: 6px; right: 6px; top: 6px; height: 2px;
+          background: rgba(250,247,242,0.1); border-radius: 2px;
+        }
+        .mock-track-line > div { height: 100%; background: ${ORANGE}; border-radius: 2px; }
+        .mock-track-step { position: relative; z-index: 1; text-align: center; flex: 1; }
+        .mock-track-dot {
+          width: 14px; height: 14px; border-radius: 50%;
+          background: #102028;
+          border: 2px solid rgba(250,247,242,0.2);
+          margin: 0 auto 8px;
+        }
+        .mock-track-step.is-on .mock-track-dot {
+          background: ${ORANGE}; border-color: ${ORANGE};
+        }
+        .mock-track-label {
+          font-size: 11px; letter-spacing: 0.04em;
+          color: rgba(250,247,242,0.55);
+        }
+        .mock-track-step.is-on .mock-track-label { color: ${CREAM}; }
+
+        .mock-foot {
+          display: flex; gap: 24px; padding-top: 12px;
+          border-top: 1px solid rgba(250,247,242,0.06);
+        }
+        .mock-foot-k { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,247,242,0.45); }
+        .mock-foot-v { font-size: 14px; font-weight: 600; margin-top: 4px; }
+
+        .mock-ring-wrap {
+          position: relative;
+          display: flex; align-items: center; justify-content: center;
+          margin: 8px 0 16px;
+        }
+        .mock-ring-num {
+          position: absolute;
+          font-family: 'Fraunces', Georgia, serif;
+          font-size: 44px; font-weight: 400;
         }
 
         .hiwi-cta-wrap {
-          display: flex;
-          justify-content: center;
+          display: flex; justify-content: center;
           padding: 60px 24px 40px;
         }
         .hiwi-cta {
-          background: ${ORANGE};
-          color: ${CREAM};
-          border: none;
-          border-radius: 999px;
+          background: ${ORANGE}; color: ${CREAM};
+          border: none; border-radius: 999px;
           padding: 18px 36px;
           font-family: 'DM Sans', sans-serif;
-          font-weight: 600;
-          font-size: 14px;
-          letter-spacing: 0.04em;
-          cursor: pointer;
-          transition: transform 0.2s ease, background 0.2s ease;
+          font-weight: 600; font-size: 14px; letter-spacing: 0.04em;
+          cursor: pointer; transition: transform 0.2s ease, background 0.2s ease;
         }
         .hiwi-cta:hover { transform: translateY(-2px); background: #ff6320; }
 
@@ -290,8 +430,8 @@ export default function HowItWorksIntro() {
           .hiwi-wrap { padding: 80px 20px 40px; }
           .hiwi-grid { grid-template-columns: 1fr; gap: 32px; }
           .hiwi-sticky { position: static; }
+          .hiwi-stage { height: auto; }
           .hiwi-sticky-frame { position: relative; top: auto; }
-          .hiwi-driver { margin-top: 0; }
           .hiwi-h2 { font-size: 32px; }
         }
       `}</style>
@@ -314,40 +454,34 @@ export default function HowItWorksIntro() {
             </div>
           </div>
 
-          {/* Right column: pinned frame + invisible scroll-driver spacers */}
+          {/* Right column: stage with sticky frame + driver spacers */}
           <div className="hiwi-right">
-            <div className="hiwi-sticky-frame">
-              {steps.map((s, i) => (
-                <div
-                  key={s.n}
-                  className={`hiwi-bg-layer ${i === active ? "is-active" : ""}`}
-                  style={{ backgroundImage: `url(${s.bg})` }}
-                />
-              ))}
-              <div className="hiwi-frame-tint" />
+            <div className="hiwi-stage">
+              <div className="hiwi-sticky-frame">
+                <div className="hiwi-frame-grain" />
+                <div className="hiwi-card-layer">
+                  {steps.map((s, i) => (
+                    <div
+                      key={s.n}
+                      className={`hiwi-card-slot ${i === active ? "is-active" : ""}`}
+                      aria-hidden={i !== active}
+                    >
+                      <MockCard kind={s.kind} />
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-              <div className="hiwi-cards-layer" key={`cards-${active}-${cardIdx}`}>
-                {steps[active].cards.map((c, i) => (
+              <div className="hiwi-driver" aria-hidden="true">
+                {steps.map((s, i) => (
                   <div
-                    key={i}
-                    className="hiwi-card-slot"
-                    style={{ animationDelay: `${i * 3.4}s` }}
-                  >
-                    <GlassCard icon={c.icon} title={c.title} />
-                  </div>
+                    key={s.n}
+                    ref={(el) => (stepRefs.current[i] = el)}
+                    data-index={i}
+                    className="hiwi-step-spacer"
+                  />
                 ))}
               </div>
-            </div>
-
-            <div className="hiwi-driver" aria-hidden="true">
-              {steps.map((s, i) => (
-                <div
-                  key={s.n}
-                  ref={(el) => (stepRefs.current[i] = el)}
-                  data-index={i}
-                  className="hiwi-step-spacer"
-                />
-              ))}
             </div>
           </div>
         </div>
