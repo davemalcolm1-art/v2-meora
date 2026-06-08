@@ -202,34 +202,29 @@ export default function HowItWorksIntro() {
         .hiwi-cards-layer {
           position: absolute;
           inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 32px;
           pointer-events: none;
+          overflow: hidden;
         }
         .hiwi-card-slot {
           position: absolute;
+          top: 50%;
+          left: 50%;
           opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-          max-width: calc(100% - 64px);
-          max-height: calc(100% - 64px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          transform: translate(-50%, -50%);
+          will-change: transform, opacity;
+          /* 6.8s total cycle: 0.7s enter + 2s hold + 0.7s exit + 3.4s offscreen wait */
+          animation: hiwi-conveyor 6.8s ease-in-out infinite;
         }
-        .hiwi-card-slot.is-in {
-          opacity: 1;
-          transform: translateY(0);
+        @keyframes hiwi-conveyor {
+          0%   { transform: translate(calc(-50% + 110%), -50%); opacity: 0; }
+          3%   { opacity: 0; }
+          10%  { transform: translate(-50%, -50%); opacity: 1; }
+          40%  { transform: translate(-50%, -50%); opacity: 1; }
+          47%  { opacity: 0; }
+          50%  { transform: translate(calc(-50% - 110%), -50%); opacity: 0; }
+          100% { transform: translate(calc(-50% - 110%), -50%); opacity: 0; }
         }
-        .hiwi-card-float {
-          animation: hiwi-float 4s ease-in-out infinite;
-        }
-        @keyframes hiwi-float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
+
 
         .hiwi-driver {
           display: flex;
