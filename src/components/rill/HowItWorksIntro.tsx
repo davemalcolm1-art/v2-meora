@@ -90,13 +90,9 @@ export default function HowItWorksIntro() {
     return () => observer.disconnect();
   }, []);
 
-  // Restart card sequence whenever the active step changes, and loop between the two cards.
+  // Restart card conveyor whenever the active step changes (CSS-driven loop).
   useEffect(() => {
-    setCardIdx(0);
-    const interval = setInterval(() => {
-      setCardIdx((i) => (i + 1) % 2);
-    }, 2600);
-    return () => clearInterval(interval);
+    setCardIdx((n) => n + 1);
   }, [active]);
 
   const progress = ((active + 1) / steps.length) * 100;
