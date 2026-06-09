@@ -31,17 +31,17 @@ const CtaBanner = () => {
             fontWeight: 300,
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
-            color: "var(--cream)",
+            color: "#FAF7F2",
             marginBottom: 24,
             maxWidth: 960,
           }}
         >
-          <span style={{ display: "block" }}>
+          <span style={{ display: "block", color: "#FAF7F2" }}>
             Take control of what comes next.
           </span>
-          <span style={{ display: "block" }}>
+          <span style={{ display: "block", color: "#FAF7F2" }}>
             Personalised longevity designed around your goals, your biology, your{" "}
-            <span style={{ color: "var(--orange)" }}>ME.</span>
+            <span style={{ color: "#FF5003", fontFamily: "'Fraunces', serif", fontStyle: "italic", fontWeight: 400 }}>ME.</span>
           </span>
         </h2>
 
