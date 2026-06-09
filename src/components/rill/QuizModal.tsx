@@ -1,5 +1,5 @@
 import { useEffect, useState, ReactNode } from "react";
-import { Link } from "react-router-dom";
+
 import { useQuiz } from "./quizContext";
 import { supabase } from "@/integrations/supabase/client";
 
