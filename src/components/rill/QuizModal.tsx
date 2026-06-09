@@ -45,7 +45,7 @@ const TOTAL_STEPS = 6;
 
 const labelStyle: React.CSSProperties = {
   fontSize: 11,
-  color: "var(--text-dim)",
+  color: "rgba(26,43,53,0.6)",
   textTransform: "uppercase",
   letterSpacing: "0.12em",
   fontFamily: "'DM Mono', monospace",
@@ -54,34 +54,34 @@ const labelStyle: React.CSSProperties = {
 
 const subCopy: React.CSSProperties = {
   fontSize: 12,
-  color: "var(--text-dimmer)",
+  color: "rgba(26,43,53,0.55)",
   fontFamily: "'DM Mono', monospace",
   marginBottom: 12,
 };
 
 const divider: React.CSSProperties = {
   height: 1,
-  background: "rgba(245,240,232,0.1)",
+  background: "rgba(26,43,53,0.1)",
   margin: "24px 0",
 };
 
 const fieldLabel: React.CSSProperties = {
   fontSize: 13,
-  color: "var(--cream)",
+  color: "#1A2B35",
   marginBottom: 6,
   display: "block",
 };
 
 const helperText: React.CSSProperties = {
   fontSize: 12,
-  color: "var(--text-dim)",
+  color: "rgba(26,43,53,0.6)",
   lineHeight: 1.5,
   margin: "0 0 12px",
 };
 
 const subLabel: React.CSSProperties = {
   fontSize: 11,
-  color: "var(--text-dim)",
+  color: "rgba(26,43,53,0.6)",
   marginTop: 6,
   fontFamily: "'DM Mono', monospace",
 };
@@ -278,7 +278,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
       return (
         <span key={g}>
           {sep}
-          <span style={{ color: "var(--cream)" }}>{g}</span>
+          <span style={{ color: "#1A2B35" }}>{g}</span>
         </span>
       );
     });
@@ -300,7 +300,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
           <div
             style={{
               fontSize: 11,
-              color: "var(--text-dimmer)",
+              color: "rgba(26,43,53,0.55)",
               fontFamily: "'DM Mono', monospace",
               marginBottom: 12,
               textAlign: "center",
@@ -326,7 +326,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
             <div className="quiz-result">
               <div
                 className="quiz-result-icon"
-                style={{ color: "var(--orange)" }}
+                style={{ color: "#E8571A" }}
               >
                 ⚠
               </div>
@@ -526,7 +526,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                     marginTop: 12,
                     cursor: "pointer",
                     fontSize: 14,
-                    color: "var(--text-dim)",
+                    color: "rgba(26,43,53,0.7)",
                   }}
                 >
                   <input
@@ -537,7 +537,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                       if (e.target.checked) setMedications("");
                     }}
                     className="quiz-option-checkbox-input"
-                    style={{ width: 18, height: 18, accentColor: "var(--orange)" }}
+                    style={{ width: 18, height: 18, accentColor: "#E8571A" }}
                   />
                   No — I'm not currently taking any medications or supplements
                 </label>
@@ -548,7 +548,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                  <div className="quiz-field-group quiz-field-group-lg">
                   <label style={fieldLabel}>
                     Sleep quality (last 30 days) —{" "}
-                    <span style={{ color: "var(--orange)" }}>{sleepScore}/10</span>
+                    <span style={{ color: "#E8571A" }}>{sleepScore}/10</span>
                   </label>
                    <p style={helperText}>
                     Sleep affects recovery, hormones and how your body responds to treatment. Your honest answer helps your doctor tailor the protocol.
@@ -569,7 +569,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                       display: "flex",
                       justifyContent: "space-between",
                       fontSize: 11,
-                      color: "var(--text-dim)",
+                      color: "rgba(26,43,53,0.6)",
                       fontFamily: "'DM Mono', monospace",
                       marginTop: 6,
                     }}
@@ -679,7 +679,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
             <div className="quiz-result">
               <div
                 className="quiz-result-icon"
-                style={{ color: "var(--orange)" }}
+                style={{ color: "#E8571A" }}
               >
                 ✓
               </div>
@@ -717,7 +717,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
               <div
                 style={{
                   fontSize: 11,
-                  color: "var(--text-dimmer)",
+                  color: "rgba(26,43,53,0.55)",
                   marginTop: 16,
                   lineHeight: 1.6,
                   fontFamily: "'DM Mono', monospace",
