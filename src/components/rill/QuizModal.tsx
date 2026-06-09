@@ -114,10 +114,8 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
   const [showStop, setShowStop] = useState(false);
 
   const [goals, setGoals] = useState<string[]>([]);
-  const [protocols, setProtocols] = useState<string[]>([]);
   const [priorExperience, setPriorExperience] = useState("");
   const [priorCompounds, setPriorCompounds] = useState("");
-  const [specificPeptides, setSpecificPeptides] = useState<string[]>([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
