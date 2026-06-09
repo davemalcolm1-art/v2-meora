@@ -19,7 +19,7 @@ const PRIOR_OPTIONS = [
   "Yes — I've used GLP-1 medications (Ozempic, Mounjaro, Wegovy)",
 ];
 
-const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT", "Prefer not to say"];
+
 
 const MEDICAL_FLAGS = [
   "Active or recent cancer diagnosis (last 5 years)",
@@ -120,7 +120,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
-  const [stateField, setStateField] = useState("");
+  
   const [medicalFlags, setMedicalFlags] = useState<string[]>([]);
   const [medications, setMedications] = useState("");
   const [noMedications, setNoMedications] = useState(false);
@@ -147,7 +147,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
       last_name: lastName.trim(),
       email: email.trim(),
       mobile: mobile.trim(),
-      state: stateField,
+      
       medical_flags: medicalFlags,
       medications: noMedications ? "" : medications.trim(),
       sleep_score: sleepScore,
@@ -185,7 +185,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
       setLastName("");
       setEmail("");
       setMobile("");
-      setStateField("");
+      
       setMedicalFlags([]);
       setMedications("");
       setNoMedications(false);
@@ -238,7 +238,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
   const canProceed = (() => {
     if (step === 0) return goals.length >= 1;
     if (step === 1) return true;
-    if (step === 2) return firstName.trim() && lastName.trim() && validEmail(email) && mobile.trim();
+    if (step === 2) return firstName.trim() !== "" && lastName.trim() !== "" && validEmail(email) && mobile.trim() !== "";
     if (step === 3) return medicalFlags.length >= 1;
     if (step === 4)
       return (
@@ -470,18 +470,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                   onChange={(e) => setMobile(e.target.value)}
                   placeholder="Mobile number"
                 />
-                <select
-                  className="quiz-input quiz-select"
-                  value={stateField}
-                  onChange={(e) => setStateField(e.target.value)}
-                >
-                  <option value="">State (optional)</option>
-                  {STATES.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
               </>
             )}
 
