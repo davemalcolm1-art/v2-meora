@@ -10,34 +10,7 @@ type QuizModalProps = {
   onClose: () => void;
 };
 
-const GOALS = [
-  "Build muscle & lean out",
-  "More energy & drive",
-  "Better sleep & recovery",
-  "Injury recovery & tissue repair",
-  "Skin, collagen & anti-ageing",
-  "Longevity & healthy ageing",
-  "Focus, memory & mental performance",
-  "Sexual health & vitality",
-  "Weight loss",
-  "Overall health optimisation",
-];
-
-const PROTOCOLS = [
-  "Foundation.ME",
-  "Foundation Pro.ME",
-  "Recovery.ME",
-  "Recomposition.ME",
-  "Longevity.ME",
-  "Skin & Collagen.ME",
-  "Vitality.ME",
-  "Performance.ME",
-  "Cognitive.ME",
-  "Weight Loss.ME",
-  "Weight Loss Pro.ME",
-  "GLP-1.ME",
-  "Opus.ME",
-];
+const GOALS = ["Energy", "Performance", "Balance", "Recovery", "Longevity", "Beauty"];
 
 const PRIOR_OPTIONS = [
   "No — this would be my first time",
@@ -45,13 +18,6 @@ const PRIOR_OPTIONS = [
   "Yes — I'm currently on TRT or HRT",
   "Yes — I've used GLP-1 medications (Ozempic, Mounjaro, Wegovy)",
 ];
-
-const PEPTIDES = [
-  "CJC-1295", "Ipamorelin", "Tesamorelin", "BPC-157", "TB-500",
-  "AOD-9604", "Thymosin Alpha-1", "GHK-Cu", "PT-141", "Semax",
-  "Selank", "Semaglutide", "Tirzepatide", "NAD+ / NMN", "Epitalon",
-];
-const PEPTIDE_GUIDE = "I don't know yet — let my doctor guide me";
 
 const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT", "Prefer not to say"];
 
