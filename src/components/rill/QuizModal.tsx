@@ -176,11 +176,11 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
       setStep(0);
       setShowResult(false);
       setShowStop(false);
-      setGoals([]);
-      setProtocols(selectedProtocol ? [selectedProtocol] : []);
+      setGoals(
+        selectedProtocol && GOALS.includes(selectedProtocol) ? [selectedProtocol] : []
+      );
       setPriorExperience("");
       setPriorCompounds("");
-      setSpecificPeptides([]);
       setFirstName("");
       setLastName("");
       setEmail("");
