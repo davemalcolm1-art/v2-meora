@@ -51,7 +51,7 @@ const CtaBanner = () => {
             fontSize: 16,
             fontWeight: 400,
             lineHeight: 1.6,
-            color: "var(--text-dim)",
+            color: "rgba(250, 247, 242, 0.78)",
             maxWidth: 520,
             marginBottom: 36,
           }}
