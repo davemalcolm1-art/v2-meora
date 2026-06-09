@@ -1,5 +1,5 @@
 import { useEffect, useState, ReactNode } from "react";
-import { Link } from "react-router-dom";
+
 import { useQuiz } from "./quizContext";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -840,28 +840,19 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                   marginTop: 8,
                 }}
               >
-                <Link
-                  to="/book"
+                <a
+                  href="https://meora.au5.cliniko.com/bookings"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="quiz-next"
-                  style={{ width: "100%", textAlign: "center", textDecoration: "none" }}
+                  style={{ width: "100%", textAlign: "center", textDecoration: "none", display: "inline-block" }}
                   onClick={() => {
-                    try {
-                      localStorage.setItem(
-                        "meora_booking_prefill",
-                        JSON.stringify({
-                          first_name: firstName.trim(),
-                          last_name: lastName.trim(),
-                          email: email.trim(),
-                          phone: mobile.trim(),
-                        })
-                      );
-                    } catch {}
                     document.body.style.overflow = "";
                     onClose();
                   }}
                 >
                   Book your consultation →
-                </Link>
+                </a>
               </div>
 
               <div
