@@ -40,12 +40,13 @@ const CtaBanner = () => {
             Take control of what comes next.
           </span>
           <span style={{ display: "block" }}>
-            Personalised longevity designed around your goals, your biology, your{" "}
+            {"\n"}Personalised longevity designed around your goals, your biology, your{" "}
             <span style={{ color: "var(--orange)" }}>ME.</span>
           </span>
         </h2>
 
         <p
+          className="text-slate-50"
           style={{
             fontFamily: "var(--font-body)",
             fontSize: 16,
