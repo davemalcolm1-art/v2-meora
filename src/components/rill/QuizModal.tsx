@@ -219,16 +219,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
     setArr(arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val]);
   };
 
-  const togglePeptide = (val: string) => {
-    if (val === PEPTIDE_GUIDE) {
-      setSpecificPeptides(specificPeptides.includes(val) ? [] : [val]);
-    } else {
-      const without = specificPeptides.filter((v) => v !== PEPTIDE_GUIDE);
-      setSpecificPeptides(
-        without.includes(val) ? without.filter((v) => v !== val) : [...without, val]
-      );
-    }
-  };
 
   const toggleMedicalFlag = (val: string) => {
     if (val === NONE_FLAG) {
