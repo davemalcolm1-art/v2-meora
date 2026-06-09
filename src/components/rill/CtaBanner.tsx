@@ -11,12 +11,15 @@ const CtaBanner = () => {
     <section
       className="cta-banner-section section-exit-blur"
       style={{
-        width: "100%",
+        width: "auto",
         background: `
           radial-gradient(ellipse 70% 70% at 100% 0%, rgba(232,87,26,0.2) 0%, transparent 55%),
           #1A2B35
         `,
         padding: "112px 60px",
+        margin: "0 40px 24px",
+        borderRadius: 24,
+        overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
@@ -48,7 +51,7 @@ const CtaBanner = () => {
             fontSize: 16,
             fontWeight: 400,
             lineHeight: 1.6,
-            color: "var(--text-dim)",
+            color: "rgba(250, 247, 242, 0.78)",
             maxWidth: 520,
             marginBottom: 36,
           }}
@@ -114,7 +117,7 @@ const CtaBanner = () => {
           style={{
             fontFamily: "var(--font-body)",
             fontSize: 13,
-            color: "var(--text-dim)",
+            color: "rgba(250, 247, 242, 0.55)",
             margin: 0,
           }}
         >
@@ -127,7 +130,7 @@ const CtaBanner = () => {
         .newsletter-input:focus { border-color: hsl(40 30% 95% / 0.35); }
         .newsletter-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px hsl(18 100% 51% / 0.25); }
         @media (max-width: 720px) {
-          .cta-banner-section { padding: 80px 28px !important; }
+          .cta-banner-section { padding: 80px 28px !important; margin: 0 16px 16px !important; }
           .newsletter-form { flex-direction: column !important; }
           .newsletter-btn { width: 100%; }
         }
