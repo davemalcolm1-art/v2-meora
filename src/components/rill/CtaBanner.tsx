@@ -115,6 +115,7 @@ const CtaBanner = () => {
         </form>
 
         <p
+          className="text-slate-100"
           style={{
             fontFamily: "var(--font-body)",
             fontSize: 13,
