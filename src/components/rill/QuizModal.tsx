@@ -431,41 +431,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                     </div>
                   </div>
 
-                  <div style={divider} />
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: "var(--text-dim)",
-                      marginBottom: 12,
-                    }}
-                  >
-                    Any specific compounds you'd like to discuss?
-                  </div>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: 8,
-                    }}
-                  >
-                    {PEPTIDES.map((p) => (
-                      <CheckTile
-                        key={p}
-                        selected={specificPeptides.includes(p)}
-                        onClick={() => togglePeptide(p)}
-                      >
-                        {p}
-                      </CheckTile>
-                    ))}
-                  </div>
-                  <div style={{ marginTop: 8 }}>
-                    <CheckTile
-                      selected={specificPeptides.includes(PEPTIDE_GUIDE)}
-                      onClick={() => togglePeptide(PEPTIDE_GUIDE)}
-                    >
-                      {PEPTIDE_GUIDE}
-                    </CheckTile>
-                  </div>
                 </div>
               </>
             )}
