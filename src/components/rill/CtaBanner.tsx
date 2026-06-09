@@ -117,7 +117,7 @@ const CtaBanner = () => {
           style={{
             fontFamily: "var(--font-body)",
             fontSize: 13,
-            color: "var(--text-dim)",
+            color: "rgba(250, 247, 242, 0.55)",
             margin: 0,
           }}
         >
