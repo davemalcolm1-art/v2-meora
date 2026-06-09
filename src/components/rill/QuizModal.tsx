@@ -10,34 +10,7 @@ type QuizModalProps = {
   onClose: () => void;
 };
 
-const GOALS = [
-  "Build muscle & lean out",
-  "More energy & drive",
-  "Better sleep & recovery",
-  "Injury recovery & tissue repair",
-  "Skin, collagen & anti-ageing",
-  "Longevity & healthy ageing",
-  "Focus, memory & mental performance",
-  "Sexual health & vitality",
-  "Weight loss",
-  "Overall health optimisation",
-];
-
-const PROTOCOLS = [
-  "Foundation.ME",
-  "Foundation Pro.ME",
-  "Recovery.ME",
-  "Recomposition.ME",
-  "Longevity.ME",
-  "Skin & Collagen.ME",
-  "Vitality.ME",
-  "Performance.ME",
-  "Cognitive.ME",
-  "Weight Loss.ME",
-  "Weight Loss Pro.ME",
-  "GLP-1.ME",
-  "Opus.ME",
-];
+const GOALS = ["Energy", "Performance", "Balance", "Recovery", "Longevity", "Beauty"];
 
 const PRIOR_OPTIONS = [
   "No — this would be my first time",
@@ -45,13 +18,6 @@ const PRIOR_OPTIONS = [
   "Yes — I'm currently on TRT or HRT",
   "Yes — I've used GLP-1 medications (Ozempic, Mounjaro, Wegovy)",
 ];
-
-const PEPTIDES = [
-  "CJC-1295", "Ipamorelin", "Tesamorelin", "BPC-157", "TB-500",
-  "AOD-9604", "Thymosin Alpha-1", "GHK-Cu", "PT-141", "Semax",
-  "Selank", "Semaglutide", "Tirzepatide", "NAD+ / NMN", "Epitalon",
-];
-const PEPTIDE_GUIDE = "I don't know yet — let my doctor guide me";
 
 const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT", "Prefer not to say"];
 
@@ -76,15 +42,6 @@ const REFERRAL_OPTIONS = [
 
 const TOTAL_STEPS = 6;
 
-const ProtocolName = ({ name }: { name: string }) => {
-  const base = name.replace(/\.ME$/, "");
-  return (
-    <>
-      <span>{base}</span>
-      <span style={{ color: "var(--orange)" }}>.ME</span>
-    </>
-  );
-};
 
 const labelStyle: React.CSSProperties = {
   fontSize: 11,
@@ -157,10 +114,8 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
   const [showStop, setShowStop] = useState(false);
 
   const [goals, setGoals] = useState<string[]>([]);
-  const [protocols, setProtocols] = useState<string[]>([]);
   const [priorExperience, setPriorExperience] = useState("");
   const [priorCompounds, setPriorCompounds] = useState("");
-  const [specificPeptides, setSpecificPeptides] = useState<string[]>([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -186,10 +141,8 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
 
     const payload = {
       goals,
-      protocols,
       prior_experience: priorExperience,
       prior_compounds: priorCompounds,
-      specific_peptides: specificPeptides,
       first_name: firstName.trim(),
       last_name: lastName.trim(),
       email: email.trim(),
@@ -223,11 +176,11 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
       setStep(0);
       setShowResult(false);
       setShowStop(false);
-      setGoals([]);
-      setProtocols(selectedProtocol ? [selectedProtocol] : []);
+      setGoals(
+        selectedProtocol && GOALS.includes(selectedProtocol) ? [selectedProtocol] : []
+      );
       setPriorExperience("");
       setPriorCompounds("");
-      setSpecificPeptides([]);
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -266,16 +219,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
     setArr(arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val]);
   };
 
-  const togglePeptide = (val: string) => {
-    if (val === PEPTIDE_GUIDE) {
-      setSpecificPeptides(specificPeptides.includes(val) ? [] : [val]);
-    } else {
-      const without = specificPeptides.filter((v) => v !== PEPTIDE_GUIDE);
-      setSpecificPeptides(
-        without.includes(val) ? without.filter((v) => v !== val) : [...without, val]
-      );
-    }
-  };
 
   const toggleMedicalFlag = (val: string) => {
     if (val === NONE_FLAG) {
@@ -295,7 +238,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
   const canProceed = (() => {
     if (step === 0) return goals.length >= 1;
     if (step === 1) return true;
-    if (step === 2) return firstName.trim() && lastName.trim() && validEmail(email);
+    if (step === 2) return firstName.trim() && lastName.trim() && validEmail(email) && mobile.trim();
     if (step === 3) return medicalFlags.length >= 1;
     if (step === 4)
       return (
@@ -437,43 +380,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                   ))}
                 </div>
 
-                <div style={divider} />
-                <div style={labelStyle}>PROTOCOLS — OPTIONAL</div>
-                <div style={subCopy}>
-                  If you have a protocol in mind, select it. Otherwise skip —
-                  your doctor will recommend the right fit.
-                </div>
-                <div className="quiz-options">
-                  {PROTOCOLS.map((p) => {
-                    const isPre =
-                      selectedProtocol && p === selectedProtocol;
-                    return (
-                      <CheckTile
-                        key={p}
-                        selected={protocols.includes(p)}
-                        onClick={() =>
-                          toggleArr(protocols, setProtocols, p)
-                        }
-                      >
-                        <ProtocolName name={p} />
-                        {isPre && (
-                          <span
-                            style={{
-                              display: "block",
-                              fontSize: 11,
-                              fontStyle: "italic",
-                              color: "var(--text-dim)",
-                              marginTop: 4,
-                              fontFamily: "'DM Mono', monospace",
-                            }}
-                          >
-                            Pre-selected from protocols page — you can change this.
-                          </span>
-                        )}
-                      </CheckTile>
-                    );
-                  })}
-                </div>
               </>
             )}
 
@@ -525,41 +431,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                     </div>
                   </div>
 
-                  <div style={divider} />
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: "var(--text-dim)",
-                      marginBottom: 12,
-                    }}
-                  >
-                    Any specific compounds you'd like to discuss?
-                  </div>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: 8,
-                    }}
-                  >
-                    {PEPTIDES.map((p) => (
-                      <CheckTile
-                        key={p}
-                        selected={specificPeptides.includes(p)}
-                        onClick={() => togglePeptide(p)}
-                      >
-                        {p}
-                      </CheckTile>
-                    ))}
-                  </div>
-                  <div style={{ marginTop: 8 }}>
-                    <CheckTile
-                      selected={specificPeptides.includes(PEPTIDE_GUIDE)}
-                      onClick={() => togglePeptide(PEPTIDE_GUIDE)}
-                    >
-                      {PEPTIDE_GUIDE}
-                    </CheckTile>
-                  </div>
                 </div>
               </>
             )}
@@ -597,7 +468,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                   type="tel"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  placeholder="Mobile number (optional)"
+                  placeholder="Mobile number"
                 />
                 <select
                   className="quiz-input quiz-select"
