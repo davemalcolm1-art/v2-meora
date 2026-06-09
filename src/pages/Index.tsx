@@ -31,6 +31,8 @@ const Index = () => {
       <TrustStrip />
       <HowItWorksIntro />
       <DomainStrips />
+      <div aria-hidden="true" style={{ height: 96, background: CREAM }} />
+      
       
       <ScienceCards />
       <Journal />
