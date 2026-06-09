@@ -468,7 +468,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                   type="tel"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  placeholder="Mobile number (optional)"
+                  placeholder="Mobile number"
                 />
                 <select
                   className="quiz-input quiz-select"
