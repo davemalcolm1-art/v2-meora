@@ -141,10 +141,8 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
 
     const payload = {
       goals,
-      protocols,
       prior_experience: priorExperience,
       prior_compounds: priorCompounds,
-      specific_peptides: specificPeptides,
       first_name: firstName.trim(),
       last_name: lastName.trim(),
       email: email.trim(),
