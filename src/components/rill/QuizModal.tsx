@@ -380,43 +380,6 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
                   ))}
                 </div>
 
-                <div style={divider} />
-                <div style={labelStyle}>PROTOCOLS — OPTIONAL</div>
-                <div style={subCopy}>
-                  If you have a protocol in mind, select it. Otherwise skip —
-                  your doctor will recommend the right fit.
-                </div>
-                <div className="quiz-options">
-                  {PROTOCOLS.map((p) => {
-                    const isPre =
-                      selectedProtocol && p === selectedProtocol;
-                    return (
-                      <CheckTile
-                        key={p}
-                        selected={protocols.includes(p)}
-                        onClick={() =>
-                          toggleArr(protocols, setProtocols, p)
-                        }
-                      >
-                        <ProtocolName name={p} />
-                        {isPre && (
-                          <span
-                            style={{
-                              display: "block",
-                              fontSize: 11,
-                              fontStyle: "italic",
-                              color: "var(--text-dim)",
-                              marginTop: 4,
-                              fontFamily: "'DM Mono', monospace",
-                            }}
-                          >
-                            Pre-selected from protocols page — you can change this.
-                          </span>
-                        )}
-                      </CheckTile>
-                    );
-                  })}
-                </div>
               </>
             )}
 
