@@ -238,7 +238,7 @@ const QuizModal = ({ open, onClose }: QuizModalProps) => {
   const canProceed = (() => {
     if (step === 0) return goals.length >= 1;
     if (step === 1) return true;
-    if (step === 2) return firstName.trim() && lastName.trim() && validEmail(email);
+    if (step === 2) return firstName.trim() && lastName.trim() && validEmail(email) && mobile.trim();
     if (step === 3) return medicalFlags.length >= 1;
     if (step === 4)
       return (
