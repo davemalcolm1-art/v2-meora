@@ -11,12 +11,15 @@ const CtaBanner = () => {
     <section
       className="cta-banner-section section-exit-blur"
       style={{
-        width: "100%",
+        width: "auto",
         background: `
           radial-gradient(ellipse 70% 70% at 100% 0%, rgba(232,87,26,0.2) 0%, transparent 55%),
           #1A2B35
         `,
         padding: "112px 60px",
+        margin: "0 40px 24px",
+        borderRadius: 24,
+        overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
