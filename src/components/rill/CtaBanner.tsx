@@ -130,7 +130,7 @@ const CtaBanner = () => {
         .newsletter-input:focus { border-color: hsl(40 30% 95% / 0.35); }
         .newsletter-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px hsl(18 100% 51% / 0.25); }
         @media (max-width: 720px) {
-          .cta-banner-section { padding: 80px 28px !important; }
+          .cta-banner-section { padding: 80px 28px !important; margin: 0 16px 16px !important; }
           .newsletter-form { flex-direction: column !important; }
           .newsletter-btn { width: 100%; }
         }
