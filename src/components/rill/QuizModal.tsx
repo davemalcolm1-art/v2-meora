@@ -42,15 +42,6 @@ const REFERRAL_OPTIONS = [
 
 const TOTAL_STEPS = 6;
 
-const ProtocolName = ({ name }: { name: string }) => {
-  const base = name.replace(/\.ME$/, "");
-  return (
-    <>
-      <span>{base}</span>
-      <span style={{ color: "var(--orange)" }}>.ME</span>
-    </>
-  );
-};
 
 const labelStyle: React.CSSProperties = {
   fontSize: 11,
